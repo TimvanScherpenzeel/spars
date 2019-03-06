@@ -2263,10 +2263,10 @@ detect-newline@^2.1.0:
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-2.1.0.tgz#f41f1c10be4b00e87b5f13da680759f2c5bfd3e2"
   integrity sha1-9B8cEL5LAOh7XxPaaAdZ8sW/0+I=
 
-detect-ua@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/detect-ua/-/detect-ua-0.0.8.tgz#16c1fc1c9209d97c314462f377940e203df2225d"
-  integrity sha512-EGJ5W5sJgyMsq4XzyEwTYpKHAXsOW9udOtNPivPzY90oVMT7WVy2hqNn1TegL3Bv6AEvf0dilDfePquX6HQPUA==
+detect-ua@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/detect-ua/-/detect-ua-0.0.10.tgz#2c3155a6e8fdf61b21ef209045adf7025a4c0a72"
+  integrity sha512-cR+k8Nq9bQ3iHhxF6588ApPvseUOSfxH84nMeCMwF3PakjDWr6zYo3VqJHCi0Iw+pufrrcMHyFc3O/AYp+ldZA==
 
 diff-sequences@^24.0.0:
   version "24.0.0"
@@ -7417,6 +7417,11 @@ wcwidth@^1.0.1:
   integrity sha1-8LDc+RW8X/FSivrbLA4XtTLaL+g=
   dependencies:
     defaults "^1.0.3"
+
+webgl-constants@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/webgl-constants/-/webgl-constants-0.2.0.tgz#5b7ab85da91214faf997d9ec8995fedbe1c477f6"
+  integrity sha512-VY/RCu/NNhEzNpBjPvHN5DYVSuCEBW4VklUwW8sDMKLDpQnvm4p2XAqGedQB5Ywj03r36Pk2QUx52Vi6lGsYvg==
 
 webidl-conversions@^4.0.2:
   version "4.0.2"

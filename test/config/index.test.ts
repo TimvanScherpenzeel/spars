@@ -1,5 +1,3 @@
-// @ts-check
-
 // Source
 import { config, getConfigEntry, setConfigEntry } from '../../src/config';
 

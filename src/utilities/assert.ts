@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * Test an assertion for its truthiness
  *

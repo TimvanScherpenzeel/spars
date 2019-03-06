@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * Acts like a global configuration object but avoids attaching itself to the window object
  */

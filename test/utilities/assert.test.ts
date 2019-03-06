@@ -1,5 +1,3 @@
-// @ts-check
-
 // Source
 import { assert } from '../../src/utilities/assert';
 

@@ -1,5 +1,3 @@
-// @ts-check
-
 // Source
 import { getQueryParameters } from '../../src/utilities/getQueryParameters';
 

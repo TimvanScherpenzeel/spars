@@ -20,7 +20,8 @@
   "author": "Tim van Scherpenzeel",
   "license": "MIT",
   "dependencies": {
-    "detect-ua": "^0.0.8"
+    "detect-ua": "^0.0.10",
+    "webgl-constants": "^0.2.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.9",
