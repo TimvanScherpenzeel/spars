@@ -5,9 +5,8 @@ import commonjsPlugin from 'rollup-plugin-commonjs';
 import filesizePlugin from 'rollup-plugin-filesize';
 // @ts-ignore: missing type definition
 import resolvePlugin from 'rollup-plugin-node-resolve';
+import { terser as terserPlugin } from 'rollup-plugin-terser';
 import typescriptPlugin from 'rollup-plugin-typescript2';
-// @ts-ignore: missing type definition
-import { uglify as uglifyPlugin } from 'rollup-plugin-uglify';
 
 // Package
 // @ts-ignore: JSON is imported without any issue, TSLint still raises issues
@@ -23,7 +22,7 @@ const plugins = ({ isUMD = false, isCJS = false, isES = false }) => [
     typescript: require('typescript'),
     useTsconfigDeclarationDir: true,
   }),
-  !isES && !process.env.ROLLUP_WATCH && uglifyPlugin(),
+  !isES && !process.env.ROLLUP_WATCH && terserPlugin(),
   !isES && !process.env.ROLLUP_WATCH && filesizePlugin(),
 ];
 
