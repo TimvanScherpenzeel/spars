@@ -1,0 +1,66 @@
+{
+  "name": "alpine-ridge",
+  "version": "0.0.1",
+  "description": "A proprietary in-house toolkit for creating interactive web experiences",
+  "main": "dist/ridge.cjs.js",
+  "browser": "dist/ridge.umd.js",
+  "module": "dist/ridge.esm.js",
+  "jsnext:main": "dist/ridge.esm.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "start": "rollup -c rollup.config.ts -w",
+    "lint": "tslint --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "test": "jest --verbose=false",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "prebuild": "rimraf dist docs",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
+    "postbuild": "typedoc --out docs --target es5 --theme minimal --hideGenerator"
+  },
+  "author": "Tim van Scherpenzeel",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^24.0.9",
+    "jest": "^24.1.0",
+    "prettier": "^1.16.4",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.4.1",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-filesize": "^6.0.1",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-typescript2": "^0.19.3",
+    "rollup-plugin-uglify": "^6.0.2",
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.13.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3333"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "printWidth": 100
+  },
+  "jest": {
+    "testURL": "http://localhost",
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/test/*.+(ts|tsx|js)"
+    ],
+    "testPathIgnorePatterns": [
+      "/test/data.ts"
+    ],
+    "preset": "ts-jest"
+  }
+}
