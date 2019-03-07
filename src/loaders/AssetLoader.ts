@@ -363,10 +363,10 @@ const loadVideo = (item: ILoadItem) =>
  * Asynchronous asset preloader
  */
 class AssetLoader {
-  public assets: Map<string, any>;
+  public assets: Map<string, Promise<Response>>;
 
   constructor() {
-    this.assets = new Map<string, Promise<Response>>();
+    this.assets = new Map();
 
     this.loadAsset = this.loadAsset.bind(this);
     this.loadAssets = this.loadAssets.bind(this);

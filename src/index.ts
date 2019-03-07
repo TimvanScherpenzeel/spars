@@ -24,7 +24,7 @@ import features from './features';
 export { features };
 
 // Loaders
-// export { assetLoader } from './loaders';
+export { assetLoader } from './loaders';
 
 // Logger
 export { error, log, warn } from './logger';
