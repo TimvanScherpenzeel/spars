@@ -1,5 +1,5 @@
 // Vendor
-import memwatch from 'node-memwatch';
+// import memwatch from 'node-memwatch';
 
 // Source
 import { eventEmitter, EventEmitter, EventReference } from '../../src/events/EventEmitter';
