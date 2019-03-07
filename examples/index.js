@@ -17,12 +17,17 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // Audio
 // -----
 
+// const button = document.createElement('button');
+// button.id = 'audio-unlock';
+// button.innerHTML = 'unlock audio';
+// document.getElementById('root').appendChild(button);
+
 // if (Ridge.isAutoplayAllowed()) {
 //   console.log('allowed!');
 // } else {
 //   console.log('not allowed, waiting for user interaction');
 
-//   Ridge.unlockAutoplay(document.getElementById('audio-unlock'))
+//   Ridge.unlockAutoplay(button)
 //     .then(unlocked => {
 //       console.log('allowed!');
 //     })
@@ -30,27 +35,6 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 //       console.log(err);
 //     });
 // }
-
-// Cache
-// -----
-
-// const persistentCache = new Ridge.PersistentCache();
-// persistentCache.set('key1', 'value1');
-// persistentCache.set('key2', 'value2');
-// persistentCache.get('key1').then(key => console.log(key));
-// persistentCache.getKeys().then(keys => {
-//   console.log(keys);
-//   persistentCache.delete('key1');
-
-//   persistentCache.getKeys().then(keys => {
-//     console.log(keys);
-//     persistentCache.clear();
-
-//     persistentCache.getKeys().then(keys => {
-//       console.log(keys);
-//     });
-//   });
-// });
 
 // Cookie
 // ------
