@@ -1,7 +1,16 @@
+// Vendor
+import memwatch from 'node-memwatch';
+
 // Source
 import { eventEmitter, EventEmitter, EventReference } from '../../src/events/EventEmitter';
 
 describe('EventEmitter', () => {
+  it('is a function', () => {
+    expect.assertions(1);
+
+    expect(eventEmitter).toBeInstanceOf(EventEmitter);
+  });
+
   it('is a function', () => {
     expect.assertions(1);
 
@@ -100,4 +109,60 @@ describe('EventEmitter', () => {
       expect(emitter.on('event-name', () => {})).toBeInstanceOf(EventReference);
     });
   });
+
+  // describe('memory leaks', () => {
+  //   describe('EventEmitter instances', () => {
+  //     let heapDiff: any;
+  //     let results: any;
+
+  //     beforeAll(() => {
+  //       heapDiff = new memwatch.HeapDiff();
+
+  //       for (let i = 0; i < 25; i++) {
+  //         new EventEmitter();
+  //       }
+
+  //       const event = new EventEmitter();
+
+  //       results = heapDiff.end();
+  //     });
+
+  //     it('can be cleared by the garbarge collector', () => {
+  //       expect.assertions(1);
+
+  //       const emitterChange = results.change.details.find(
+  //         (detail: any) => detail.what === 'EventEmitter'
+  //       );
+
+  //       expect(emitterChange && emitterChange['+']).toEqual(1);
+  //     });
+  //   });
+  // });
+
+  // describe('EventHandler instances', () => {
+  //   let heapDiff: any;
+  //   let results: any;
+
+  //   beforeAll(() => {
+  //     heapDiff = new memwatch.HeapDiff();
+
+  //     for (let i = 0; i < 25; i++) {
+  //       new EventEmitter().on('test', () => {});
+  //     }
+
+  //     const reference = new EventEmitter().on('test', () => {});
+
+  //     results = heapDiff.end();
+  //   });
+
+  //   it('can be cleared by the garbage collector', () => {
+  //     expect.assertions(1);
+
+  //     const referenceChange = results.change.details.find(
+  //       (detail: any) => detail.what === 'EventReference'
+  //     );
+
+  //     expect(referenceChange && referenceChange['+']).toEqual(1);
+  //   });
+  // });
 });
