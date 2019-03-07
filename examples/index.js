@@ -1,3 +1,4 @@
+// Vendor
 import * as Ridge from '../dist/ridge.umd';
 
 // Override config
@@ -17,23 +18,29 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // Audio
 // -----
 
-// const button = document.createElement('button');
-// button.id = 'audio-unlock';
-// button.innerHTML = 'unlock audio';
-// document.getElementById('root').appendChild(button);
+// let button;
 
-// if (Ridge.isAutoplayAllowed()) {
-//   console.log('allowed!');
-// } else {
-//   console.log('not allowed, waiting for user interaction');
+// if (!document.getElementById('audio-unlock')) {
+//   button = document.createElement('button');
+//   button.id = 'audio-unlock';
+//   button.width = '50px';
+//   button.height = '50px';
+//   button.innerHTML = 'unlock audio';
+//   document.getElementById('root').appendChild(button);
 
-//   Ridge.unlockAutoplay(button)
-//     .then(unlocked => {
-//       console.log('allowed!');
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
+//   if (Ridge.isAutoplayAllowed()) {
+//     console.log('allowed!');
+//   } else {
+//     console.log('not allowed, waiting for user interaction');
+
+//     Ridge.unlockAutoplay(button)
+//       .then(unlocked => {
+//         console.log('allowed!');
+//       })
+//       .catch(err => {
+//         console.log(err);
+//       });
+//   }
 // }
 
 // Cookie
