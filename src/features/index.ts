@@ -42,9 +42,7 @@ import isDoNotTrackEnabled from './browserSettings/isDoNotTrackEnabled';
 // Hardware features
 import getDevicePixelRatio from './hardwareFeatures/getDevicePixelRatio';
 import getEndianness from './hardwareFeatures/getEndianness';
-import getScreenSize from './hardwareFeatures/getScreenSize';
 import getWebWorkerPoolSize from './hardwareFeatures/getWebWorkerPoolSize';
-import getWindowSize from './hardwareFeatures/getWindowSize';
 
 const features = {
   // Browser features
@@ -101,8 +99,6 @@ const features = {
   hardwareFeatures: {
     devicePixelRatio: getDevicePixelRatio,
     endianness: getEndianness,
-    screenSize: getScreenSize.toString(),
-    windowSize: getWindowSize.toString(),
     workerPoolSize: getWebWorkerPoolSize,
   },
 };
