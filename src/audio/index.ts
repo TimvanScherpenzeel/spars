@@ -1,7 +1,7 @@
 // @ts-check
 
 // Events
-import { eventEmitter } from '../events/eventEmitter';
+import { eventEmitter } from '../events/EventEmitter';
 
 // Features
 import isUserActivationSupported from '../features/browserFeatures/isUserActivationSupported';

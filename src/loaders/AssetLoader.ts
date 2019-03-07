@@ -1,5 +1,5 @@
 // Events
-import { eventEmitter } from '../events/eventEmitter';
+import { eventEmitter } from '../events/EventEmitter';
 
 // Features
 import getBrowserType from '../features/browserFeatures/getBrowserType';

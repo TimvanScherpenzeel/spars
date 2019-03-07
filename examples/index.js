@@ -62,20 +62,20 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // Events
 // ------
 
-// Ridge.listenToConnectionChange();
-// Ridge.listenToVisibilityChange();
+Ridge.listenToConnectionChange();
+Ridge.listenToVisibilityChange();
 
-// Ridge.eventEmitter.on('RIDGE::CONNECTION_CHANGE', event => {
-//   console.log(event);
+Ridge.eventEmitter.on('RIDGE::CONNECTION_CHANGE', event => {
+  console.log(event);
 
-//   // Ridge.stopListeningToConnectionChange();
-// });
+  // Ridge.stopListeningToConnectionChange();
+});
 
-// Ridge.eventEmitter.on('RIDGE::VISIBILITY_CHANGE', event => {
-//   console.log(event);
+Ridge.eventEmitter.on('RIDGE::VISIBILITY_CHANGE', event => {
+  console.log(event);
 
-//   // Ridge.stopListeningToVisibilityChange();
-// });
+  // Ridge.stopListeningToVisibilityChange();
+});
 
 // Features
 // --------

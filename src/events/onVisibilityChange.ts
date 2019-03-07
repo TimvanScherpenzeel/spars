@@ -1,5 +1,5 @@
 // Events
-import { eventEmitter } from './eventEmitter';
+import { eventEmitter } from './EventEmitter';
 
 // Create vendor agnostic API (inspired by https://github.com/rafrex/fscreen)
 const key = {

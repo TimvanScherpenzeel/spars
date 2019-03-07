@@ -1,5 +1,5 @@
 // Events
-import { eventEmitter } from './eventEmitter';
+import { eventEmitter } from './EventEmitter';
 
 /**
  * Monitor connection changes and speed
