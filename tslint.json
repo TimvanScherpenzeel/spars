@@ -5,7 +5,8 @@
   "rules": {
     "no-bitwise": false,
     "no-console": false,
-    "trailing-comma": true
+    "trailing-comma": true,
+    "only-arrow-functions": false
   },
   "rulesDirectory": []
 }

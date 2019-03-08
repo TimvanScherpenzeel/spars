@@ -33,5 +33,8 @@ export { assetLoader } from './loaders';
 // Logger
 export { error, log, warn } from './logger';
 
+// Threads
+export { Thread } from './threads';
+
 // Utilities
 export { assert, getQueryParameters } from './utilities';
