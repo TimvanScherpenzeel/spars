@@ -1,5 +1,5 @@
 /**
  * Tests for WebXR support
  */
-// @ts-ignore
+// @ts-ignore: missing type definition
 export default (() => !!navigator.xr || false)();

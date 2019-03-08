@@ -26,7 +26,7 @@ describe('EventEmitter', () => {
   it('returns an EventEmitter instance when called without new', () => {
     expect.assertions(1);
 
-    // @ts-ignore
+    // @ts-ignore: expects new
     expect(EventEmitter()).toBeInstanceOf(EventEmitter);
   });
 
@@ -67,7 +67,7 @@ describe('EventEmitter', () => {
       expect.assertions(1);
 
       expect(() => {
-        emitter.on('event-name', () => {}, 0);
+        emitter.on('event-name', () => { }, 0);
       }).toThrow();
     });
 
@@ -75,7 +75,7 @@ describe('EventEmitter', () => {
       expect.assertions(1);
 
       expect(() => {
-        emitter.on('event-name', () => {}, -1);
+        emitter.on('event-name', () => { }, -1);
       }).toThrow();
     });
 
@@ -83,7 +83,7 @@ describe('EventEmitter', () => {
       expect.assertions(1);
 
       expect(() => {
-        emitter.on('event-name', () => {}, 1.5);
+        emitter.on('event-name', () => { }, 1.5);
       }).toThrow();
     });
 
@@ -91,7 +91,7 @@ describe('EventEmitter', () => {
       expect.assertions(1);
 
       expect(() => {
-        emitter.on('event-name', () => {}, 10);
+        emitter.on('event-name', () => { }, 10);
       }).not.toThrow();
     });
 
@@ -99,14 +99,14 @@ describe('EventEmitter', () => {
       expect.assertions(1);
 
       expect(() => {
-        emitter.on('event-name', () => {}, 10);
+        emitter.on('event-name', () => { }, 10);
       }).not.toThrow();
     });
 
     it('returns an EventReference', () => {
       expect.assertions(1);
 
-      expect(emitter.on('event-name', () => {})).toBeInstanceOf(EventReference);
+      expect(emitter.on('event-name', () => { })).toBeInstanceOf(EventReference);
     });
   });
 

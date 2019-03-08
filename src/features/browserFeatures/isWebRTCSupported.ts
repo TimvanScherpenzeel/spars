@@ -1,16 +1,15 @@
 /**
  * Tests for WebRTC support
  */
-// @ts-ignore
 export default (() =>
-  // @ts-ignore
+  // @ts-ignore: missing type definition
   (!!window.RTCPeerConnection && !!window.RTCDataChannelEvent) ||
-  // @ts-ignore
+  // @ts-ignore: missing type definition
   !!window.webkitRTCPeerConnection ||
-  // @ts-ignore
+  // @ts-ignore: missing type definition
   !!window.mozRTCPeerConnection ||
-  // @ts-ignore
+  // @ts-ignore: missing type definition
   !!window.msRTCPeerConnection ||
-  // @ts-ignore
+  // @ts-ignore: missing type definition
   !!window.oRTCPeerConnection ||
   false)();

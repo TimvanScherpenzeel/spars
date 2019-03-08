@@ -8,6 +8,6 @@ export default () => {
   // Note: there is no "experimental-webgl2".
   const gl = canvas.getContext('webgl2');
 
-  // @ts-ignore
+  // @ts-ignore: missing type definition
   return (gl && gl instanceof WebGL2RenderingContext) || false;
 };

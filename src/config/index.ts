@@ -10,7 +10,7 @@ export const config = {
  *
  * @param key Key of config entry to get
  */
-// @ts-ignore
+// @ts-ignore: implicit any, has no index structure
 export const getConfigEntry = (key: string) => config[key];
 
 /**
@@ -20,5 +20,5 @@ export const getConfigEntry = (key: string) => config[key];
  * @param value Value of config entry to set
  */
 export const setConfigEntry = (key: string, value: string | boolean | number) =>
-  // @ts-ignore
+  // @ts-ignore: implicit any, has no index structure
   (config[key] = value);

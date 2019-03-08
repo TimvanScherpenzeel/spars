@@ -23,27 +23,27 @@ const vendor =
 const visibility = {
   // True is page is not visible, false if page is visible
   get hidden() {
-    // @ts-ignore
+    // @ts-ignore: implicit any, has no index structure
     return Boolean(document[vendor[key.hidden]]);
   },
 
   // Vendor prefixed listeners
   addEventListener: (type: string, handler: () => void, options?: any) =>
-    // @ts-ignore
+    // @ts-ignore: implicit any, has no index structure
     document.addEventListener(vendor[key[type]], handler, options),
 
   removeEventListener: (type: string, handler: () => void, options?: any) =>
-    // @ts-ignore
+    // @ts-ignore: implicit any, has no index structure
     document.removeEventListener(vendor[key[type]], handler, options),
 
   // Visibility change listener
   get onvisibilitychange() {
-    // @ts-ignore
+    // @ts-ignore: implicit any, has no index structure
     return document[`on${vendor[key.visibilitychange]}`.toLowerCase()];
   },
 
   set onvisibilitychange(handler) {
-    // @ts-ignore
+    // @ts-ignore: implicit any, has no index structure
     document[`on${vendor[key.visibilitychange]}`.toLowerCase()] = handler;
   },
 };

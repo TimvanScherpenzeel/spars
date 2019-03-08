@@ -1,5 +1,5 @@
 /**
  * Tests for WebAudio support
  */
-// @ts-ignore
+// @ts-ignore: missing type definition
 export default (() => !!window.AudioContext || !!window.webkitAudioContext || false)();
