@@ -1,29 +1,16 @@
 // @ts-check
 
-// Cache
-// @ts-ignore: the worker-loader solution of Webpack allows for not having a default export
-import PersistentCacheWorker from 'worker!./PersistentCache.worker';
+// Vendor
+import { clear, del, get, keys, set, Store } from 'idb-keyval';
 
-// Config
-import { getConfigEntry } from '../config';
-
-// Types
-export interface IPersistentCacheOptions {
-  databaseName?: string;
-  storeName?: string;
-}
+// Logger
+import { warn } from '../logger';
 
 /**
  * PersistentCache is a simple { key: value } cache that is persistent using IndexedDB.
  * IndexedDB is promisified by a `idb-keyval`, a small abstraction around the IndexedDB API.
  * IndexedDB is intended to be asynchronous but is unfortunately not implemented that way by browser vendors.
  * By moving the database transactions to a webworker some of the latency is avoided.
-
- * PersistentCacheWorker relies on permissions and availability of inlining webworkers
- * (this avoids shipping a seperate worker file).
-
- * This is sometimes forbidden due to security restrictions (https://developers.google.com/web/fundamentals/security/csp/)
- * and sometimes not available in very old browsers (https://caniuse.com/#feat=webworkers)
  */
 
 // A single instance of the IndexedDB cache constructed in a web worker
@@ -31,17 +18,16 @@ export class PersistentCache {
   public databaseName: string;
   public storeName: string;
 
-  private cache: PersistentCacheWorker;
+  private store!: Store;
 
   /**
    * Sets various configuration options
    *
    * @param {object} options Options: { databaseName, storeName }
    */
-  constructor(options: IPersistentCacheOptions = {}) {
-    this.databaseName = options.databaseName || 'ridge-persistent-db';
-    this.storeName = options.storeName || 'ridge-persistent-store';
-    this.cache = new PersistentCacheWorker();
+  constructor(databaseName: string = 'ridge-persistent-db', storeName: string = 'ridge-persistent-store') {
+    this.databaseName = databaseName;
+    this.storeName = storeName;
   }
 
   /**
@@ -51,14 +37,9 @@ export class PersistentCache {
    * @param {any} value Value
    */
   public set(key: string, value: any) {
-    this.cache.postMessage({
-      databaseName: this.databaseName,
-      key,
-      logVerbosity: getConfigEntry('LOG_VERBOSITY'),
-      storeName: this.storeName,
-      type: 'set',
-      value,
-    });
+    set(key, value, this.store).catch(err =>
+      warn(`PersistentCache -> Set: { key: ${key}, value: ${value} } has failed with error: ${err}`),
+    );
   }
 
   /**
@@ -68,19 +49,13 @@ export class PersistentCache {
    */
   public get(key: string) {
     return new Promise(resolve => {
-      this.cache.postMessage({
-        databaseName: this.databaseName,
-        key,
-        logVerbosity: getConfigEntry('LOG_VERBOSITY'),
-        storeName: this.storeName,
-        type: 'get',
-      });
-
-      this.cache.addEventListener('message', (event: MessageEvent) => {
-        if (event.data.type === 'get') {
-          resolve(event.data.val);
-        }
-      });
+      get(key, this.store)
+        .then(value => {
+          resolve(value);
+        })
+        .catch(err =>
+          warn(`PersistentCache -> Get: { key: ${key} } has failed with error: ${err}`),
+        );
     });
   }
 
@@ -89,45 +64,33 @@ export class PersistentCache {
    */
   public getKeys() {
     return new Promise(resolve => {
-      this.cache.postMessage({
-        databaseName: this.databaseName,
-        logVerbosity: getConfigEntry('LOG_VERBOSITY'),
-        storeName: this.storeName,
-        type: 'keys',
-      });
-
-      this.cache.addEventListener('message', (event: MessageEvent) => {
-        if (event.data.type === 'keys') {
-          resolve(event.data.keys);
-        }
-      });
+      keys(this.store)
+        .then(storeKeys => {
+          resolve(storeKeys);
+        })
+        .catch(err =>
+          warn(`PersistentCache -> Keys: { key: ${keys} } has failed with error: ${err}`),
+        );
     });
   }
 
   /**
-   * Dispose a { key: value } pair by key in the persistent cache
+   * Delete a { key: value } pair by key in the persistent cache
    *
    * @param {string} key Key
    */
-  public dispose(key: string) {
-    this.cache.postMessage({
-      databaseName: this.databaseName,
-      key,
-      logVerbosity: getConfigEntry('LOG_VERBOSITY'),
-      storeName: this.storeName,
-      type: 'del',
-    });
+  public delete(key: string) {
+    del(key, this.store).catch(err =>
+      warn(`PersistentCache -> Delete: { key: ${key} } has failed with error: ${err}`),
+    );
   }
 
   /**
    * Clear the entire persistent cache from { key: value } pairs
    */
   public clear() {
-    this.cache.postMessage({
-      databaseName: this.databaseName,
-      logVerbosity: getConfigEntry('LOG_VERBOSITY'),
-      storeName: this.storeName,
-      type: 'clear',
-    });
+    clear(this.store).catch(err =>
+      warn(`PersistentCache -> Clear: Store clearing has failed with error: ${err}`),
+    );
   }
 }

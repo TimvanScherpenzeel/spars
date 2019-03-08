@@ -1,5 +1,3 @@
-// Vendor
-import bundleWorker from 'rollup-plugin-bundle-worker';
 // @ts-ignore: missing type definition
 import commonjsPlugin from 'rollup-plugin-commonjs';
 // @ts-ignore: missing type definition

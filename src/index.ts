@@ -1,12 +1,11 @@
 // Analytics
 export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 
-// // Audio
+// Audio
 export { createAudioContext, isAutoplayAllowed, unlockAutoplay } from './audio';
 
 // Cache
-// NOTE: Currently not included because I have not found a way yet to include Workers like worker-loader in Rollup
-// export { PersistentCache } from './cache';
+export { PersistentCache } from './cache';
 
 // Config
 export { config, getConfigEntry, setConfigEntry } from './config';
