@@ -34,8 +34,6 @@ import {
 
 /**
  * Collect and structure all major device and browser specific WebGL features
- *
- * @returns {Object} Returns browser supported WebGL features
  */
 export default (() => {
   const attributes = {

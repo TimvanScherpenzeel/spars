@@ -1,7 +1,5 @@
 /**
  * Tests for UserActivation support
- *
- * @returns {boolean}
  */
 export default (() => {
   try {

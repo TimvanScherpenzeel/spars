@@ -31,7 +31,7 @@ const LOADER_EXTENSIONS_MAP = new Map([
 /**
  * Get a file extension from a full asset path
  *
- * @param {string} path Path to asset
+ * @param path Path to asset
  */
 const getFileExtension = (path: string) => {
   const basename = path.split(/[\\/]/).pop();
@@ -52,8 +52,7 @@ const getFileExtension = (path: string) => {
 /**
  * Retrieve loader key from extension (when the loader option isn't specified)
  *
- * @param {string} path File path
- * @returns Loader (ArrayBuffer by default)
+ * @param path File path
  */
 const getLoaderByFileExtension = (path: string) => {
   const fileExtension = getFileExtension(path);
@@ -68,7 +67,6 @@ const getLoaderByFileExtension = (path: string) => {
  * Fetch wrapper for loading an item, to be processed by a specific loader afterwards
  *
  * @param item Item to fetch
- * @returns Fetch response
  */
 const fetchItem = (item: ILoadItem) => fetch(item.src, item.options || {});
 
@@ -76,7 +74,6 @@ const fetchItem = (item: ILoadItem) => fetch(item.src, item.options || {});
  * Load an item and parse the Response as arrayBuffer
  *
  * @param item Item to load
- * @returns {Promise} Fulfilled value of parsed Response
  */
 const loadArrayBuffer = (item: ILoadItem) =>
   fetchItem(item).then(response => response.arrayBuffer());
@@ -85,7 +82,6 @@ const loadArrayBuffer = (item: ILoadItem) =>
  * Load an item and parse the Response as <audio> element
  *
  * @param item Item to load
- * @returns {Promise} Fulfilled value of parsed Response. Defaults to a HTMLAudioElement with a blob as src.
  */
 const loadAudio = (item: ILoadItem) =>
   fetchItem(item)
@@ -123,7 +119,6 @@ const loadAudio = (item: ILoadItem) =>
  * Load an item and parse the Response as blob
  *
  * @param item Item to load
- * @returns {Promise} Fulfilled value of parsed Response
  */
 const loadBlob = (item: ILoadItem) => fetchItem(item).then(response => response.blob());
 
@@ -131,7 +126,6 @@ const loadBlob = (item: ILoadItem) => fetchItem(item).then(response => response.
  * Load an item and parse the Response as <image> element
  *
  * @param item Item to load
- * @returns {Promise} Fulfilled value of parsed Response. Defaults to a HTMLImageElement with a blob as src.
  */
 const loadImage = (item: ILoadItem) =>
   new Promise((resolve, reject) => {
@@ -169,7 +163,6 @@ const loadImage = (item: ILoadItem) =>
  * Load an item and parse the Response as compressed image (KTX container)
  *
  * @param item Item to load
- * @returns {Promise} Fulfilled value of parsed Response
  */
 const loadCompressedImage = (item: ILoadItem) =>
   loadArrayBuffer(item).then(data => {
@@ -307,7 +300,6 @@ const loadCompressedImage = (item: ILoadItem) =>
  * Load an item and parse the Response as JSON
  *
  * @param item Item to load
- * @returns {Promise} Fulfilled value of parsed Response
  */
 const loadJSON = (item: ILoadItem) => fetchItem(item).then(response => response.json());
 
@@ -315,7 +307,6 @@ const loadJSON = (item: ILoadItem) => fetchItem(item).then(response => response.
  * Load an item and parse the Response as plain text
  *
  * @param item Item to load
- * @returns {Promise} Fulfilled value of parsed Response
  */
 const loadText = (item: ILoadItem) => fetchItem(item).then(response => response.text());
 
@@ -323,7 +314,6 @@ const loadText = (item: ILoadItem) => fetchItem(item).then(response => response.
  * Load an item and parse the Response as <video> element
  *
  * @param item Item to load
- * @returns {Promise} Fulfilled value of parsed Response. Defaults to a HTMLVideoElement with a blob as src.
  */
 const loadVideo = (item: ILoadItem) =>
   fetchItem(item)
@@ -376,7 +366,6 @@ class AssetLoader {
    * Load a single item
    *
    * @param item Item to load
-   * @returns {Promise} Resolve when item is loaded, reject for any error
    */
   public loadAsset(item: ILoadItem) {
     const startTime = window.performance.now();
@@ -442,7 +431,6 @@ class AssetLoader {
    * Load the specified manifest (array of items)
    *
    * @param items Items to load
-   * @returns {Promise} Resolve when all items are loaded, reject for any error
    */
   public loadAssets(items: ILoadItem[]) {
     const loadingAssets = items.filter(item => item).map(this.loadAsset);

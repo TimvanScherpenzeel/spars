@@ -1,7 +1,5 @@
 /**
  * Tests for LocalStorage support
- *
- * @returns {boolean}
  */
 export default (() => {
   try {

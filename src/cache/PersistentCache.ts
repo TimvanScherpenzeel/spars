@@ -1,5 +1,3 @@
-// @ts-check
-
 // Vendor
 import { clear, del, get, keys, set, Store } from 'idb-keyval';
 
@@ -23,7 +21,8 @@ export class PersistentCache {
   /**
    * Sets various configuration options
    *
-   * @param {object} options Options: { databaseName, storeName }
+   * @param databaseName Name of the persistent cache database
+   * @param storeName Name of the persistent cache store
    */
   constructor(databaseName: string = 'ridge-persistent-db', storeName: string = 'ridge-persistent-store') {
     this.databaseName = databaseName;
@@ -33,8 +32,8 @@ export class PersistentCache {
   /**
    * Sets a { key: value } pair in the persistent cache
    *
-   * @param {string} key Key
-   * @param {any} value Value
+   * @param key Key to set cache entry with
+   * @param value Value to set cache entry with
    */
   public set(key: string, value: any) {
     set(key, value, this.store).catch(err =>
@@ -45,7 +44,7 @@ export class PersistentCache {
   /**
    * Gets a { key: value } pair by key in the persistent cache
    *
-   * @param {string} key Key
+   * @param key Key of cache entry to get
    */
   public get(key: string) {
     return new Promise(resolve => {
@@ -77,7 +76,7 @@ export class PersistentCache {
   /**
    * Delete a { key: value } pair by key in the persistent cache
    *
-   * @param {string} key Key
+   * @param key Key of cache entry to delete
    */
   public delete(key: string) {
     del(key, this.store).catch(err =>

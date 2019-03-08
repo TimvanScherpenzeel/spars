@@ -1,7 +1,5 @@
 /**
  * Tests for IndexedDB support
- *
- * @returns {boolean}
  */
 export default (() => {
   try {

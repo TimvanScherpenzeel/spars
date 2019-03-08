@@ -59,8 +59,6 @@ function onVisibilityChange() {
 
 /**
  * Monitor visibility changes
- *
- * @returns RIDGE::VISIBILITY_CHANGE
  */
 export const listenToVisibilityChange = () => {
   visibility.addEventListener('visibilitychange', onVisibilityChange, false);

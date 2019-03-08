@@ -1,7 +1,5 @@
 /**
  * Tests for inline web worker support
- *
- * @returns {boolean}
  */
 export default (() => {
   try {

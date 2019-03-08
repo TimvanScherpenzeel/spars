@@ -46,8 +46,6 @@ function onConnectionChange() {
 
 /**
  * Monitor connection changes and speed
- *
- * @returns RIDGE::CONNECTION_CHANGE
  */
 export const listenToConnectionChange = () => {
   // https://caniuse.com/#feat=netinfo (Chrome only for now)

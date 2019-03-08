@@ -1,7 +1,5 @@
 /**
  * Tests for Image decode support
- *
- * @returns {boolean}
  */
 export default (() => {
   try {

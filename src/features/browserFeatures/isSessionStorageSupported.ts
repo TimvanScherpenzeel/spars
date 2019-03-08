@@ -1,7 +1,5 @@
 /**
  * Tests for SessionStorage support
- *
- * @returns {boolean}
  */
 export default (() => {
   try {

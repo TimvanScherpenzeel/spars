@@ -1,7 +1,5 @@
 /**
  * Get supported media formats (audio & video)
- *
- * @returns {Object} Returns browser supported audio and video formats
  */
 export default (() => {
   const audio = new Audio();

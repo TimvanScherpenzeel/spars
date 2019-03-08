@@ -1,7 +1,5 @@
 /**
  * Tests for WebGL support
- *
- * @returns {boolean}
  */
 export default (() => {
   const canvas = document.createElement('canvas');

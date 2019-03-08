@@ -1,5 +1,3 @@
-// @ts-check
-
 // Features
 import isRequestIdleCallbackSupported from '../features/browserFeatures/isRequestIdleCallbackSupported';
 import isDoNotTrackEnabled from '../features/browserSettings/isDoNotTrackEnabled';
@@ -10,7 +8,7 @@ import { warn } from '../logger';
 /**
  * Registers Google Analytics tracking snippet
  *
- * @param {string} trackingIdentifier Tracking identifier in format: UA-XXXX-YY.
+ * @param trackingIdentifier Tracking identifier in format: UA-XXXX-YY.
  */
 export const registerAnalytics = (trackingIdentifier: string) => {
   if (
@@ -24,7 +22,7 @@ export const registerAnalytics = (trackingIdentifier: string) => {
   if (!isDoNotTrackEnabled) {
     // Default async GA snippet as provided by Google
     // tslint:disable-next-line:only-arrow-functions
-    (function(i, s, o, g, r, a, m) {
+    (function (i, s, o, g, r, a, m) {
       // @ts-ignore
       i.GoogleAnalyticsObject = r;
       // @ts-ignore
@@ -32,7 +30,7 @@ export const registerAnalytics = (trackingIdentifier: string) => {
         // @ts-ignore
         i[r] ||
         // tslint:disable-next-line:only-arrow-functions
-        function() {
+        function () {
           // @ts-ignore
           (i[r].q = i[r].q || []).push(arguments);
         }),
@@ -60,7 +58,7 @@ export const registerAnalytics = (trackingIdentifier: string) => {
 /**
  * Record a Google event
  *
- * @param {object} record A valid analytics record object
+ * @param record A valid analytics record object
  *
  * https://developers.google.com/analytics/devguides/collection/analyticsjs/events
  * {

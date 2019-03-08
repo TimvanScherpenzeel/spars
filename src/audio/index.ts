@@ -1,5 +1,3 @@
-// @ts-check
-
 // Events
 import { eventEmitter } from '../events/EventEmitter';
 
@@ -21,7 +19,7 @@ export const isAutoplayAllowed = () => autoplayAllowed;
 /**
  * Creates a new iOS safe Web Audio context (https://github.com/Jam3/ios-safe-audio-context/blob/master/index.js)
  *
- * @param {number} desiredSampleRate Desired sample rate of reated audio context
+ * @param desiredSampleRate Desired sample rate of reated audio context
  */
 export const createAudioContext = (desiredSampleRate = 44100) => {
   // @ts-ignore window.AudioContext and window.webkitAudioContext are not available as types
@@ -51,11 +49,9 @@ export const createAudioContext = (desiredSampleRate = 44100) => {
 /**
  * Unlock the global Web Audio context for autoplay abilities
  *
- * @param {HTMLElement} element DOM element to attach the unlock listener to
- * @returns {AudioContext} Unlocked WebAudio context
+ * @param element DOM element to attach the unlock listener to
  */
-// @ts-ignore
-export const unlockAutoplay = element =>
+export const unlockAutoplay = (element: HTMLElement) =>
   new Promise((resolve, reject) => {
     // https://developers.google.com/web/updates/2019/01/nic72#user-activation
     // @ts-ignore navigator.userActivation does not yet exist as type

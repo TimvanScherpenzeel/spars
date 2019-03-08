@@ -1,7 +1,5 @@
 /**
  * Gets the device byte endianness
- *
- * @returns {string} Byte endianness
  */
 export default (() => {
   // @ts-ignore

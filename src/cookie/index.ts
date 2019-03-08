@@ -1,5 +1,3 @@
-// @ts-check
-
 // Features
 import isCookieEnabled from '../features/browserSettings/isCookieEnabled';
 
@@ -7,6 +5,13 @@ import isCookieEnabled from '../features/browserSettings/isCookieEnabled';
 import { warn } from '../logger';
 
 // Note: When blocking cookies Firefox throws a security error for localStorage and indexDB blocking further execution.
+/**
+ * Set a cookie
+ *
+ * @param key Key of cookie
+ * @param value Value of cookie
+ * @param expiryDays After how many days the cookie expires
+ */
 export const setCookie = (key: string, value: string, expiryDays = 365) => {
   if (isCookieEnabled) {
     const date = new Date();
@@ -22,6 +27,11 @@ export const setCookie = (key: string, value: string, expiryDays = 365) => {
   }
 };
 
+/**
+ * Get a cookie by key
+ *
+ * @param key Key of cookie to get
+ */
 export const getCookie = (key: string) => {
   if (isCookieEnabled) {
     const query = `${key}=`;
@@ -43,6 +53,11 @@ export const getCookie = (key: string) => {
   return false;
 };
 
+/**
+ * Delete a cookie by key
+ *
+ * @param key Key of cookie to delete
+ */
 export const deleteCookie = (key: string) => {
   if (isCookieEnabled) {
     document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=${window.location.hostname.replace(

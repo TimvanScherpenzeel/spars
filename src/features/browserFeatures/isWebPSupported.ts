@@ -1,7 +1,5 @@
 /**
  * Tests for WebP support
- *
- * @returns {boolean}
  */
 export default (() => {
   const canvas = document.createElement('canvas');

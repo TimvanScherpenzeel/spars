@@ -58,8 +58,6 @@ import {
 
 /**
  * Collect and structure all major device and browser specific WebGL2 features
- *
- * @returns {Object} Returns browser supported WebGL features
  */
 export default () => {
   const attributes = {
@@ -218,7 +216,7 @@ export default () => {
     extensions: {
       // prettier-ignore
       maxAnisotropy: glAnisotropicExtension
-      // @ts-ignore
+        // @ts-ignore
         ? gl.getParameter(glAnisotropicExtension.MAX_TEXTURE_MAX_ANISOTROPY_EXT)
         : 0,
       // @ts-ignore

@@ -1,7 +1,5 @@
 /**
  * Tests for WebRTC support
- *
- * @returns {boolean}
  */
 // @ts-ignore
 export default (() =>

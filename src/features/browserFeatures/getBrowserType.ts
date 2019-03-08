@@ -19,8 +19,6 @@ const isChromium = typeof browser === 'object' && browser.name === 'Chromium';
 
 /**
  * Device and browser detection
- *
- * @returns {object} Browser and device type
  */
 export default {
   isDesktop,
