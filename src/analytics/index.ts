@@ -8,7 +8,7 @@ import { warn } from '../logger';
 /**
  * Registers Google Analytics tracking snippet
  *
- * @param trackingIdentifier Tracking identifier in format: UA-XXXX-YY.
+ * @param trackingIdentifier Tracking identifier in format: UA-XXXX-YY
  */
 export const registerAnalytics = (trackingIdentifier: string) => {
   if (
