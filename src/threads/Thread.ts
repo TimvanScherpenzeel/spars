@@ -5,7 +5,7 @@ import isWebWorkerInlineSupported from '../features/browserFeatures/isWebWorkerI
 import { assert } from '../utilities/assert';
 
 export class Thread {
-  constructor(asyncFunction: any) {
+  constructor(asyncFunction: (...args: any[]) => Promise<any>) {
     assert(isWebWorkerInlineSupported, 'In-line web worker is not supported');
 
     // A simple counter is used to generate worker-global unique ID's for RPC
