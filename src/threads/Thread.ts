@@ -34,12 +34,18 @@ export class Thread {
                   (createImageBitmap && x instanceof ImageBitmap)
               )
             );
+
+            // Terminate the worker
+            close();
           },
 
           // error handler - callback(id, ERROR(1), error)
           err => {
             // @ts-ignore
             postMessage([event.data[0], 1, `${err}`]);
+
+            // Terminate the worker
+            close();
           }
         );
     }}`;
