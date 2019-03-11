@@ -3,19 +3,20 @@ import { DetectUA } from 'detect-ua';
 
 const device = new DetectUA();
 
-const { isMobile, isTablet, isDesktop, isiOS, isAndroid, browser } = device;
+export const { isMobile, isTablet, isDesktop, isiOS, isAndroid, browser } = device;
 
-const isChrome = typeof browser === 'object' && browser.name === 'Chrome';
-const isFirefox = typeof browser === 'object' && browser.name === 'Firefox';
-const isSafari = typeof browser === 'object' && browser.name === 'Safari';
-const isEdge = typeof browser === 'object' && browser.name === 'Microsoft Edge';
-const isInternetExplorer = typeof browser === 'object' && browser.name === 'Internet Explorer';
-const isOpera = typeof browser === 'object' && browser.name === 'Opera';
-const isSamsungBrowser =
+export const isChrome = typeof browser === 'object' && browser.name === 'Chrome';
+export const isFirefox = typeof browser === 'object' && browser.name === 'Firefox';
+export const isSafari = typeof browser === 'object' && browser.name === 'Safari';
+export const isEdge = typeof browser === 'object' && browser.name === 'Microsoft Edge';
+export const isInternetExplorer =
+  typeof browser === 'object' && browser.name === 'Internet Explorer';
+export const isOpera = typeof browser === 'object' && browser.name === 'Opera';
+export const isSamsungBrowser =
   typeof browser === 'object' && browser.name === 'Samsung Internet for Android';
-const isYandexBrowser = typeof browser === 'object' && browser.name === 'Yandex Browser';
-const isUCBrowser = typeof browser === 'object' && browser.name === 'UC Browser';
-const isChromium = typeof browser === 'object' && browser.name === 'Chromium';
+export const isYandexBrowser = typeof browser === 'object' && browser.name === 'Yandex Browser';
+export const isUCBrowser = typeof browser === 'object' && browser.name === 'UC Browser';
+export const isChromium = typeof browser === 'object' && browser.name === 'Chromium';
 
 /**
  * Device and browser detection

@@ -1,4 +1,5 @@
 // Features
+import { isInternetExplorer } from '../features/browserFeatures/getBrowserType';
 import isWebWorkerInlineSupported from '../features/browserFeatures/isWebWorkerInlineSupported';
 
 // TODO: Issues on IE11 (issue with Promise), iOS Safari (inline webworker is supported)
@@ -14,7 +15,7 @@ export class Thread {
    */
   constructor(asyncFunction: any) {
     // Execute on main thread as a fallback solution
-    if (!isWebWorkerInlineSupported) {
+    if (!isWebWorkerInlineSupported || isInternetExplorer) {
       return function(args: any) {
         args = [].slice.call(arguments);
 
