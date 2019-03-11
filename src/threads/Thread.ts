@@ -2,7 +2,7 @@
 import { isInternetExplorer } from '../features/browserFeatures/getBrowserType';
 import isWebWorkerInlineSupported from '../features/browserFeatures/isWebWorkerInlineSupported';
 
-// TODO: Issues on IE11 (issue with Promise), iOS Safari (inline webworker is supported)
+// TODO: Issue iOS Safari (inline webworker is supported)
 
 /**
  * Create a self-closing RPC worker that consumes a single asynchronous function
@@ -15,6 +15,10 @@ export class Thread {
    */
   constructor(asyncFunction: any) {
     // Execute on main thread as a fallback solution
+
+    // Internet Explorer 11 does not support Promise without being polyfilled
+    // which is currently likely too costly to ship along with the worker
+    // to make it worth including
     if (!isWebWorkerInlineSupported || isInternetExplorer) {
       return function(args: any) {
         args = [].slice.call(arguments);
