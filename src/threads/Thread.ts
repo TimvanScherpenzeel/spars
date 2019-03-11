@@ -1,6 +1,8 @@
 // Features
 import isWebWorkerInlineSupported from '../features/browserFeatures/isWebWorkerInlineSupported';
 
+// TODO: Issues on IE11 (issue with Promise), iOS Safari (inline webworker is supported)
+
 /**
  * Create a self-closing RPC worker that consumes a single asynchronous function
  *
