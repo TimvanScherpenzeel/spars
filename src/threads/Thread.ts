@@ -34,46 +34,47 @@ export class Thread {
     const promises: any = {};
 
     // Use a data URI for the worker's src. It inlines the target function and an RPC handler
-    const worker = new Worker(
-      URL.createObjectURL(
-        new Blob([
-          `data:$$=${asyncFunction};onmessage=${(event: MessageEvent) => {
-            // Invoking within then() captures exceptions in the supplied async function as rejections
-            Promise.resolve(event.data[1])
-              // @ts-ignore: $$ is internally globally available
-              .then(v => $$.apply($$, v))
-              .then(
-                // success handler - callback(id, SUCCESS(0), result)
-                // if `data` is transferable transfer zero-copy
-                data => {
-                  postMessage(
-                    [event.data[0], 0, data],
-                    // @ts-ignore
-                    [data].filter(
-                      (x: any) =>
-                        x instanceof ArrayBuffer ||
-                        x instanceof MessagePort ||
-                        (self.createImageBitmap && x instanceof ImageBitmap)
-                    )
-                  );
-
-                  // Terminate the worker
-                  close();
-                },
-
-                // error handler - callback(id, ERROR(1), error)
-                err => {
+    const workerURL = URL.createObjectURL(
+      new Blob([
+        `$$=${asyncFunction};onmessage=${(event: MessageEvent) => {
+          // Invoking within then() captures exceptions in the supplied async function as rejections
+          Promise.resolve(event.data[1])
+            // @ts-ignore: $$ is internally globally available
+            .then(v => $$.apply($$, v))
+            .then(
+              // success handler - callback(id, SUCCESS(0), result)
+              // if `data` is transferable transfer zero-copy
+              data => {
+                postMessage(
+                  [event.data[0], 0, data],
                   // @ts-ignore
-                  postMessage([event.data[0], 1, `${err}`]);
+                  [data].filter(
+                    (x: any) =>
+                      x instanceof ArrayBuffer ||
+                      x instanceof MessagePort ||
+                      (self.createImageBitmap && x instanceof ImageBitmap)
+                  )
+                );
 
-                  // Terminate the worker
-                  close();
-                }
-              );
-          }}`,
-        ])
-      )
+                // Terminate the worker
+                close();
+              },
+
+              // error handler - callback(id, ERROR(1), error)
+              err => {
+                // @ts-ignore
+                postMessage([event.data[0], 1, `${err}`]);
+
+                // Terminate the worker
+                close();
+              }
+            );
+        }}`,
+      ])
     );
+
+    const worker = new Worker(workerURL);
+    URL.revokeObjectURL(workerURL);
 
     /**
      * Handle RPC results/errors coming back out of the worker
