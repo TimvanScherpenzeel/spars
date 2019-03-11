@@ -46,7 +46,7 @@ export class Thread {
                       (x: any) =>
                         x instanceof ArrayBuffer ||
                         x instanceof MessagePort ||
-                        (createImageBitmap && x instanceof ImageBitmap)
+                        (self.createImageBitmap && x instanceof ImageBitmap)
                     )
                   );
 
@@ -100,7 +100,7 @@ export class Thread {
             (x: any) =>
               x instanceof ArrayBuffer ||
               x instanceof MessagePort ||
-              (createImageBitmap && x instanceof ImageBitmap)
+              (window.createImageBitmap && x instanceof ImageBitmap)
           )
         );
       });
