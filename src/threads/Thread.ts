@@ -17,8 +17,7 @@ export class Thread {
     // Execute on main thread as a fallback solution
 
     // Internet Explorer 11 does not support Promise without being polyfilled
-    // which is currently likely too costly to ship along with the worker
-    // to make it worth including
+    // which is too costly to ship along with the worker to make it worth including
     if (!isWebWorkerInlineSupported || isInternetExplorer) {
       return function(args: any) {
         args = [].slice.call(arguments);
