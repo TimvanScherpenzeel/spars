@@ -47,7 +47,7 @@ export class Thread {
           // Invoking within then() captures exceptions in the supplied async function as rejections
           Promise.resolve(event.data[1])
             // @ts-ignore: $$ is internally globally available
-            .then(v => $$.apply($$, v))
+            .then((args: any) => $$.apply($$, args))
             .then(
               // success handler - callback(id, SUCCESS(0), result)
               // if `data` is transferable transfer zero-copy
@@ -56,10 +56,10 @@ export class Thread {
                   [event.data[0], 0, data],
                   // @ts-ignore
                   [data].filter(
-                    (x: any) =>
-                      x instanceof ArrayBuffer ||
-                      x instanceof MessagePort ||
-                      (self.createImageBitmap && x instanceof ImageBitmap)
+                    (transfer: any) =>
+                      transfer instanceof ArrayBuffer ||
+                      transfer instanceof MessagePort ||
+                      (self.createImageBitmap && transfer instanceof ImageBitmap)
                   )
                 );
 
@@ -112,10 +112,10 @@ export class Thread {
         worker.postMessage(
           [WORKER_ID, args],
           args.filter(
-            (x: any) =>
-              x instanceof ArrayBuffer ||
-              x instanceof MessagePort ||
-              (window.createImageBitmap && x instanceof ImageBitmap)
+            (transfer: any) =>
+              transfer instanceof ArrayBuffer ||
+              transfer instanceof MessagePort ||
+              (window.createImageBitmap && transfer instanceof ImageBitmap)
           )
         );
       });
