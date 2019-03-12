@@ -37,9 +37,13 @@ export class Thread {
     const URL = window.URL || window.webkitURL;
 
     // Use a data URI for the worker's src. It inlines the target function and an RPC handler
+    // console.log does not work in workers on iOS Safari, works fine on desktop Safari
     const workerURL = URL.createObjectURL(
       new Blob([
         `$$=${asyncFunction};onmessage=${(event: MessageEvent) => {
+          // @(tim), check if debugger throws on iOS Safari meaning onmessage is being executed
+          // debugger;
+
           // Invoking within then() captures exceptions in the supplied async function as rejections
           Promise.resolve(event.data[1])
             // @ts-ignore: $$ is internally globally available
