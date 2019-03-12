@@ -2,8 +2,6 @@
 import { isInternetExplorer } from '../features/browserFeatures/getBrowserType';
 import isWebWorkerInlineSupported from '../features/browserFeatures/isWebWorkerInlineSupported';
 
-// TODO: Issue iOS Safari (inline webworker is supported)
-
 /**
  * Create a self-closing RPC worker that consumes a single asynchronous function
  *
@@ -32,17 +30,10 @@ export class Thread {
     // Outward-facing promises store their `controllers` (`[request, reject]`) here
     const promises: any = {};
 
-    // @ts-ignore webkitURL is not defined on Window but used on Safari
-    const URL = window.URL || window.webkitURL;
-
     // Use a data URI for the worker's src. It inlines the target function and an RPC handler
-    // console.log does not work in workers on iOS Safari, works fine on desktop Safari
     const workerURL = URL.createObjectURL(
       new Blob([
         `$$=${asyncFunction};onmessage=${(event: MessageEvent) => {
-          // @(tim), check if debugger throws on iOS Safari meaning onmessage is being executed
-          // debugger;
-
           // Invoking within then() captures exceptions in the supplied async function as rejections
           Promise.resolve(event.data[1])
             // @ts-ignore: $$ is internally globally available

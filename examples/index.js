@@ -236,7 +236,7 @@ let getName = new Ridge.Thread(username => {
 
 getName('timvanscherpenzeel').then(
   log => {
-    return console.log(log);
+    document.write(log);
   },
   err => {
     return console.error(err);
