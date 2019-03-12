@@ -30,6 +30,9 @@ export class Thread {
     // Outward-facing promises store their `controllers` (`[request, reject]`) here
     const promises: any = {};
 
+    // @ts-ignore: fallback to webkitURL if necessary (https://caniuse.com/#search=createObjectURL)
+    const URL = window.URL || window.webkitURL;
+
     // Use a data URI for the worker's src. It inlines the target function and an RPC handler
     const workerURL = URL.createObjectURL(
       new Blob([
