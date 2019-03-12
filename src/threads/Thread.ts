@@ -34,38 +34,42 @@ export class Thread {
     const workerURL = URL.createObjectURL(
       new Blob([
         `$$=${asyncFunction};onmessage=${(event: MessageEvent) => {
-          // Invoking within then() captures exceptions in the supplied async function as rejections
-          Promise.resolve(event.data[1])
-            // @ts-ignore: $$ is internally globally available
-            .then((args: any) => $$.apply($$, args))
-            .then(
-              // success handler - callback(id, SUCCESS(0), result)
-              // if `data` is transferable transfer zero-copy
-              data => {
-                postMessage(
-                  [event.data[0], 0, data],
+          if (event) {
+            // Invoking within then() captures exceptions in the supplied async function as rejections
+            Promise.resolve(event.data[1])
+              // @ts-ignore: $$ is internally globally available
+              .then((args: any[]) => $$.apply($$, args))
+              .then(
+                // success handler - callback(id, SUCCESS(0), result)
+                // if `data` is transferable transfer zero-copy
+                (data: MessageEvent) => {
+                  postMessage(
+                    [event.data[0], 0, data],
+                    // @ts-ignore
+                    [data].filter(
+                      (transfer: any) =>
+                        transfer instanceof ArrayBuffer ||
+                        transfer instanceof MessagePort ||
+                        (self.createImageBitmap && transfer instanceof ImageBitmap)
+                    )
+                  );
+
+                  // Terminate the worker
+                  close();
+                },
+
+                // error handler - callback(id, ERROR(1), error)
+                (err: Error) => {
                   // @ts-ignore
-                  [data].filter(
-                    (transfer: any) =>
-                      transfer instanceof ArrayBuffer ||
-                      transfer instanceof MessagePort ||
-                      (self.createImageBitmap && transfer instanceof ImageBitmap)
-                  )
-                );
+                  postMessage([event.data[0], 1, `${err}`]);
 
-                // Terminate the worker
-                close();
-              },
-
-              // error handler - callback(id, ERROR(1), error)
-              err => {
-                // @ts-ignore
-                postMessage([event.data[0], 1, `${err}`]);
-
-                // Terminate the worker
-                close();
-              }
-            );
+                  // Terminate the worker
+                  close();
+                }
+              );
+          } else {
+            throw new Error('Expected event');
+          }
         }}`,
       ])
     );
