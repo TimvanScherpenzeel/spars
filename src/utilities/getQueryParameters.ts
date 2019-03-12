@@ -7,7 +7,6 @@
  */
 export const getQueryParameters = (url = window.location.search) =>
   url
-
     // Remove ?
     .slice(1)
     // Split by &

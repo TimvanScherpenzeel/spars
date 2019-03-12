@@ -67,7 +67,8 @@ describe('EventEmitter', () => {
       expect.assertions(1);
 
       expect(() => {
-        emitter.on('event-name', () => { }, 0);
+        // tslint:disable-next-line:no-empty
+        emitter.on('event-name', () => {}, 0);
       }).toThrow();
     });
 
@@ -75,7 +76,8 @@ describe('EventEmitter', () => {
       expect.assertions(1);
 
       expect(() => {
-        emitter.on('event-name', () => { }, -1);
+        // tslint:disable-next-line:no-empty
+        emitter.on('event-name', () => {}, -1);
       }).toThrow();
     });
 
@@ -83,7 +85,8 @@ describe('EventEmitter', () => {
       expect.assertions(1);
 
       expect(() => {
-        emitter.on('event-name', () => { }, 1.5);
+        // tslint:disable-next-line:no-empty
+        emitter.on('event-name', () => {}, 1.5);
       }).toThrow();
     });
 
@@ -91,7 +94,8 @@ describe('EventEmitter', () => {
       expect.assertions(1);
 
       expect(() => {
-        emitter.on('event-name', () => { }, 10);
+        // tslint:disable-next-line:no-empty
+        emitter.on('event-name', () => {}, 10);
       }).not.toThrow();
     });
 
@@ -99,14 +103,16 @@ describe('EventEmitter', () => {
       expect.assertions(1);
 
       expect(() => {
-        emitter.on('event-name', () => { }, 10);
+        // tslint:disable-next-line:no-empty
+        emitter.on('event-name', () => {}, 10);
       }).not.toThrow();
     });
 
     it('returns an EventReference', () => {
       expect.assertions(1);
 
-      expect(emitter.on('event-name', () => { })).toBeInstanceOf(EventReference);
+      // tslint:disable-next-line:no-empty
+      expect(emitter.on('event-name', () => {})).toBeInstanceOf(EventReference);
     });
   });
 

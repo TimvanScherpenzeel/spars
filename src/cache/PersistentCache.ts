@@ -6,7 +6,7 @@ import { warn } from '../logger';
 
 /**
  * PersistentCache is a simple { key: value } cache that is persistent using IndexedDB.
- * IndexedDB is promisified by a `idb-keyval`, a small abstraction around the IndexedDB API.
+ * IndexedDB is promisified by `idb-keyval`, a small abstraction around the IndexedDB API.
  * IndexedDB is intended to be asynchronous but is unfortunately not implemented that way by browser vendors.
  * By moving the database transactions to a webworker some of the latency is avoided.
  */
@@ -24,7 +24,10 @@ export class PersistentCache {
    * @param databaseName Name of the persistent cache database
    * @param storeName Name of the persistent cache store
    */
-  constructor(databaseName: string = 'ridge-persistent-db', storeName: string = 'ridge-persistent-store') {
+  constructor(
+    databaseName: string = 'ridge-persistent-db',
+    storeName: string = 'ridge-persistent-store'
+  ) {
     this.databaseName = databaseName;
     this.storeName = storeName;
   }
@@ -37,7 +40,7 @@ export class PersistentCache {
    */
   public set(key: string, value: any) {
     set(key, value, this.store).catch(err =>
-      warn(`PersistentCache -> Set: { key: ${key}, value: ${value} } has failed with error: ${err}`),
+      warn(`PersistentCache -> Set: { key: ${key}, value: ${value} } has failed with error: ${err}`)
     );
   }
 
@@ -53,7 +56,7 @@ export class PersistentCache {
           resolve(value);
         })
         .catch(err =>
-          warn(`PersistentCache -> Get: { key: ${key} } has failed with error: ${err}`),
+          warn(`PersistentCache -> Get: { key: ${key} } has failed with error: ${err}`)
         );
     });
   }
@@ -68,7 +71,7 @@ export class PersistentCache {
           resolve(storeKeys);
         })
         .catch(err =>
-          warn(`PersistentCache -> Keys: { key: ${keys} } has failed with error: ${err}`),
+          warn(`PersistentCache -> Keys: { key: ${keys} } has failed with error: ${err}`)
         );
     });
   }
@@ -80,7 +83,7 @@ export class PersistentCache {
    */
   public delete(key: string) {
     del(key, this.store).catch(err =>
-      warn(`PersistentCache -> Delete: { key: ${key} } has failed with error: ${err}`),
+      warn(`PersistentCache -> Delete: { key: ${key} } has failed with error: ${err}`)
     );
   }
 
@@ -89,7 +92,7 @@ export class PersistentCache {
    */
   public clear() {
     clear(this.store).catch(err =>
-      warn(`PersistentCache -> Clear: Store clearing has failed with error: ${err}`),
+      warn(`PersistentCache -> Clear: Store clearing has failed with error: ${err}`)
     );
   }
 }

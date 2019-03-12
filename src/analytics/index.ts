@@ -22,7 +22,7 @@ export const registerAnalytics = (trackingIdentifier: string) => {
   if (!isDoNotTrackEnabled) {
     // Default async GA snippet as provided by Google
     // tslint:disable-next-line:only-arrow-functions
-    (function (i, s, o, g, r, a, m) {
+    (function(i, s, o, g, r, a, m) {
       // @ts-ignore: Google Analytics snippet
       i.GoogleAnalyticsObject = r;
       // @ts-ignore: Google Analytics snippet
@@ -30,7 +30,7 @@ export const registerAnalytics = (trackingIdentifier: string) => {
         // @ts-ignore: Google Analytics snippet
         i[r] ||
         // tslint:disable-next-line:only-arrow-functions
-        function () {
+        function() {
           // @ts-ignore: Google Analytics snippet
           (i[r].q = i[r].q || []).push(arguments);
         }),
