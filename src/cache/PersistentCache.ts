@@ -12,7 +12,7 @@ import { assert } from '../utilities/assert';
  *
  * @param key Key to validate
  */
-const isAllowedAsAKey = (key: any) => {
+const isAllowedAsKey = (key: any) => {
   if (typeof key === 'number' || typeof key === 'string') {
     return true;
   }
@@ -64,13 +64,14 @@ export class PersistentCache {
   /**
    * Sets a { key: value } pair in the persistent cache
    *
-   * NOTE: In order to store ArrayBuffers in IndexedDB you will need to convert them to Blob's
+   * NOTE: In order to store ArrayBuffers in IndexedDB you will need to convert them to Blobs
+   * See `utilities/convertArrayBufferToBlob.ts` and `utilities/convertBlobToArrayBuffer.ts`
    *
    * @param key Key to set cache entry with
    * @param value Value to set cache entry with
    */
   public set(key: IDBValidKey, value: any) {
-    assert(isAllowedAsAKey(key), 'PersistentCache -> The given type of key is not allowed');
+    assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
 
     set(key, value, this.store).catch(err => {
       warn(
@@ -87,7 +88,7 @@ export class PersistentCache {
    * @param key Key of cache entry to get
    */
   public get(key: IDBValidKey) {
-    assert(isAllowedAsAKey(key), 'PersistentCache -> The given type of key is not allowed');
+    assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
 
     return new Promise(resolve => {
       get(key, this.store)
@@ -125,7 +126,7 @@ export class PersistentCache {
    * @param key Key of cache entry to delete
    */
   public delete(key: IDBValidKey) {
-    assert(isAllowedAsAKey(key), 'PersistentCache -> The given type of key is not allowed');
+    assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
 
     del(key, this.store).catch(err => {
       warn(`PersistentCache -> Delete: { key: ${key} } has failed with error: ${err}`);
