@@ -70,7 +70,7 @@ export class PersistentCache {
    * @param value Value to set cache entry with
    */
   public set(key: IDBValidKey, value: any) {
-    assert(isAllowedAsAKey(key), 'PersistentCache -> The given value is not allowed as a key');
+    assert(isAllowedAsAKey(key), 'PersistentCache -> The given type of key is not allowed');
 
     set(key, value, this.store).catch(err => {
       warn(
@@ -87,7 +87,7 @@ export class PersistentCache {
    * @param key Key of cache entry to get
    */
   public get(key: IDBValidKey) {
-    assert(isAllowedAsAKey(key), 'PersistentCache -> The given value is not allowed as a key');
+    assert(isAllowedAsAKey(key), 'PersistentCache -> The given type of key is not allowed');
 
     return new Promise(resolve => {
       get(key, this.store)
@@ -125,7 +125,7 @@ export class PersistentCache {
    * @param key Key of cache entry to delete
    */
   public delete(key: IDBValidKey) {
-    assert(isAllowedAsAKey(key), 'PersistentCache -> The given value is not allowed as a key');
+    assert(isAllowedAsAKey(key), 'PersistentCache -> The given type of key is not allowed');
 
     del(key, this.store).catch(err => {
       warn(`PersistentCache -> Delete: { key: ${key} } has failed with error: ${err}`);
