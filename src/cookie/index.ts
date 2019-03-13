@@ -4,7 +4,7 @@ import isCookieEnabled from '../features/browserSettings/isCookieEnabled';
 // Logger
 import { warn } from '../logger';
 
-// Note: When blocking cookies Firefox throws a security error for localStorage and indexDB blocking further execution.
+// NOTE: When blocking cookies Firefox throws a security error for localStorage and indexedDB blocking further execution.
 /**
  * Set a cookie
  *

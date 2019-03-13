@@ -1,3 +1,7 @@
+// TODO: add way to limit concurrent threads (p-queue?)
+// TODO: add way to re-use existing workers (worker pool)
+// TODO: add way to dynamically allocate an optimal amount of workers
+
 // Features
 import { isInternetExplorer } from '../features/browserFeatures/getBrowserType';
 import isWebWorkerInlineSupported from '../features/browserFeatures/isWebWorkerInlineSupported';
