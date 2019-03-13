@@ -4,14 +4,39 @@ import { clear, del, get, keys, set, Store } from 'idb-keyval';
 // Logger
 import { warn } from '../logger';
 
+// Utilities
+import { assert } from '../utilities/assert';
+
 /**
- * PersistentCache is a simple { key: value } cache that is persistent using IndexedDB.
+ * Check if key is allowed to be stored in IndexedDB
+ *
+ * @param key Key to validate
+ */
+const isAllowedAsAKey = (key: any) => {
+  if (typeof key === 'number' || typeof key === 'string') {
+    return true;
+  }
+
+  if (key === 'object' && key) {
+    if (
+      Array.isArray(key) ||
+      'setUTCFullYear' in key ||
+      (typeof ArrayBuffer === 'function' && ArrayBuffer.isView(key)) ||
+      ('byteLength' in key && 'length' in key)
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+/**
+ * PersistentCache is a simple { key: value } cache that is made persistent using IndexedDB.
+ *
  * IndexedDB is promisified by `idb-keyval`, a small abstraction around the IndexedDB API.
- * IndexedDB is intended to be asynchronous but is unfortunately not implemented that way by browser vendors.
- * By moving the database transactions to a webworker some of the latency is avoided.
  */
 
-// A single instance of the IndexedDB cache constructed in a web worker
 export class PersistentCache {
   public databaseName: string;
   public storeName: string;
@@ -25,8 +50,8 @@ export class PersistentCache {
    * @param storeName Name of the persistent cache store
    */
   constructor(
-    databaseName: string = 'ridge-persistent-db',
-    storeName: string = 'ridge-persistent-store'
+    databaseName: string = 'persistent-cache-db',
+    storeName: string = 'persistent-cache-store'
   ) {
     this.databaseName = databaseName;
     this.storeName = storeName;
@@ -38,7 +63,9 @@ export class PersistentCache {
    * @param key Key to set cache entry with
    * @param value Value to set cache entry with
    */
-  public set(key: string, value: any) {
+  public set(key: IDBValidKey, value: any) {
+    assert(isAllowedAsAKey(key), 'PersistentCache -> The given value is not allowed as a key');
+
     set(key, value, this.store).catch(err =>
       warn(`PersistentCache -> Set: { key: ${key}, value: ${value} } has failed with error: ${err}`)
     );
@@ -49,7 +76,9 @@ export class PersistentCache {
    *
    * @param key Key of cache entry to get
    */
-  public get(key: string) {
+  public get(key: IDBValidKey) {
+    assert(isAllowedAsAKey(key), 'PersistentCache -> The given value is not allowed as a key');
+
     return new Promise(resolve => {
       get(key, this.store)
         .then(value => {
@@ -81,7 +110,9 @@ export class PersistentCache {
    *
    * @param key Key of cache entry to delete
    */
-  public delete(key: string) {
+  public delete(key: IDBValidKey) {
+    assert(isAllowedAsAKey(key), 'PersistentCache -> The given value is not allowed as a key');
+
     del(key, this.store).catch(err =>
       warn(`PersistentCache -> Delete: { key: ${key} } has failed with error: ${err}`)
     );
