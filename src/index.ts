@@ -37,4 +37,9 @@ export { error, log, warn } from './logger';
 export { Thread } from './threads';
 
 // Utilities
-export { assert, getQueryParameters } from './utilities';
+export {
+  assert,
+  convertArrayBufferToBlob,
+  convertBlobToArrayBuffer,
+  getQueryParameters,
+} from './utilities';
