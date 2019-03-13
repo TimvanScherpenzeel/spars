@@ -24,8 +24,7 @@ export {
 } from './events';
 
 // Features
-import features from './features';
-export { features };
+export { features } from './features';
 
 // Loaders
 export { assetLoader } from './loaders';

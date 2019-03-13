@@ -44,7 +44,7 @@ import getDevicePixelRatio from './hardwareFeatures/getDevicePixelRatio';
 import getEndianness from './hardwareFeatures/getEndianness';
 import getWebWorkerPoolSize from './hardwareFeatures/getWebWorkerPoolSize';
 
-const features = {
+export const features = {
   // Browser features
   browserFeatures: {
     browserType: getBrowserType,
@@ -102,5 +102,3 @@ const features = {
     workerPoolSize: getWebWorkerPoolSize,
   },
 };
-
-export default features;
