@@ -41,6 +41,10 @@ export class PersistentCache {
   public databaseName: string;
   public storeName: string;
 
+  // Back persistent cache with in-memory cache in order to maintain functionality
+  // in case IndexedDB is not available (private browsing mode)
+  public memoryCache: Map<IDBValidKey, any> = new Map();
+
   private store!: Store;
 
   /**
@@ -68,9 +72,13 @@ export class PersistentCache {
   public set(key: IDBValidKey, value: any) {
     assert(isAllowedAsAKey(key), 'PersistentCache -> The given value is not allowed as a key');
 
-    set(key, value, this.store).catch(err =>
-      warn(`PersistentCache -> Set: { key: ${key}, value: ${value} } has failed with error: ${err}`)
-    );
+    set(key, value, this.store).catch(err => {
+      warn(
+        `PersistentCache -> Set: { key: ${key}, value: ${value} } has failed with error: ${err}`
+      );
+
+      this.memoryCache.set(key, value);
+    });
   }
 
   /**
@@ -86,9 +94,11 @@ export class PersistentCache {
         .then(value => {
           resolve(value);
         })
-        .catch(err =>
-          warn(`PersistentCache -> Get: { key: ${key} } has failed with error: ${err}`)
-        );
+        .catch(err => {
+          warn(`PersistentCache -> Get: { key: ${key} } has failed with error: ${err}`);
+
+          this.memoryCache.get(key);
+        });
     });
   }
 
@@ -101,9 +111,11 @@ export class PersistentCache {
         .then(storeKeys => {
           resolve(storeKeys);
         })
-        .catch(err =>
-          warn(`PersistentCache -> Keys: { key: ${keys} } has failed with error: ${err}`)
-        );
+        .catch(err => {
+          warn(`PersistentCache -> Keys: { key: ${keys} } has failed with error: ${err}`);
+
+          this.memoryCache.keys();
+        });
     });
   }
 
@@ -115,17 +127,21 @@ export class PersistentCache {
   public delete(key: IDBValidKey) {
     assert(isAllowedAsAKey(key), 'PersistentCache -> The given value is not allowed as a key');
 
-    del(key, this.store).catch(err =>
-      warn(`PersistentCache -> Delete: { key: ${key} } has failed with error: ${err}`)
-    );
+    del(key, this.store).catch(err => {
+      warn(`PersistentCache -> Delete: { key: ${key} } has failed with error: ${err}`);
+
+      this.memoryCache.delete(key);
+    });
   }
 
   /**
    * Clear the entire persistent cache from { key: value } pairs
    */
   public clear() {
-    clear(this.store).catch(err =>
-      warn(`PersistentCache -> Clear: Store clearing has failed with error: ${err}`)
-    );
+    clear(this.store).catch(err => {
+      warn(`PersistentCache -> Clear: Store clearing has failed with error: ${err}`);
+
+      this.memoryCache.clear();
+    });
   }
 }
