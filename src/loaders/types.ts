@@ -6,8 +6,9 @@
 export enum ELoaderKey {
   ArrayBuffer = 'ArrayBuffer',
   Audio = 'Audio',
-  CompressedImage = 'CompressedImage',
   Image = 'Image',
+  ImageBitmap = 'ImageBitmap',
+  ImageCompressed = 'ImageCompressed',
   JSON = 'JSON',
   Text = 'Text',
   Video = 'Video',
