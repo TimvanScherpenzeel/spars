@@ -160,11 +160,37 @@ const loadImage = (item: ILoadItem) =>
     }
   });
 
-const loadImageBitmap = (item: ILoadItem) =>
+/**
+ * Load an item and parse the Response as ImageBitmap element
+ *
+ * @param item Item to load
+ */
+const loadImageBitmap = (
+  item: ILoadItem,
+  sx?: number,
+  sy?: number,
+  sw?: number,
+  sh?: number,
+  options?: {}
+) =>
   loadBlob(item).then(data => {
-    // NOTE: Firefox does not yet support passing options to createImageBitmap and throws
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
-    return createImageBitmap(data);
+    if (sx && sy && sw && sh) {
+      if (options) {
+        // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+        // @ts-ignore
+        return createImageBitmap(data, sx, sy, sw, sh, options);
+      } else {
+        return createImageBitmap(data, sx, sy, sw, sh);
+      }
+    } else if (options) {
+      // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
+      // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+      // @ts-ignore
+      return createImageBitmap(data, options);
+    } else {
+      return createImageBitmap(data);
+    }
   });
 
 /**
