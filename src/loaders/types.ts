@@ -24,7 +24,10 @@ export interface ILoadItem {
   src: string;
   id?: string | number;
   loader?: ELoaderKey;
+
+  // Any options directly passed to the loader
   loaderOptions?: any;
+
   options?: RequestInit;
   body?: TBodyMethod;
 }
