@@ -5,6 +5,9 @@ import { eventEmitter } from '../events/EventEmitter';
 import getBrowserType from '../features/browserFeatures/getBrowserType';
 import isImageDecodeSupported from '../features/browserFeatures/isImageDecodeSupported';
 
+// Logger
+import { error } from '../logger';
+
 // Utilities
 import { assert } from '../utilities';
 
@@ -77,7 +80,11 @@ const fetchItem = (item: ILoadItem) => fetch(item.src, item.options || {});
  * @param item Item to load
  */
 const loadArrayBuffer = (item: ILoadItem) =>
-  fetchItem(item).then(response => response.arrayBuffer());
+  fetchItem(item)
+    .then(response => response.arrayBuffer())
+    .catch(err => {
+      error(err);
+    });
 
 /**
  * Load an item and parse the Response as <audio> element
@@ -95,13 +102,13 @@ const loadAudio = (item: ILoadItem) =>
           audio.autoplay = false;
 
           if (IS_MEDIA_PRELOAD_SUPPORTED) {
-            audio.addEventListener('canplaythrough', function canplaythrough() {
-              audio.removeEventListener('canplaythrough', canplaythrough);
+            audio.addEventListener('canplaythrough', function handler() {
+              audio.removeEventListener('canplaythrough', handler);
               resolve(audio);
             });
 
-            audio.addEventListener('error', function error() {
-              audio.removeEventListener('error', error);
+            audio.addEventListener('error', function handler() {
+              audio.removeEventListener('error', handler);
               reject(audio);
             });
           }
@@ -114,14 +121,22 @@ const loadAudio = (item: ILoadItem) =>
             resolve(audio);
           }
         })
-    );
+    )
+    .catch(err => {
+      error(err);
+    });
 
 /**
  * Load an item and parse the Response as blob
  *
  * @param item Item to load
  */
-const loadBlob = (item: ILoadItem) => fetchItem(item).then(response => response.blob());
+const loadBlob = (item: ILoadItem) =>
+  fetchItem(item)
+    .then(response => response.blob())
+    .catch(err => {
+      error(err);
+    });
 
 /**
  * Load an item and parse the Response as <image> element
@@ -177,22 +192,26 @@ const loadImageBitmap = (item: ILoadItem) =>
   loadBlob(item).then(data => {
     const { sx, sy, sw, sh, options } = item.loaderOptions;
 
-    if (sx && sy && sw && sh) {
-      if (options) {
+    if (data) {
+      if (sx && sy && sw && sh) {
+        if (options) {
+          // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
+          // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+          // @ts-ignore
+          return createImageBitmap(data, sx, sy, sw, sh, options);
+        } else {
+          return createImageBitmap(data, sx, sy, sw, sh);
+        }
+      } else if (options) {
         // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
         // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
         // @ts-ignore
-        return createImageBitmap(data, sx, sy, sw, sh, options);
+        return createImageBitmap(data, options);
       } else {
-        return createImageBitmap(data, sx, sy, sw, sh);
+        return createImageBitmap(data);
       }
-    } else if (options) {
-      // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
-      // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
-      // @ts-ignore
-      return createImageBitmap(data, options);
     } else {
-      return createImageBitmap(data);
+      error('Data was not correctly retrieved');
     }
   });
 
@@ -203,134 +222,135 @@ const loadImageBitmap = (item: ILoadItem) =>
  */
 const loadImageCompressed = (item: ILoadItem) =>
   loadArrayBuffer(item).then(data => {
-    // Switch endianness of value
-    const switchEndianness = (value: number) =>
-      ((value & 0xff) << 24) |
-      ((value & 0xff00) << 8) |
-      ((value >> 8) & 0xff00) |
-      ((value >> 24) & 0xff);
+    if (data) {
+      // Switch endianness of value
+      const switchEndianness = (value: number) =>
+        ((value & 0xff) << 24) |
+        ((value & 0xff00) << 8) |
+        ((value >> 8) & 0xff00) |
+        ((value >> 24) & 0xff);
 
-    // Test that it is a ktx formatted file, based on the first 12 bytes:
-    // '´', 'K', 'T', 'X', ' ', '1', '1', 'ª', '\r', '\n', '\x1A', '\n'
-    // 0xAB, 0x4B, 0x54, 0x58, 0x20, 0x31, 0x31, 0xBB, 0x0D, 0x0A, 0x1A, 0x0A
-    const identifier = new Uint8Array(data, 0, 12);
+      // Test that it is a ktx formatted file, based on the first 12 bytes:
+      // '´', 'K', 'T', 'X', ' ', '1', '1', 'ª', '\r', '\n', '\x1A', '\n'
+      // 0xAB, 0x4B, 0x54, 0x58, 0x20, 0x31, 0x31, 0xBB, 0x0D, 0x0A, 0x1A, 0x0A
+      const identifier = new Uint8Array(data, 0, 12);
 
-    if (
-      identifier[0] !== 0xab ||
-      identifier[1] !== 0x4b ||
-      identifier[2] !== 0x54 ||
-      identifier[3] !== 0x58 ||
-      identifier[4] !== 0x20 ||
-      identifier[5] !== 0x31 ||
-      identifier[6] !== 0x31 ||
-      identifier[7] !== 0xbb ||
-      identifier[8] !== 0x0d ||
-      identifier[9] !== 0x0a ||
-      identifier[10] !== 0x1a ||
-      identifier[11] !== 0x0a
-    ) {
-      throw new Error('Texture missing KTX identifier, currently only supporting KTX containers');
-    }
+      assert(
+        identifier[0] === 0xab ||
+          identifier[1] === 0x4b ||
+          identifier[2] === 0x54 ||
+          identifier[3] === 0x58 ||
+          identifier[4] === 0x20 ||
+          identifier[5] === 0x31 ||
+          identifier[6] === 0x31 ||
+          identifier[7] === 0xbb ||
+          identifier[8] === 0x0d ||
+          identifier[9] === 0x0a ||
+          identifier[10] === 0x1a ||
+          identifier[11] === 0x0a,
+        'Texture missing KTX identifier, currently only supporting KTX containers'
+      );
 
-    // Load the rest of the header in 32 bit int
-    const header = new Int32Array(data, 12, 13);
+      // Load the rest of the header in 32 bit int
+      const header = new Int32Array(data, 12, 13);
 
-    // Determine of the remaining header values are recorded
-    // in the opposite endianness and require conversion
-    const bigEndian = header[0] === 0x01020304;
+      // Determine of the remaining header values are recorded
+      // in the opposite endianness and require conversion
+      const bigEndian = header[0] === 0x01020304;
 
-    // Must be 0 for compressed textures
-    const glType = bigEndian ? switchEndianness(header[1]) : header[1];
+      // Must be 0 for compressed textures
+      const glType = bigEndian ? switchEndianness(header[1]) : header[1];
 
-    // Must be 1 for compressed textures
-    // const glTypeSize = bigEndian ? switchEndianness(header[2]) : header[2];
+      // Must be 1 for compressed textures
+      // const glTypeSize = bigEndian ? switchEndianness(header[2]) : header[2];
 
-    // Must be 0 for compressed textures
-    // const glFormat = bigEndian ? switchEndianness(header[3]) : header[3];
+      // Must be 0 for compressed textures
+      // const glFormat = bigEndian ? switchEndianness(header[3]) : header[3];
 
-    // The value to be passed to gl.compressedTexImage2D(,,x,,,,)
-    const glInternalFormat = bigEndian ? switchEndianness(header[4]) : header[4];
+      // The value to be passed to gl.compressedTexImage2D(,,x,,,,)
+      const glInternalFormat = bigEndian ? switchEndianness(header[4]) : header[4];
 
-    // Specify GL_RGB, GL_RGBA, GL_ALPHA, etc (un-compressed only)
-    const glBaseInternalFormat = bigEndian ? switchEndianness(header[5]) : header[5];
+      // Specify GL_RGB, GL_RGBA, GL_ALPHA, etc (un-compressed only)
+      const glBaseInternalFormat = bigEndian ? switchEndianness(header[5]) : header[5];
 
-    // Level 0 value to be passed to gl.compressedTexImage2D(,,,x,,,)
-    const pixelWidth = bigEndian ? switchEndianness(header[6]) : header[6];
+      // Level 0 value to be passed to gl.compressedTexImage2D(,,,x,,,)
+      const pixelWidth = bigEndian ? switchEndianness(header[6]) : header[6];
 
-    // Level 0 value to be passed to gl.compressedTexImage2D(,,,,x,,)
-    const pixelHeight = bigEndian ? switchEndianness(header[7]) : header[7];
+      // Level 0 value to be passed to gl.compressedTexImage2D(,,,,x,,)
+      const pixelHeight = bigEndian ? switchEndianness(header[7]) : header[7];
 
-    // Level 0 value to be passed to gl.compressedTexImage3D(,,,,,x,,)
-    const pixelDepth = bigEndian ? switchEndianness(header[8]) : header[8];
+      // Level 0 value to be passed to gl.compressedTexImage3D(,,,,,x,,)
+      const pixelDepth = bigEndian ? switchEndianness(header[8]) : header[8];
 
-    // Used for texture arrays
-    const numberOfArrayElements = bigEndian ? switchEndianness(header[9]) : header[9];
+      // Used for texture arrays
+      const numberOfArrayElements = bigEndian ? switchEndianness(header[9]) : header[9];
 
-    // Used for cubemap textures, should either be 1 or 6
-    const numberOfFaces = bigEndian ? switchEndianness(header[10]) : header[10];
+      // Used for cubemap textures, should either be 1 or 6
+      const numberOfFaces = bigEndian ? switchEndianness(header[10]) : header[10];
 
-    // Number of levels; disregard possibility of 0 for compressed textures
-    let numberOfMipmapLevels = bigEndian ? switchEndianness(header[11]) : header[11];
+      // Number of levels; disregard possibility of 0 for compressed textures
+      let numberOfMipmapLevels = bigEndian ? switchEndianness(header[11]) : header[11];
 
-    // The amount of space after the header for meta-data
-    const bytesOfKeyValueData = bigEndian ? switchEndianness(header[12]) : header[12];
+      // The amount of space after the header for meta-data
+      const bytesOfKeyValueData = bigEndian ? switchEndianness(header[12]) : header[12];
 
-    // Value of zero is an indication to generate mipmaps at runtime.
-    // Not usually allowed for compressed, so disregard.
-    numberOfMipmapLevels = Math.max(1, numberOfMipmapLevels);
+      // Value of zero is an indication to generate mipmaps at runtime.
+      // Not usually allowed for compressed, so disregard.
+      numberOfMipmapLevels = Math.max(1, numberOfMipmapLevels);
 
-    // Check for 2D texture
-    assert(pixelHeight !== 0 && pixelDepth === 0, 'Only 2D textures currently supported');
+      // Check for 2D texture
+      assert(pixelHeight !== 0 && pixelDepth === 0, 'Only 2D textures currently supported');
 
-    // Check for texture arrays, currently not supported
-    assert(numberOfArrayElements === 0, 'Texture arrays not currently supported');
+      // Check for texture arrays, currently not supported
+      assert(numberOfArrayElements === 0, 'Texture arrays not currently supported');
 
-    const mipmaps = [];
+      const mipmaps = [];
 
-    // Identifier + header elements (not including key value meta-data pairs)
-    let dataOffset = 64 + bytesOfKeyValueData;
-    let width = pixelWidth;
-    let height = pixelHeight;
-    const mipmapCount = numberOfMipmapLevels || 1;
+      // Identifier + header elements (not including key value meta-data pairs)
+      let dataOffset = 64 + bytesOfKeyValueData;
+      let width = pixelWidth;
+      let height = pixelHeight;
+      const mipmapCount = numberOfMipmapLevels || 1;
 
-    for (let level = 0; level < mipmapCount; level += 1) {
-      // Size per face, since not supporting array cubemaps
-      const imageSize = new Int32Array(data, dataOffset, 1)[0];
+      for (let level = 0; level < mipmapCount; level += 1) {
+        // Size per face, since not supporting array cubemaps
+        const imageSize = new Int32Array(data, dataOffset, 1)[0];
 
-      // Image data starts from next multiple of 4 offset
-      // Each face refers to same imagesize field above
-      dataOffset += 4;
+        // Image data starts from next multiple of 4 offset
+        // Each face refers to same imagesize field above
+        dataOffset += 4;
 
-      for (let face = 0; face < numberOfFaces; face += 1) {
-        const byteArray = new Uint8Array(data, dataOffset, imageSize);
+        for (let face = 0; face < numberOfFaces; face += 1) {
+          const byteArray = new Uint8Array(data, dataOffset, imageSize);
 
-        mipmaps.push({
-          data: byteArray,
-          height,
-          width,
-        });
+          mipmaps.push({
+            data: byteArray,
+            height,
+            width,
+          });
 
-        // Add size of the image for the next face / mipmap
-        dataOffset += imageSize;
+          // Add size of the image for the next face / mipmap
+          dataOffset += imageSize;
 
-        // Add padding for odd sized image
-        dataOffset += 3 - ((imageSize + 3) % 4);
+          // Add padding for odd sized image
+          dataOffset += 3 - ((imageSize + 3) % 4);
+        }
+
+        width = Math.max(1.0, width * 0.5);
+        height = Math.max(1.0, height * 0.5);
       }
 
-      width = Math.max(1.0, width * 0.5);
-      height = Math.max(1.0, height * 0.5);
+      return {
+        baseInternalFormat: glBaseInternalFormat,
+        height: pixelHeight,
+        internalFormat: glInternalFormat,
+        isCompressed: !glType,
+        isCubemap: numberOfFaces === 6,
+        mipmapCount: numberOfMipmapLevels,
+        mipmaps,
+        width: pixelWidth,
+      };
     }
-
-    return {
-      baseInternalFormat: glBaseInternalFormat,
-      height: pixelHeight,
-      internalFormat: glInternalFormat,
-      isCompressed: !glType,
-      isCubemap: numberOfFaces === 6,
-      mipmapCount: numberOfMipmapLevels,
-      mipmaps,
-      width: pixelWidth,
-    };
   });
 
 /**
@@ -338,14 +358,24 @@ const loadImageCompressed = (item: ILoadItem) =>
  *
  * @param item Item to load
  */
-const loadJSON = (item: ILoadItem) => fetchItem(item).then(response => response.json());
+const loadJSON = (item: ILoadItem) =>
+  fetchItem(item)
+    .then(response => response.json())
+    .catch(err => {
+      error(err);
+    });
 
 /**
  * Load an item and parse the Response as plain text
  *
  * @param item Item to load
  */
-const loadText = (item: ILoadItem) => fetchItem(item).then(response => response.text());
+const loadText = (item: ILoadItem) =>
+  fetchItem(item)
+    .then(response => response.text())
+    .catch(err => {
+      error(err);
+    });
 
 /**
  * Load an item and parse the Response as <video> element
@@ -365,13 +395,15 @@ const loadVideo = (item: ILoadItem) =>
           video.playsinline = true;
 
           if (IS_MEDIA_PRELOAD_SUPPORTED) {
-            video.addEventListener('canplaythrough', function canplaythrough() {
-              video.removeEventListener('canplaythrough', canplaythrough);
+            video.addEventListener('canplaythrough', function handler() {
+              video.removeEventListener('canplaythrough', handler);
+              URL.revokeObjectURL(video.src);
               resolve(video);
             });
 
-            video.addEventListener('error', function error() {
-              video.removeEventListener('error', error);
+            video.addEventListener('error', function handler() {
+              video.removeEventListener('error', handler);
+              URL.revokeObjectURL(video.src);
               reject(video);
             });
           }
@@ -384,7 +416,10 @@ const loadVideo = (item: ILoadItem) =>
             resolve(video);
           }
         })
-    );
+    )
+    .catch(err => {
+      error(err);
+    });
 
 /**
  * Asynchronous asset preloader

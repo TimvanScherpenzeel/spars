@@ -8,6 +8,7 @@ export const convertBlobToArrayBuffer = (blob: Blob) => {
     const reader = new FileReader();
 
     reader.addEventListener('loadend', e => {
+      // @ts-ignore
       resolve(reader.result);
     });
 
