@@ -163,6 +163,14 @@ const loadImage = (item: ILoadItem) =>
 /**
  * Load an item and parse the Response as ImageBitmap element
  *
+ * NOTE: Please be cautious when using loadImageBitmap as browser support is still spotty and unreliable
+ *
+ *  See:
+ * - https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#dom-createimagebitmap
+ * - https://caniuse.com/createimagebitmap
+ * - https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+ * - https://bugzilla.mozilla.org/show_bug.cgi?id=1363861
+ *
  * @param item Item to load
  */
 const loadImageBitmap = (
