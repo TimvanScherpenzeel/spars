@@ -173,15 +173,10 @@ const loadImage = (item: ILoadItem) =>
  *
  * @param item Item to load
  */
-const loadImageBitmap = (
-  item: ILoadItem,
-  sx?: number,
-  sy?: number,
-  sw?: number,
-  sh?: number,
-  options?: {}
-) =>
+const loadImageBitmap = (item: ILoadItem) =>
   loadBlob(item).then(data => {
+    const { sx, sy, sw, sh, options } = item.loaderOptions;
+
     if (sx && sy && sw && sh) {
       if (options) {
         // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
