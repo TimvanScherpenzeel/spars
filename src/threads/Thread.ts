@@ -13,9 +13,9 @@ import isWebWorkerInlineSupported from '../features/browserFeatures/isWebWorkerI
  */
 export class Thread {
   /**
-   * @param asyncFunction Asynchronous function to process
+   * @param asyncFn Asynchronous function to process
    */
-  constructor(asyncFunction: any) {
+  constructor(asyncFn: any) {
     // Execute on main thread as a fallback solution
 
     // Internet Explorer 11 does not support Promise without being polyfilled
@@ -24,7 +24,7 @@ export class Thread {
       return function(args: any) {
         args = [].slice.call(arguments);
 
-        return asyncFunction(args);
+        return asyncFn(args);
       };
     }
 
@@ -40,7 +40,7 @@ export class Thread {
     // Use a data URI for the worker's src. It inlines the target function and an RPC handler
     const workerURL = URL.createObjectURL(
       new Blob([
-        `$$=${asyncFunction};onmessage=${(event: MessageEvent) => {
+        `$$=${asyncFn};onmessage=${(event: MessageEvent) => {
           if (event) {
             // Invoking within then() captures exceptions in the supplied async function as rejections
             Promise.resolve(event.data[1])

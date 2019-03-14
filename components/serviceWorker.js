@@ -2,9 +2,10 @@
 //   navigator.serviceWorker.register('/serviceWorker.js');
 // }
 
-const ACTIVE_CACHE_NAME = 'V1';
-const ACTIVE_CACHE_FILES = [];
-const ACTIVE_CACHES = [ACTIVE_CACHE_NAME];
+const ACTIVE_CACHE_NAMES = [ACTIVE_CACHE_NAME];
+
+const CURRENT_ACTIVE_CACHE_NAME = 'V1';
+const CURRENT_ACTIVE_CACHE_FILES = [];
 
 // Install and activate
 self.addEventListener('install', event => {
@@ -16,7 +17,7 @@ self.addEventListener('install', event => {
   );
 });
 
-// Clean up any old caches and claim ownership (prevents from having to reload)
+// Clean up any old caches
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches
@@ -25,6 +26,7 @@ self.addEventListener('activate', event => {
       .then(cachesToDelete =>
         Promise.all(cachesToDelete.map(cacheToDelete => caches.delete(cacheToDelete)))
       )
+      // Claim ownership (prevents page from having to reload to use the new service worker)
       .then(() => self.clients.claim())
   );
 });

@@ -23,7 +23,8 @@ const LOADER_EXTENSIONS_MAP = new Map([
   ['Text', { extensions: ['txt', 'svg'] }],
   ['JSON', { extensions: ['json'] }],
   ['Image', { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
-  ['CompressedImage', { extensions: ['ktx'] }],
+  ['ImageBitmap', { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
+  ['ImageCompressed', { extensions: ['ktx'] }],
   ['Audio', { extensions: ['mp3', 'ogg', 'wav', 'flac'] }],
   ['Video', { extensions: ['webm', 'ogg', 'mp4'] }],
 ]);
@@ -159,12 +160,19 @@ const loadImage = (item: ILoadItem) =>
     }
   });
 
+const loadImageBitmap = (item: ILoadItem) =>
+  loadBlob(item).then(data => {
+    // NOTE: Firefox does not yet support passing options to createImageBitmap and throws
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+    return createImageBitmap(data);
+  });
+
 /**
  * Load an item and parse the Response as compressed image (KTX container)
  *
  * @param item Item to load
  */
-const loadCompressedImage = (item: ILoadItem) =>
+const loadImageCompressed = (item: ILoadItem) =>
   loadArrayBuffer(item).then(data => {
     // Switch endianness of value
     const switchEndianness = (value: number) =>
@@ -393,11 +401,14 @@ class AssetLoader {
         case 'Audio':
           loadedItem = loadAudio(item);
           break;
-        case 'CompressedImage':
-          loadedItem = loadCompressedImage(item);
-          break;
         case 'Image':
           loadedItem = loadImage(item);
+          break;
+        case 'ImageBitmap':
+          loadedItem = loadImageBitmap(item);
+          break;
+        case 'ImageCompressed':
+          loadedItem = loadImageCompressed(item);
           break;
         case 'JSON':
           loadedItem = loadJSON(item);
