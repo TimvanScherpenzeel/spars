@@ -3,6 +3,7 @@ import { eventEmitter } from '../events/EventEmitter';
 
 // Features
 import getBrowserType from '../features/browserFeatures/getBrowserType';
+import isImageBitmapSupported from '../features/browserFeatures/isImageBitmapSupported';
 import isImageDecodeSupported from '../features/browserFeatures/isImageDecodeSupported';
 
 // Logger
@@ -188,40 +189,41 @@ const loadImage = (item: ILoadItem) =>
  *
  * @param item Item to load
  */
-const loadImageBitmap = (item: ILoadItem) =>
-  loadBlob(item).then(data => {
-    if (data) {
-      if (item.loaderOptions) {
-        const { sx, sy, sw, sh, options } = item.loaderOptions;
+const loadImageBitmap = (item: ILoadItem) => {
+  if (isImageBitmapSupported) {
+    return loadBlob(item).then(data => {
+      if (data) {
+        if (item.loaderOptions) {
+          const { sx, sy, sw, sh, options } = item.loaderOptions;
 
-        if (
-          sx !== undefined &&
-          sy !== undefined &&
-          sw !== undefined &&
-          sh !== undefined &&
-          options !== undefined
-        ) {
-          // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
-          // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
-          // @ts-ignore
-          return createImageBitmap(data, sx, sy, sw, sh, options);
-        } else if (sx !== undefined && sy !== undefined && sw !== undefined && sh !== undefined) {
-          return createImageBitmap(data, sx, sy, sw, sh);
-        } else if (options) {
-          // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
-          // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
-          // @ts-ignore
-          return createImageBitmap(data, options);
+          if (sx !== undefined && sy !== undefined && sw !== undefined && sh !== undefined) {
+            if (options !== undefined) {
+              // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
+              // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+              // @ts-ignore
+              return createImageBitmap(data, sx, sy, sw, sh, options);
+            } else {
+              return createImageBitmap(data, sx, sy, sw, sh);
+            }
+          } else if (options !== undefined) {
+            // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
+            // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+            // @ts-ignore
+            return createImageBitmap(data, options);
+          } else {
+            return createImageBitmap(data);
+          }
         } else {
           return createImageBitmap(data);
         }
       } else {
-        return createImageBitmap(data);
+        error('Data was not correctly retrieved');
       }
-    } else {
-      error('Data was not correctly retrieved');
-    }
-  });
+    });
+  } else {
+    return loadImage(item);
+  }
+};
 
 /**
  * Load an item and parse the Response as compressed image (KTX container)
