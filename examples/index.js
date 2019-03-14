@@ -46,24 +46,24 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // Cache
 // -----
 
-const persistentCache = new Ridge.PersistentCache();
+// const persistentCache = new Ridge.PersistentCache();
 
-persistentCache.set('key1', 'value1');
-persistentCache.set('key2', 'value2');
-persistentCache.get('key1').then(key => console.log(key));
-persistentCache.getKeys().then(keys => {
-  console.log(keys);
-  persistentCache.delete('key1');
+// persistentCache.set('key1', 'value1');
+// persistentCache.set('key2', 'value2');
+// persistentCache.get('key1').then(key => console.log(key));
+// persistentCache.getKeys().then(keys => {
+//   console.log(keys);
+//   persistentCache.delete('key1');
 
-  persistentCache.getKeys().then(keys => {
-    console.log(keys);
-    persistentCache.clear();
+//   persistentCache.getKeys().then(keys => {
+//     console.log(keys);
+//     persistentCache.clear();
 
-    persistentCache.getKeys().then(keys => {
-      console.log(keys);
-    });
-  });
-});
+//     persistentCache.getKeys().then(keys => {
+//       console.log(keys);
+//     });
+//   });
+// });
 
 // Cookie
 // ------
