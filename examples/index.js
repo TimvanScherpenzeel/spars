@@ -143,7 +143,16 @@ const getSupportedCompressedTexture = data =>
 
 Ridge.assetLoader
   .loadAssets([
-    isDesktop && { src: './assets/1.png' },
+    isDesktop && {
+      loader: 'ImageBitmap',
+      loaderOptions: {
+        sx: 0,
+        sy: 0,
+        sw: 25,
+        sh: 25,
+      },
+      src: './assets/1.png',
+    },
     isTablet && { src: './assets/2.png' },
     isMobile && { src: './assets/3.png' },
 

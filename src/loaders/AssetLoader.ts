@@ -190,23 +190,31 @@ const loadImage = (item: ILoadItem) =>
  */
 const loadImageBitmap = (item: ILoadItem) =>
   loadBlob(item).then(data => {
-    const { sx, sy, sw, sh, options } = item.loaderOptions;
-
     if (data) {
-      if (sx && sy && sw && sh) {
-        if (options) {
+      if (item.loaderOptions) {
+        const { sx, sy, sw, sh, options } = item.loaderOptions;
+
+        if (
+          sx !== undefined &&
+          sy !== undefined &&
+          sw !== undefined &&
+          sh !== undefined &&
+          options !== undefined
+        ) {
           // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
           // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
           // @ts-ignore
           return createImageBitmap(data, sx, sy, sw, sh, options);
-        } else {
+        } else if (sx !== undefined && sy !== undefined && sw !== undefined && sh !== undefined) {
           return createImageBitmap(data, sx, sy, sw, sh);
+        } else if (options) {
+          // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
+          // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+          // @ts-ignore
+          return createImageBitmap(data, options);
+        } else {
+          return createImageBitmap(data);
         }
-      } else if (options) {
-        // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
-        // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
-        // @ts-ignore
-        return createImageBitmap(data, options);
       } else {
         return createImageBitmap(data);
       }
