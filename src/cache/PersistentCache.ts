@@ -38,14 +38,11 @@ const isAllowedAsKey = (key: any) => {
  */
 
 export class PersistentCache {
-  public databaseName: string;
-  public storeName: string;
-
   // Back persistent cache with in-memory cache in order to maintain functionality
   // in case IndexedDB is not available (private browsing mode)
-  public memoryCache: Map<IDBValidKey, any> = new Map();
+  private memoryCache: Map<IDBValidKey, any> = new Map();
 
-  private store!: Store;
+  private store: Store;
 
   /**
    * Sets various configuration options
@@ -57,8 +54,7 @@ export class PersistentCache {
     databaseName: string = 'persistent-cache-db',
     storeName: string = 'persistent-cache-store'
   ) {
-    this.databaseName = databaseName;
-    this.storeName = storeName;
+    this.store = new Store(databaseName, storeName);
   }
 
   /**
