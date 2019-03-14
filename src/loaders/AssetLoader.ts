@@ -7,7 +7,7 @@ import isImageBitmapSupported from '../features/browserFeatures/isImageBitmapSup
 import isImageDecodeSupported from '../features/browserFeatures/isImageDecodeSupported';
 
 // Logger
-import { error } from '../logger';
+import { warn } from '../logger';
 
 // Utilities
 import { assert } from '../utilities';
@@ -84,7 +84,7 @@ const loadArrayBuffer = (item: ILoadItem) =>
   fetchItem(item)
     .then(response => response.arrayBuffer())
     .catch(err => {
-      error(err);
+      warn(err);
     });
 
 /**
@@ -124,7 +124,7 @@ const loadAudio = (item: ILoadItem) =>
         })
     )
     .catch(err => {
-      error(err);
+      warn(err);
     });
 
 /**
@@ -136,7 +136,7 @@ const loadBlob = (item: ILoadItem) =>
   fetchItem(item)
     .then(response => response.blob())
     .catch(err => {
-      error(err);
+      warn(err);
     });
 
 /**
@@ -217,10 +217,14 @@ const loadImageBitmap = (item: ILoadItem) => {
           return createImageBitmap(data);
         }
       } else {
-        error('Data was not correctly retrieved');
+        // In case something went wrong with loading the blob or corrupted data
+        // Fallback to default image loader
+        warn('Received broken data, falling back to default image loader');
+        return loadImage(item);
       }
     });
   } else {
+    // Fallback to default image loader
     return loadImage(item);
   }
 };
@@ -372,7 +376,7 @@ const loadJSON = (item: ILoadItem) =>
   fetchItem(item)
     .then(response => response.json())
     .catch(err => {
-      error(err);
+      warn(err);
     });
 
 /**
@@ -384,7 +388,7 @@ const loadText = (item: ILoadItem) =>
   fetchItem(item)
     .then(response => response.text())
     .catch(err => {
-      error(err);
+      warn(err);
     });
 
 /**
@@ -428,7 +432,7 @@ const loadVideo = (item: ILoadItem) =>
         })
     )
     .catch(err => {
-      error(err);
+      warn(err);
     });
 
 /**
