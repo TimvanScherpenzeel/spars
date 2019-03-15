@@ -124,7 +124,7 @@ describe('EventEmitter', () => {
   //     beforeAll(() => {
   //       heapDiff = new memwatch.HeapDiff();
 
-  //       for (let i = 0; i < 25; i++) {
+  //       for (let i = 0; i < 25; i += 1) {
   //         new EventEmitter();
   //       }
 
@@ -152,7 +152,7 @@ describe('EventEmitter', () => {
   //   beforeAll(() => {
   //     heapDiff = new memwatch.HeapDiff();
 
-  //     for (let i = 0; i < 25; i++) {
+  //     for (let i = 0; i < 25; i += 1) {
   //       new EventEmitter().on('test', () => {});
   //     }
 

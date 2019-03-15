@@ -219,7 +219,7 @@ const loadImageBitmap = (item: ILoadItem) => {
       } else {
         // In case something went wrong with loading the blob or corrupted data
         // Fallback to default image loader
-        warn('Received broken data, falling back to default image loader');
+        warn('Received no or corrupt data, falling back to default image loader');
         return loadImage(item);
       }
     });
@@ -544,5 +544,4 @@ class AssetLoader {
 }
 
 // Export as a singleton in order to prevent multiple instances
-const assetLoader = new AssetLoader();
-export { assetLoader };
+export const assetLoader = new AssetLoader();

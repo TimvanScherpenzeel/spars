@@ -7,7 +7,7 @@ export const convertBlobToArrayBuffer = (blob: Blob) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
 
-    reader.addEventListener('loadend', e => {
+    reader.addEventListener('loadend', (event: Event) => {
       // @ts-ignore
       resolve(reader.result);
     });
