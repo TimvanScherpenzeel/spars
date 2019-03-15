@@ -40,5 +40,6 @@ export {
   assert,
   convertArrayBufferToBlob,
   convertBlobToArrayBuffer,
+  createUUID,
   getQueryParameters,
 } from './utilities';
