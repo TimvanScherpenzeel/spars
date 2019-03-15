@@ -1,4 +1,4 @@
-// Vendor
+// Source
 import { createUUID, getRandomValues, hex } from '../../src/utilities/createUUID';
 
 // Regular expression used for basic parsing of the uuid.
