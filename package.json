@@ -22,6 +22,7 @@
   "dependencies": {
     "detect-ua": "^0.0.10",
     "idb-keyval": "^3.1.0",
+    "mitt": "^1.1.3",
     "webgl-constants": "^0.2.0"
   },
   "devDependencies": {
