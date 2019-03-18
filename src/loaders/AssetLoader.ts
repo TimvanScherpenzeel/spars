@@ -443,7 +443,7 @@ const webGLFeatures = getWebGLFeatures;
  */
 class AssetLoader {
   /**
-   * Load conditionally by device type
+   * Load conditionally based on device type
    */
   public static byDeviceType = (data: { DESKTOP?: string; TABLET?: string; MOBILE?: string }) =>
     data.DESKTOP && getBrowserType.isDesktop
