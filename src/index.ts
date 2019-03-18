@@ -18,8 +18,10 @@ export {
   eventEmitter,
   EventEmitter,
   listenToConnectionChange,
+  listenToOrientationChange,
   listenToVisibilityChange,
   stopListeningToConnectionChange,
+  stopListeningToOrientationChange,
   stopListeningToVisibilityChange,
 } from './events';
 

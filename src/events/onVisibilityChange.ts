@@ -58,12 +58,15 @@ function onVisibilityChange() {
 }
 
 /**
- * Monitor visibility changes
+ * Start listening to visibility change events
  */
 export const listenToVisibilityChange = () => {
   visibility.addEventListener('visibilitychange', onVisibilityChange, false);
 };
 
+/**
+ * Stop listening to visibility change events
+ */
 export const stopListeningToVisibilityChange = () => {
   visibility.removeEventListener('visibilitychange', onVisibilityChange);
 };

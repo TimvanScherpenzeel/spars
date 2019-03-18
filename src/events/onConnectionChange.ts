@@ -45,7 +45,7 @@ function onConnectionChange() {
 }
 
 /**
- * Monitor connection changes and speed
+ * Start listening to connection change events
  */
 export const listenToConnectionChange = () => {
   // https://caniuse.com/#feat=netinfo (Chrome only for now)
@@ -59,6 +59,9 @@ export const listenToConnectionChange = () => {
   window.addEventListener('online', onConnectionChange);
 };
 
+/**
+ * Stop listening to connection change events
+ */
 export const stopListeningToConnectionChange = () => {
   window.removeEventListener('offline', onConnectionChange);
   window.removeEventListener('online', onConnectionChange);
