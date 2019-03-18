@@ -87,6 +87,7 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // Ridge.listenToConnectionChange();
 // Ridge.listenToOrientationChange();
 // Ridge.listenToVisibilityChange();
+// Ridge.listenToWindowSizeChange();
 
 // Ridge.eventEmitter.on('RIDGE::CONNECTION_CHANGE', event => {
 //   console.log(event);
@@ -104,6 +105,12 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 //   console.log(event);
 
 //   // Ridge.stopListeningToVisibilityChange();
+// });
+
+// Ridge.eventEmitter.on('RIDGE::WINDOW_SIZE_CHANGE', event => {
+//   console.log(event);
+
+//   // Ridge.stopListeningToWindowSizeChange();
 // });
 
 // Features

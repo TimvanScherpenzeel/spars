@@ -20,9 +20,11 @@ export {
   listenToConnectionChange,
   listenToOrientationChange,
   listenToVisibilityChange,
+  listenToWindowSizeChange,
   stopListeningToConnectionChange,
   stopListeningToOrientationChange,
   stopListeningToVisibilityChange,
+  stopListeningToWindowSizeChange,
 } from './events';
 
 // Features
