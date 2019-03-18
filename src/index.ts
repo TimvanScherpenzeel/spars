@@ -31,7 +31,7 @@ export {
 export { features } from './features';
 
 // Loaders
-export { assetLoader } from './loaders';
+export { AssetLoader } from './loaders';
 
 // Logger
 export { error, log, warn } from './logger';

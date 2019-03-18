@@ -1,2 +1,2 @@
 // Loaders
-export { assetLoader } from './AssetLoader';
+export { AssetLoader } from './AssetLoader';

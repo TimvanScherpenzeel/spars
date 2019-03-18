@@ -3,6 +3,7 @@ import { eventEmitter } from '../events/EventEmitter';
 
 // Features
 import getBrowserType from '../features/browserFeatures/getBrowserType';
+import getWebGLFeatures from '../features/browserFeatures/getWebGLFeatures';
 import isImageBitmapSupported from '../features/browserFeatures/isImageBitmapSupported';
 import isImageDecodeSupported from '../features/browserFeatures/isImageDecodeSupported';
 
@@ -435,10 +436,47 @@ const loadVideo = (item: ILoadItem) =>
       warn(err);
     });
 
+const webGLFeatures = getWebGLFeatures;
+
 /**
  * Asynchronous asset preloader
  */
 class AssetLoader {
+  /**
+   * Load conditionally by device type
+   */
+  public static byDeviceType = (data: { DESKTOP?: string; TABLET?: string; MOBILE?: string }) =>
+    data.DESKTOP && getBrowserType.isDesktop
+      ? data.DESKTOP
+      : data.TABLET && getBrowserType.isTablet
+      ? data.TABLET
+      : data.MOBILE;
+
+  /**
+   * Load conditionally based on supported compressed texture
+   */
+  public static bySupportedCompressedTexture = (data: {
+    ASTC?: string;
+    ETC?: string;
+    S3TC?: string;
+    PVRTC?: string;
+    FALLBACK?: string;
+  }) => {
+    if (webGLFeatures) {
+      return data.ASTC && webGLFeatures.extensions.compressedTextureASTCExtension
+        ? data.ASTC
+        : data.ETC && webGLFeatures.extensions.compressedTextureETCExtension
+        ? data.S3TC
+        : data.PVRTC && webGLFeatures.extensions.compressedTexturePVRTCExtension
+        ? data.PVRTC
+        : data.S3TC && webGLFeatures.extensions.compressedTextureS3TCExtension
+        ? data.S3TC
+        : data.FALLBACK;
+    } else {
+      return data.FALLBACK;
+    }
+  };
+
   public assets: Map<string, Promise<Response>>;
 
   constructor() {
@@ -543,5 +581,4 @@ class AssetLoader {
   }
 }
 
-// Export as a singleton in order to prevent multiple instances
-export const assetLoader = new AssetLoader();
+export { AssetLoader };
