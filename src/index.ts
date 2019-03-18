@@ -15,6 +15,7 @@ export { deleteCookie, getCookie, setCookie } from './cookie';
 
 // Events
 export {
+  EventEmitter,
   eventEmitter,
   listenToConnectionChange,
   listenToOrientationChange,

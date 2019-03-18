@@ -84,6 +84,16 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // Events
 // ------
 
+// class Test extends Ridge.EventEmitter {
+//   constructor() {
+//     super();
+
+//     console.log(this);
+//   }
+// }
+
+// new Test();
+
 // Ridge.listenToConnectionChange();
 // Ridge.listenToOrientationChange();
 // Ridge.listenToVisibilityChange();

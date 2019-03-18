@@ -7,4 +7,4 @@ import Mitt from 'mitt';
 
 const eventEmitter = new Mitt();
 
-export { eventEmitter };
+export { eventEmitter, Mitt as EventEmitter };
