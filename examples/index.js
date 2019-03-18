@@ -84,43 +84,46 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // Events
 // ------
 
-Ridge.listenToConnectionChange();
-Ridge.listenToOrientationChange();
-Ridge.listenToVisibilityChange();
-Ridge.listenToWindowSizeChange();
+// Ridge.listenToConnectionChange();
+// Ridge.listenToOrientationChange();
+// Ridge.listenToVisibilityChange();
+// Ridge.listenToWindowSizeChange();
 
-// const connectionChangeHandler =
+// const connectionChangeHandler = event => {
+//   console.log(event);
 
-Ridge.eventEmitter.on('RIDGE::CONNECTION_CHANGE', event => {
-  console.log(event);
-});
+//   Ridge.eventEmitter.off('RIDGE::CONNECTION_CHANGE', connectionChangeHandler);
+//   Ridge.stopListeningToConnectionChange();
+// };
 
-// Ridge.eventEmitter.off(connectionChangeHandler);
-// Ridge.stopListeningToConnectionChange(connectionChangeHandler);
+// Ridge.eventEmitter.on('RIDGE::CONNECTION_CHANGE', connectionChangeHandler);
 
-// const orientationChangeHandler =
- Ridge.eventEmitter.on('RIDGE::ORIENTATION_CHANGE', event => {
-  console.log(event);
-});
+// const orientationChangeHandler = event => {
+//   console.log(event);
 
-// Ridge.eventEmitter.off(orientationChangeHandler);
-// Ridge.stopListeningToOrientationChange();
+//   Ridge.eventEmitter.off('RIDGE::ORIENTATION_CHANGE');
+//   Ridge.stopListeningToOrientationChange();
+// };
 
-// const visibilityChangeHandler =
- Ridge.eventEmitter.on('RIDGE::VISIBILITY_CHANGE', event => {
-  console.log(event);
-});
+// Ridge.eventEmitter.on('RIDGE::ORIENTATION_CHANGE', orientationChangeHandler);
 
-// Ridge.eventEmitter.off(visibilityChangeHandler);
-// Ridge.stopListeningToVisibilityChange();
+// const visibilityChangeHandler = event => {
+//   console.log(event);
 
-// const windowSizeChangeHandler =
- Ridge.eventEmitter.on('RIDGE::WINDOW_SIZE_CHANGE', event => {
-  console.log(event);
-});
+//   Ridge.eventEmitter.off('RIDGE::VISIBILITY_CHANGE');
+//   Ridge.stopListeningToVisibilityChange();
+// };
 
-// Ridge.eventEmitter.off(windowSizeChangeHandler);
-// Ridge.stopListeningToWindowSizeChange();
+// Ridge.eventEmitter.on('RIDGE::VISIBILITY_CHANGE', visibilityChangeHandler);
+
+// const windowSizeChangeHandler = event => {
+//   console.log(event);
+
+//   Ridge.eventEmitter.off('RIDGE::WINDOW_SIZE_CHANGE');
+//   Ridge.stopListeningToWindowSizeChange();
+// };
+
+// Ridge.eventEmitter.on('RIDGE::WINDOW_SIZE_CHANGE', windowSizeChangeHandler);
 
 // Features
 // --------
