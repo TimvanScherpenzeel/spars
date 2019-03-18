@@ -462,21 +462,16 @@ class AssetLoader {
     S3TC?: string;
     PVRTC?: string;
     FALLBACK?: string;
-  }) => {
-    if (webGLFeatures) {
-      return data.ASTC && webGLFeatures.extensions.compressedTextureASTCExtension
-        ? data.ASTC
-        : data.ETC && webGLFeatures.extensions.compressedTextureETCExtension
-        ? data.S3TC
-        : data.PVRTC && webGLFeatures.extensions.compressedTexturePVRTCExtension
-        ? data.PVRTC
-        : data.S3TC && webGLFeatures.extensions.compressedTextureS3TCExtension
-        ? data.S3TC
-        : data.FALLBACK;
-    } else {
-      return data.FALLBACK;
-    }
-  };
+  }) =>
+    data.ASTC && webGLFeatures && webGLFeatures.extensions.compressedTextureASTCExtension
+      ? data.ASTC
+      : data.ETC && webGLFeatures && webGLFeatures.extensions.compressedTextureETCExtension
+      ? data.S3TC
+      : data.PVRTC && webGLFeatures && webGLFeatures.extensions.compressedTexturePVRTCExtension
+      ? data.PVRTC
+      : data.S3TC && webGLFeatures && webGLFeatures.extensions.compressedTextureS3TCExtension
+      ? data.S3TC
+      : data.FALLBACK;
 
   public assets: Map<string, Promise<Response>>;
 
