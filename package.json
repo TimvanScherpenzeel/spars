@@ -27,10 +27,8 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
-    "@types/node-memwatch": "^1.0.0",
     "concurrently": "^4.1.0",
     "jest": "^24.5.0",
-    "node-memwatch": "^1.0.1",
     "parcel": "^1.12.2",
     "prettier": "^1.16.4",
     "rimraf": "^2.6.3",
