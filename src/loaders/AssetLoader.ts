@@ -436,6 +436,7 @@ const loadVideo = (item: ILoadItem) =>
       warn(err);
     });
 
+// Make sure to cache the WebGL feature set as it doesn't change over time and is quite heavy
 const webGLFeatures = getWebGLFeatures;
 
 /**
