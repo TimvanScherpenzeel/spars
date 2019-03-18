@@ -85,12 +85,19 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // ------
 
 // Ridge.listenToConnectionChange();
+// Ridge.listenToOrientationChange();
 // Ridge.listenToVisibilityChange();
 
 // Ridge.eventEmitter.on('RIDGE::CONNECTION_CHANGE', event => {
 //   console.log(event);
 
 //   // Ridge.stopListeningToConnectionChange();
+// });
+
+// Ridge.eventEmitter.on('RIDGE::ORIENTATION_CHANGE', event => {
+//   console.log(event);
+
+//   // Ridge.stopListeningToOrientationChange();
 // });
 
 // Ridge.eventEmitter.on('RIDGE::VISIBILITY_CHANGE', event => {
