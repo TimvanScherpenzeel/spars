@@ -119,109 +119,109 @@ console.log(Ridge.features);
 //     document.body.appendChild(asset.item);
 //   });
 
-const { isDesktop, isTablet, isMobile } = Ridge.features.browserFeatures.browserType;
-const {
-  compressedTextureASTCExtension,
-  compressedTextureETCExtension,
-  compressedTexturePVRTCExtension,
-  compressedTextureS3TCExtension,
-} = Ridge.features.browserFeatures.webGLFeatures.extensions;
+// const { isDesktop, isTablet, isMobile } = Ridge.features.browserFeatures.browserType;
+// const {
+//   compressedTextureASTCExtension,
+//   compressedTextureETCExtension,
+//   compressedTexturePVRTCExtension,
+//   compressedTextureS3TCExtension,
+// } = Ridge.features.browserFeatures.webGLFeatures.extensions;
 
-const getDeviceType = data =>
-  data.DESKTOP && isDesktop ? data.DESKTOP : data.TABLET && isTablet ? data.TABLET : data.MOBILE;
+// const getDeviceType = data =>
+//   data.DESKTOP && isDesktop ? data.DESKTOP : data.TABLET && isTablet ? data.TABLET : data.MOBILE;
 
-const getSupportedCompressedTexture = data =>
-  data.ASTC && compressedTextureASTCExtension
-    ? data.ASTC
-    : data.ETC && compressedTextureETCExtension
-    ? data.S3TC
-    : data.PVRTC && compressedTexturePVRTCExtension
-    ? data.PVRTC
-    : data.S3TC && compressedTextureS3TCExtension
-    ? data.S3TC
-    : data.FALLBACK;
+// const getSupportedCompressedTexture = data =>
+//   data.ASTC && compressedTextureASTCExtension
+//     ? data.ASTC
+//     : data.ETC && compressedTextureETCExtension
+//     ? data.S3TC
+//     : data.PVRTC && compressedTexturePVRTCExtension
+//     ? data.PVRTC
+//     : data.S3TC && compressedTextureS3TCExtension
+//     ? data.S3TC
+//     : data.FALLBACK;
 
-Ridge.assetLoader
-  .loadAssets([
-    isDesktop && {
-      loader: 'ImageBitmap',
-      loaderOptions: {
-        sx: 0,
-        sy: 0,
-        sw: 25,
-        sh: 25,
-      },
-      src: './assets/1.png',
-    },
-    isTablet && { src: './assets/2.png' },
-    isMobile && { src: './assets/3.png' },
+// Ridge.assetLoader
+//   .loadAssets([
+//     isDesktop && {
+//       loader: 'ImageBitmap',
+//       loaderOptions: {
+//         sx: 0,
+//         sy: 0,
+//         sw: 25,
+//         sh: 25,
+//       },
+//       src: './assets/1.png',
+//     },
+//     isTablet && { src: './assets/2.png' },
+//     isMobile && { src: './assets/3.png' },
 
-    { src: './assets/audio.mp3' },
-    { src: './assets/video.mp4' },
-    { src: './assets/text.txt' },
-    { src: './assets/MJeans1TEX_Lores.dds' },
-    { src: './assets/icon-twitter.svg' },
-    { src: './assets/audio.ogg' },
+//     { src: './assets/audio.mp3' },
+//     { src: './assets/video.mp4' },
+//     { src: './assets/text.txt' },
+//     { src: './assets/MJeans1TEX_Lores.dds' },
+//     { src: './assets/icon-twitter.svg' },
+//     { src: './assets/audio.ogg' },
 
-    {
-      id: 'assets',
-      src: getDeviceType({
-        DESKTOP: './assets/1-desktop.png',
-        TABLET: './assets/1-tablet.png',
-        MOBILE: './assets/1-mobile.png',
-      }),
-    },
+//     {
+//       id: 'assets',
+//       src: getDeviceType({
+//         DESKTOP: './assets/1-desktop.png',
+//         TABLET: './assets/1-tablet.png',
+//         MOBILE: './assets/1-mobile.png',
+//       }),
+//     },
 
-    {
-      id: 'example',
-      src: getSupportedCompressedTexture({
-        ASTC: './assets/example-astc-4x4.ktx',
-        ETC: './assets/example-etc2.ktx',
-        PVRTC: './assets/example-pvrtc4BPP.ktx',
-        S3TC: './assets/example-dxt5.ktx',
-        FALLBACK: './assets/example.png',
-      }),
-    },
+//     {
+//       id: 'example',
+//       src: getSupportedCompressedTexture({
+//         ASTC: './assets/example-astc-4x4.ktx',
+//         ETC: './assets/example-etc2.ktx',
+//         PVRTC: './assets/example-pvrtc4BPP.ktx',
+//         S3TC: './assets/example-dxt5.ktx',
+//         FALLBACK: './assets/example.png',
+//       }),
+//     },
 
-    {
-      id: 'example-mipmaps',
-      src: getSupportedCompressedTexture({
-        ASTC: './assets/example-astc-4x4-mipmaps.ktx',
-        ETC: './assets/example-etc2-mipmaps.ktx',
-        PVRTC: './assets/example-pvrtc4BPP-mipmaps.ktx',
-        S3TC: './assets/example-dxt5-mipmaps.ktx',
-        FALLBACK: './assets/example.png',
-      }),
-    },
+//     {
+//       id: 'example-mipmaps',
+//       src: getSupportedCompressedTexture({
+//         ASTC: './assets/example-astc-4x4-mipmaps.ktx',
+//         ETC: './assets/example-etc2-mipmaps.ktx',
+//         PVRTC: './assets/example-pvrtc4BPP-mipmaps.ktx',
+//         S3TC: './assets/example-dxt5-mipmaps.ktx',
+//         FALLBACK: './assets/example.png',
+//       }),
+//     },
 
-    (isMobile || isTablet) && {
-      id: 'green_point_park_4k_sh',
-      src: './assets/green_point_park_4k_sh.bin',
-    },
+//     (isMobile || isTablet) && {
+//       id: 'green_point_park_4k_sh',
+//       src: './assets/green_point_park_4k_sh.bin',
+//     },
 
-    isDesktop && {
-      id: 'green_point_park_4k_ibl',
-      src: getSupportedCompressedTexture({
-        ASTC: './assets/green_point_park_4k_ibl_astc.ktx',
-        ETC: './assets/green_point_park_4k_ibl_etc.ktx',
-        S3TC: './assets/green_point_park_4k_ibl_s3tc.ktx',
-        FALLBACK: './assets/green_point_park_4k_ibl_none.ktx',
-      }),
-    },
+//     isDesktop && {
+//       id: 'green_point_park_4k_ibl',
+//       src: getSupportedCompressedTexture({
+//         ASTC: './assets/green_point_park_4k_ibl_astc.ktx',
+//         ETC: './assets/green_point_park_4k_ibl_etc.ktx',
+//         S3TC: './assets/green_point_park_4k_ibl_s3tc.ktx',
+//         FALLBACK: './assets/green_point_park_4k_ibl_none.ktx',
+//       }),
+//     },
 
-    isDesktop && {
-      id: 'green_point_park_4k_skybox',
-      src: getSupportedCompressedTexture({
-        ASTC: './assets/green_point_park_4k_skybox_astc.ktx',
-        ETC: './assets/green_point_park_4k_skybox_etc.ktx',
-        S3TC: './assets/green_point_park_4k_skybox_s3tc.ktx',
-        FALLBACK: './assets/green_point_park_4k_skybox_none.ktx',
-      }),
-    },
-  ])
-  .then(assets => {
-    console.log(assets);
-  });
+//     isDesktop && {
+//       id: 'green_point_park_4k_skybox',
+//       src: getSupportedCompressedTexture({
+//         ASTC: './assets/green_point_park_4k_skybox_astc.ktx',
+//         ETC: './assets/green_point_park_4k_skybox_etc.ktx',
+//         S3TC: './assets/green_point_park_4k_skybox_s3tc.ktx',
+//         FALLBACK: './assets/green_point_park_4k_skybox_none.ktx',
+//       }),
+//     },
+//   ])
+//   .then(assets => {
+//     console.log(assets);
+//   });
 
 // Logger
 // ------
@@ -233,21 +233,21 @@ Ridge.assetLoader
 // Threads
 // -------
 
-let getName = new Ridge.Thread(username => {
-  return new Promise(resolve => {
-    let url = `https://api.github.com/users/${username}`;
+// let getName = new Ridge.Thread(username => {
+//   return new Promise(resolve => {
+//     let url = `https://api.github.com/users/${username}`;
 
-    fetch(url)
-      .then(response => response.json())
-      .then(profile => resolve(profile.name));
-  });
-});
+//     fetch(url)
+//       .then(response => response.json())
+//       .then(profile => resolve(profile.name));
+//   });
+// });
 
-getName('timvanscherpenzeel').then(
-  log => {
-    document.write(log);
-  },
-  err => {
-    return console.error(err);
-  }
-);
+// getName('timvanscherpenzeel').then(
+//   log => {
+//     document.write(log);
+//   },
+//   err => {
+//     return console.error(err);
+//   }
+// );
