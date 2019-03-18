@@ -74,8 +74,6 @@ export class Thread {
                   close();
                 }
               );
-          } else {
-            throw new Error('Expected event');
           }
         }}`,
       ])

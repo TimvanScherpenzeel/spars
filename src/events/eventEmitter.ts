@@ -1,3 +1,6 @@
+// Utilities
+import { assert } from '../utilities';
+
 const handlersMap = new WeakMap();
 const eventsMap = new WeakMap();
 
@@ -22,11 +25,10 @@ export class EventEmitter {
   }
 
   public on(eventName: string, callback: () => void, count: number = Infinity) {
-    if (count !== Infinity && (Math.floor(count) !== count || count < 1)) {
-      throw new RangeError(
-        'Count must not be set to an integer less than zero or a non-integer value'
-      );
-    }
+    assert(
+      count === Infinity || (Math.floor(count) === count && count > 0),
+      'Count must not be set to an integer less than zero or a non-integer value'
+    );
 
     const eventsForThisEmitter = eventsMap.get(this);
     let eventsForThisEventName = eventsForThisEmitter.get(eventName);
