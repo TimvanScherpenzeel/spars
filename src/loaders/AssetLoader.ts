@@ -14,7 +14,7 @@ import { warn } from '../logger';
 import { assert } from '../utilities';
 
 // Types
-import { ILoadItem } from './types';
+import { ELoaderKey, ILoadItem } from './types';
 
 // Safari does not fire `canplaythrough` preventing it from resolving naturally.
 // A workaround is to not wait for the `canplaythrough` event but rather resolve early and hope for the best
@@ -25,13 +25,14 @@ const IS_MEDIA_PRELOAD_SUPPORTED = !getBrowserType.isSafari;
  * Allows the omission of the loader key for some generic extensions used on the web
  */
 const LOADER_EXTENSIONS_MAP = new Map([
-  ['Text', { extensions: ['txt', 'svg'] }],
-  ['JSON', { extensions: ['json'] }],
-  ['Image', { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
-  ['ImageBitmap', { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
-  ['ImageCompressed', { extensions: ['ktx'] }],
-  ['Audio', { extensions: ['mp3', 'ogg', 'wav', 'flac'] }],
-  ['Video', { extensions: ['webm', 'ogg', 'mp4'] }],
+  [ELoaderKey.Audio, { extensions: ['mp3', 'ogg', 'wav', 'flac'] }],
+  [ELoaderKey.Image, { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
+  [ELoaderKey.ImageBitmap, { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
+  [ELoaderKey.ImageCompressed, { extensions: ['ktx'] }],
+  [ELoaderKey.JSON, { extensions: ['json'] }],
+  [ELoaderKey.Text, { extensions: ['txt', 'svg'] }],
+  [ELoaderKey.Video, { extensions: ['webm', 'ogg', 'mp4'] }],
+  [ELoaderKey.WebAssembly, { extensions: ['wasm'] }],
 ]);
 
 /**
@@ -66,7 +67,7 @@ const getLoaderByFileExtension = (path: string) => {
     type[1].extensions.includes(fileExtension)
   );
 
-  return loader ? loader[0] : 'ArrayBuffer';
+  return loader ? loader[0] : ELoaderKey.ArrayBuffer;
 };
 
 /**
@@ -436,6 +437,13 @@ const loadVideo = (item: ILoadItem) =>
       warn(err);
     });
 
+/**
+ * Load an item and parse the Response as ArrayBuffer (ready to instantiate)
+ *
+ * @param item Item to load
+ */
+const loadWebAssembly = (item: ILoadItem) => loadArrayBuffer(item);
+
 // Make sure to cache the WebGL feature set as it doesn't change over time and is quite heavy
 const webGLFeatures = getWebGLFeatures;
 
@@ -507,33 +515,36 @@ class AssetLoader {
       let loadedItem;
 
       switch (loaderType) {
-        case 'ArrayBuffer':
+        case ELoaderKey.ArrayBuffer:
           loadedItem = loadArrayBuffer(item);
           break;
-        case 'Audio':
+        case ELoaderKey.Audio:
           loadedItem = loadAudio(item);
           break;
-        case 'Image':
+        case ELoaderKey.Blob:
+          loadedItem = loadBlob(item);
+        case ELoaderKey.Image:
           loadedItem = loadImage(item);
           break;
-        case 'ImageBitmap':
+        case ELoaderKey.ImageBitmap:
           loadedItem = loadImageBitmap(item);
           break;
-        case 'ImageCompressed':
+        case ELoaderKey.ImageCompressed:
           loadedItem = loadImageCompressed(item);
           break;
-        case 'JSON':
+        case ELoaderKey.JSON:
           loadedItem = loadJSON(item);
           break;
-        case 'Text':
+        case ELoaderKey.Text:
           loadedItem = loadText(item);
           break;
-        case 'Video':
+        case ELoaderKey.Video:
           loadedItem = loadVideo(item);
           break;
-        case 'Blob':
+        case ELoaderKey.WebAssembly:
+          loadedItem = loadWebAssembly(item);
         default:
-          loadedItem = loadBlob(item);
+          loadedItem = loadArrayBuffer(item);
           break;
       }
 

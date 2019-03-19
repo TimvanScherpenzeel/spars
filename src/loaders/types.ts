@@ -6,13 +6,14 @@
 export enum ELoaderKey {
   ArrayBuffer = 'ArrayBuffer',
   Audio = 'Audio',
+  Blob = 'Blob',
   Image = 'Image',
   ImageBitmap = 'ImageBitmap',
   ImageCompressed = 'ImageCompressed',
   JSON = 'JSON',
   Text = 'Text',
   Video = 'Video',
-  Blob = 'Blob',
+  WebAssembly = 'WebAssembly',
 }
 
 // Interfaces
