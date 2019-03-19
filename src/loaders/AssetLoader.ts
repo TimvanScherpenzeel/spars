@@ -35,7 +35,7 @@ const LOADER_EXTENSIONS_MAP = new Map([
   [ELoaderKey.ImageBitmap, { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
   [ELoaderKey.ImageCompressed, { extensions: ['ktx'] }],
   [ELoaderKey.JSON, { extensions: ['json'] }],
-  [ELoaderKey.Text, { extensions: ['txt', 'svg'] }],
+  [ELoaderKey.Text, { extensions: ['txt'] }],
   [ELoaderKey.Video, { extensions: ['webm', 'ogg', 'mp4'] }],
   [ELoaderKey.WebAssembly, { extensions: ['wasm'] }],
   [
@@ -498,7 +498,7 @@ const loadXML = (item: ILoadItem) => {
     .then(response => response.text())
     .then(data => {
       if (item.mimeType) {
-        domParser.parseFromString(data, item.mimeType);
+        return domParser.parseFromString(data, item.mimeType);
       }
     })
     .catch(err => {

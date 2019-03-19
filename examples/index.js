@@ -179,6 +179,8 @@ assetLoader
     { src: './assets/text.txt' },
     { src: './assets/MJeans1TEX_Lores.dds' },
     { src: './assets/icon-twitter.svg' },
+    { src: './assets/xml.html' },
+    { src: './assets/xml.xml' },
     { src: './assets/audio.ogg' },
     { id: 'Antonio', src: 'antonio-bold-webfont.woff2' },
 
