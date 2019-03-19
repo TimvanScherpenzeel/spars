@@ -501,6 +501,7 @@ const loadWebAssembly = (item: ILoadItem) => {
     }
   } else {
     warn('WebAssembly is not supported');
+    return Promise.resolve();
   }
 };
 
