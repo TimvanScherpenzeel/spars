@@ -481,11 +481,9 @@ export class AssetLoader {
       ? data.S3TC
       : data.FALLBACK;
 
-  public assets: Map<string, Promise<Response>>;
+  public assets: Map<string, Promise<Response>> = new Map();
 
   constructor() {
-    this.assets = new Map();
-
     this.loadAsset = this.loadAsset.bind(this);
     this.loadAssets = this.loadAssets.bind(this);
   }
