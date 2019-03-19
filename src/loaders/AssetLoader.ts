@@ -1,3 +1,7 @@
+// Vendor
+// @ts-ignore
+import * as FontFaceObserver from 'fontfaceobserver-es';
+
 // Events
 import { eventEmitter } from '../events/EventEmitter';
 
@@ -26,6 +30,7 @@ const IS_MEDIA_PRELOAD_SUPPORTED = !getBrowserType.isSafari;
  */
 const LOADER_EXTENSIONS_MAP = new Map([
   [ELoaderKey.Audio, { extensions: ['mp3', 'ogg', 'wav', 'flac'] }],
+  [ELoaderKey.Font, { extensions: ['woff2', 'woff', 'ttf', 'otf', 'eot'] }],
   [ELoaderKey.Image, { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
   [ELoaderKey.ImageBitmap, { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
   [ELoaderKey.ImageCompressed, { extensions: ['ktx'] }],
@@ -163,6 +168,14 @@ const loadBlob = (item: ILoadItem) =>
     .catch(err => {
       warn(err);
     });
+
+/**
+ * Load an item and parse the Response as a FontFace
+ *
+ * @param item Item to load
+ */
+const loadFont = (item: ILoadItem): Promise<any> =>
+  new FontFaceObserver(item.id, item.options || {}).load();
 
 /**
  * Load an item and parse the Response as <image> element
@@ -568,6 +581,9 @@ export class AssetLoader {
           break;
         case ELoaderKey.Blob:
           loadedItem = loadBlob(item);
+          break;
+        case ELoaderKey.Font:
+          loadedItem = loadFont(item);
           break;
         case ELoaderKey.Image:
           loadedItem = loadImage(item);

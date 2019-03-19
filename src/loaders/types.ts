@@ -7,6 +7,7 @@ export enum ELoaderKey {
   ArrayBuffer = 'ArrayBuffer',
   Audio = 'Audio',
   Blob = 'Blob',
+  Font = 'Font',
   Image = 'Image',
   ImageBitmap = 'ImageBitmap',
   ImageCompressed = 'ImageCompressed',

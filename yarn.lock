@@ -2786,6 +2786,11 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
+fontfaceobserver-es@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/fontfaceobserver-es/-/fontfaceobserver-es-3.3.1.tgz#f2bb9677eafbe8621122f99d3825e489d0c087f3"
+  integrity sha512-uYxDHKEvO7IRyeG5qMTx67A9gHZfyxZCe24SpEuvtzXPu4WbK6Dev40SWesMh5kIAGjLSkIQevHIUWAAHWZtQA==
+
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
