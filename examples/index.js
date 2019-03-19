@@ -178,11 +178,21 @@ assetLoader
     { src: './assets/video.mp4' },
     { src: './assets/text.txt' },
     { src: './assets/MJeans1TEX_Lores.dds' },
-    { src: './assets/icon-twitter.svg' },
-    { src: './assets/xml.html' },
-    { src: './assets/xml.xml' },
+    // { src: './assets/icon-twitter.svg' },
+    // { src: './assets/xml.html' },
+    // { src: './assets/xml.xml' },
     { src: './assets/audio.ogg' },
-    { id: 'Antonio', src: 'antonio-bold-webfont.woff2' },
+    {
+      src: './assets/simple.wasm',
+      loaderOptions: {
+        importObject: {
+          imports: {
+            imported_func: arg => console.log(arg),
+          },
+        },
+      },
+    },
+    // { id: 'Antonio', src: 'antonio-bold-webfont.woff2' },
 
     {
       id: 'assets',
@@ -242,6 +252,9 @@ assetLoader
   ])
   .then(assets => {
     console.log(assets);
+
+    // Call WebAssembly function
+    assets[6].item.instance.exports.exported_func();
   });
 
 // Logger

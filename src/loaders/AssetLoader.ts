@@ -10,6 +10,7 @@ import getBrowserType from '../features/browserFeatures/getBrowserType';
 import getWebGLFeatures from '../features/browserFeatures/getWebGLFeatures';
 import isImageBitmapSupported from '../features/browserFeatures/isImageBitmapSupported';
 import isImageDecodeSupported from '../features/browserFeatures/isImageDecodeSupported';
+import isWebAssemblySupported from '../features/browserFeatures/isWebAssemblySupported';
 
 // Logger
 import { warn } from '../logger';
@@ -37,7 +38,7 @@ const LOADER_EXTENSIONS_MAP = new Map([
   [ELoaderKey.JSON, { extensions: ['json'] }],
   [ELoaderKey.Text, { extensions: ['txt'] }],
   [ELoaderKey.Video, { extensions: ['webm', 'ogg', 'mp4'] }],
-  [ELoaderKey.WebAssembly, { extensions: ['wasm'] }],
+  [ELoaderKey.WebAssembly, { extensions: ['wasm', 'wat'] }],
   [
     ELoaderKey.XML,
     {
@@ -478,7 +479,30 @@ const loadVideo = (item: ILoadItem) =>
  *
  * @param item Item to load
  */
-const loadWebAssembly = (item: ILoadItem) => loadArrayBuffer(item);
+const loadWebAssembly = (item: ILoadItem) => {
+  if (isWebAssemblySupported) {
+    // @ts-ignore
+    if (window.WebAssembly.instantiateStreaming) {
+      // @ts-ignore
+      return window.WebAssembly.instantiateStreaming(
+        fetchItem(item),
+        item.loaderOptions.importObject
+      );
+    } else {
+      return (
+        fetchItem(item)
+          .then(response => response.arrayBuffer())
+          // @ts-ignore
+          .then(data => window.WebAssembly.instantiate(data, item.loaderOptions.importObject))
+          .catch(err => {
+            warn(err);
+          })
+      );
+    }
+  } else {
+    warn('WebAssembly is not supported');
+  }
+};
 
 /**
  * Load an item and parse the Response as XML
@@ -615,7 +639,7 @@ export class AssetLoader {
           break;
       }
 
-      loadedItem.then(asset => {
+      loadedItem.then((asset: any) => {
         this.assets.set(item.src, asset);
 
         resolve({
