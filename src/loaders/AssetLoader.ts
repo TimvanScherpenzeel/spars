@@ -483,17 +483,12 @@ export class AssetLoader {
 
   public assets: Map<string, Promise<Response>> = new Map();
 
-  constructor() {
-    this.loadAsset = this.loadAsset.bind(this);
-    this.loadAssets = this.loadAssets.bind(this);
-  }
-
   /**
    * Load a single item
    *
    * @param item Item to load
    */
-  public loadAsset(item: ILoadItem) {
+  public loadAsset = (item: ILoadItem) => {
     const startTime = window.performance.now();
 
     return new Promise(resolve => {
@@ -558,14 +553,14 @@ export class AssetLoader {
         });
       });
     });
-  }
+  };
 
   /**
    * Load the specified manifest (array of items)
    *
    * @param items Items to load
    */
-  public loadAssets(items: ILoadItem[]) {
+  public loadAssets = (items: ILoadItem[]) => {
     const loadingAssets = items.filter(item => item).map(this.loadAsset);
     const loadedAssets = Promise.all(loadingAssets);
 
@@ -584,5 +579,5 @@ export class AssetLoader {
     );
 
     return loadedAssets;
-  }
+  };
 }
