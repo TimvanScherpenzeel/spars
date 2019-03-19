@@ -53,12 +53,6 @@ const LOADER_EXTENSIONS_MAP = new Map([
 // A workaround is to not wait for the `canplaythrough` event but rather resolve early and hope for the best
 const IS_MEDIA_PRELOAD_SUPPORTED = !getBrowserType.isSafari;
 
-// Make sure to cache the WebGL feature set (loadImageCompressed)
-const webGLFeatures = getWebGLFeatures;
-
-// Make sure to cache the DOMParser instance (loadXML)
-const domParser = new DOMParser();
-
 /**
  * Asynchronous asset preloader
  */
@@ -83,15 +77,22 @@ export class AssetLoader {
     PVRTC?: string;
     FALLBACK?: string;
   }) =>
-    data.ASTC && webGLFeatures && webGLFeatures.extensions.compressedTextureASTCExtension
+    data.ASTC && getWebGLFeatures && getWebGLFeatures.extensions.compressedTextureASTCExtension
       ? data.ASTC
-      : data.ETC && webGLFeatures && webGLFeatures.extensions.compressedTextureETCExtension
+      : data.ETC && getWebGLFeatures && getWebGLFeatures.extensions.compressedTextureETCExtension
       ? data.S3TC
-      : data.PVRTC && webGLFeatures && webGLFeatures.extensions.compressedTexturePVRTCExtension
+      : data.PVRTC &&
+        getWebGLFeatures &&
+        getWebGLFeatures.extensions.compressedTexturePVRTCExtension
       ? data.PVRTC
-      : data.S3TC && webGLFeatures && webGLFeatures.extensions.compressedTextureS3TCExtension
+      : data.S3TC && getWebGLFeatures && getWebGLFeatures.extensions.compressedTextureS3TCExtension
       ? data.S3TC
       : data.FALLBACK;
+
+  /**
+   * DOMParser instance for the XML loader
+   */
+  private static domParser = new DOMParser();
 
   /**
    * Get a file extension from a full asset path
@@ -563,7 +564,7 @@ export class AssetLoader {
       .then(response => response.text())
       .then(data => {
         if (item.mimeType) {
-          return domParser.parseFromString(data, item.mimeType);
+          return AssetLoader.domParser.parseFromString(data, item.mimeType);
         }
       })
       .catch(err => {

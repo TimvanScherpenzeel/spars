@@ -178,10 +178,13 @@ assetLoader
     { src: './assets/video.mp4' },
     { src: './assets/text.txt' },
     { src: './assets/MJeans1TEX_Lores.dds' },
+    { src: './assets/audio.ogg' },
+
     // { src: './assets/icon-twitter.svg' },
     // { src: './assets/xml.html' },
     // { src: './assets/xml.xml' },
-    { src: './assets/audio.ogg' },
+    // { id: 'Antonio', src: 'antonio-bold-webfont.woff2' },
+
     {
       src: './assets/simple.wasm',
       loaderOptions: {
@@ -192,7 +195,6 @@ assetLoader
         },
       },
     },
-    // { id: 'Antonio', src: 'antonio-bold-webfont.woff2' },
 
     {
       id: 'assets',
@@ -254,7 +256,9 @@ assetLoader
     console.log(assets);
 
     // Call WebAssembly function
-    assets[6].item.instance.exports.exported_func();
+    if (assets[6].item) {
+      assets[6].item.instance.exports.exported_func();
+    }
   });
 
 // Logger
