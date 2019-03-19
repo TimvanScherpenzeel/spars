@@ -450,7 +450,7 @@ const webGLFeatures = getWebGLFeatures;
 /**
  * Asynchronous asset preloader
  */
-class AssetLoader {
+export class AssetLoader {
   /**
    * Load conditionally based on device type
    */
@@ -544,6 +544,7 @@ class AssetLoader {
         case ELoaderKey.WebAssembly:
           loadedItem = loadWebAssembly(item);
         default:
+          warn('Missing loader, falling back to loading as ArrayBuffer');
           loadedItem = loadArrayBuffer(item);
           break;
       }
@@ -587,5 +588,3 @@ class AssetLoader {
     return loadedAssets;
   }
 }
-
-export { AssetLoader };
