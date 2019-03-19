@@ -4,29 +4,29 @@
  * @param v Value to compute
  */
 const logBaseTwo = (value: number) => {
-  let r;
+  let result;
   let shift;
 
   // @ts-ignore
-  r = (value > 0xffff) << 4;
-  value >>>= r;
+  result = (value > 0xffff) << 4;
+  value >>>= result;
 
   // @ts-ignore
   shift = (value > 0xff) << 3;
   value >>>= shift;
-  r |= shift;
+  result |= shift;
 
   // @ts-ignore
   shift = (value > 0xf) << 2;
   value >>>= shift;
-  r |= shift;
+  result |= shift;
 
   // @ts-ignore
   shift = (value > 0x3) << 1;
   value >>>= shift;
-  r |= shift;
+  result |= shift;
 
-  return r | (value >> 1);
+  return result | (value >> 1);
 };
 
 /**
@@ -69,9 +69,17 @@ const TYPED_ARRAY_POOL = {
   FLOAT_64: new Array(DEFAULT_SIZE).fill(0),
 };
 
+/**
+ * A global pool for typed arrays
+ *
+ * Inspired by https://github.com/mikolalysenko/typedarray-pool
+ */
 export class TypedArrayPool {
-  private static allocArrayBuffer = (value: number) => {
-    const slot = nextPowerOfTwo(value);
+  /**
+   * Allocate an array buffer
+   */
+  private static allocArrayBuffer = (size: number) => {
+    const slot = nextPowerOfTwo(size);
     const logSlot = logBaseTwo(slot);
     const dataView = TYPED_ARRAY_POOL.DATAVIEW[logSlot];
 
@@ -82,44 +90,55 @@ export class TypedArrayPool {
     return new ArrayBuffer(slot);
   };
 
-  public alloc(value: number, type = 'arraybuffer') {
+  /**
+   * Allocates a typed array (or ArrayBuffer) with at least n elements
+   *
+   * @param size Number of elements in the array
+   * @param type Data type of the array to allocate
+   */
+  public alloc(size: number, type = 'arraybuffer') {
     if (type === 'arraybuffer') {
-      return TypedArrayPool.allocArrayBuffer(value);
+      return TypedArrayPool.allocArrayBuffer(size);
     } else {
       switch (type) {
         case 'DATAVIEW':
-          return new DataView(TypedArrayPool.allocArrayBuffer(value), 0, value);
+          return new DataView(TypedArrayPool.allocArrayBuffer(size), 0, size);
         case 'INT_8':
-          return new Int8Array(TypedArrayPool.allocArrayBuffer(value), 0, value);
+          return new Int8Array(TypedArrayPool.allocArrayBuffer(size), 0, size);
         case 'INT_16':
-          return new Int16Array(TypedArrayPool.allocArrayBuffer(2 * value), 0, value);
+          return new Int16Array(TypedArrayPool.allocArrayBuffer(2 * size), 0, size);
         case 'INT_32':
-          return new Int32Array(TypedArrayPool.allocArrayBuffer(4 * value), 0, value);
+          return new Int32Array(TypedArrayPool.allocArrayBuffer(4 * size), 0, size);
         case 'INT_64':
-          return new BigInt64Array(TypedArrayPool.allocArrayBuffer(8 * value), 0, value);
+          return new BigInt64Array(TypedArrayPool.allocArrayBuffer(8 * size), 0, size);
 
         case 'UINT_8':
-          return new Uint8Array(TypedArrayPool.allocArrayBuffer(value), 0, value);
+          return new Uint8Array(TypedArrayPool.allocArrayBuffer(size), 0, size);
         case 'UINT_8_CLAMPED':
-          return new Uint8ClampedArray(TypedArrayPool.allocArrayBuffer(value), 0, value);
+          return new Uint8ClampedArray(TypedArrayPool.allocArrayBuffer(size), 0, size);
         case 'UINT_16':
-          return new Uint16Array(TypedArrayPool.allocArrayBuffer(2 * value), 0, value);
+          return new Uint16Array(TypedArrayPool.allocArrayBuffer(2 * size), 0, size);
         case 'UINT_32':
-          return new Uint32Array(TypedArrayPool.allocArrayBuffer(4 * value), 0, value);
+          return new Uint32Array(TypedArrayPool.allocArrayBuffer(4 * size), 0, size);
         case 'UINT_64':
-          return new BigUint64Array(TypedArrayPool.allocArrayBuffer(8 * value), 0, value);
+          return new BigUint64Array(TypedArrayPool.allocArrayBuffer(8 * size), 0, size);
 
         case 'FLOAT_32':
-          return new Float32Array(TypedArrayPool.allocArrayBuffer(4 * value), 0, value);
+          return new Float32Array(TypedArrayPool.allocArrayBuffer(4 * size), 0, size);
         case 'FLOAT_64':
-          return new Float64Array(TypedArrayPool.allocArrayBuffer(8 * value), 0, value);
+          return new Float64Array(TypedArrayPool.allocArrayBuffer(8 * size), 0, size);
 
         default:
-          return TypedArrayPool.allocArrayBuffer(value);
+          return TypedArrayPool.allocArrayBuffer(size);
       }
     }
   }
 
+  /**
+   * Release the array back to the pool
+   *
+   * @param array The array object to return to the pool
+   */
   public free(
     array:
       | ArrayBuffer
@@ -155,6 +174,10 @@ export class TypedArrayPool {
     TYPED_ARRAY_POOL.DATAVIEW[logSlot].push(buffer);
   }
 
+  /**
+   * Removes all references to cached arrays.
+   * Use this when you are done with the pool to return all the cached memory to the garbage collector.
+   */
   public clear() {
     let i;
 
