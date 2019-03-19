@@ -76,18 +76,21 @@ export class AssetLoader {
     S3TC?: string;
     PVRTC?: string;
     FALLBACK?: string;
-  }) =>
-    data.ASTC && getWebGLFeatures && getWebGLFeatures.extensions.compressedTextureASTCExtension
-      ? data.ASTC
-      : data.ETC && getWebGLFeatures && getWebGLFeatures.extensions.compressedTextureETCExtension
-      ? data.S3TC
-      : data.PVRTC &&
-        getWebGLFeatures &&
-        getWebGLFeatures.extensions.compressedTexturePVRTCExtension
-      ? data.PVRTC
-      : data.S3TC && getWebGLFeatures && getWebGLFeatures.extensions.compressedTextureS3TCExtension
-      ? data.S3TC
-      : data.FALLBACK;
+  }) => {
+    if (getWebGLFeatures) {
+      return data.ASTC && getWebGLFeatures.extensions.compressedTextureASTCExtension
+        ? data.ASTC
+        : data.ETC && getWebGLFeatures.extensions.compressedTextureETCExtension
+        ? data.S3TC
+        : data.PVRTC && getWebGLFeatures.extensions.compressedTexturePVRTCExtension
+        ? data.PVRTC
+        : data.S3TC && getWebGLFeatures.extensions.compressedTextureS3TCExtension
+        ? data.S3TC
+        : data.FALLBACK;
+    } else {
+      return data.FALLBACK;
+    }
+  };
 
   /**
    * DOMParser instance for the XML loader
