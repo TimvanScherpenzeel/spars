@@ -36,6 +36,9 @@ export { AssetLoader } from './loaders';
 // Logger
 export { error, log, warn } from './logger';
 
+// Structures
+export { TypedArrayPool } from './structures';
+
 // Threads
 export { Thread } from './threads';
 

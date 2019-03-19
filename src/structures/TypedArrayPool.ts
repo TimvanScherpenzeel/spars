@@ -1,41 +1,51 @@
-const logBaseTwo = (v: number) => {
+/**
+ * Computes log base 2
+ *
+ * @param v Value to compute
+ */
+const logBaseTwo = (value: number) => {
   let r;
   let shift;
 
   // @ts-ignore
-  r = (v > 0xffff) << 4;
-  v >>>= r;
+  r = (value > 0xffff) << 4;
+  value >>>= r;
 
   // @ts-ignore
-  shift = (v > 0xff) << 3;
-  v >>>= shift;
+  shift = (value > 0xff) << 3;
+  value >>>= shift;
   r |= shift;
 
   // @ts-ignore
-  shift = (v > 0xf) << 2;
-  v >>>= shift;
+  shift = (value > 0xf) << 2;
+  value >>>= shift;
   r |= shift;
 
   // @ts-ignore
-  shift = (v > 0x3) << 1;
-  v >>>= shift;
+  shift = (value > 0x3) << 1;
+  value >>>= shift;
   r |= shift;
 
-  return r | (v >> 1);
+  return r | (value >> 1);
 };
 
-export const nextPowerOfTwo = (v: number) => {
+/**
+ * Rounds to the next power of two
+ *
+ * @param value Value to round
+ */
+export const nextPowerOfTwo = (value: number) => {
   // @ts-ignore
-  v += v === 0;
-  --v;
+  value += value === 0;
+  --value;
 
-  v |= v >>> 1;
-  v |= v >>> 2;
-  v |= v >>> 4;
-  v |= v >>> 8;
-  v |= v >>> 16;
+  value |= value >>> 1;
+  value |= value >>> 2;
+  value |= value >>> 4;
+  value |= value >>> 8;
+  value |= value >>> 16;
 
-  return v + 1;
+  return value + 1;
 };
 
 const DEFAULT_SIZE = 32;
@@ -105,7 +115,7 @@ export class TypedArrayPool {
           return new Float64Array(TypedArrayPool.allocArrayBuffer(8 * value), 0, value);
 
         default:
-          return null;
+          return TypedArrayPool.allocArrayBuffer(value);
       }
     }
   }
