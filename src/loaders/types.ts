@@ -14,6 +14,7 @@ export enum ELoaderKey {
   Text = 'Text',
   Video = 'Video',
   WebAssembly = 'WebAssembly',
+  XML = 'XML',
 }
 
 // Interfaces
@@ -31,6 +32,7 @@ export interface ILoadItem {
 
   options?: RequestInit;
   body?: TBodyMethod;
+  mimeType?: SupportedType;
 }
 
 // Types

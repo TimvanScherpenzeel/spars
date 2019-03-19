@@ -33,6 +33,18 @@ const LOADER_EXTENSIONS_MAP = new Map([
   [ELoaderKey.Text, { extensions: ['txt', 'svg'] }],
   [ELoaderKey.Video, { extensions: ['webm', 'ogg', 'mp4'] }],
   [ELoaderKey.WebAssembly, { extensions: ['wasm'] }],
+  [
+    ELoaderKey.XML,
+    {
+      defaultMimeType: 'text/xml',
+      extensions: ['xml', 'svg', 'html'],
+      mimeType: {
+        html: 'text/html',
+        svg: 'image/svg+xml',
+        xml: 'text/xml',
+      },
+    },
+  ],
 ]);
 
 /**
@@ -54,6 +66,17 @@ const getFileExtension = (path: string) => {
   }
 
   return basename.slice(seperator + 1);
+};
+
+/**
+ * Retrieve mime type from extension
+ *
+ * @param loaderKey Loader key
+ * @param extension extension
+ */
+const getMimeType = (loaderKey: ELoaderKey, extension: string) => {
+  const loader: any = LOADER_EXTENSIONS_MAP.get(loaderKey);
+  return loader.mimeType[extension] || loader.defaultMimeType;
 };
 
 /**
@@ -444,8 +467,37 @@ const loadVideo = (item: ILoadItem) =>
  */
 const loadWebAssembly = (item: ILoadItem) => loadArrayBuffer(item);
 
-// Make sure to cache the WebGL feature set as it doesn't change over time and is quite heavy
+/**
+ * Load an item and parse the Response as XML
+ *
+ * @param item Item to load
+ */
+const loadXML = (item: ILoadItem) => {
+  if (!item.mimeType) {
+    const extension: string = getFileExtension(item.src);
+    item = {
+      ...item,
+      mimeType: getMimeType(ELoaderKey.XML, extension),
+    };
+  }
+
+  return fetchItem(item)
+    .then(response => response.text())
+    .then(data => {
+      if (item.mimeType) {
+        domParser.parseFromString(data, item.mimeType);
+      }
+    })
+    .catch(err => {
+      warn(err);
+    });
+};
+
+// Make sure to cache the WebGL feature set
 const webGLFeatures = getWebGLFeatures;
+
+// Make sure to cache the DOMParser instance
+const domParser = new DOMParser();
 
 /**
  * Asynchronous asset preloader
@@ -521,6 +573,7 @@ export class AssetLoader {
           break;
         case ELoaderKey.Blob:
           loadedItem = loadBlob(item);
+          break;
         case ELoaderKey.Image:
           loadedItem = loadImage(item);
           break;
@@ -541,6 +594,10 @@ export class AssetLoader {
           break;
         case ELoaderKey.WebAssembly:
           loadedItem = loadWebAssembly(item);
+          break;
+        case ELoaderKey.XML:
+          loadedItem = loadXML(item);
+          break;
         default:
           warn('Missing loader, falling back to loading as ArrayBuffer');
           loadedItem = loadArrayBuffer(item);
