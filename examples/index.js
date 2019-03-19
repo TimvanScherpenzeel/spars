@@ -151,13 +151,13 @@ const { isDesktop, isTablet, isMobile } = Ridge.features.browserFeatures.browser
 
 const assetLoader = new Ridge.AssetLoader();
 
-assetLoader
-  .loadAsset({
-    src: './assets/1.png',
-  })
-  .then(asset => {
-    document.body.appendChild(asset.item);
-  });
+// assetLoader
+//   .loadAsset({
+//     src: './assets/1.png',
+//   })
+//   .then(asset => {
+//     document.body.appendChild(asset.item);
+//   });
 
 assetLoader
   .loadAssets([
@@ -180,6 +180,7 @@ assetLoader
     { src: './assets/MJeans1TEX_Lores.dds' },
     { src: './assets/icon-twitter.svg' },
     { src: './assets/audio.ogg' },
+    { id: 'Antonio', src: 'antonio-bold-webfont.woff2' },
 
     {
       id: 'assets',

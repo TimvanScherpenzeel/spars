@@ -1,6 +1,6 @@
 // Vendor
 // @ts-ignore
-import * as FontFaceObserver from 'fontfaceobserver-es';
+import FontFaceObserver from 'fontfaceobserver-es';
 
 // Events
 import { eventEmitter } from '../events/EventEmitter';
