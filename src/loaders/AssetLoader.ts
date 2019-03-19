@@ -21,10 +21,6 @@ import { assert } from '../utilities';
 // Types
 import { ELoaderKey, ILoadItem } from './types';
 
-// Safari does not fire `canplaythrough` preventing it from resolving naturally.
-// A workaround is to not wait for the `canplaythrough` event but rather resolve early and hope for the best
-const IS_MEDIA_PRELOAD_SUPPORTED = !getBrowserType.isSafari;
-
 /**
  * Loader types and the extensions they handle
  * Allows the omission of the loader key for some generic extensions used on the web
@@ -53,10 +49,14 @@ const LOADER_EXTENSIONS_MAP = new Map([
   ],
 ]);
 
-// Make sure to cache the WebGL feature set
+// Safari does not fire `canplaythrough` preventing it from resolving naturally.
+// A workaround is to not wait for the `canplaythrough` event but rather resolve early and hope for the best
+const IS_MEDIA_PRELOAD_SUPPORTED = !getBrowserType.isSafari;
+
+// Make sure to cache the WebGL feature set (loadImageCompressed)
 const webGLFeatures = getWebGLFeatures;
 
-// Make sure to cache the DOMParser instance
+// Make sure to cache the DOMParser instance (loadXML)
 const domParser = new DOMParser();
 
 /**
