@@ -268,6 +268,8 @@ console.log(Ridge.features);
 // Ridge.warn('example warning');
 // Ridge.error('example error');
 
+// Polyfills
+
 // Threads
 // -------
 
