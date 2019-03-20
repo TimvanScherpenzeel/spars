@@ -11,7 +11,7 @@ const webkit = ['webkitHidden', 'webkitvisibilitychange'];
 
 const ms = ['msHidden', 'msvisibilitychange'];
 
-const vendor =
+const prefix =
   ('hidden' in document && Object.keys(key)) ||
   (webkit[0] in document && webkit) ||
   (ms[0] in document && ms) ||
@@ -24,27 +24,27 @@ const visibility = {
   // True is page is not visible, false if page is visible
   get hidden() {
     // @ts-ignore: implicit any, has no index structure
-    return Boolean(document[vendor[key.hidden]]);
+    return Boolean(document[prefix[key.hidden]]);
   },
 
   // Vendor prefixed listeners
   addEventListener: (type: string, handler: () => void, options?: any) =>
     // @ts-ignore: implicit any, has no index structure
-    document.addEventListener(vendor[key[type]], handler, options),
+    document.addEventListener(prefix[key[type]], handler, options),
 
   removeEventListener: (type: string, handler: () => void, options?: any) =>
     // @ts-ignore: implicit any, has no index structure
-    document.removeEventListener(vendor[key[type]], handler, options),
+    document.removeEventListener(prefix[key[type]], handler, options),
 
   // Visibility change listener
   get onvisibilitychange() {
     // @ts-ignore: implicit any, has no index structure
-    return document[`on${vendor[key.visibilitychange]}`.toLowerCase()];
+    return document[`on${prefix[key.visibilitychange]}`.toLowerCase()];
   },
 
   set onvisibilitychange(handler) {
     // @ts-ignore: implicit any, has no index structure
-    document[`on${vendor[key.visibilitychange]}`.toLowerCase()] = handler;
+    document[`on${prefix[key.visibilitychange]}`.toLowerCase()] = handler;
   },
 };
 

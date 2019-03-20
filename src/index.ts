@@ -36,6 +36,9 @@ export { AssetLoader } from './loaders';
 // Logger
 export { error, log, warn } from './logger';
 
+// Polyfill
+export { fullScreen, pointerLock } from './polyfill';
+
 // Threads
 export { Thread } from './threads';
 
