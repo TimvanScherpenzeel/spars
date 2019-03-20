@@ -578,92 +578,88 @@ export class AssetLoader {
   public assets: Map<string, Promise<Response>> = new Map();
 
   /**
-   * Load a single item
-   *
-   * @param item Item to load
-   */
-  public loadAsset = (item: ILoadItem) => {
-    const startTime = window.performance.now();
-
-    return new Promise(resolve => {
-      const cacheHit = this.assets.get(item.src);
-
-      if (cacheHit) {
-        resolve({
-          fromCache: true,
-          id: item.id || item.src,
-          item: cacheHit,
-          timeToLoad: window.performance.now() - startTime,
-        });
-      }
-
-      const loaderType = item.loader || AssetLoader.getLoaderByFileExtension(item.src);
-
-      let loadedItem;
-
-      switch (loaderType) {
-        case ELoaderKey.ArrayBuffer:
-          loadedItem = AssetLoader.loadArrayBuffer(item);
-          break;
-        case ELoaderKey.Audio:
-          loadedItem = AssetLoader.loadAudio(item);
-          break;
-        case ELoaderKey.Blob:
-          loadedItem = AssetLoader.loadBlob(item);
-          break;
-        case ELoaderKey.Font:
-          loadedItem = AssetLoader.loadFont(item);
-          break;
-        case ELoaderKey.Image:
-          loadedItem = AssetLoader.loadImage(item);
-          break;
-        case ELoaderKey.ImageBitmap:
-          loadedItem = AssetLoader.loadImageBitmap(item);
-          break;
-        case ELoaderKey.ImageCompressed:
-          loadedItem = AssetLoader.loadImageCompressed(item);
-          break;
-        case ELoaderKey.JSON:
-          loadedItem = AssetLoader.loadJSON(item);
-          break;
-        case ELoaderKey.Text:
-          loadedItem = AssetLoader.loadText(item);
-          break;
-        case ELoaderKey.Video:
-          loadedItem = AssetLoader.loadVideo(item);
-          break;
-        case ELoaderKey.WebAssembly:
-          loadedItem = AssetLoader.loadWebAssembly(item);
-          break;
-        case ELoaderKey.XML:
-          loadedItem = AssetLoader.loadXML(item);
-          break;
-        default:
-          warn('Missing loader, falling back to loading as ArrayBuffer');
-          loadedItem = AssetLoader.loadArrayBuffer(item);
-          break;
-      }
-
-      loadedItem.then((asset: any) => {
-        this.assets.set(item.src, asset);
-
-        resolve({
-          fromCache: false,
-          id: item.id || item.src,
-          item: asset,
-          timeToLoad: window.performance.now() - startTime,
-        });
-      });
-    });
-  };
-
-  /**
    * Load the specified manifest (array of items)
    *
    * @param items Items to load
    */
   public loadAssets = (items: ILoadItem[]) => {
-    const loadingAssets = items.filter(item => item).map(this.loadAsset);
+    const loadingAssets = items
+      .filter(item => item)
+      .map(item => {
+        const startTime = window.performance.now();
+
+        return new Promise(resolve => {
+          const cacheHit = this.assets.get(item.src);
+
+          if (cacheHit) {
+            resolve({
+              fromCache: true,
+              id: item.id || item.src,
+              item: cacheHit,
+              timeToLoad: window.performance.now() - startTime,
+            });
+          }
+
+          const loaderType = item.loader || AssetLoader.getLoaderByFileExtension(item.src);
+
+          let loadedItem;
+
+          switch (loaderType) {
+            case ELoaderKey.ArrayBuffer:
+              loadedItem = AssetLoader.loadArrayBuffer(item);
+              break;
+            case ELoaderKey.Audio:
+              loadedItem = AssetLoader.loadAudio(item);
+              break;
+            case ELoaderKey.Blob:
+              loadedItem = AssetLoader.loadBlob(item);
+              break;
+            case ELoaderKey.Font:
+              loadedItem = AssetLoader.loadFont(item);
+              break;
+            case ELoaderKey.Image:
+              loadedItem = AssetLoader.loadImage(item);
+              break;
+            case ELoaderKey.ImageBitmap:
+              loadedItem = AssetLoader.loadImageBitmap(item);
+              break;
+            case ELoaderKey.ImageCompressed:
+              loadedItem = AssetLoader.loadImageCompressed(item);
+              break;
+            case ELoaderKey.JSON:
+              loadedItem = AssetLoader.loadJSON(item);
+              break;
+            case ELoaderKey.Text:
+              loadedItem = AssetLoader.loadText(item);
+              break;
+            case ELoaderKey.Video:
+              loadedItem = AssetLoader.loadVideo(item);
+              break;
+            case ELoaderKey.WebAssembly:
+              loadedItem = AssetLoader.loadWebAssembly(item);
+              break;
+            case ELoaderKey.XML:
+              loadedItem = AssetLoader.loadXML(item);
+              break;
+            default:
+              warn('Missing loader, falling back to loading as ArrayBuffer');
+              loadedItem = AssetLoader.loadArrayBuffer(item);
+              break;
+          }
+
+          loadedItem.then((asset: any) => {
+            this.assets.set(item.src, asset);
+
+            resolve({
+              fromCache: false,
+              id: item.id || item.src,
+              item: asset,
+              timeToLoad: window.performance.now() - startTime,
+            });
+          });
+        });
+      });
+
     const loadedAssets = Promise.all(loadingAssets);
 
     let progress = 0;
@@ -680,6 +676,18 @@ export class AssetLoader {
       })
     );
 
-    return loadedAssets;
+    return loadedAssets.then(assets => {
+      const assetMap = new Map();
+
+      assets.forEach((asset: any) => {
+        if (assetMap.get(asset.id)) {
+          warn("Detected duplicate id, please use unique id's");
+        }
+
+        assetMap.set(asset.id, asset.item);
+      });
+
+      return assetMap;
+    });
   };
 }
