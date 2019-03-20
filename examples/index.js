@@ -269,6 +269,10 @@ console.log(Ridge.features);
 // Ridge.error('example error');
 
 // Polyfills
+// ---------
+
+console.log(Ridge.fullScreen);
+console.log(Ridge.pointerLock);
 
 // Threads
 // -------
