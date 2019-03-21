@@ -143,112 +143,123 @@ console.log(Ridge.features);
 // Loaders
 // -------
 
-Ridge.eventEmitter.on('RIDGE::ASSET_LOADED', event => {
-  console.log(event);
-});
+// Ridge.eventEmitter.on('RIDGE::ASSET_LOADED', event => {
+//   console.log(event);
+// });
 
-const { isDesktop, isTablet, isMobile } = Ridge.features.browserFeatures.browserType;
+// const { isDesktop, isTablet, isMobile } = Ridge.features.browserFeatures.browserType;
 
-const assetLoader = new Ridge.AssetLoader();
+// const assetLoader = new Ridge.AssetLoader();
 
-const assets = assetLoader
-  .loadAssets([
-    isDesktop && {
-      loader: 'ImageBitmap',
-      loaderOptions: {
-        sx: 0,
-        sy: 0,
-        sw: 25,
-        sh: 25,
-      },
-      src: './assets/1.png',
-    },
-    isTablet && { src: './assets/2.png' },
-    isMobile && { src: './assets/3.png' },
+// assetLoader
+//   .loadAssets([
+//     isDesktop && {
+//       loader: 'ImageBitmap',
+//       loaderOptions: {
+//         sx: 0,
+//         sy: 0,
+//         sw: 25,
+//         sh: 25,
+//       },
+//       src: './assets/1.png',
+//     },
+//     isTablet && { src: './assets/2.png' },
+//     isMobile && { src: './assets/3.png' },
 
-    { src: './assets/audio.mp3' },
-    { src: './assets/video.mp4' },
-    { src: './assets/text.txt' },
-    { src: './assets/MJeans1TEX_Lores.dds' },
-    { src: './assets/audio.ogg' },
+//     { src: './assets/audio.mp3' },
+//     { src: './assets/video.mp4' },
+//     { src: './assets/text.txt' },
+//     { src: './assets/MJeans1TEX_Lores.dds' },
+//     { src: './assets/audio.ogg' },
 
-    // { src: './assets/icon-twitter.svg' },
-    // { src: './assets/xml.html' },
-    // { src: './assets/xml.xml' },
-    // { id: 'Antonio', src: 'antonio-bold-webfont.woff2' },
+//     { src: './assets/icon-twitter.svg' },
+//     { src: './assets/xml.html' },
+//     { src: './assets/xml.xml' },
 
-    {
-      src: './assets/simple.wasm',
-      loaderOptions: {
-        importObject: {
-          imports: {
-            imported_func: arg => console.log(arg),
-          },
-        },
-      },
-    },
+//     // Does not require a src but can use it for automatic loader detection
+//     // { id: 'Antonio', loader: 'Font' },
+//     { id: 'Antonio', src: './assets/antonio-bold-webfont.woff2' },
 
-    {
-      id: './assets/1a.png',
-      src: Ridge.AssetLoader.byDeviceType({
-        DESKTOP: './assets/1-desktop.png',
-        TABLET: './assets/1-tablet.png',
-        MOBILE: './assets/1-mobile.png',
-      }),
-    },
+//     {
+//       src: './assets/simple.wasm',
+//       loaderOptions: {
+//         importObject: {
+//           imports: {
+//             imported_func: arg => console.log(arg),
+//           },
+//         },
+//       },
+//     },
 
-    {
-      id: './assets/example.ktx',
-      src: Ridge.AssetLoader.bySupportedCompressedTexture({
-        ASTC: './assets/example-astc-4x4.ktx',
-        ETC: './assets/example-etc2.ktx',
-        PVRTC: './assets/example-pvrtc4BPP.ktx',
-        S3TC: './assets/example-dxt5.ktx',
-        FALLBACK: './assets/example.png',
-      }),
-    },
+//     {
+//       id: './assets/1-device.png',
+//       src: Ridge.AssetLoader.byDeviceType({
+//         DESKTOP: './assets/1-desktop.png',
+//         TABLET: './assets/1-tablet.png',
+//         MOBILE: './assets/1-mobile.png',
+//       }),
+//     },
 
-    {
-      id: './assets/example-mipmaps.ktx',
-      src: Ridge.AssetLoader.bySupportedCompressedTexture({
-        ASTC: './assets/example-astc-4x4-mipmaps.ktx',
-        ETC: './assets/example-etc2-mipmaps.ktx',
-        PVRTC: './assets/example-pvrtc4BPP-mipmaps.ktx',
-        S3TC: './assets/example-dxt5-mipmaps.ktx',
-        FALLBACK: './assets/example.png',
-      }),
-    },
+//     {
+//       id: './assets/example.ktx',
+//       src: Ridge.AssetLoader.bySupportedCompressedTexture({
+//         ASTC: './assets/example-astc-4x4.ktx',
+//         ETC: './assets/example-etc2.ktx',
+//         PVRTC: './assets/example-pvrtc4BPP.ktx',
+//         S3TC: './assets/example-dxt5.ktx',
+//         FALLBACK: './assets/example.png',
+//       }),
+//     },
 
-    (isMobile || isTablet) && {
-      src: './assets/green_point_park_4k_sh.bin',
-    },
+//     {
+//       id: './assets/example-mipmaps.ktx',
+//       src: Ridge.AssetLoader.bySupportedCompressedTexture({
+//         ASTC: './assets/example-astc-4x4-mipmaps.ktx',
+//         ETC: './assets/example-etc2-mipmaps.ktx',
+//         PVRTC: './assets/example-pvrtc4BPP-mipmaps.ktx',
+//         S3TC: './assets/example-dxt5-mipmaps.ktx',
+//         FALLBACK: './assets/example.png',
+//       }),
+//     },
 
-    isDesktop && {
-      id: './assets/green_point_park_4k_ibl.ktx',
-      src: Ridge.AssetLoader.bySupportedCompressedTexture({
-        ASTC: './assets/green_point_park_4k_ibl_astc.ktx',
-        ETC: './assets/green_point_park_4k_ibl_etc.ktx',
-        S3TC: './assets/green_point_park_4k_ibl_s3tc.ktx',
-        FALLBACK: './assets/green_point_park_4k_ibl_none.ktx',
-      }),
-    },
+//     (isMobile || isTablet) && {
+//       src: './assets/green_point_park_4k_sh.bin',
+//     },
 
-    isDesktop && {
-      id: './assets/green_point_park_4k_skybox.ktx',
-      src: Ridge.AssetLoader.bySupportedCompressedTexture({
-        ASTC: './assets/green_point_park_4k_skybox_astc.ktx',
-        ETC: './assets/green_point_park_4k_skybox_etc.ktx',
-        S3TC: './assets/green_point_park_4k_skybox_s3tc.ktx',
-        FALLBACK: './assets/green_point_park_4k_skybox_none.ktx',
-      }),
-    },
-  ])
-  .then(assets => {
-    console.log(assets);
+//     isDesktop && {
+//       id: './assets/green_point_park_4k_ibl.ktx',
+//       src: Ridge.AssetLoader.bySupportedCompressedTexture({
+//         ASTC: './assets/green_point_park_4k_ibl_astc.ktx',
+//         ETC: './assets/green_point_park_4k_ibl_etc.ktx',
+//         S3TC: './assets/green_point_park_4k_ibl_s3tc.ktx',
+//         FALLBACK: './assets/green_point_park_4k_ibl_none.ktx',
+//       }),
+//     },
 
-    console.log(assets.get('./assets/green_point_park_4k_skybox.ktx'));
-    assets.get('./assets/simple.wasm').instance.exports.exported_func();
-  });
+//     isDesktop && {
+//       id: './assets/green_point_park_4k_skybox.ktx',
+//       src: Ridge.AssetLoader.bySupportedCompressedTexture({
+//         ASTC: './assets/green_point_park_4k_skybox_astc.ktx',
+//         ETC: './assets/green_point_park_4k_skybox_etc.ktx',
+//         S3TC: './assets/green_point_park_4k_skybox_s3tc.ktx',
+//         FALLBACK: './assets/green_point_park_4k_skybox_none.ktx',
+//       }),
+//     },
+//   ])
+//   .then(assets => {
+//     new App(assets);
+//   });
+
+// class App {
+//   constructor(assets) {
+//     console.log('app init!');
+
+//     console.log(assets);
+
+//     console.log(assets.get('./assets/green_point_park_4k_skybox.ktx'));
+//     assets.get('./assets/simple.wasm').instance.exports.exported_func();
+//   }
+// }
 
 // Logger
 // ------
