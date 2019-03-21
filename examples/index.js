@@ -271,7 +271,38 @@ console.log(Ridge.features);
 // Polyfills
 // ---------
 
+// Fullscreen
+
+// const element = document.getElementById('root');
+
+// element.onclick = () => {
+//   if (Ridge.fullScreen.fullscreenEnabled) {
+//     if (Ridge.fullScreen.fullscreenElement) {
+//       Ridge.fullScreen.exitFullscreen();
+//     } else {
+//       Ridge.fullScreen.requestFullscreen(element);
+//     }
+//   }
+// };
+
 // console.log(Ridge.fullScreen);
+
+// Pointer lock
+
+// const element = document.getElementById('root');
+
+// let pointerLockEnabled = false;
+
+// element.onclick = () => {
+//   if (pointerLockEnabled) {
+//     pointerLockEnabled = false;
+//     Ridge.pointerLock.exitPointerLock();
+//   } else {
+//     pointerLockEnabled = true;
+//     Ridge.pointerLock.requestPointerLock(element);
+//   }
+// };
+
 // console.log(Ridge.pointerLock);
 
 // Threads
