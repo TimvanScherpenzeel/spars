@@ -34,18 +34,9 @@ export const setCookie = (key: string, value: string, expiryDays = 365) => {
  */
 export const getCookie = (key: string) => {
   if (isCookieEnabled) {
-    const query = `${key}=`;
-    const cookies = document.cookie.split(';');
+    const result = document.cookie.match(`(^|;)\\s*${key}\\s*=\\s*([^;]+)`);
 
-    for (let cookie of cookies) {
-      while (cookie.charAt(0) === ' ') {
-        cookie = cookie.substring(1, cookie.length);
-      }
-
-      if (cookie.indexOf(query) === 0) {
-        return cookie.substring(query.length, cookie.length);
-      }
-    }
+    return result ? result.pop() : '';
   }
 
   warn('Cookie -> Cookies are disabled, no cookie was retrieved');
