@@ -283,6 +283,7 @@ export class AssetLoader {
               if (options !== undefined) {
                 // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
                 // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+                // https://www.khronos.org/registry/webgl/specs/latest/1.0/#PIXEL_STORAGE_PARAMETERS
                 // @ts-ignore
                 return createImageBitmap(data, sx, sy, sw, sh, options);
               } else {
@@ -291,6 +292,7 @@ export class AssetLoader {
             } else if (options !== undefined) {
               // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
               // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+              // https://www.khronos.org/registry/webgl/specs/latest/1.0/#PIXEL_STORAGE_PARAMETERS
               // @ts-ignore
               return createImageBitmap(data, options);
             } else {
