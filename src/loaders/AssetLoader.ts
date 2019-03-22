@@ -19,7 +19,12 @@ import { warn } from '../logger';
 import { assert } from '../utilities';
 
 // Types
-import { ELoaderKey, ILoadItem } from './types';
+import {
+  ELoaderKey,
+  IByDeviceTypeOptions,
+  IBySupportedCompressedTextureOptions,
+  ILoadItem,
+} from './types';
 
 /**
  * Loader types and the extensions they handle
@@ -60,7 +65,7 @@ export class AssetLoader {
   /**
    * Load conditionally based on device type
    */
-  public static byDeviceType = (data: { DESKTOP?: string; TABLET?: string; MOBILE?: string }) =>
+  public static byDeviceType = (data: IByDeviceTypeOptions) =>
     data.DESKTOP && getBrowserType.isDesktop
       ? data.DESKTOP
       : data.TABLET && getBrowserType.isTablet
@@ -70,13 +75,7 @@ export class AssetLoader {
   /**
    * Load conditionally based on supported compressed texture
    */
-  public static bySupportedCompressedTexture = (data: {
-    ASTC?: string;
-    ETC?: string;
-    S3TC?: string;
-    PVRTC?: string;
-    FALLBACK?: string;
-  }) => {
+  public static bySupportedCompressedTexture = (data: IBySupportedCompressedTextureOptions) => {
     if (getWebGLFeatures) {
       return data.ASTC && getWebGLFeatures.extensions.compressedTextureASTCExtension
         ? data.ASTC

@@ -21,6 +21,26 @@ export enum ELoaderKey {
 // Interfaces
 
 /**
+ * Conditionally load by device type
+ */
+export interface IByDeviceTypeOptions {
+  DESKTOP?: string;
+  TABLET?: string;
+  MOBILE?: string;
+}
+
+/**
+ * Conditionally load by supported GPU compressed texture format
+ */
+export interface IBySupportedCompressedTextureOptions {
+  ASTC?: string;
+  ETC?: string;
+  S3TC?: string;
+  PVRTC?: string;
+  FALLBACK?: string;
+}
+
+/**
  * Main interface representing an object to load
  */
 export interface ILoadItem {
