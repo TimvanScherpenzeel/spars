@@ -48,5 +48,6 @@ export {
   convertArrayBufferToBlob,
   convertBlobToArrayBuffer,
   createUUID,
+  debounce,
   getQueryParameters,
 } from './utilities';
