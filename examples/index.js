@@ -95,9 +95,6 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // new Test();
 
 // Ridge.listenToConnectionChange();
-// Ridge.listenToOrientationChange();
-// Ridge.listenToVisibilityChange();
-// Ridge.listenToWindowSizeChange();
 
 // const connectionChangeHandler = event => {
 //   console.log(event);
@@ -108,6 +105,8 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 
 // Ridge.eventEmitter.on('RIDGE::CONNECTION_CHANGE', connectionChangeHandler);
 
+// Ridge.listenToOrientationChange();
+
 // const orientationChangeHandler = event => {
 //   console.log(event);
 
@@ -117,6 +116,8 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 
 // Ridge.eventEmitter.on('RIDGE::ORIENTATION_CHANGE', orientationChangeHandler);
 
+// Ridge.listenToVisibilityChange();
+
 // const visibilityChangeHandler = event => {
 //   console.log(event);
 
@@ -125,6 +126,8 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // };
 
 // Ridge.eventEmitter.on('RIDGE::VISIBILITY_CHANGE', visibilityChangeHandler);
+
+// Ridge.listenToWindowSizeChange();
 
 // const windowSizeChangeHandler = event => {
 //   console.log(event);
