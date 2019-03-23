@@ -7,7 +7,7 @@
  * @param immediate Trigger function on the leader edge instead of the trailing
  */
 export const debounce = (func: any, wait: number, immediate: boolean = false) => {
-  let timeout: number | null;
+  let timeout: any;
 
   return function executedFunction() {
     // @ts-ignore
@@ -24,10 +24,8 @@ export const debounce = (func: any, wait: number, immediate: boolean = false) =>
 
     const callNow = immediate && !timeout;
 
-    // @ts-ignore
     clearTimeout(timeout);
 
-    // @ts-ignore
     timeout = setTimeout(later, wait);
 
     if (callNow) {
