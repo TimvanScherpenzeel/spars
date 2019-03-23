@@ -59,13 +59,13 @@ export const fullScreen = {
     // @ts-ignore: implicit any, has no index structure
     document.removeEventListener(prefix[key[type]], handler, options),
 
-  get fullscreenEnabled() {
+  get fullscreenSupported() {
     // @ts-ignore: implicit any, has no index structure
     return Boolean(document[prefix[key.fullscreenEnabled]]);
   },
 
   // tslint:disable-next-line:no-empty
-  set fullscreenEnabled(val) {},
+  set fullscreenSupported(val) {},
 
   get fullscreenElement() {
     // @ts-ignore: implicit any, has no index structure

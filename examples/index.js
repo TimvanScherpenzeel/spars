@@ -276,7 +276,7 @@ console.log(Ridge.features);
 // const element = document.getElementById('root');
 
 // element.onclick = () => {
-//   if (Ridge.fullScreen.fullscreenEnabled) {
+//   if (Ridge.fullScreen.fullscreenSupported) {
 //     if (Ridge.fullScreen.fullscreenElement) {
 //       Ridge.fullScreen.exitFullscreen();
 //     } else {
