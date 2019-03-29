@@ -143,7 +143,24 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 
 console.log(Ridge.features);
 
-// console.log(Ridge.getGPUTier());
+// console.log(
+//   Ridge.getGPUTier({
+//     mobileBenchmarkPercentages: [
+//       0, // TIER_0
+//       50, // TIER_1
+//       30, // TIER_2
+//       20, // TIER_3
+//     ],
+//     desktopBenchmarkPercentages: [
+//       0, // TIER_0
+//       50, // TIER_1
+//       30, // TIER_2
+//       20, // TIER_3
+//     ],
+//     // forceRendererString: 'Apple A12 GPU',
+//     // forceMobile: true,
+//   })
+// );
 
 // Loaders
 // -------
