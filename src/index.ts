@@ -28,7 +28,7 @@ export {
 } from './events';
 
 // Features
-export { features } from './features';
+export { features, getGPUTier } from './features';
 
 // Loaders
 export { AssetLoader } from './loaders';

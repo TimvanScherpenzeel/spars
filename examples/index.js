@@ -143,6 +143,8 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 
 console.log(Ridge.features);
 
+// console.log(Ridge.getGPUTier());
+
 // Loaders
 // -------
 
