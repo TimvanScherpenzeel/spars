@@ -9,7 +9,6 @@
 .rpt2_cache
 
 # Node
-dist
 node_modules
 
 # Directories
