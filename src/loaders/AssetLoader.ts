@@ -179,11 +179,13 @@ export class AssetLoader {
             if (IS_MEDIA_PRELOAD_SUPPORTED) {
               audio.addEventListener('canplaythrough', function handler() {
                 audio.removeEventListener('canplaythrough', handler);
+                URL.revokeObjectURL(audio.src);
                 resolve(audio);
               });
 
               audio.addEventListener('error', function handler() {
                 audio.removeEventListener('error', handler);
+                URL.revokeObjectURL(audio.src);
                 reject(audio);
               });
             }
