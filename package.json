@@ -1,6 +1,6 @@
 {
   "name": "alpine-toolkit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A toolkit for creating interactive web experiences",
   "main": "dist/alpine-toolkit.cjs.js",
   "browser": "dist/alpine-toolkit.umd.js",
