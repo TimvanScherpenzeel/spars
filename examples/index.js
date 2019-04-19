@@ -1,5 +1,5 @@
 // Vendor
-import * as AlpineToolkit from '../dist/AlpineToolkit.umd';
+import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 
 // Override config
 AlpineToolkit.setConfigEntry('LOG_VERBOSITY', 3);
