@@ -1,0 +1,1 @@
+{"version":3,"file":"isLocalStorageSupported.js","sourceRoot":"","sources":["../../../../src/features/browserFeatures/isLocalStorageSupported.ts"],"names":[],"mappings":";;AAAA;;GAEG;AACH,kBAAe,CAAC;IACd,IAAI;QACF,OAAO,CAAC,CAAC,MAAM,CAAC,YAAY,CAAC;KAC9B;IAAC,OAAO,GAAG,EAAE;QACZ,OAAO,KAAK,CAAC;KACd;AACH,CAAC,CAAC,EAAE,CAAC"}

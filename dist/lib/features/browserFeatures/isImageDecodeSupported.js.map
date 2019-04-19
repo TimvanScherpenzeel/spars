@@ -1,0 +1,1 @@
+{"version":3,"file":"isImageDecodeSupported.js","sourceRoot":"","sources":["../../../../src/features/browserFeatures/isImageDecodeSupported.ts"],"names":[],"mappings":";;AAAA;;GAEG;AACH,kBAAe,CAAC;IACd,IAAI;QACF,IAAM,KAAK,GAAG,IAAI,KAAK,EAAE,CAAC;QAC1B,OAAO,CAAC,CAAC,KAAK,CAAC,MAAM,CAAC;KACvB;IAAC,OAAO,GAAG,EAAE;QACZ,OAAO,KAAK,CAAC;KACd;AACH,CAAC,CAAC,EAAE,CAAC"}
