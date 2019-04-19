@@ -410,7 +410,7 @@ export class AssetLoader {
         let height = pixelHeight;
         const mipmapCount = numberOfMipmapLevels || 1;
 
-        for (let level = 0; level < mipmapCount; level += 1) {
+        for (let level = 0; level < mipmapCount; level++) {
           // Size per face, since not supporting array cubemaps
           const imageSize = new Int32Array(data, dataOffset, 1)[0];
 
@@ -418,7 +418,7 @@ export class AssetLoader {
           // Each face refers to same imagesize field above
           dataOffset += 4;
 
-          for (let face = 0; face < numberOfFaces; face += 1) {
+          for (let face = 0; face < numberOfFaces; face++) {
             const byteArray = new Uint8Array(data, dataOffset, imageSize);
 
             mipmaps.push({
@@ -667,7 +667,7 @@ export class AssetLoader {
 
     loadingAssets.forEach((promise: Promise<any>) =>
       promise.then(asset => {
-        progress += 1;
+        progress++;
 
         eventEmitter.emit('RIDGE::ASSET_LOADED', {
           id: asset.id,

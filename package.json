@@ -1,7 +1,7 @@
 {
   "name": "alpine-ridge",
   "version": "0.0.1",
-  "description": "A proprietary in-house toolkit for creating interactive web experiences",
+  "description": "A toolkit for creating interactive web experiences",
   "main": "dist/ridge.cjs.js",
   "browser": "dist/ridge.umd.js",
   "module": "dist/ridge.esm.js",

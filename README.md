@@ -1,6 +1,6 @@
 # Alpine Ridge
 
-A proprietary in-house toolkit for creating interactive web experiences.
+A toolkit for creating interactive web experiences.
 
 ## Statement
 
@@ -21,4 +21,4 @@ Alpine Ridge does not include any polyfills. It is recommended to use the [polyf
 
 ## Licence
 
-The Alpine Ridge toolkit is proprietary software.
+My work is released under the [MIT license](https://raw.githubusercontent.com/TimvanScherpenzeel/alpine-ridge/master/LICENSE).
