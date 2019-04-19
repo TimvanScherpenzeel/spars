@@ -16,7 +16,6 @@ Alpine Toolkit supports the latest two versions of `evergreen` browsers and `Int
 - Edge
 - Firefox
 - Chrome
-- Chrome Android
 - Safari
 - iOS Safari
 
