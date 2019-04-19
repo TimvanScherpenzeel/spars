@@ -19,6 +19,26 @@ Alpine Toolkit supports the latest two versions of `evergreen` browsers and `Int
 
 Alpine Toolkit does not include any polyfills. It is recommended to use the [polyfill.io](https://polyfill.io/v3/) service in your application.
 
+## Installation
+
+Make sure you have [Node.js](http://nodejs.org/) installed.
+
+```sh
+ $ npm install
+```
+
+## Development
+
+```sh
+$ yarn start
+
+$ yarn lint
+
+$ yarn test
+
+$ yarn build
+```
+
 ## Licence
 
 My work is released under the [MIT license](https://raw.githubusercontent.com/TimvanScherpenzeel/alpine-toolkit/master/LICENSE).
