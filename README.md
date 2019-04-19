@@ -27,7 +27,7 @@ Alpine Toolkit does not include any polyfills. It is recommended to use the [pol
 Make sure you have [Node.js](http://nodejs.org/) installed.
 
 ```sh
- $ npm install
+ $ npm install alpine-toolkit
 ```
 
 ## Development
