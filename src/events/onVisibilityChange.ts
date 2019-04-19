@@ -52,7 +52,7 @@ const visibility = {
  * Monitor visibility changes
  */
 function onVisibilityChange() {
-  eventEmitter.emit('RIDGE::VISIBILITY_CHANGE', {
+  eventEmitter.emit('ALPINE::VISIBILITY_CHANGE', {
     isVisible: !visibility.hidden,
   });
 }

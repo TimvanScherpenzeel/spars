@@ -37,7 +37,7 @@ function onConnectionChange() {
     }
   }
 
-  eventEmitter.emit('RIDGE::CONNECTION_CHANGE', {
+  eventEmitter.emit('ALPINE::CONNECTION_CHANGE', {
     connectionIsOnline,
     connectionSaveData,
     connectionSpeed,

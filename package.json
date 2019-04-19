@@ -1,11 +1,11 @@
 {
-  "name": "alpine-ridge",
+  "name": "alpine-toolkit",
   "version": "0.0.1",
   "description": "A toolkit for creating interactive web experiences",
-  "main": "dist/ridge.cjs.js",
-  "browser": "dist/ridge.umd.js",
-  "module": "dist/ridge.esm.js",
-  "jsnext:main": "dist/ridge.esm.js",
+  "main": "dist/alpine-toolkit.cjs.js",
+  "browser": "dist/alpine-toolkit.umd.js",
+  "module": "dist/alpine-toolkit.esm.js",
+  "jsnext:main": "dist/alpine-toolkit.esm.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
     "start": "concurrently \"rollup -c rollup.config.ts -w\" \"parcel examples/index.html --open\"",

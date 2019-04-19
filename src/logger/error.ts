@@ -9,4 +9,4 @@ import { getConfigEntry } from '../config';
  * @param message Message to error in the console
  */
 export const error = (message: string) =>
-  getConfigEntry('LOG_VERBOSITY') >= 1 && console.error(`Ridge :: [ERROR] -> ${message}`);
+  getConfigEntry('LOG_VERBOSITY') >= 1 && console.error(`Alpine :: [ERROR] -> ${message}`);

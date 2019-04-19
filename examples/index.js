@@ -1,14 +1,14 @@
 // Vendor
-import * as Ridge from '../dist/ridge.umd';
+import * as AlpineToolkit from '../dist/AlpineToolkit.umd';
 
 // Override config
-Ridge.setConfigEntry('LOG_VERBOSITY', 3);
+AlpineToolkit.setConfigEntry('LOG_VERBOSITY', 3);
 
 // Analytics
 // ---------
 
-// Ridge.registerAnalytics('UA-71404844-4');
-// Ridge.recordAnalyticsEvent({
+// AlpineToolkit.registerAnalytics('UA-71404844-4');
+// AlpineToolkit.recordAnalyticsEvent({
 //   hitType: 'event',
 //   eventCategory: 'string',
 //   eventAction: 'play',
@@ -28,12 +28,12 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 //   button.innerHTML = 'unlock audio';
 //   document.getElementById('root').appendChild(button);
 
-//   if (Ridge.isAutoplayAllowed()) {
+//   if (AlpineToolkit.isAutoplayAllowed()) {
 //     console.log('allowed!');
 //   } else {
 //     console.log('not allowed, waiting for user interaction');
 
-//     Ridge.unlockAutoplay(button)
+//     AlpineToolkit.unlockAutoplay(button)
 //       .then(unlocked => {
 //         console.log('allowed!');
 //       })
@@ -46,7 +46,7 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // Cache
 // -----
 
-// const persistentCache = new Ridge.PersistentCache();
+// const persistentCache = new AlpineToolkit.PersistentCache();
 
 // persistentCache.set('key1', 'value1');
 // persistentCache.set('key2', 'value2');
@@ -68,23 +68,23 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 // Cookie
 // ------
 
-// Ridge.setCookie('key1', 'value1');
-// Ridge.setCookie('key2', 'value2');
+// AlpineToolkit.setCookie('key1', 'value1');
+// AlpineToolkit.setCookie('key2', 'value2');
 // console.log(document.cookie);
 
-// const exampleKeyCookie = Ridge.getCookie('key1');
+// const exampleKeyCookie = AlpineToolkit.getCookie('key1');
 // console.log(exampleKeyCookie);
 
-// Ridge.deleteCookie('key1');
+// AlpineToolkit.deleteCookie('key1');
 // console.log(document.cookie);
 
-// Ridge.deleteCookie('key2');
+// AlpineToolkit.deleteCookie('key2');
 // console.log(document.cookie);
 
 // Events
 // ------
 
-// class Test extends Ridge.EventEmitter {
+// class Test extends AlpineToolkit.EventEmitter {
 //   constructor() {
 //     super();
 
@@ -94,57 +94,57 @@ Ridge.setConfigEntry('LOG_VERBOSITY', 3);
 
 // new Test();
 
-// Ridge.listenToConnectionChange();
+// AlpineToolkit.listenToConnectionChange();
 
 // const connectionChangeHandler = event => {
 //   console.log(event);
 
-//   Ridge.eventEmitter.off('RIDGE::CONNECTION_CHANGE', connectionChangeHandler);
-//   Ridge.stopListeningToConnectionChange();
+//   AlpineToolkit.eventEmitter.off('ALPINE::CONNECTION_CHANGE', connectionChangeHandler);
+//   AlpineToolkit.stopListeningToConnectionChange();
 // };
 
-// Ridge.eventEmitter.on('RIDGE::CONNECTION_CHANGE', connectionChangeHandler);
+// AlpineToolkit.eventEmitter.on('ALPINE::CONNECTION_CHANGE', connectionChangeHandler);
 
-// Ridge.listenToOrientationChange();
+// AlpineToolkit.listenToOrientationChange();
 
 // const orientationChangeHandler = event => {
 //   console.log(event);
 
-//   Ridge.eventEmitter.off('RIDGE::ORIENTATION_CHANGE');
-//   Ridge.stopListeningToOrientationChange();
+//   AlpineToolkit.eventEmitter.off('ALPINE::ORIENTATION_CHANGE');
+//   AlpineToolkit.stopListeningToOrientationChange();
 // };
 
-// Ridge.eventEmitter.on('RIDGE::ORIENTATION_CHANGE', orientationChangeHandler);
+// AlpineToolkit.eventEmitter.on('ALPINE::ORIENTATION_CHANGE', orientationChangeHandler);
 
-// Ridge.listenToVisibilityChange();
+// AlpineToolkit.listenToVisibilityChange();
 
 // const visibilityChangeHandler = event => {
 //   console.log(event);
 
-//   Ridge.eventEmitter.off('RIDGE::VISIBILITY_CHANGE');
-//   Ridge.stopListeningToVisibilityChange();
+//   AlpineToolkit.eventEmitter.off('ALPINE::VISIBILITY_CHANGE');
+//   AlpineToolkit.stopListeningToVisibilityChange();
 // };
 
-// Ridge.eventEmitter.on('RIDGE::VISIBILITY_CHANGE', visibilityChangeHandler);
+// AlpineToolkit.eventEmitter.on('ALPINE::VISIBILITY_CHANGE', visibilityChangeHandler);
 
-// Ridge.listenToWindowSizeChange();
+// AlpineToolkit.listenToWindowSizeChange();
 
 // const windowSizeChangeHandler = event => {
 //   console.log(event);
 
-//   Ridge.eventEmitter.off('RIDGE::WINDOW_SIZE_CHANGE');
-//   Ridge.stopListeningToWindowSizeChange();
+//   AlpineToolkit.eventEmitter.off('ALPINE::WINDOW_SIZE_CHANGE');
+//   AlpineToolkit.stopListeningToWindowSizeChange();
 // };
 
-// Ridge.eventEmitter.on('RIDGE::WINDOW_SIZE_CHANGE', windowSizeChangeHandler);
+// AlpineToolkit.eventEmitter.on('ALPINE::WINDOW_SIZE_CHANGE', windowSizeChangeHandler);
 
 // Features
 // --------
 
-console.log(Ridge.features);
+console.log(AlpineToolkit.features);
 
 // console.log(
-//   Ridge.getGPUTier({
+//   AlpineToolkit.getGPUTier({
 //     mobileBenchmarkPercentages: [
 //       0, // TIER_0
 //       50, // TIER_1
@@ -165,13 +165,13 @@ console.log(Ridge.features);
 // Loaders
 // -------
 
-// Ridge.eventEmitter.on('RIDGE::ASSET_LOADED', event => {
+// AlpineToolkit.eventEmitter.on('ALPINE::ASSET_LOADED', event => {
 //   console.log(event);
 // });
 
-// const { isDesktop, isTablet, isMobile } = Ridge.features.browserFeatures.browserType;
+// const { isDesktop, isTablet, isMobile } = AlpineToolkit.features.browserFeatures.browserType;
 
-// const assetLoader = new Ridge.AssetLoader();
+// const assetLoader = new AlpineToolkit.AssetLoader();
 
 // assetLoader
 //   .loadAssets([
@@ -215,7 +215,7 @@ console.log(Ridge.features);
 
 //     {
 //       id: './assets/1-device.png',
-//       src: Ridge.AssetLoader.byDeviceType({
+//       src: AlpineToolkit.AssetLoader.byDeviceType({
 //         DESKTOP: './assets/1-desktop.png',
 //         TABLET: './assets/1-tablet.png',
 //         MOBILE: './assets/1-mobile.png',
@@ -224,7 +224,7 @@ console.log(Ridge.features);
 
 //     {
 //       id: './assets/example.ktx',
-//       src: Ridge.AssetLoader.bySupportedCompressedTexture({
+//       src: AlpineToolkit.AssetLoader.bySupportedCompressedTexture({
 //         ASTC: './assets/example-astc-4x4.ktx',
 //         ETC: './assets/example-etc2.ktx',
 //         PVRTC: './assets/example-pvrtc4BPP.ktx',
@@ -235,7 +235,7 @@ console.log(Ridge.features);
 
 //     {
 //       id: './assets/example-mipmaps.ktx',
-//       src: Ridge.AssetLoader.bySupportedCompressedTexture({
+//       src: AlpineToolkit.AssetLoader.bySupportedCompressedTexture({
 //         ASTC: './assets/example-astc-4x4-mipmaps.ktx',
 //         ETC: './assets/example-etc2-mipmaps.ktx',
 //         PVRTC: './assets/example-pvrtc4BPP-mipmaps.ktx',
@@ -250,7 +250,7 @@ console.log(Ridge.features);
 
 //     isDesktop && {
 //       id: './assets/green_point_park_4k_ibl.ktx',
-//       src: Ridge.AssetLoader.bySupportedCompressedTexture({
+//       src: AlpineToolkit.AssetLoader.bySupportedCompressedTexture({
 //         ASTC: './assets/green_point_park_4k_ibl_astc.ktx',
 //         ETC: './assets/green_point_park_4k_ibl_etc.ktx',
 //         S3TC: './assets/green_point_park_4k_ibl_s3tc.ktx',
@@ -260,7 +260,7 @@ console.log(Ridge.features);
 
 //     isDesktop && {
 //       id: './assets/green_point_park_4k_skybox.ktx',
-//       src: Ridge.AssetLoader.bySupportedCompressedTexture({
+//       src: AlpineToolkit.AssetLoader.bySupportedCompressedTexture({
 //         ASTC: './assets/green_point_park_4k_skybox_astc.ktx',
 //         ETC: './assets/green_point_park_4k_skybox_etc.ktx',
 //         S3TC: './assets/green_point_park_4k_skybox_s3tc.ktx',
@@ -286,9 +286,9 @@ console.log(Ridge.features);
 // Logger
 // ------
 
-// Ridge.log('example log');
-// Ridge.warn('example warning');
-// Ridge.error('example error');
+// AlpineToolkit.log('example log');
+// AlpineToolkit.warn('example warning');
+// AlpineToolkit.error('example error');
 
 // Polyfills
 // ---------
@@ -298,16 +298,16 @@ console.log(Ridge.features);
 // const element = document.getElementById('root');
 
 // element.onclick = () => {
-//   if (Ridge.fullScreen.fullscreenSupported) {
-//     if (Ridge.fullScreen.fullscreenElement) {
-//       Ridge.fullScreen.exitFullscreen();
+//   if (AlpineToolkit.fullScreen.fullscreenSupported) {
+//     if (AlpineToolkit.fullScreen.fullscreenElement) {
+//       AlpineToolkit.fullScreen.exitFullscreen();
 //     } else {
-//       Ridge.fullScreen.requestFullscreen(element);
+//       AlpineToolkit.fullScreen.requestFullscreen(element);
 //     }
 //   }
 // };
 
-// console.log(Ridge.fullScreen);
+// console.log(AlpineToolkit.fullScreen);
 
 // Pointer lock
 
@@ -318,19 +318,19 @@ console.log(Ridge.features);
 // element.onclick = () => {
 //   if (pointerLockEnabled) {
 //     pointerLockEnabled = false;
-//     Ridge.pointerLock.exitPointerLock();
+//     AlpineToolkit.pointerLock.exitPointerLock();
 //   } else {
 //     pointerLockEnabled = true;
-//     Ridge.pointerLock.requestPointerLock(element);
+//     AlpineToolkit.pointerLock.requestPointerLock(element);
 //   }
 // };
 
-// console.log(Ridge.pointerLock);
+// console.log(AlpineToolkit.pointerLock);
 
 // Threads
 // -------
 
-// let getName = new Ridge.Thread(username => {
+// let getName = new AlpineToolkit.Thread(username => {
 //   return new Promise(resolve => {
 //     let url = `https://api.github.com/users/${username}`;
 

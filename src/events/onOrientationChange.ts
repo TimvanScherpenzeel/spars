@@ -16,7 +16,7 @@ function onOrientationChange() {
   const isLandscape = window.innerWidth > window.innerHeight;
   const isPortrait = !isLandscape;
 
-  eventEmitter.emit('RIDGE::ORIENTATION_CHANGE', {
+  eventEmitter.emit('ALPINE::ORIENTATION_CHANGE', {
     isLandscape,
     isPortrait,
   });

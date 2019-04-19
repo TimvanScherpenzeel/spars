@@ -8,4 +8,4 @@ import { getConfigEntry } from '../config';
  * @param message Message to warn in the console
  */
 export const warn = (message: string) =>
-  getConfigEntry('LOG_VERBOSITY') >= 2 && console.warn(`Ridge :: [WARN] -> ${message}`);
+  getConfigEntry('LOG_VERBOSITY') >= 2 && console.warn(`Alpine :: [WARN] -> ${message}`);

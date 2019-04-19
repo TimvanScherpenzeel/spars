@@ -66,7 +66,7 @@ export const unlockAutoplay = (element: HTMLElement) =>
     if (context.state === 'suspended') {
       autoplayAllowed = false;
 
-      eventEmitter.emit('RIDGE::AUTOPLAY_CHANGE', {
+      eventEmitter.emit('ALPINE::AUTOPLAY_CHANGE', {
         autoplayAllowed,
       });
 
@@ -80,7 +80,7 @@ export const unlockAutoplay = (element: HTMLElement) =>
 
             autoplayAllowed = true;
 
-            eventEmitter.emit('RIDGE::AUTOPLAY_CHANGE', {
+            eventEmitter.emit('ALPINE::AUTOPLAY_CHANGE', {
               autoplayAllowed,
             });
 

@@ -13,7 +13,7 @@ const debouncedOnWindowSizeChange = debounce(onWindowSizeChange, 100);
  * Monitor window size changes
  */
 function onWindowSizeChange() {
-  eventEmitter.emit('RIDGE::WINDOW_SIZE_CHANGE', {
+  eventEmitter.emit('ALPINE::WINDOW_SIZE_CHANGE', {
     windowHeight: window.innerHeight,
     windowWidth: window.innerWidth,
   });

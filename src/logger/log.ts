@@ -8,4 +8,4 @@ import { getConfigEntry } from '../config';
  * @param message Message to log in the console
  */
 export const log = (message: string) =>
-  getConfigEntry('LOG_VERBOSITY') >= 3 && console.log(`Ridge :: [LOG] -> ${message}`);
+  getConfigEntry('LOG_VERBOSITY') >= 3 && console.log(`Alpine :: [LOG] -> ${message}`);
