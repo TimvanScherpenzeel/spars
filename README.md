@@ -3,7 +3,7 @@
 ![](http://img.badgesize.io/TimvanScherpenzeel/alpine-toolkit/master/dist/alpine-toolkit.cjs.js.svg?compression=gzip&maxAge=60)
 [![npm version](https://badge.fury.io/js/alpine-toolkit.svg)](https://badge.fury.io/js/alpine-toolkit)
 
-A toolkit for creating interactive web experiences.
+A general toolkit for creating interactive web experiences.
 
 ## Statement
 
