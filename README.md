@@ -21,7 +21,7 @@ Contains code to help you set up Google Analytics tracking and reporting of indi
 
 ### Audio
 
-Contains code to help you with audio autoplay unlocking.
+Contains code to help you with audio autoplay unlocking in the browser.
 
 ### Cache
 
@@ -41,7 +41,7 @@ Contains code to check the support of various browser features, test for browser
 
 ### Loaders
 
-Contains code for an `AssetLoader` class for preloading any commonly used image (including GPU compressed formats), bitmaps, video, audio, fonts, WebAssembly, JSON, SVG, etc..).
+Contains code for an `AssetLoader` class used for preloading commonly used assets like images, GPU compressed images, bitmaps, video, audio, fonts, WebAssembly, JSON, SVG, etc..).
 
 ### Logger
 
