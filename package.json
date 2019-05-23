@@ -13,9 +13,8 @@
     "test": "jest --verbose=false",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prebuild": "rimraf dist docs",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
-    "postbuild": "typedoc --out docs --target es5 --theme minimal --hideGenerator"
+    "prebuild": "rimraf dist",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts"
   },
   "author": "Tim van Scherpenzeel",
   "license": "MIT",
