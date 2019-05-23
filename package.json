@@ -1,7 +1,7 @@
 {
   "name": "alpine-toolkit",
   "version": "0.1.2",
-  "description": "A toolkit for creating interactive web experiences",
+  "description": "A general toolkit for creating interactive web experiences.",
   "main": "dist/alpine-toolkit.cjs.js",
   "browser": "dist/alpine-toolkit.umd.js",
   "module": "dist/alpine-toolkit.esm.js",
