@@ -13,9 +13,9 @@ function onConnectionChange() {
     // 4g	          0	          ∞	      The network is suited for HD video, real-time video, etc.
     var connectionIsOnline = navigator.onLine || false;
     var connectionEffectiveType = 
-    // @ts-ignore: navigator.connection does not exist yet as a type but is valid in the browser
+    // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
     (navigator.connection && navigator.connection.effectiveType) || '4g';
-    // @ts-ignore: navigator.connection does not exist yet as a type but is valid in the browser
+    // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
     var connectionSaveData = (navigator.connection && navigator.connection.saveData) || false;
     var connectionSpeed;
     if (!connectionIsOnline) {
@@ -46,9 +46,9 @@ function onConnectionChange() {
  */
 exports.listenToConnectionChange = function () {
     // https://caniuse.com/#feat=netinfo (Chrome only for now)
-    // @ts-ignore: navigator.connection does not exist yet as a type but is valid in the browser
+    // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
     if (navigator.connection) {
-        // @ts-ignore: navigator.connection does not exist yet as a type but is valid in the browser
+        // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
         navigator.connection.addEventListener('change', onConnectionChange, false);
     }
     window.addEventListener('offline', onConnectionChange);

@@ -1,7 +1,7 @@
 /**
  * Tests for requestIdleCallback support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isRequestIdleCallbackSupported = (function () { return !!window.requestIdleCallback || false; })();
 
 /**
@@ -27,7 +27,7 @@ var config = {
  *
  * @param key Key of config entry to get
  */
-// @ts-ignore: implicit any, has no index structure
+// @ts-ignore implicit any, has no index structure
 var getConfigEntry = function (key) { return config[key]; };
 /**
  * Sets a config entry
@@ -36,7 +36,7 @@ var getConfigEntry = function (key) { return config[key]; };
  * @param value Value of config entry to set
  */
 var setConfigEntry = function (key, value) {
-    // @ts-ignore: implicit any, has no index structure
+    // @ts-ignore implicit any, has no index structure
     return (config[key] = value);
 };
 
@@ -92,31 +92,31 @@ var registerAnalytics = function (trackingIdentifier) {
         // Default async GA snippet as provided by Google
         // tslint:disable-next-line:only-arrow-functions
         (function (i, s, o, g, r, a, m) {
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             i.GoogleAnalyticsObject = r;
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             (i[r] =
-                // @ts-ignore: Google Analytics snippet
+                // @ts-ignore Google Analytics snippet
                 i[r] ||
                     // tslint:disable-next-line:only-arrow-functions
                     function () {
-                        // @ts-ignore: Google Analytics snippet
+                        // @ts-ignore Google Analytics snippet
                         (i[r].q = i[r].q || []).push(arguments);
                     }),
-                // @ts-ignore: Google Analytics snippet
+                // @ts-ignore Google Analytics snippet
                 (i[r].l = 1 * new Date());
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             a.async = 1;
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             a.src = g;
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             m.parentNode.insertBefore(a, m);
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-        // @ts-ignore: Google Analytics snippet
+        // @ts-ignore Google Analytics snippet
         ga('create', "" + trackingIdentifier, 'auto');
-        // @ts-ignore: Google Analytics snippet
+        // @ts-ignore Google Analytics snippet
         ga('send', 'pageview');
     }
     else {
@@ -167,18 +167,18 @@ var registerAnalytics = function (trackingIdentifier) {
  */
 var recordAnalyticsEvent = function (record) {
     if (record === void 0) { record = {}; }
-    // @ts-ignore: Google Analytics snippet
+    // @ts-ignore Google Analytics snippet
     if (window.ga !== undefined && typeof window.ga === 'function') {
         if (Object.keys(record).length <= 0) {
             warn('Analytics -> Record cannot be empty');
             return;
         }
         var callback = function () {
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             window.ga('send', record);
         };
         if (isRequestIdleCallbackSupported) {
-            // @ts-ignore: missing type definition
+            // @ts-ignore missing type definition
             window.requestIdleCallback(callback);
         }
         else {
@@ -260,7 +260,7 @@ var eventEmitter = new mitt();
  */
 var isUserActivationSupported = (function () {
     try {
-        // @ts-ignore: missing type definition
+        // @ts-ignore missing type definition
         return !!navigator.userActivation;
     }
     catch (err) {
@@ -284,7 +284,7 @@ var isAutoplayAllowed = function () { return autoplayAllowed; };
  */
 var createAudioContext = function (desiredSampleRate) {
     if (desiredSampleRate === void 0) { desiredSampleRate = 44100; }
-    // @ts-ignore: window.AudioContext and window.webkitAudioContext are not available as types
+    // @ts-ignore window.AudioContext and window.webkitAudioContext are not available as types
     var context = new (window.AudioContext || window.webkitAudioContext)();
     // https://stackoverflow.com/questions/17892345/webkit-audio-distorts-on-ios-6-iphone-5-first-time-after-power-cycling
     // Only occurs in iOS6+ devices and only when you first boot the iPhone, or play a audio/video with a different sample rate
@@ -297,7 +297,7 @@ var createAudioContext = function (desiredSampleRate) {
         dummy.disconnect();
         // Dispose old context
         context.close();
-        // @ts-ignore: window.AudioContext and window.webkitAudioContext are not available as types
+        // @ts-ignore window.AudioContext and window.webkitAudioContext are not available as types
         context = new (window.AudioContext || window.webkitAudioContext)();
     }
     return context;
@@ -310,7 +310,7 @@ var createAudioContext = function (desiredSampleRate) {
 var unlockAutoplay = function (element) {
     return new Promise(function (resolve, reject) {
         // https://developers.google.com/web/updates/2019/01/nic72#user-activation
-        // @ts-ignore: navigator.userActivation does not yet exist as type
+        // @ts-ignore navigator.userActivation does not yet exist as type
         if (isUserActivationSupported && navigator.userActivation.hasBeenActive === true) {
             autoplayAllowed = true;
             resolve(true);
@@ -615,9 +615,9 @@ function onConnectionChange() {
     // 4g	          0	          ∞	      The network is suited for HD video, real-time video, etc.
     var connectionIsOnline = navigator.onLine || false;
     var connectionEffectiveType = 
-    // @ts-ignore: navigator.connection does not exist yet as a type but is valid in the browser
+    // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
     (navigator.connection && navigator.connection.effectiveType) || '4g';
-    // @ts-ignore: navigator.connection does not exist yet as a type but is valid in the browser
+    // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
     var connectionSaveData = (navigator.connection && navigator.connection.saveData) || false;
     var connectionSpeed;
     if (!connectionIsOnline) {
@@ -648,9 +648,9 @@ function onConnectionChange() {
  */
 var listenToConnectionChange = function () {
     // https://caniuse.com/#feat=netinfo (Chrome only for now)
-    // @ts-ignore: navigator.connection does not exist yet as a type but is valid in the browser
+    // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
     if (navigator.connection) {
-        // @ts-ignore: navigator.connection does not exist yet as a type but is valid in the browser
+        // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
         navigator.connection.addEventListener('change', onConnectionChange, false);
     }
     window.addEventListener('offline', onConnectionChange);
@@ -741,25 +741,25 @@ var prefix = ('hidden' in document && Object.keys(key)) ||
 var visibility = {
     // True is page is not visible, false if page is visible
     get hidden() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return Boolean(document[prefix[key.hidden]]);
     },
     // Vendor prefixed listeners
     addEventListener: function (type, handler, options) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document.addEventListener(prefix[key[type]], handler, options);
     },
     removeEventListener: function (type, handler, options) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document.removeEventListener(prefix[key[type]], handler, options);
     },
     // Visibility change listener
     get onvisibilitychange() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document[("on" + prefix[key.visibilitychange]).toLowerCase()];
     },
     set onvisibilitychange(handler) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         document[("on" + prefix[key.visibilitychange]).toLowerCase()] = handler;
     },
 };
@@ -1757,19 +1757,19 @@ var getWebGLFeatures = (function () {
 /**
  * Tests for Animation Worklet support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isAnimationWorkletSupported = (function () { return (!!window.CSS && !!window.CSS.animationWorklet) || false; })();
 
 /**
  * Tests for Audio Worklet support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isAudioWorkletSupported = (function () { return !!window.AudioWorklet || false; })();
 
 /**
  * Tests for BroadcastChannel support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isBroadcastChannelSupported = (function () { return !!window.BroadcastChannel || false; })();
 
 /**
@@ -1780,13 +1780,13 @@ var isFetchSupported = (function () { return !!window.fetch || false; })();
 /**
  * Tests for gamepad support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isGamepadSupported = (function () { return !!window.Gamepad || false; })();
 
 /**
  * Tests for ImageBitmap support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isImageBitmapSupported = (function () { return (!!window.ImageBitmap && !!window.createImageBitmap) || false; })();
 
 /**
@@ -1817,13 +1817,13 @@ var isIndexedDBSupported = (function () {
 /**
  * Tests for IntersectionObserver support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isIntersectionObserverSupported = (function () { return !!window.IntersectionObserver || false; })();
 
 /**
  * Tests for Layout Worklet support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isLayoutWorkletSupported = (function () { return (!!window.CSS && !!window.CSS.layoutWorklet) || false; })();
 
 /**
@@ -1841,19 +1841,19 @@ var isLocalStorageSupported = (function () {
 /**
  * Tests for MutationObserver support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isMutationObserverSupported = (function () { return !!window.MutationObserver || false; })();
 
 /**
  * Tests for OffscreenCanvas support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isOffscreenCanvasSupported = (function () { return !!window.OffscreenCanvas || false; })();
 
 /**
  * Tests for Paint Worklet support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isPaintWorkletSupported = (function () { return (!!window.CSS && !!window.CSS.paintWorklet) || false; })();
 
 /**
@@ -1864,7 +1864,7 @@ var isPerformanceNowSupported = (function () { return !!(window.performance && w
 /**
  * Tests for PerformanceObserver support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isPerformanceObserverSupported = (function () { return !!window.PerformanceObserver || false; })();
 
 /**
@@ -1887,13 +1887,13 @@ var isSessionStorageSupported = (function () {
 /**
  * Tests for WebAssembly support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isWebAssemblySupported = (function () { return !!window.WebAssembly || false; })();
 
 /**
  * Tests for WebAudio support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isWebAudioSupported = (function () { return !!window.AudioContext || !!window.webkitAudioContext || false; })();
 
 /**
@@ -1903,7 +1903,7 @@ var isWebGL2Supported = (function () {
     var canvas = document.createElement('canvas');
     // NOTE: there is no 'experimental-webgl2' as mentioned in https://webgl2fundamentals.org/webgl/lessons/webgl1-to-webgl2.html
     var gl = canvas.getContext('webgl2');
-    // @ts-ignore: missing type definition
+    // @ts-ignore missing type definition
     return (gl && gl instanceof WebGL2RenderingContext) || false;
 });
 
@@ -1930,15 +1930,15 @@ var isWebPSupported = (function () {
  * Tests for WebRTC support
  */
 var isWebRTCSupported = (function () {
-    // @ts-ignore: missing type definition
+    // @ts-ignore missing type definition
     return (!!window.RTCPeerConnection && !!window.RTCDataChannelEvent) ||
-        // @ts-ignore: missing type definition
+        // @ts-ignore missing type definition
         !!window.webkitRTCPeerConnection ||
-        // @ts-ignore: missing type definition
+        // @ts-ignore missing type definition
         !!window.mozRTCPeerConnection ||
-        // @ts-ignore: missing type definition
+        // @ts-ignore missing type definition
         !!window.msRTCPeerConnection ||
-        // @ts-ignore: missing type definition
+        // @ts-ignore missing type definition
         !!window.oRTCPeerConnection ||
         false;
 })();
@@ -1946,7 +1946,7 @@ var isWebRTCSupported = (function () {
 /**
  * Tests for WebSocket support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isWebSocketSupported = (function () { return !!window.WebSocket || false; })();
 
 /**
@@ -1959,9 +1959,9 @@ var isWebVRSupported = (function () { return !!navigator.getVRDisplays || false;
  */
 var isWebWorkerInlineSupported = (function () {
     try {
-        // @ts-ignore: missing type definition
+        // @ts-ignore missing type definition
         var URL_1 = window.URL || window.webkitURL;
-        // @ts-ignore: missing type definition
+        // @ts-ignore missing type definition
         if (URL_1 === undefined || window.Blob === undefined || window.Worker === undefined) {
             return false;
         }
@@ -1983,13 +1983,13 @@ var isWebWorkerInlineSupported = (function () {
 /**
  * Tests for inline web worker support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isWebWorkerSupported = (function () { return !!window.Worker || false; })();
 
 /**
  * Tests for WebXR support
  */
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 var isWebXRSupported = (function () { return !!navigator.xr || false; })();
 
 /**
@@ -2002,7 +2002,7 @@ var getDevicePixelRatio = (function () { return window.devicePixelRatio || 1; })
  * Gets the device byte endianness
  */
 var getEndianness = (function () {
-    // @ts-ignore: missing type definition
+    // @ts-ignore missing type definition
     if (window.ArrayBuffer !== null) {
         var buffer = new ArrayBuffer(4);
         var intView = new Uint32Array(buffer);
@@ -3410,7 +3410,7 @@ var getQueryParameters = function (url) {
         // Construct { key: value } pairs
         .reduce(function (values, _a) {
         var key = _a[0], value = _a[1];
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         values[key] = value;
         return values;
     }, {});
@@ -3958,7 +3958,7 @@ var AssetLoader = /** @class */ (function () {
                 var video = document.createElement('video');
                 video.preload = 'auto';
                 video.autoplay = false;
-                // @ts-ignore: playsinline is not recognized as a valid type but it is valid syntax
+                // @ts-ignore playsinline is not recognized as a valid type but it is valid syntax
                 video.playsinline = true;
                 if (IS_MEDIA_PRELOAD_SUPPORTED) {
                     video.addEventListener('canplaythrough', function handler() {
@@ -4076,46 +4076,46 @@ var prefix$1 = ('fullscreenEnabled' in document && Object.keys(key$1)) ||
     (ms$1[0] in document && ms$1) ||
     [];
 var fullScreen = {
-    // @ts-ignore: implicit any, has no index structure
+    // @ts-ignore implicit any, has no index structure
     requestFullscreen: function (element) { return element[prefix$1[key$1.requestFullscreen]](); },
     get exitFullscreen() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document[prefix$1[key$1.exitFullscreen]].bind(document);
     },
     addEventListener: function (type, handler, options) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document.addEventListener(prefix$1[key$1[type]], handler, options);
     },
     removeEventListener: function (type, handler, options) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document.removeEventListener(prefix$1[key$1[type]], handler, options);
     },
     get fullscreenSupported() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return Boolean(document[prefix$1[key$1.fullscreenEnabled]]);
     },
     // tslint:disable-next-line:no-empty
     set fullscreenSupported(val) { },
     get fullscreenElement() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document[prefix$1[key$1.fullscreenElement]];
     },
     // tslint:disable-next-line:no-empty
     set fullscreenElement(val) { },
     get onfullscreenchange() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document[("on" + prefix$1[key$1.fullscreenchange]).toLowerCase()];
     },
     set onfullscreenchange(handler) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return (document[("on" + prefix$1[key$1.fullscreenchange]).toLowerCase()] = handler);
     },
     get onfullscreenerror() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document[("on" + prefix$1[key$1.fullscreenerror]).toLowerCase()];
     },
     set onfullscreenerror(handler) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         document[("on" + prefix$1[key$1.fullscreenerror]).toLowerCase()] = handler;
     },
 };
@@ -4156,22 +4156,22 @@ var prefix$2 = ('pointerLockElement' in document && Object.keys(key$2)) ||
     (ms$2[0] in document && ms$2) ||
     [];
 var pointerLock = {
-    // @ts-ignore: implicit any, has no index structure
+    // @ts-ignore implicit any, has no index structure
     requestPointerLock: function (element) { return element[prefix$2[key$2.requestPointerLock]](); },
     get exitPointerLock() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document[prefix$2[key$2.exitPointerLock]].bind(document);
     },
     addEventListener: function (type, handler, options) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document.addEventListener(prefix$2[key$2[type]], handler, options);
     },
     removeEventListener: function (type, handler, options) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document.removeEventListener(prefix$2[key$2[type]], handler, options);
     },
     get pointerlockEnabled() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return Boolean('pointerLockElement' in document ||
             webkit$2[0] in document ||
             moz$1[0] in document ||
@@ -4180,25 +4180,25 @@ var pointerLock = {
     // tslint:disable-next-line:no-empty
     set pointerlockEnabled(val) { },
     get pointerLockElement() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document[prefix$2[key$2.pointerLockElement]];
     },
     // tslint:disable-next-line:no-empty
     set pointerLockElement(val) { },
     get onpointerlockchange() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document[("on" + prefix$2[key$2.pointerlockchange]).toLowerCase()];
     },
     set onpointerlockchange(handler) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return (document[("on" + prefix$2[key$2.pointerlockchange]).toLowerCase()] = handler);
     },
     get onpointerlockerror() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document[("on" + prefix$2[key$2.pointerlockerror]).toLowerCase()];
     },
     set onpointerlockerror(handler) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         document[("on" + prefix$2[key$2.pointerlockerror]).toLowerCase()] = handler;
     },
 };
@@ -4229,7 +4229,7 @@ var Thread = /** @class */ (function () {
         var WORKER_ID = 0;
         // Outward-facing promises store their `controllers` (`[request, reject]`) here
         var promises = {};
-        // @ts-ignore: fallback to webkitURL if necessary (https://caniuse.com/#search=createObjectURL)
+        // @ts-ignore fallback to webkitURL if necessary (https://caniuse.com/#search=createObjectURL)
         var URL = window.URL || window.webkitURL;
         // Use a data URI for the worker's src. It inlines the target function and an RPC handler
         var workerURL = URL.createObjectURL(new Blob([
@@ -4237,7 +4237,7 @@ var Thread = /** @class */ (function () {
                 if (event) {
                     // Invoking within then() captures exceptions in the supplied async function as rejections
                     Promise.resolve(event.data[1])
-                        // @ts-ignore: $$ is internally globally available
+                        // @ts-ignore $$ is internally globally available
                         .then(function (args) { return $$.apply($$, args); })
                         .then(
                     // success handler - callback(id, SUCCESS(0), result)

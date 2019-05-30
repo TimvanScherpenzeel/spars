@@ -19,7 +19,7 @@ exports.getQueryParameters = function (url) {
         // Construct { key: value } pairs
         .reduce(function (values, _a) {
         var key = _a[0], value = _a[1];
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         values[key] = value;
         return values;
     }, {});

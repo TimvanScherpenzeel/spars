@@ -1,14 +1,14 @@
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 import commonjsPlugin from 'rollup-plugin-commonjs';
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 import filesizePlugin from 'rollup-plugin-filesize';
-// @ts-ignore: missing type definition
+// @ts-ignore missing type definition
 import resolvePlugin from 'rollup-plugin-node-resolve';
 import { terser as terserPlugin } from 'rollup-plugin-terser';
 import typescriptPlugin from 'rollup-plugin-typescript2';
 
 // Package
-// @ts-ignore: JSON is imported without any issue, TSLint still raises issues
+// @ts-ignore JSON is imported without any issue, TSLint still raises issues
 import pkg from './package.json';
 
 const input = './src/index.ts';

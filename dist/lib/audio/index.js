@@ -22,7 +22,7 @@ exports.isAutoplayAllowed = function () { return autoplayAllowed; };
  */
 exports.createAudioContext = function (desiredSampleRate) {
     if (desiredSampleRate === void 0) { desiredSampleRate = 44100; }
-    // @ts-ignore: window.AudioContext and window.webkitAudioContext are not available as types
+    // @ts-ignore window.AudioContext and window.webkitAudioContext are not available as types
     var context = new (window.AudioContext || window.webkitAudioContext)();
     // https://stackoverflow.com/questions/17892345/webkit-audio-distorts-on-ios-6-iphone-5-first-time-after-power-cycling
     // Only occurs in iOS6+ devices and only when you first boot the iPhone, or play a audio/video with a different sample rate
@@ -35,7 +35,7 @@ exports.createAudioContext = function (desiredSampleRate) {
         dummy.disconnect();
         // Dispose old context
         context.close();
-        // @ts-ignore: window.AudioContext and window.webkitAudioContext are not available as types
+        // @ts-ignore window.AudioContext and window.webkitAudioContext are not available as types
         context = new (window.AudioContext || window.webkitAudioContext)();
     }
     return context;
@@ -48,7 +48,7 @@ exports.createAudioContext = function (desiredSampleRate) {
 exports.unlockAutoplay = function (element) {
     return new Promise(function (resolve, reject) {
         // https://developers.google.com/web/updates/2019/01/nic72#user-activation
-        // @ts-ignore: navigator.userActivation does not yet exist as type
+        // @ts-ignore navigator.userActivation does not yet exist as type
         if (isUserActivationSupported_1.default && navigator.userActivation.hasBeenActive === true) {
             autoplayAllowed = true;
             resolve(true);

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 exports.default = (function () {
     try {
-        // @ts-ignore: missing type definition
+        // @ts-ignore missing type definition
         return !!navigator.userActivation;
     }
     catch (err) {

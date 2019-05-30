@@ -34,7 +34,7 @@ export class Thread {
     // Outward-facing promises store their `controllers` (`[request, reject]`) here
     const promises: any = {};
 
-    // @ts-ignore: fallback to webkitURL if necessary (https://caniuse.com/#search=createObjectURL)
+    // @ts-ignore fallback to webkitURL if necessary (https://caniuse.com/#search=createObjectURL)
     const URL = window.URL || window.webkitURL;
 
     // Use a data URI for the worker's src. It inlines the target function and an RPC handler
@@ -44,7 +44,7 @@ export class Thread {
           if (event) {
             // Invoking within then() captures exceptions in the supplied async function as rejections
             Promise.resolve(event.data[1])
-              // @ts-ignore: $$ is internally globally available
+              // @ts-ignore $$ is internally globally available
               .then((args: any[]) => $$.apply($$, args))
               .then(
                 // success handler - callback(id, SUCCESS(0), result)

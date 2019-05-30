@@ -23,31 +23,31 @@ exports.registerAnalytics = function (trackingIdentifier) {
         // Default async GA snippet as provided by Google
         // tslint:disable-next-line:only-arrow-functions
         (function (i, s, o, g, r, a, m) {
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             i.GoogleAnalyticsObject = r;
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             (i[r] =
-                // @ts-ignore: Google Analytics snippet
+                // @ts-ignore Google Analytics snippet
                 i[r] ||
                     // tslint:disable-next-line:only-arrow-functions
                     function () {
-                        // @ts-ignore: Google Analytics snippet
+                        // @ts-ignore Google Analytics snippet
                         (i[r].q = i[r].q || []).push(arguments);
                     }),
-                // @ts-ignore: Google Analytics snippet
+                // @ts-ignore Google Analytics snippet
                 (i[r].l = 1 * new Date());
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             a.async = 1;
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             a.src = g;
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             m.parentNode.insertBefore(a, m);
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-        // @ts-ignore: Google Analytics snippet
+        // @ts-ignore Google Analytics snippet
         ga('create', "" + trackingIdentifier, 'auto');
-        // @ts-ignore: Google Analytics snippet
+        // @ts-ignore Google Analytics snippet
         ga('send', 'pageview');
     }
     else {
@@ -98,18 +98,18 @@ exports.registerAnalytics = function (trackingIdentifier) {
  */
 exports.recordAnalyticsEvent = function (record) {
     if (record === void 0) { record = {}; }
-    // @ts-ignore: Google Analytics snippet
+    // @ts-ignore Google Analytics snippet
     if (window.ga !== undefined && typeof window.ga === 'function') {
         if (Object.keys(record).length <= 0) {
             logger_1.warn('Analytics -> Record cannot be empty');
             return;
         }
         var callback = function () {
-            // @ts-ignore: Google Analytics snippet
+            // @ts-ignore Google Analytics snippet
             window.ga('send', record);
         };
         if (isRequestIdleCallbackSupported_1.default) {
-            // @ts-ignore: missing type definition
+            // @ts-ignore missing type definition
             window.requestIdleCallback(callback);
         }
         else {

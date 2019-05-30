@@ -19,25 +19,25 @@ var prefix = ('hidden' in document && Object.keys(key)) ||
 var visibility = {
     // True is page is not visible, false if page is visible
     get hidden() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return Boolean(document[prefix[key.hidden]]);
     },
     // Vendor prefixed listeners
     addEventListener: function (type, handler, options) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document.addEventListener(prefix[key[type]], handler, options);
     },
     removeEventListener: function (type, handler, options) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document.removeEventListener(prefix[key[type]], handler, options);
     },
     // Visibility change listener
     get onvisibilitychange() {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         return document[("on" + prefix[key.visibilitychange]).toLowerCase()];
     },
     set onvisibilitychange(handler) {
-        // @ts-ignore: implicit any, has no index structure
+        // @ts-ignore implicit any, has no index structure
         document[("on" + prefix[key.visibilitychange]).toLowerCase()] = handler;
     },
 };

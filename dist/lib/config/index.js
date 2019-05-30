@@ -11,7 +11,7 @@ exports.config = {
  *
  * @param key Key of config entry to get
  */
-// @ts-ignore: implicit any, has no index structure
+// @ts-ignore implicit any, has no index structure
 exports.getConfigEntry = function (key) { return exports.config[key]; };
 /**
  * Sets a config entry
@@ -20,7 +20,7 @@ exports.getConfigEntry = function (key) { return exports.config[key]; };
  * @param value Value of config entry to set
  */
 exports.setConfigEntry = function (key, value) {
-    // @ts-ignore: implicit any, has no index structure
+    // @ts-ignore implicit any, has no index structure
     return (exports.config[key] = value);
 };
 //# sourceMappingURL=index.js.map

@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Gets the device byte endianness
  */
 exports.default = (function () {
-    // @ts-ignore: missing type definition
+    // @ts-ignore missing type definition
     if (window.ArrayBuffer !== null) {
         var buffer = new ArrayBuffer(4);
         var intView = new Uint32Array(buffer);

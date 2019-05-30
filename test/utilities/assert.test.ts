@@ -17,7 +17,7 @@ describe('assert', () => {
     expect.assertions(1);
 
     try {
-      // @ts-ignore: condition overlap
+      // @ts-ignore condition overlap
       assert(foo === false, `${assertionErrorMessage}`);
       expect(true).toBe(false);
     } catch (err) {

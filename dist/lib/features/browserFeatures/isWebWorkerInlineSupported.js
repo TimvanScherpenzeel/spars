@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 exports.default = (function () {
     try {
-        // @ts-ignore: missing type definition
+        // @ts-ignore missing type definition
         var URL_1 = window.URL || window.webkitURL;
-        // @ts-ignore: missing type definition
+        // @ts-ignore missing type definition
         if (URL_1 === undefined || window.Blob === undefined || window.Worker === undefined) {
             return false;
         }

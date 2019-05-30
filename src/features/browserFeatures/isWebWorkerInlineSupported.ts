@@ -3,10 +3,10 @@
  */
 export default (() => {
   try {
-    // @ts-ignore: missing type definition
+    // @ts-ignore missing type definition
     const URL = window.URL || window.webkitURL;
 
-    // @ts-ignore: missing type definition
+    // @ts-ignore missing type definition
     if (URL === undefined || window.Blob === undefined || window.Worker === undefined) {
       return false;
     }

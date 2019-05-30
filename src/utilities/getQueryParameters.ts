@@ -15,7 +15,7 @@ export const getQueryParameters = (url = window.location.search) =>
     .map(param => param.split('='))
     // Construct { key: value } pairs
     .reduce((values, [key, value]) => {
-      // @ts-ignore: implicit any, has no index structure
+      // @ts-ignore implicit any, has no index structure
       values[key] = value;
       return values;
     }, {});

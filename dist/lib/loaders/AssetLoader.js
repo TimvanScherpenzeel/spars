@@ -551,7 +551,7 @@ var AssetLoader = /** @class */ (function () {
                 var video = document.createElement('video');
                 video.preload = 'auto';
                 video.autoplay = false;
-                // @ts-ignore: playsinline is not recognized as a valid type but it is valid syntax
+                // @ts-ignore playsinline is not recognized as a valid type but it is valid syntax
                 video.playsinline = true;
                 if (IS_MEDIA_PRELOAD_SUPPORTED) {
                     video.addEventListener('canplaythrough', function handler() {
