@@ -12,12 +12,13 @@ const cache = {
   y: -Infinity,
 };
 
+const isTouchEvent = (event: any): boolean => 'TouchEvent' in window && event instanceof TouchEvent;
+
 function onPointerDown(event: any): void {
-  if (event.clientX !== undefined) {
-    isTouch = false;
-  } else {
-    // event.preventDefault();
+  if (isTouchEvent(event)) {
     isTouch = true;
+  } else {
+    isTouch = false;
   }
 
   isPointerDown = true;
@@ -48,10 +49,16 @@ function onPointerMove(event: any): void {
   }
 }
 
+// Ignore context menu events
+function onContextMenu(event: any): void {
+  event.preventDefault();
+}
+
 /**
  * Start listening to pointer change events
  */
 export const listenToPointerChange = (element = window): void => {
+  element.addEventListener('contextmenu', onContextMenu, false);
   element.addEventListener('touchstart', onPointerDown, false);
   element.addEventListener('touchend', onPointerUp, false);
   element.addEventListener('touchmove', onPointerMove, false);
@@ -64,6 +71,7 @@ export const listenToPointerChange = (element = window): void => {
  * Stop listening to pointer change events
  */
 export const stopListeningToPointerChange = (element = window): void => {
+  element.removeEventListener('contextmenu', onContextMenu, false);
   element.removeEventListener('touchstart', onPointerDown, false);
   element.removeEventListener('touchend', onPointerUp, false);
   element.removeEventListener('touchmove', onPointerMove, false);
