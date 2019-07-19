@@ -105,10 +105,7 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 AlpineToolkit.listenToKeyCodeChange();
 
 const keyCodeChangeHandler = event => {
-  console.log(event);
-
   document.getElementById('root').appendChild(document.createTextNode(event.key));
-  document.getElementById('root').appendChild(document.createTextNode(event.keyCode));
 };
 
 AlpineToolkit.eventEmitter.on('ALPINE::KEYCODE_CHANGE', keyCodeChangeHandler);
