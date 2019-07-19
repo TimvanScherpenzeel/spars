@@ -142,6 +142,11 @@ AlpineToolkit.listenToPointerChange();
 
 const pointerChangeHandler = event => {
   console.log(event);
+
+  document.getElementById('root').innerHTML = [
+    Number(event.positionX).toFixed(2),
+    Number(event.positionY).toFixed(2),
+  ];
 };
 
 AlpineToolkit.eventEmitter.on('ALPINE::POINTER_CHANGE', pointerChangeHandler);

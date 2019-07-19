@@ -8,6 +8,7 @@ function onPointerDown(event: any): void {
   if (event.clientX !== undefined) {
     isTouch = false;
   } else {
+    // event.preventDefault();
     isTouch = true;
   }
 
@@ -15,11 +16,17 @@ function onPointerDown(event: any): void {
 }
 
 function onPointerUp(event: any): void {
+  // if (isTouch) {
+    // event.preventDefault();
+  // }
+
   isPointerDown = false;
 }
 
 function onPointerMove(event: any): void {
   if (isPointerDown) {
+    // event.preventDefault();
+
     eventEmitter.emit('ALPINE::POINTER_CHANGE', {
       isTouch,
       positionX: isTouch ? event.touches[0].clientX : event.clientX,
