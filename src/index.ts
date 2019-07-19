@@ -17,11 +17,13 @@ export {
   listenToConnectionChange,
   listenToKeyChange,
   listenToOrientationChange,
+  listenToPointerChange,
   listenToVisibilityChange,
   listenToWindowSizeChange,
   stopListeningToConnectionChange,
   stopListeningToKeyChange,
   stopListeningToOrientationChange,
+  stopListeningToPointerChange,
   stopListeningToVisibilityChange,
   stopListeningToWindowSizeChange,
 } from './events';

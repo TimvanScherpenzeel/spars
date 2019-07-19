@@ -138,6 +138,14 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 
 // AlpineToolkit.eventEmitter.on('ALPINE::ORIENTATION_CHANGE', orientationChangeHandler);
 
+AlpineToolkit.listenToPointerChange();
+
+const pointerChangeMoveHandler = event => {
+  console.log(event);
+};
+
+AlpineToolkit.eventEmitter.on('ALPINE::POINTER_MOVE_CHANGE', pointerChangeMoveHandler);
+
 // AlpineToolkit.listenToVisibilityChange();
 
 // const visibilityChangeHandler = event => {
