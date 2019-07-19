@@ -7,6 +7,12 @@ let isTouch = false;
 let positionX = 0;
 let positionY = 0;
 
+let mode;
+
+const MODE_DRAG = 'MODE_DRAG';
+const MODE_ZOOM = 'MODE_ZOOM';
+const MODE_PAN = 'MODE_PAN';
+
 const cache = {
   x: -Infinity,
   y: -Infinity,
@@ -33,6 +39,33 @@ function onPointerUp(event: any): void {
 }
 
 function onPointerMove(event: any): void {
+  console.log(event.which);
+
+  // https://github.com/amelierosser/medium/blob/develop/src/controls/OrbitControls.ts
+
+  // Touch device
+  if (event.touches) {
+    switch (event.touches.length) {
+      case 1:
+        mode = MODE_DRAG;
+        break;
+      case 2:
+        mode = MODE_ZOOM;
+        break;
+      default:
+        mode = MODE_PAN;
+        break;
+    }
+  } else {
+    // Non-touch device
+    switch (event.which) {
+      case 3:
+        mode = MODE_PAN;
+      default:
+        mode = MODE_DRAG;
+    }
+  }
+
   if (isPointerDown) {
     // event.preventDefault();
 
@@ -58,7 +91,7 @@ function onContextMenu(event: any): void {
  * Start listening to pointer change events
  */
 export const listenToPointerChange = (element = window): void => {
-  element.addEventListener('contextmenu', onContextMenu, false);
+  // element.addEventListener('contextmenu', onContextMenu, false);
   element.addEventListener('touchstart', onPointerDown, false);
   element.addEventListener('touchend', onPointerUp, false);
   element.addEventListener('touchmove', onPointerMove, false);
@@ -71,7 +104,7 @@ export const listenToPointerChange = (element = window): void => {
  * Stop listening to pointer change events
  */
 export const stopListeningToPointerChange = (element = window): void => {
-  element.removeEventListener('contextmenu', onContextMenu, false);
+  // element.removeEventListener('contextmenu', onContextMenu, false);
   element.removeEventListener('touchstart', onPointerDown, false);
   element.removeEventListener('touchend', onPointerUp, false);
   element.removeEventListener('touchmove', onPointerMove, false);
