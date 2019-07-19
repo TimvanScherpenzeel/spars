@@ -11,6 +11,7 @@ import isGamepadSupported from './browserFeatures/isGamepadSupported';
 import isImageBitmapSupported from './browserFeatures/isImageBitmapSupported';
 import isImageDecodeSupported from './browserFeatures/isImageDecodeSupported';
 import isIndexedDBSupported from './browserFeatures/isIndexedDBSupported';
+import isInputEventSupported from './browserFeatures/isInputEventSupported';
 import isIntersectionObserverSupported from './browserFeatures/isIntersectionObserverSupported';
 import isLayoutWorkletSupported from './browserFeatures/isLayoutWorkletSupported';
 import isLocalStorageSupported from './browserFeatures/isLocalStorageSupported';
@@ -56,6 +57,7 @@ export const features = {
     isImageBitmapSupported,
     isImageDecodeSupported,
     isIndexedDBSupported,
+    isInputEventSupported,
     isIntersectionObserverSupported,
     isLayoutWorkletSupported,
     isLocalStorageSupported,

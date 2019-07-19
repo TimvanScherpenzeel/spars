@@ -1,3 +1,6 @@
+// Features
+import getBrowserType from '../features/browserFeatures/getBrowserType';
+
 // Events
 import { eventEmitter } from './EventEmitter';
 
@@ -13,10 +16,14 @@ import { eventEmitter } from './EventEmitter';
  * Monitor keycode changes
  */
 function onKeyCodeChange(event: KeyboardEvent): void {
-  eventEmitter.emit('ALPINE::KEYCODE_CHANGE', {
-    key: event.key,
-    keyCode: event.keyCode,
-  });
+  if (getBrowserType.isAndroid) {
+    console.log(event);
+  } else {
+    eventEmitter.emit('ALPINE::KEYCODE_CHANGE', {
+      key: event.key,
+      keyCode: event.keyCode,
+    });
+  }
 }
 
 /**
