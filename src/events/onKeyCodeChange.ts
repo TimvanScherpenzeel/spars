@@ -12,8 +12,6 @@ import { eventEmitter } from './EventEmitter';
  * Monitor keycode changes
  */
 function onKeyCodeChange(event: KeyboardEvent): void {
-  event.preventDefault();
-
   let { key } = event;
 
   // Normalize key event names for Internet Explorer 11
