@@ -7,9 +7,6 @@ export { createAudioContext, isAutoplayAllowed, unlockAutoplay } from './audio';
 // Cache
 export { PersistentCache } from './cache';
 
-// Config
-export { config, getConfigEntry, setConfigEntry } from './config';
-
 // Cookie
 export { deleteCookie, getCookie, setCookie } from './cookie';
 
@@ -32,9 +29,6 @@ export { features } from './features';
 
 // Loaders
 export { AssetLoader } from './loaders';
-
-// Logger
-export { error, log, warn } from './logger';
 
 // Polyfill
 export { fullScreen, pointerLock } from './polyfills';

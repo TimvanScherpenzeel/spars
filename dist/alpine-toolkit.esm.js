@@ -16,66 +16,6 @@ var isDoNotTrackEnabled = (function () {
     return false;
 })();
 
-/**
- * Acts like a global configuration object but avoids attaching itself to the window object
- */
-var config = {
-    LOG_VERBOSITY: 0,
-};
-/**
- * Gets a config entry
- *
- * @param key Key of config entry to get
- */
-// @ts-ignore implicit any, has no index structure
-var getConfigEntry = function (key) { return config[key]; };
-/**
- * Sets a config entry
- *
- * @param key Key of config entry to set
- * @param value Value of config entry to set
- */
-var setConfigEntry = function (key, value) {
-    // @ts-ignore implicit any, has no index structure
-    return (config[key] = value);
-};
-
-// Config
-/**
- * console.error() a message to the console in a prefixed format
- * Only logs when the low, medium or highest verbosity level is set
- * Gets disabled if verbosity is set to 0 (usually the case in production)
- *
- * @param message Message to error in the console
- */
-var error = function (message) {
-    return getConfigEntry('LOG_VERBOSITY') >= 1 && console.error("Alpine :: [ERROR] -> " + message);
-};
-
-// Config
-/**
- * console.log() a message to the console in a prefixed format
- * Only logs when the highest verbosity level is set
- *
- * @param message Message to log in the console
- */
-var log = function (message) {
-    return getConfigEntry('LOG_VERBOSITY') >= 3 && console.log("Alpine :: [LOG] -> " + message);
-};
-
-// Config
-/**
- * console.warn() a message to the console in a prefixed format
- * Only logs when the medium or highest verbosity level is set
- *
- * @param message Message to warn in the console
- */
-var warn = function (message) {
-    return getConfigEntry('LOG_VERBOSITY') >= 2 && console.warn("Alpine :: [WARN] -> " + message);
-};
-
-// Logger
-
 // Features
 /**
  * Registers Google Analytics tracking snippet
@@ -86,7 +26,7 @@ var registerAnalytics = function (trackingIdentifier) {
     if (trackingIdentifier === undefined ||
         !/^ua-\d{4,9}-\d{1,4}$/i.test(trackingIdentifier.toString())) {
         // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#trackingId
-        warn('Analytics -> TrackingIdentifier expected to be of format "UA-XXXX-YY"');
+        console.warn('Analytics -> TrackingIdentifier expected to be of format "UA-XXXX-YY"');
     }
     if (!isDoNotTrackEnabled) {
         // Default async GA snippet as provided by Google
@@ -120,7 +60,7 @@ var registerAnalytics = function (trackingIdentifier) {
         ga('send', 'pageview');
     }
     else {
-        warn('Analytics -> "DoNotTrack" setting is enabled, avoided installing the analytics snippet');
+        console.warn('Analytics -> "DoNotTrack" setting is enabled, avoided installing the analytics snippet');
     }
 };
 /**
@@ -170,7 +110,7 @@ var recordAnalyticsEvent = function (record) {
     // @ts-ignore Google Analytics snippet
     if (window.ga !== undefined && typeof window.ga === 'function') {
         if (Object.keys(record).length <= 0) {
-            warn('Analytics -> Record cannot be empty');
+            console.warn('Analytics -> Record cannot be empty');
             return;
         }
         var callback = function () {
@@ -477,7 +417,7 @@ var PersistentCache = /** @class */ (function () {
         var _this = this;
         assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
         set(key, value, this.store).catch(function (err) {
-            warn("PersistentCache -> Set: { key: " + key + ", value: " + value + " } has failed with error: " + err);
+            console.warn("PersistentCache -> Set: { key: " + key + ", value: " + value + " } has failed with error: " + err);
             _this.memoryCache.set(key, value);
         });
     };
@@ -495,7 +435,7 @@ var PersistentCache = /** @class */ (function () {
                 resolve(value);
             })
                 .catch(function (err) {
-                warn("PersistentCache -> Get: { key: " + key + " } has failed with error: " + err);
+                console.warn("PersistentCache -> Get: { key: " + key + " } has failed with error: " + err);
                 _this.memoryCache.get(key);
             });
         });
@@ -511,7 +451,7 @@ var PersistentCache = /** @class */ (function () {
                 resolve(storeKeys);
             })
                 .catch(function (err) {
-                warn("PersistentCache -> Keys: { key: " + keys + " } has failed with error: " + err);
+                console.warn("PersistentCache -> Keys: { key: " + keys + " } has failed with error: " + err);
                 _this.memoryCache.keys();
             });
         });
@@ -525,7 +465,7 @@ var PersistentCache = /** @class */ (function () {
         var _this = this;
         assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
         del(key, this.store).catch(function (err) {
-            warn("PersistentCache -> Delete: { key: " + key + " } has failed with error: " + err);
+            console.warn("PersistentCache -> Delete: { key: " + key + " } has failed with error: " + err);
             _this.memoryCache.delete(key);
         });
     };
@@ -535,7 +475,7 @@ var PersistentCache = /** @class */ (function () {
     PersistentCache.prototype.clear = function () {
         var _this = this;
         clear(this.store).catch(function (err) {
-            warn("PersistentCache -> Clear: Store clearing has failed with error: " + err);
+            console.warn("PersistentCache -> Clear: Store clearing has failed with error: " + err);
             _this.memoryCache.clear();
         });
     };
@@ -573,7 +513,7 @@ var setCookie = function (key, value, expiryDays) {
         document.cookie = key + "=" + value + "; " + expires + "; path=/; domain=" + window.location.hostname.replace('www.', '') + ";";
     }
     else {
-        warn('Cookie -> Cookies are disabled, no cookie was set');
+        console.warn('Cookie -> Cookies are disabled, no cookie was set');
     }
 };
 /**
@@ -586,7 +526,7 @@ var getCookie = function (key) {
         var result = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
         return result ? result.pop() : '';
     }
-    warn('Cookie -> Cookies are disabled, no cookie was retrieved');
+    console.warn('Cookie -> Cookies are disabled, no cookie was retrieved');
     return false;
 };
 /**
@@ -599,7 +539,7 @@ var deleteCookie = function (key) {
         document.cookie = key + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=" + window.location.hostname.replace('www.', '');
     }
     else {
-        warn('Cookie -> Cookies are disabled, no cookie was deleted');
+        console.warn('Cookie -> Cookies are disabled, no cookie was deleted');
     }
 };
 
@@ -1993,6 +1933,11 @@ var isWebWorkerSupported = (function () { return !!window.Worker || false; })();
 var isWebXRSupported = (function () { return !!navigator.xr || false; })();
 
 /**
+ * Gets the CPU cores available for web worker threading
+ */
+var getAvailableCPUCoreCount = (function () { return navigator.hardwareConcurrency || 0; })();
+
+/**
  * Gets the device pixel ratio of the device
  * Note that different zooming levels change the device pixel ratio
  */
@@ -2012,11 +1957,6 @@ var getEndianness = (function () {
     }
     return 'Unknown';
 })();
-
-/**
- * Gets the CPU cores available for web worker threading
- */
-var getWebWorkerPoolSize = (function () { return navigator.hardwareConcurrency || 0; })();
 
 // Browser features
 var features = {
@@ -2069,9 +2009,9 @@ var features = {
     },
     // Hardware features
     hardwareFeatures: {
+        availableCPUCores: getAvailableCPUCoreCount,
         devicePixelRatio: getDevicePixelRatio,
         endianness: getEndianness,
-        workerPoolSize: getWebWorkerPoolSize,
     },
 };
 
@@ -2954,7 +2894,7 @@ var AssetLoader = /** @class */ (function () {
                             loadedItem = AssetLoader.loadXML(item);
                             break;
                         default:
-                            warn('Missing loader, falling back to loading as ArrayBuffer');
+                            console.warn('Missing loader, falling back to loading as ArrayBuffer');
                             loadedItem = AssetLoader.loadArrayBuffer(item);
                             break;
                     }
@@ -2985,7 +2925,7 @@ var AssetLoader = /** @class */ (function () {
                 var assetMap = new Map();
                 assets.forEach(function (asset) {
                     if (assetMap.get(asset.id)) {
-                        warn("Detected duplicate id, please use unique id's");
+                        console.warn("Detected duplicate id, please use unique id's");
                     }
                     assetMap.set(asset.id, asset.item);
                 });
@@ -3079,7 +3019,7 @@ var AssetLoader = /** @class */ (function () {
         return AssetLoader.fetchItem(item)
             .then(function (response) { return response.arrayBuffer(); })
             .catch(function (err) {
-            warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -3116,7 +3056,7 @@ var AssetLoader = /** @class */ (function () {
             });
         })
             .catch(function (err) {
-            warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -3128,7 +3068,7 @@ var AssetLoader = /** @class */ (function () {
         return AssetLoader.fetchItem(item)
             .then(function (response) { return response.blob(); })
             .catch(function (err) {
-            warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -3223,7 +3163,7 @@ var AssetLoader = /** @class */ (function () {
                 else {
                     // In case something went wrong with loading the blob or corrupted data
                     // Fallback to default image loader
-                    warn('Received no or corrupt data, falling back to default image loader');
+                    console.warn('Received no or corrupt data, falling back to default image loader');
                     return AssetLoader.loadImage(item);
                 }
             });
@@ -3349,7 +3289,7 @@ var AssetLoader = /** @class */ (function () {
         return AssetLoader.fetchItem(item)
             .then(function (response) { return response.json(); })
             .catch(function (err) {
-            warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -3361,7 +3301,7 @@ var AssetLoader = /** @class */ (function () {
         return AssetLoader.fetchItem(item)
             .then(function (response) { return response.text(); })
             .catch(function (err) {
-            warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -3400,7 +3340,7 @@ var AssetLoader = /** @class */ (function () {
             });
         })
             .catch(function (err) {
-            warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -3421,12 +3361,12 @@ var AssetLoader = /** @class */ (function () {
                     // @ts-ignore
                     .then(function (data) { return window.WebAssembly.instantiate(data, item.loaderOptions.importObject); })
                     .catch(function (err) {
-                    warn(err);
+                    console.warn(err);
                 }));
             }
         }
         else {
-            warn('WebAssembly is not supported');
+            console.warn('WebAssembly is not supported');
             return Promise.resolve();
         }
     };
@@ -3448,7 +3388,7 @@ var AssetLoader = /** @class */ (function () {
             }
         })
             .catch(function (err) {
-            warn(err);
+            console.warn(err);
         });
     };
     return AssetLoader;
@@ -3626,4 +3566,4 @@ var pointerLock = {
 
 // Analytics
 
-export { AssetLoader, mitt as EventEmitter, PersistentCache, assert, config, convertArrayBufferToBlob, convertBlobToArrayBuffer, createAudioContext, createUUID, debounce, deleteCookie, error, eventEmitter, features, fullScreen, getConfigEntry, getCookie, getQueryParameters, isAutoplayAllowed, listenToConnectionChange, listenToOrientationChange, listenToVisibilityChange, listenToWindowSizeChange, log, pointerLock, recordAnalyticsEvent, registerAnalytics, setConfigEntry, setCookie, stopListeningToConnectionChange, stopListeningToOrientationChange, stopListeningToVisibilityChange, stopListeningToWindowSizeChange, unlockAutoplay, warn };
+export { AssetLoader, mitt as EventEmitter, PersistentCache, assert, convertArrayBufferToBlob, convertBlobToArrayBuffer, createAudioContext, createUUID, debounce, deleteCookie, eventEmitter, features, fullScreen, getCookie, getQueryParameters, isAutoplayAllowed, listenToConnectionChange, listenToOrientationChange, listenToVisibilityChange, listenToWindowSizeChange, pointerLock, recordAnalyticsEvent, registerAnalytics, setCookie, stopListeningToConnectionChange, stopListeningToOrientationChange, stopListeningToVisibilityChange, stopListeningToWindowSizeChange, unlockAutoplay };

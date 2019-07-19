@@ -205,8 +205,8 @@ export declare const features: {
         isDoNotTrackEnabled: boolean;
     };
     hardwareFeatures: {
+        availableCPUCores: number;
         devicePixelRatio: number;
         endianness: string;
-        workerPoolSize: number;
     };
 };

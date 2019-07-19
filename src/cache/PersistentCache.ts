@@ -1,9 +1,6 @@
 // Vendor
 import { clear, del, get, keys, set, Store } from 'idb-keyval';
 
-// Logger
-import { warn } from '../logger';
-
 // Utilities
 import { assert } from '../utilities/assert';
 
@@ -70,7 +67,7 @@ export class PersistentCache {
     assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
 
     set(key, value, this.store).catch(err => {
-      warn(
+      console.warn(
         `PersistentCache -> Set: { key: ${key}, value: ${value} } has failed with error: ${err}`
       );
 
@@ -92,7 +89,7 @@ export class PersistentCache {
           resolve(value);
         })
         .catch(err => {
-          warn(`PersistentCache -> Get: { key: ${key} } has failed with error: ${err}`);
+          console.warn(`PersistentCache -> Get: { key: ${key} } has failed with error: ${err}`);
 
           this.memoryCache.get(key);
         });
@@ -109,7 +106,7 @@ export class PersistentCache {
           resolve(storeKeys);
         })
         .catch(err => {
-          warn(`PersistentCache -> Keys: { key: ${keys} } has failed with error: ${err}`);
+          console.warn(`PersistentCache -> Keys: { key: ${keys} } has failed with error: ${err}`);
 
           this.memoryCache.keys();
         });
@@ -125,7 +122,7 @@ export class PersistentCache {
     assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
 
     del(key, this.store).catch(err => {
-      warn(`PersistentCache -> Delete: { key: ${key} } has failed with error: ${err}`);
+      console.warn(`PersistentCache -> Delete: { key: ${key} } has failed with error: ${err}`);
 
       this.memoryCache.delete(key);
     });
@@ -136,7 +133,7 @@ export class PersistentCache {
    */
   public clear() {
     clear(this.store).catch(err => {
-      warn(`PersistentCache -> Clear: Store clearing has failed with error: ${err}`);
+      console.warn(`PersistentCache -> Clear: Store clearing has failed with error: ${err}`);
 
       this.memoryCache.clear();
     });

@@ -6,8 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Features
 var isRequestIdleCallbackSupported_1 = __importDefault(require("../features/browserFeatures/isRequestIdleCallbackSupported"));
 var isDoNotTrackEnabled_1 = __importDefault(require("../features/browserSettings/isDoNotTrackEnabled"));
-// Logger
-var logger_1 = require("../logger");
 /**
  * Registers Google Analytics tracking snippet
  *
@@ -17,7 +15,7 @@ exports.registerAnalytics = function (trackingIdentifier) {
     if (trackingIdentifier === undefined ||
         !/^ua-\d{4,9}-\d{1,4}$/i.test(trackingIdentifier.toString())) {
         // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#trackingId
-        logger_1.warn('Analytics -> TrackingIdentifier expected to be of format "UA-XXXX-YY"');
+        console.warn('Analytics -> TrackingIdentifier expected to be of format "UA-XXXX-YY"');
     }
     if (!isDoNotTrackEnabled_1.default) {
         // Default async GA snippet as provided by Google
@@ -51,7 +49,7 @@ exports.registerAnalytics = function (trackingIdentifier) {
         ga('send', 'pageview');
     }
     else {
-        logger_1.warn('Analytics -> "DoNotTrack" setting is enabled, avoided installing the analytics snippet');
+        console.warn('Analytics -> "DoNotTrack" setting is enabled, avoided installing the analytics snippet');
     }
 };
 /**
@@ -101,7 +99,7 @@ exports.recordAnalyticsEvent = function (record) {
     // @ts-ignore Google Analytics snippet
     if (window.ga !== undefined && typeof window.ga === 'function') {
         if (Object.keys(record).length <= 0) {
-            logger_1.warn('Analytics -> Record cannot be empty');
+            console.warn('Analytics -> Record cannot be empty');
             return;
         }
         var callback = function () {

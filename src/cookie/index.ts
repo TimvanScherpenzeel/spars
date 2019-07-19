@@ -1,9 +1,6 @@
 // Features
 import isCookieEnabled from '../features/browserSettings/isCookieEnabled';
 
-// Logger
-import { warn } from '../logger';
-
 // NOTE: When blocking cookies Firefox throws a security error for localStorage and indexedDB blocking further execution.
 /**
  * Set a cookie
@@ -23,7 +20,7 @@ export const setCookie = (key: string, value: string, expiryDays = 365) => {
       ''
     )};`;
   } else {
-    warn('Cookie -> Cookies are disabled, no cookie was set');
+    console.warn('Cookie -> Cookies are disabled, no cookie was set');
   }
 };
 
@@ -39,7 +36,7 @@ export const getCookie = (key: string) => {
     return result ? result.pop() : '';
   }
 
-  warn('Cookie -> Cookies are disabled, no cookie was retrieved');
+  console.warn('Cookie -> Cookies are disabled, no cookie was retrieved');
 
   return false;
 };
@@ -56,6 +53,6 @@ export const deleteCookie = (key: string) => {
       ''
     )}`;
   } else {
-    warn('Cookie -> Cookies are disabled, no cookie was deleted');
+    console.warn('Cookie -> Cookies are disabled, no cookie was deleted');
   }
 };

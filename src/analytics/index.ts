@@ -2,9 +2,6 @@
 import isRequestIdleCallbackSupported from '../features/browserFeatures/isRequestIdleCallbackSupported';
 import isDoNotTrackEnabled from '../features/browserSettings/isDoNotTrackEnabled';
 
-// Logger
-import { warn } from '../logger';
-
 /**
  * Registers Google Analytics tracking snippet
  *
@@ -16,7 +13,7 @@ export const registerAnalytics = (trackingIdentifier: string) => {
     !/^ua-\d{4,9}-\d{1,4}$/i.test(trackingIdentifier.toString())
   ) {
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#trackingId
-    warn('Analytics -> TrackingIdentifier expected to be of format "UA-XXXX-YY"');
+    console.warn('Analytics -> TrackingIdentifier expected to be of format "UA-XXXX-YY"');
   }
 
   if (!isDoNotTrackEnabled) {
@@ -51,7 +48,9 @@ export const registerAnalytics = (trackingIdentifier: string) => {
     // @ts-ignore Google Analytics snippet
     ga('send', 'pageview');
   } else {
-    warn('Analytics -> "DoNotTrack" setting is enabled, avoided installing the analytics snippet');
+    console.warn(
+      'Analytics -> "DoNotTrack" setting is enabled, avoided installing the analytics snippet'
+    );
   }
 };
 
@@ -101,7 +100,7 @@ export const recordAnalyticsEvent = (record = {}) => {
   // @ts-ignore Google Analytics snippet
   if (window.ga !== undefined && typeof window.ga === 'function') {
     if (Object.keys(record).length <= 0) {
-      warn('Analytics -> Record cannot be empty');
+      console.warn('Analytics -> Record cannot be empty');
       return;
     }
 

@@ -12,11 +12,6 @@ exports.unlockAutoplay = audio_1.unlockAutoplay;
 // Cache
 var cache_1 = require("./cache");
 exports.PersistentCache = cache_1.PersistentCache;
-// Config
-var config_1 = require("./config");
-exports.config = config_1.config;
-exports.getConfigEntry = config_1.getConfigEntry;
-exports.setConfigEntry = config_1.setConfigEntry;
 // Cookie
 var cookie_1 = require("./cookie");
 exports.deleteCookie = cookie_1.deleteCookie;
@@ -40,11 +35,6 @@ exports.features = features_1.features;
 // Loaders
 var loaders_1 = require("./loaders");
 exports.AssetLoader = loaders_1.AssetLoader;
-// Logger
-var logger_1 = require("./logger");
-exports.error = logger_1.error;
-exports.log = logger_1.log;
-exports.warn = logger_1.warn;
 // Polyfill
 var polyfills_1 = require("./polyfills");
 exports.fullScreen = polyfills_1.fullScreen;

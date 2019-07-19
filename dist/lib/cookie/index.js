@@ -5,8 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // Features
 var isCookieEnabled_1 = __importDefault(require("../features/browserSettings/isCookieEnabled"));
-// Logger
-var logger_1 = require("../logger");
 // NOTE: When blocking cookies Firefox throws a security error for localStorage and indexedDB blocking further execution.
 /**
  * Set a cookie
@@ -24,7 +22,7 @@ exports.setCookie = function (key, value, expiryDays) {
         document.cookie = key + "=" + value + "; " + expires + "; path=/; domain=" + window.location.hostname.replace('www.', '') + ";";
     }
     else {
-        logger_1.warn('Cookie -> Cookies are disabled, no cookie was set');
+        console.warn('Cookie -> Cookies are disabled, no cookie was set');
     }
 };
 /**
@@ -37,7 +35,7 @@ exports.getCookie = function (key) {
         var result = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
         return result ? result.pop() : '';
     }
-    logger_1.warn('Cookie -> Cookies are disabled, no cookie was retrieved');
+    console.warn('Cookie -> Cookies are disabled, no cookie was retrieved');
     return false;
 };
 /**
@@ -50,7 +48,7 @@ exports.deleteCookie = function (key) {
         document.cookie = key + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=" + window.location.hostname.replace('www.', '');
     }
     else {
-        logger_1.warn('Cookie -> Cookies are disabled, no cookie was deleted');
+        console.warn('Cookie -> Cookies are disabled, no cookie was deleted');
     }
 };
 //# sourceMappingURL=index.js.map

@@ -12,9 +12,6 @@ import isImageBitmapSupported from '../features/browserFeatures/isImageBitmapSup
 import isImageDecodeSupported from '../features/browserFeatures/isImageDecodeSupported';
 import isWebAssemblySupported from '../features/browserFeatures/isWebAssemblySupported';
 
-// Logger
-import { warn } from '../logger';
-
 // Utilities
 import { assert } from '../utilities';
 
@@ -158,7 +155,7 @@ export class AssetLoader {
     AssetLoader.fetchItem(item)
       .then(response => response.arrayBuffer())
       .catch(err => {
-        warn(err);
+        console.warn(err);
       });
 
   /**
@@ -200,7 +197,7 @@ export class AssetLoader {
           })
       )
       .catch(err => {
-        warn(err);
+        console.warn(err);
       });
 
   /**
@@ -212,7 +209,7 @@ export class AssetLoader {
     AssetLoader.fetchItem(item)
       .then(response => response.blob())
       .catch(err => {
-        warn(err);
+        console.warn(err);
       });
 
   /**
@@ -305,7 +302,7 @@ export class AssetLoader {
         } else {
           // In case something went wrong with loading the blob or corrupted data
           // Fallback to default image loader
-          warn('Received no or corrupt data, falling back to default image loader');
+          console.warn('Received no or corrupt data, falling back to default image loader');
           return AssetLoader.loadImage(item);
         }
       });
@@ -462,7 +459,7 @@ export class AssetLoader {
     AssetLoader.fetchItem(item)
       .then(response => response.json())
       .catch(err => {
-        warn(err);
+        console.warn(err);
       });
 
   /**
@@ -474,7 +471,7 @@ export class AssetLoader {
     AssetLoader.fetchItem(item)
       .then(response => response.text())
       .catch(err => {
-        warn(err);
+        console.warn(err);
       });
 
   /**
@@ -518,7 +515,7 @@ export class AssetLoader {
           })
       )
       .catch(err => {
-        warn(err);
+        console.warn(err);
       });
 
   /**
@@ -542,12 +539,12 @@ export class AssetLoader {
             // @ts-ignore
             .then(data => window.WebAssembly.instantiate(data, item.loaderOptions.importObject))
             .catch(err => {
-              warn(err);
+              console.warn(err);
             })
         );
       }
     } else {
-      warn('WebAssembly is not supported');
+      console.warn('WebAssembly is not supported');
       return Promise.resolve();
     }
   };
@@ -574,7 +571,7 @@ export class AssetLoader {
         }
       })
       .catch(err => {
-        warn(err);
+        console.warn(err);
       });
   };
 
@@ -645,7 +642,7 @@ export class AssetLoader {
               loadedItem = AssetLoader.loadXML(item);
               break;
             default:
-              warn('Missing loader, falling back to loading as ArrayBuffer');
+              console.warn('Missing loader, falling back to loading as ArrayBuffer');
               loadedItem = AssetLoader.loadArrayBuffer(item);
               break;
           }
@@ -684,7 +681,7 @@ export class AssetLoader {
 
       assets.forEach((asset: any) => {
         if (assetMap.get(asset.id)) {
-          warn("Detected duplicate id, please use unique id's");
+          console.warn("Detected duplicate id, please use unique id's");
         }
 
         assetMap.set(asset.id, asset.item);

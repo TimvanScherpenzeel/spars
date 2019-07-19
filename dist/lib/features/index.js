@@ -43,9 +43,9 @@ var isWebXRSupported_1 = __importDefault(require("./browserFeatures/isWebXRSuppo
 var isCookieEnabled_1 = __importDefault(require("./browserSettings/isCookieEnabled"));
 var isDoNotTrackEnabled_1 = __importDefault(require("./browserSettings/isDoNotTrackEnabled"));
 // Hardware features
+var getAvailableCPUCoreCount_1 = __importDefault(require("./hardwareFeatures/getAvailableCPUCoreCount"));
 var getDevicePixelRatio_1 = __importDefault(require("./hardwareFeatures/getDevicePixelRatio"));
 var getEndianness_1 = __importDefault(require("./hardwareFeatures/getEndianness"));
-var getWebWorkerPoolSize_1 = __importDefault(require("./hardwareFeatures/getWebWorkerPoolSize"));
 exports.features = {
     // Browser features
     browserFeatures: {
@@ -96,9 +96,9 @@ exports.features = {
     },
     // Hardware features
     hardwareFeatures: {
+        availableCPUCores: getAvailableCPUCoreCount_1.default,
         devicePixelRatio: getDevicePixelRatio_1.default,
         endianness: getEndianness_1.default,
-        workerPoolSize: getWebWorkerPoolSize_1.default,
     },
 };
 //# sourceMappingURL=index.js.map

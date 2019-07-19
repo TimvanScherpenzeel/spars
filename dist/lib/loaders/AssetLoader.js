@@ -25,8 +25,6 @@ var getWebGLFeatures_1 = __importDefault(require("../features/browserFeatures/ge
 var isImageBitmapSupported_1 = __importDefault(require("../features/browserFeatures/isImageBitmapSupported"));
 var isImageDecodeSupported_1 = __importDefault(require("../features/browserFeatures/isImageDecodeSupported"));
 var isWebAssemblySupported_1 = __importDefault(require("../features/browserFeatures/isWebAssemblySupported"));
-// Logger
-var logger_1 = require("../logger");
 // Utilities
 var utilities_1 = require("../utilities");
 // Types
@@ -128,7 +126,7 @@ var AssetLoader = /** @class */ (function () {
                             loadedItem = AssetLoader.loadXML(item);
                             break;
                         default:
-                            logger_1.warn('Missing loader, falling back to loading as ArrayBuffer');
+                            console.warn('Missing loader, falling back to loading as ArrayBuffer');
                             loadedItem = AssetLoader.loadArrayBuffer(item);
                             break;
                     }
@@ -159,7 +157,7 @@ var AssetLoader = /** @class */ (function () {
                 var assetMap = new Map();
                 assets.forEach(function (asset) {
                     if (assetMap.get(asset.id)) {
-                        logger_1.warn("Detected duplicate id, please use unique id's");
+                        console.warn("Detected duplicate id, please use unique id's");
                     }
                     assetMap.set(asset.id, asset.item);
                 });
@@ -253,7 +251,7 @@ var AssetLoader = /** @class */ (function () {
         return AssetLoader.fetchItem(item)
             .then(function (response) { return response.arrayBuffer(); })
             .catch(function (err) {
-            logger_1.warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -290,7 +288,7 @@ var AssetLoader = /** @class */ (function () {
             });
         })
             .catch(function (err) {
-            logger_1.warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -302,7 +300,7 @@ var AssetLoader = /** @class */ (function () {
         return AssetLoader.fetchItem(item)
             .then(function (response) { return response.blob(); })
             .catch(function (err) {
-            logger_1.warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -397,7 +395,7 @@ var AssetLoader = /** @class */ (function () {
                 else {
                     // In case something went wrong with loading the blob or corrupted data
                     // Fallback to default image loader
-                    logger_1.warn('Received no or corrupt data, falling back to default image loader');
+                    console.warn('Received no or corrupt data, falling back to default image loader');
                     return AssetLoader.loadImage(item);
                 }
             });
@@ -523,7 +521,7 @@ var AssetLoader = /** @class */ (function () {
         return AssetLoader.fetchItem(item)
             .then(function (response) { return response.json(); })
             .catch(function (err) {
-            logger_1.warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -535,7 +533,7 @@ var AssetLoader = /** @class */ (function () {
         return AssetLoader.fetchItem(item)
             .then(function (response) { return response.text(); })
             .catch(function (err) {
-            logger_1.warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -574,7 +572,7 @@ var AssetLoader = /** @class */ (function () {
             });
         })
             .catch(function (err) {
-            logger_1.warn(err);
+            console.warn(err);
         });
     };
     /**
@@ -595,12 +593,12 @@ var AssetLoader = /** @class */ (function () {
                     // @ts-ignore
                     .then(function (data) { return window.WebAssembly.instantiate(data, item.loaderOptions.importObject); })
                     .catch(function (err) {
-                    logger_1.warn(err);
+                    console.warn(err);
                 }));
             }
         }
         else {
-            logger_1.warn('WebAssembly is not supported');
+            console.warn('WebAssembly is not supported');
             return Promise.resolve();
         }
     };
@@ -622,7 +620,7 @@ var AssetLoader = /** @class */ (function () {
             }
         })
             .catch(function (err) {
-            logger_1.warn(err);
+            console.warn(err);
         });
     };
     return AssetLoader;

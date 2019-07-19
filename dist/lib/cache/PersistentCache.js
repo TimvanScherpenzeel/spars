@@ -2,8 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // Vendor
 var idb_keyval_1 = require("idb-keyval");
-// Logger
-var logger_1 = require("../logger");
 // Utilities
 var assert_1 = require("../utilities/assert");
 /**
@@ -58,7 +56,7 @@ var PersistentCache = /** @class */ (function () {
         var _this = this;
         assert_1.assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
         idb_keyval_1.set(key, value, this.store).catch(function (err) {
-            logger_1.warn("PersistentCache -> Set: { key: " + key + ", value: " + value + " } has failed with error: " + err);
+            console.warn("PersistentCache -> Set: { key: " + key + ", value: " + value + " } has failed with error: " + err);
             _this.memoryCache.set(key, value);
         });
     };
@@ -76,7 +74,7 @@ var PersistentCache = /** @class */ (function () {
                 resolve(value);
             })
                 .catch(function (err) {
-                logger_1.warn("PersistentCache -> Get: { key: " + key + " } has failed with error: " + err);
+                console.warn("PersistentCache -> Get: { key: " + key + " } has failed with error: " + err);
                 _this.memoryCache.get(key);
             });
         });
@@ -92,7 +90,7 @@ var PersistentCache = /** @class */ (function () {
                 resolve(storeKeys);
             })
                 .catch(function (err) {
-                logger_1.warn("PersistentCache -> Keys: { key: " + idb_keyval_1.keys + " } has failed with error: " + err);
+                console.warn("PersistentCache -> Keys: { key: " + idb_keyval_1.keys + " } has failed with error: " + err);
                 _this.memoryCache.keys();
             });
         });
@@ -106,7 +104,7 @@ var PersistentCache = /** @class */ (function () {
         var _this = this;
         assert_1.assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
         idb_keyval_1.del(key, this.store).catch(function (err) {
-            logger_1.warn("PersistentCache -> Delete: { key: " + key + " } has failed with error: " + err);
+            console.warn("PersistentCache -> Delete: { key: " + key + " } has failed with error: " + err);
             _this.memoryCache.delete(key);
         });
     };
@@ -116,7 +114,7 @@ var PersistentCache = /** @class */ (function () {
     PersistentCache.prototype.clear = function () {
         var _this = this;
         idb_keyval_1.clear(this.store).catch(function (err) {
-            logger_1.warn("PersistentCache -> Clear: Store clearing has failed with error: " + err);
+            console.warn("PersistentCache -> Clear: Store clearing has failed with error: " + err);
             _this.memoryCache.clear();
         });
     };
