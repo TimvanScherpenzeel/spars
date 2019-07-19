@@ -10,7 +10,7 @@ export const debounce = (func: any, wait: number, immediate: boolean = false) =>
   let timeout: any;
 
   return function executedFunction() {
-    // @ts-ignore
+    // @ts-ignore this implicitly has any type, (this as any) does not fix it
     const context = this;
     const args = arguments;
 

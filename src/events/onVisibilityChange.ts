@@ -23,28 +23,23 @@ const prefix =
 const visibility = {
   // True is page is not visible, false if page is visible
   get hidden() {
-    // @ts-ignore implicit any, has no index structure
-    return Boolean(document[prefix[key.hidden]]);
+    return Boolean((document as any)[prefix[key.hidden]]);
   },
 
   // Vendor prefixed listeners
   addEventListener: (type: string, handler: () => void, options?: any) =>
-    // @ts-ignore implicit any, has no index structure
-    document.addEventListener(prefix[key[type]], handler, options),
+    document.addEventListener(prefix[(key as any)[type]], handler, options),
 
   removeEventListener: (type: string, handler: () => void, options?: any) =>
-    // @ts-ignore implicit any, has no index structure
-    document.removeEventListener(prefix[key[type]], handler, options),
+    document.removeEventListener(prefix[(key as any)[type]], handler, options),
 
   // Visibility change listener
   get onvisibilitychange() {
-    // @ts-ignore implicit any, has no index structure
-    return document[`on${prefix[key.visibilitychange]}`.toLowerCase()];
+    return (document as any)[`on${prefix[key.visibilitychange]}`.toLowerCase()];
   },
 
   set onvisibilitychange(handler) {
-    // @ts-ignore implicit any, has no index structure
-    document[`on${prefix[key.visibilitychange]}`.toLowerCase()] = handler;
+    (document as any)[`on${prefix[key.visibilitychange]}`.toLowerCase()] = handler;
   },
 };
 

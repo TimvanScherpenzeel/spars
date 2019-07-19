@@ -13,10 +13,9 @@ function onConnectionChange() {
 
   const connectionIsOnline = navigator.onLine || false;
   const connectionEffectiveType =
-    // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
-    (navigator.connection && navigator.connection.effectiveType) || '4g';
-  // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
-  const connectionSaveData = (navigator.connection && navigator.connection.saveData) || false;
+    ((navigator as any).connection && (navigator as any).connection.effectiveType) || '4g';
+  const connectionSaveData =
+    ((navigator as any).connection && (navigator as any).connection.saveData) || false;
 
   let connectionSpeed;
 
@@ -49,10 +48,8 @@ function onConnectionChange() {
  */
 export const listenToConnectionChange = () => {
   // https://caniuse.com/#feat=netinfo (Chrome only for now)
-  // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
-  if (navigator.connection) {
-    // @ts-ignore navigator.connection does not exist yet as a type but is valid in the browser
-    navigator.connection.addEventListener('change', onConnectionChange, false);
+  if ((navigator as any).connection) {
+    (navigator as any).connection.addEventListener('change', onConnectionChange, false);
   }
 
   window.addEventListener('offline', onConnectionChange);
