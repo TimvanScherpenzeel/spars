@@ -1,9 +1,6 @@
 // Vendor
 import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 
-// Override config
-AlpineToolkit.setConfigEntry('LOG_VERBOSITY', 3);
-
 // Analytics
 // ---------
 
@@ -282,13 +279,6 @@ console.log(AlpineToolkit.features);
 //     assets.get('./assets/simple.wasm').instance.exports.exported_func();
 //   }
 // }
-
-// Logger
-// ------
-
-// AlpineToolkit.log('example log');
-// AlpineToolkit.warn('example warning');
-// AlpineToolkit.error('example error');
 
 // Polyfills
 // ---------
