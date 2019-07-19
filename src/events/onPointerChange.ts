@@ -4,6 +4,14 @@ import { eventEmitter } from './EventEmitter';
 let isPointerDown = false;
 let isTouch = false;
 
+let positionX = 0;
+let positionY = 0;
+
+const cache = {
+  x: -Infinity,
+  y: -Infinity,
+};
+
 function onPointerDown(event: any): void {
   if (event.clientX !== undefined) {
     isTouch = false;
@@ -17,7 +25,7 @@ function onPointerDown(event: any): void {
 
 function onPointerUp(event: any): void {
   // if (isTouch) {
-    // event.preventDefault();
+  // event.preventDefault();
   // }
 
   isPointerDown = false;
@@ -27,16 +35,21 @@ function onPointerMove(event: any): void {
   if (isPointerDown) {
     // event.preventDefault();
 
-    eventEmitter.emit('ALPINE::POINTER_CHANGE', {
-      isTouch,
-      positionX: isTouch ? event.touches[0].clientX : event.clientX,
-      positionY: isTouch ? event.touches[0].clientY : event.clientY,
-    });
+    positionX = isTouch ? event.touches[0].clientX : event.clientX;
+    positionY = isTouch ? event.touches[0].clientY : event.clientY;
+
+    if (cache.x !== positionX || cache.y !== positionY) {
+      eventEmitter.emit('ALPINE::POINTER_CHANGE', {
+        isTouch,
+        positionX,
+        positionY,
+      });
+    }
   }
 }
 
 /**
- * Start listening to keycode change events
+ * Start listening to pointer change events
  */
 export const listenToPointerChange = (element = window): void => {
   element.addEventListener('touchstart', onPointerDown, false);
@@ -48,7 +61,7 @@ export const listenToPointerChange = (element = window): void => {
 };
 
 /**
- * Stop listening to keycode change events
+ * Stop listening to pointer change events
  */
 export const stopListeningToPointerChange = (element = window): void => {
   element.removeEventListener('touchstart', onPointerDown, false);
