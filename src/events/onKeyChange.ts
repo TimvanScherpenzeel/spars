@@ -44,7 +44,7 @@ const normalizeKey = (key: string): string => {
 /**
  * Monitor keydown changes
  */
-function onKeyDownChange(event: KeyboardEvent): void {
+function onKeyDownChangeHandler(event: KeyboardEvent): void {
   eventEmitter.emit('ALPINE::KEY_DOWN_CHANGE', {
     key: normalizeKey(event.key),
   });
@@ -53,7 +53,7 @@ function onKeyDownChange(event: KeyboardEvent): void {
 /**
  * Monitor keyup changes
  */
-function onKeyUpChange(event: KeyboardEvent): void {
+function onKeyUpChangeHandler(event: KeyboardEvent): void {
   eventEmitter.emit('ALPINE::KEY_UP_CHANGE', {
     key: normalizeKey(event.key),
   });
@@ -62,15 +62,15 @@ function onKeyUpChange(event: KeyboardEvent): void {
 /**
  * Start listening to keydown change events
  */
-export const listenToKeyChange = (element = window): void => {
-  element.addEventListener('keydown', onKeyDownChange, false);
-  element.addEventListener('keyup', onKeyUpChange, false);
+export const onKeyChange = (element = window): void => {
+  element.addEventListener('keydown', onKeyDownChangeHandler, false);
+  element.addEventListener('keyup', onKeyUpChangeHandler, false);
 };
 
 /**
  * Stop listening to keydown change events
  */
-export const stopListeningToKeyChange = (element = window): void => {
-  element.removeEventListener('keydown', onKeyDownChange, false);
-  element.removeEventListener('keyup', onKeyUpChange, false);
+export const offKeyChange = (element = window): void => {
+  element.removeEventListener('keydown', onKeyDownChangeHandler, false);
+  element.removeEventListener('keyup', onKeyUpChangeHandler, false);
 };

@@ -14,18 +14,16 @@ export { deleteCookie, getCookie, setCookie } from './cookie';
 export {
   EventEmitter,
   eventEmitter,
-  listenToConnectionChange,
-  listenToKeyChange,
-  listenToOrientationChange,
-  listenToPointerChange,
-  listenToVisibilityChange,
-  listenToWindowSizeChange,
-  stopListeningToConnectionChange,
-  stopListeningToKeyChange,
-  stopListeningToOrientationChange,
-  stopListeningToPointerChange,
-  stopListeningToVisibilityChange,
-  stopListeningToWindowSizeChange,
+  onConnectionChange,
+  onKeyChange,
+  onOrientationChange,
+  onVisibilityChange,
+  onWindowSizeChange,
+  offConnectionChange,
+  offKeyChange,
+  offOrientationChange,
+  offVisibilityChange,
+  offWindowSizeChange,
 } from './events';
 
 // Features

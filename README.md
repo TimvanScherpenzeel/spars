@@ -11,7 +11,6 @@ Alpine Toolkit is not a framework but a minimalistic toolkit that has a strong f
 
 ## Roadmap
 
-- Add onPointerChange event
 - Add WakeLock (https://github.com/richtr/NoSleep.js/blob/master/src/index.js)
 
 ## API

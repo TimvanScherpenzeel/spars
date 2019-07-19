@@ -46,7 +46,7 @@ const visibility = {
 /**
  * Monitor visibility changes
  */
-function onVisibilityChange(): void {
+function onVisibilityChangeHandler(): void {
   eventEmitter.emit('ALPINE::VISIBILITY_CHANGE', {
     isVisible: !visibility.hidden,
   });
@@ -55,13 +55,13 @@ function onVisibilityChange(): void {
 /**
  * Start listening to visibility change events
  */
-export const listenToVisibilityChange = (): void => {
-  visibility.addEventListener('visibilitychange', onVisibilityChange, false);
+export const onVisibilityChange = (): void => {
+  visibility.addEventListener('visibilitychange', onVisibilityChangeHandler, false);
 };
 
 /**
  * Stop listening to visibility change events
  */
-export const stopListeningToVisibilityChange = (): void => {
-  visibility.removeEventListener('visibilitychange', onVisibilityChange);
+export const offVisibilityChange = (): void => {
+  visibility.removeEventListener('visibilitychange', onVisibilityChangeHandler);
 };

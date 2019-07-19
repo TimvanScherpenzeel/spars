@@ -91,18 +91,18 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 
 // new Test();
 
-// AlpineToolkit.listenToConnectionChange();
+// AlpineToolkit.onConnectionChange();
 
 // const connectionChangeHandler = event => {
 //   console.log(event);
 
 //   AlpineToolkit.eventEmitter.off('ALPINE::CONNECTION_CHANGE', connectionChangeHandler);
-//   AlpineToolkit.stopListeningToConnectionChange();
+//   AlpineToolkit.offConnectionChange();
 // };
 
 // AlpineToolkit.eventEmitter.on('ALPINE::CONNECTION_CHANGE', connectionChangeHandler);
 
-// AlpineToolkit.listenToKeyChange();
+// AlpineToolkit.onKeyChange();
 
 // const keyChangeDownHandler = event => {
 //   console.log(`keyDown: ${event.key}`);
@@ -110,7 +110,7 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 //   document.getElementById('root').appendChild(document.createTextNode(event.key));
 
 //   // AlpineToolkit.eventEmitter.off('ALPINE::KEY_DOWN_CHANGE', keyChangeDownHandler);
-//   // AlpineToolkit.stopListeningToKeyChange();
+//   // AlpineToolkit.offKeyChange();
 // };
 
 // const keyChangeUpHandler = event => {
@@ -119,7 +119,7 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 //   document.getElementById('root').appendChild(document.createTextNode(event.key));
 
 //   // AlpineToolkit.eventEmitter.off('ALPINE::KEY_UP_CHANGE', keyChangeDownHandler);
-//   // AlpineToolkit.stopListeningToKeyChange();
+//   // AlpineToolkit.offKeyChange();
 // };
 
 // AlpineToolkit.eventEmitter.on('ALPINE::KEY_DOWN_CHANGE', keyChangeDownHandler);
@@ -127,48 +127,35 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 
 // document.getElementById('root').appendChild(document.createElement('textarea'));
 
-// AlpineToolkit.listenToOrientationChange();
+// AlpineToolkit.onOrientationChange();
 
 // const orientationChangeHandler = event => {
 //   console.log(event);
 
 //   AlpineToolkit.eventEmitter.off('ALPINE::ORIENTATION_CHANGE');
-//   AlpineToolkit.stopListeningToOrientationChange();
+//   AlpineToolkit.offOrientationChange();
 // };
 
 // AlpineToolkit.eventEmitter.on('ALPINE::ORIENTATION_CHANGE', orientationChangeHandler);
 
-AlpineToolkit.listenToPointerChange();
-
-const pointerChangeHandler = event => {
-  console.log(event);
-
-  document.getElementById('root').innerHTML = [
-    Number(event.positionX).toFixed(2),
-    Number(event.positionY).toFixed(2),
-  ];
-};
-
-AlpineToolkit.eventEmitter.on('ALPINE::POINTER_CHANGE', pointerChangeHandler);
-
-// AlpineToolkit.listenToVisibilityChange();
+// AlpineToolkit.onVisibilityChange();
 
 // const visibilityChangeHandler = event => {
 //   console.log(event);
 
 //   AlpineToolkit.eventEmitter.off('ALPINE::VISIBILITY_CHANGE');
-//   AlpineToolkit.stopListeningToVisibilityChange();
+//   AlpineToolkit.offVisibilityChange();
 // };
 
 // AlpineToolkit.eventEmitter.on('ALPINE::VISIBILITY_CHANGE', visibilityChangeHandler);
 
-// AlpineToolkit.listenToWindowSizeChange();
+// AlpineToolkit.onWindowSizeChange();
 
 // const windowSizeChangeHandler = event => {
 //   console.log(event);
 
 //   AlpineToolkit.eventEmitter.off('ALPINE::WINDOW_SIZE_CHANGE');
-//   AlpineToolkit.stopListeningToWindowSizeChange();
+//   AlpineToolkit.offWindowSizeChange();
 // };
 
 // AlpineToolkit.eventEmitter.on('ALPINE::WINDOW_SIZE_CHANGE', windowSizeChangeHandler);
