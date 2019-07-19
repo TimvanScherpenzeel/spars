@@ -1,5 +1,3 @@
-import { getGPUTier } from './hardwareFeatures/getGPUTier';
-export { getGPUTier };
 export declare const features: {
     browserFeatures: {
         browserType: {

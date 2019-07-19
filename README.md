@@ -51,10 +51,6 @@ Contains code to wrap logging statements which can be conditionally turned on or
 
 Contains a fullscreen and pointerlock polyfill that can be used without having to worry about vendor prefixes.
 
-### Threads
-
-Contains code to dynamically create a worker for a specific function. Inspired by [greenlet](https://github.com/developit/greenlet).
-
 ### Utilities
 
 Contains some commonly used utilities (assertions, UUID, query parameters, etc..).

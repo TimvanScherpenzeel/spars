@@ -37,7 +37,6 @@ exports.stopListeningToWindowSizeChange = events_1.stopListeningToWindowSizeChan
 // Features
 var features_1 = require("./features");
 exports.features = features_1.features;
-exports.getGPUTier = features_1.getGPUTier;
 // Loaders
 var loaders_1 = require("./loaders");
 exports.AssetLoader = loaders_1.AssetLoader;
@@ -50,9 +49,6 @@ exports.warn = logger_1.warn;
 var polyfills_1 = require("./polyfills");
 exports.fullScreen = polyfills_1.fullScreen;
 exports.pointerLock = polyfills_1.pointerLock;
-// Threads
-var threads_1 = require("./threads");
-exports.Thread = threads_1.Thread;
 // Utilities
 var utilities_1 = require("./utilities");
 exports.assert = utilities_1.assert;

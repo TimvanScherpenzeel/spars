@@ -326,25 +326,3 @@ console.log(AlpineToolkit.features);
 // };
 
 // console.log(AlpineToolkit.pointerLock);
-
-// Threads
-// -------
-
-// let getName = new AlpineToolkit.Thread(username => {
-//   return new Promise(resolve => {
-//     let url = `https://api.github.com/users/${username}`;
-
-//     fetch(url)
-//       .then(response => response.json())
-//       .then(profile => resolve(profile.name));
-//   });
-// });
-
-// getName('timvanscherpenzeel').then(
-//   log => {
-//     document.write(log);
-//   },
-//   err => {
-//     return console.error(err);
-//   }
-// );

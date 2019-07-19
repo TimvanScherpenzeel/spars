@@ -28,7 +28,7 @@ export {
 } from './events';
 
 // Features
-export { features, getGPUTier } from './features';
+export { features } from './features';
 
 // Loaders
 export { AssetLoader } from './loaders';
@@ -38,9 +38,6 @@ export { error, log, warn } from './logger';
 
 // Polyfill
 export { fullScreen, pointerLock } from './polyfills';
-
-// Threads
-export { Thread } from './threads';
 
 // Utilities
 export {

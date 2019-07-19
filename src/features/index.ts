@@ -42,10 +42,7 @@ import isDoNotTrackEnabled from './browserSettings/isDoNotTrackEnabled';
 // Hardware features
 import getDevicePixelRatio from './hardwareFeatures/getDevicePixelRatio';
 import getEndianness from './hardwareFeatures/getEndianness';
-import { getGPUTier } from './hardwareFeatures/getGPUTier';
 import getWebWorkerPoolSize from './hardwareFeatures/getWebWorkerPoolSize';
-
-export { getGPUTier };
 
 export const features = {
   // Browser features

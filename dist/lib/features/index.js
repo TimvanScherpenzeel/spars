@@ -45,8 +45,6 @@ var isDoNotTrackEnabled_1 = __importDefault(require("./browserSettings/isDoNotTr
 // Hardware features
 var getDevicePixelRatio_1 = __importDefault(require("./hardwareFeatures/getDevicePixelRatio"));
 var getEndianness_1 = __importDefault(require("./hardwareFeatures/getEndianness"));
-var getGPUTier_1 = require("./hardwareFeatures/getGPUTier");
-exports.getGPUTier = getGPUTier_1.getGPUTier;
 var getWebWorkerPoolSize_1 = __importDefault(require("./hardwareFeatures/getWebWorkerPoolSize"));
 exports.features = {
     // Browser features
