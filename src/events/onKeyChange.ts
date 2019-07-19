@@ -9,9 +9,9 @@ import { eventEmitter } from './EventEmitter';
 // TODO: Chrome Android returns `Unidentified` keycodes using `.key` (using the stock native keyboard on Samsung / Pixel) - https://live.browserstack.com/dashboard#os=android&os_version=9.0&device=Samsung+Galaxy+S10e&device_browser=chrome&zoom_to_fit=true&full_screen=true&url=http%3A%2F%2Flocalhost%3A1234%2F&speed=1&host_ports=google.com%2C80%2C0
 
 /**
- * Monitor keycode changes
+ * Monitor key changes
  */
-function onKeyCodeChange(event: KeyboardEvent): void {
+function onKeyChange(event: KeyboardEvent): void {
   let { key } = event;
 
   // Normalize key event names for Internet Explorer 11
@@ -41,20 +41,20 @@ function onKeyCodeChange(event: KeyboardEvent): void {
     }
   }
 
-  eventEmitter.emit('ALPINE::KEYCODE_CHANGE', {
+  eventEmitter.emit('ALPINE::KEY_CHANGE', {
     key,
   });
 }
 /**
  * Start listening to keycode change events
  */
-export const listenToKeyCodeChange = (): void => {
-  window.addEventListener('keydown', (event: KeyboardEvent) => onKeyCodeChange(event), false);
+export const listenToKeyChange = (): void => {
+  window.addEventListener('keydown', onKeyChange, false);
 };
 
 /**
  * Stop listening to keycode change events
  */
-export const stopListeningToKeyCodeChange = (): void => {
-  window.removeEventListener('keydown', onKeyCodeChange, false);
+export const stopListeningToKeyChange = (): void => {
+  window.removeEventListener('keydown', onKeyChange, false);
 };

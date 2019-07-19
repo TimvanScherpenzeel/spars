@@ -102,15 +102,18 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 
 // AlpineToolkit.eventEmitter.on('ALPINE::CONNECTION_CHANGE', connectionChangeHandler);
 
-AlpineToolkit.listenToKeyCodeChange();
+// AlpineToolkit.listenToKeyChange();
 
-const keyCodeChangeHandler = event => {
-  document.getElementById('root').appendChild(document.createTextNode(event.key));
-};
+// const keyChangeHandler = event => {
+//   document.getElementById('root').appendChild(document.createTextNode(event.key));
 
-AlpineToolkit.eventEmitter.on('ALPINE::KEYCODE_CHANGE', keyCodeChangeHandler);
+//   AlpineToolkit.eventEmitter.off('ALPINE::KEY_CHANGE', keyChangeHandler);
+//   AlpineToolkit.stopListeningToKeyChange();
+// };
 
-document.getElementById('root').appendChild(document.createElement('textarea'));
+// AlpineToolkit.eventEmitter.on('ALPINE::KEY_CHANGE', keyChangeHandler);
+
+// document.getElementById('root').appendChild(document.createElement('textarea'));
 
 // AlpineToolkit.listenToOrientationChange();
 

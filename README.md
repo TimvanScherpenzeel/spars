@@ -11,8 +11,7 @@ Alpine Toolkit is not a framework but a minimalistic toolkit that has a strong f
 
 ## Roadmap
 
-- Add onKeyCodeChange event
-- Add onMouseChange event
+- Add onPointerChange event
 
 ## API
 
