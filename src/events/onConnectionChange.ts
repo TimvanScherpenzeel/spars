@@ -4,7 +4,7 @@ import { eventEmitter } from './EventEmitter';
 /**
  * Monitor connection changes and speed
  */
-function onConnectionChange(): void {
+function onConnectionChangeHandler(): void {
   // ECT          RTT         Kbps    Explanation
   // slow-2g      2000	      50	    The network is suited for small transfers only such as text-only pages.
   // 2g	          1400	      70	    The network is suited for transfers of small images.
@@ -46,20 +46,20 @@ function onConnectionChange(): void {
 /**
  * Start listening to connection change events
  */
-export const listenToConnectionChange = (): void => {
+export const onConnectionChange = (): void => {
   // https://caniuse.com/#feat=netinfo (Chrome only for now)
   if ((navigator as any).connection) {
-    (navigator as any).connection.addEventListener('change', onConnectionChange, false);
+    (navigator as any).connection.addEventListener('change', onConnectionChangeHandler, false);
   }
 
-  window.addEventListener('offline', onConnectionChange);
-  window.addEventListener('online', onConnectionChange);
+  window.addEventListener('offline', onConnectionChangeHandler);
+  window.addEventListener('online', onConnectionChangeHandler);
 };
 
 /**
  * Stop listening to connection change events
  */
-export const stopListeningToConnectionChange = (): void => {
-  window.removeEventListener('offline', onConnectionChange);
-  window.removeEventListener('online', onConnectionChange);
+export const offConnectionChange = (): void => {
+  window.removeEventListener('offline', onConnectionChangeHandler);
+  window.removeEventListener('online', onConnectionChangeHandler);
 };
