@@ -140,25 +140,6 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 
 console.log(AlpineToolkit.features);
 
-// console.log(
-//   AlpineToolkit.getGPUTier({
-//     mobileBenchmarkPercentages: [
-//       0, // TIER_0
-//       50, // TIER_1
-//       30, // TIER_2
-//       20, // TIER_3
-//     ],
-//     desktopBenchmarkPercentages: [
-//       0, // TIER_0
-//       50, // TIER_1
-//       30, // TIER_2
-//       20, // TIER_3
-//     ],
-//     // forceRendererString: 'Apple A12 GPU',
-//     // forceMobile: true,
-//   })
-// );
-
 // Loaders
 // -------
 
