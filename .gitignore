@@ -12,6 +12,7 @@
 node_modules
 
 # Directories
+dist
 docs
 coverage
 

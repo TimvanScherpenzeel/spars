@@ -1,1 +1,0 @@
-{"version":3,"file":"isDoNotTrackEnabled.js","sourceRoot":"","sources":["../../../../src/features/browserSettings/isDoNotTrackEnabled.ts"],"names":[],"mappings":";;AAAA;;;GAGG;AACH,kBAAe,CAAC;IACd,IAAM,UAAU,GAAG,SAAS,CAAC,UAAU,IAAI,KAAK,CAAC;IAEjD,IAAI,CAAC,CAAC,UAAU,IAAI,UAAU,KAAK,aAAa,EAAE;QAChD,OAAO,IAAI,CAAC;KACb;IAED,OAAO,KAAK,CAAC;AACf,CAAC,CAAC,EAAE,CAAC"}

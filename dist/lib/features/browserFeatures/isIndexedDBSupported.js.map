@@ -1,1 +1,0 @@
-{"version":3,"file":"isIndexedDBSupported.js","sourceRoot":"","sources":["../../../../src/features/browserFeatures/isIndexedDBSupported.ts"],"names":[],"mappings":";;AAAA;;GAEG;AACH,kBAAe,CAAC;IACd,IAAI;QACF,OAAO,CAAC,CAAC,MAAM,CAAC,SAAS,CAAC;KAC3B;IAAC,OAAO,GAAG,EAAE;QACZ,OAAO,KAAK,CAAC;KACd;AACH,CAAC,CAAC,EAAE,CAAC"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"isSessionStorageSupported.js","sourceRoot":"","sources":["../../../../src/features/browserFeatures/isSessionStorageSupported.ts"],"names":[],"mappings":";;AAAA;;GAEG;AACH,kBAAe,CAAC;IACd,IAAI;QACF,OAAO,CAAC,CAAC,MAAM,CAAC,cAAc,CAAC;KAChC;IAAC,OAAO,GAAG,EAAE;QACZ,OAAO,KAAK,CAAC;KACd;AACH,CAAC,CAAC,EAAE,CAAC"}
