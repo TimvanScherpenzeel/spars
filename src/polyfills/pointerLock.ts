@@ -43,7 +43,7 @@ export const pointerLock = {
   requestPointerLock: (element: HTMLElement): void =>
     (element as any)[prefix[key.requestPointerLock]](),
 
-  get exitPointerLock() {
+  get exitPointerLock(): void {
     return (document as any)[prefix[key.exitPointerLock]].bind(document);
   },
 
