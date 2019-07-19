@@ -2,7 +2,7 @@
 import getBrowserType from '../features/browserFeatures/getBrowserType';
 
 // Events
-import { eventEmitter } from './EventEmitter';
+import { eventEmitter } from './eventEmitter';
 
 // Known issues:
 // TODO: Chrome Android always return 229 on `.keyCode` (see: https://stackoverflow.com/a/41517115, https://clark.engineering/input-on-android-229-unidentified-1d92105b9a04)
