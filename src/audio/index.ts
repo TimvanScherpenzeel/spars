@@ -22,8 +22,7 @@ export const isAutoplayAllowed = () => autoplayAllowed;
  * @param desiredSampleRate Desired sample rate of reated audio context
  */
 export const createAudioContext = (desiredSampleRate = 44100) => {
-  // @ts-ignore window.AudioContext and window.webkitAudioContext are not available as types
-  let context = new (window.AudioContext || window.webkitAudioContext)();
+  let context = new ((window as any).AudioContext || (window as any).webkitAudioContext)();
 
   // https://stackoverflow.com/questions/17892345/webkit-audio-distorts-on-ios-6-iphone-5-first-time-after-power-cycling
   // Only occurs in iOS6+ devices and only when you first boot the iPhone, or play a audio/video with a different sample rate
@@ -39,8 +38,7 @@ export const createAudioContext = (desiredSampleRate = 44100) => {
     // Dispose old context
     context.close();
 
-    // @ts-ignore window.AudioContext and window.webkitAudioContext are not available as types
-    context = new (window.AudioContext || window.webkitAudioContext)();
+    context = new ((window as any).AudioContext || (window as any).webkitAudioContext)();
   }
 
   return context;
@@ -54,8 +52,7 @@ export const createAudioContext = (desiredSampleRate = 44100) => {
 export const unlockAutoplay = (element: HTMLElement) =>
   new Promise((resolve, reject) => {
     // https://developers.google.com/web/updates/2019/01/nic72#user-activation
-    // @ts-ignore navigator.userActivation does not yet exist as type
-    if (isUserActivationSupported && navigator.userActivation.hasBeenActive === true) {
+    if (isUserActivationSupported && (navigator as any).userActivation.hasBeenActive === true) {
       autoplayAllowed = true;
 
       resolve(true);

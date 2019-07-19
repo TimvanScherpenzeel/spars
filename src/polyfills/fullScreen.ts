@@ -43,55 +43,45 @@ const prefix =
   [];
 
 export const fullScreen = {
-  // @ts-ignore implicit any, has no index structure
-  requestFullscreen: (element: HTMLElement) => element[prefix[key.requestFullscreen]](),
+  requestFullscreen: (element: HTMLElement) => (element as any)[prefix[key.requestFullscreen]](),
 
   get exitFullscreen() {
-    // @ts-ignore implicit any, has no index structure
-    return document[prefix[key.exitFullscreen]].bind(document);
+    return (document as any)[prefix[key.exitFullscreen]].bind(document);
   },
 
   addEventListener: (type: string, handler: () => void, options?: any) =>
-    // @ts-ignore implicit any, has no index structure
-    document.addEventListener(prefix[key[type]], handler, options),
+    document.addEventListener(prefix[(key as any)[type]], handler, options),
 
   removeEventListener: (type: string, handler: () => void, options?: any) =>
-    // @ts-ignore implicit any, has no index structure
-    document.removeEventListener(prefix[key[type]], handler, options),
+    document.removeEventListener(prefix[(key as any)[type]], handler, options),
 
   get fullscreenSupported() {
-    // @ts-ignore implicit any, has no index structure
-    return Boolean(document[prefix[key.fullscreenEnabled]]);
+    return Boolean((document as any)[prefix[key.fullscreenEnabled]]);
   },
 
   // tslint:disable-next-line:no-empty
   set fullscreenSupported(val) {},
 
   get fullscreenElement() {
-    // @ts-ignore implicit any, has no index structure
-    return document[prefix[key.fullscreenElement]];
+    return (document as any)[prefix[key.fullscreenElement]];
   },
 
   // tslint:disable-next-line:no-empty
   set fullscreenElement(val) {},
 
   get onfullscreenchange() {
-    // @ts-ignore implicit any, has no index structure
-    return document[`on${prefix[key.fullscreenchange]}`.toLowerCase()];
+    return (document as any)[`on${prefix[key.fullscreenchange]}`.toLowerCase()];
   },
 
   set onfullscreenchange(handler) {
-    // @ts-ignore implicit any, has no index structure
-    return (document[`on${prefix[key.fullscreenchange]}`.toLowerCase()] = handler);
+    (document as any)[`on${prefix[key.fullscreenchange]}`.toLowerCase()] = handler;
   },
 
   get onfullscreenerror() {
-    // @ts-ignore implicit any, has no index structure
-    return document[`on${prefix[key.fullscreenerror]}`.toLowerCase()];
+    return (document as any)[`on${prefix[key.fullscreenerror]}`.toLowerCase()];
   },
 
   set onfullscreenerror(handler) {
-    // @ts-ignore implicit any, has no index structure
-    document[`on${prefix[key.fullscreenerror]}`.toLowerCase()] = handler;
+    (document as any)[`on${prefix[key.fullscreenerror]}`.toLowerCase()] = handler;
   },
 };

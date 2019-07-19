@@ -1,5 +1,4 @@
 /**
  * Tests for OffscreenCanvas support
  */
-// @ts-ignore missing type definition
-export default (() => !!window.OffscreenCanvas || false)();
+export default (() => !!(window as any).OffscreenCanvas || false)();

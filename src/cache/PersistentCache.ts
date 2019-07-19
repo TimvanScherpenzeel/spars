@@ -54,6 +54,7 @@ export class PersistentCache {
       const reader = new FileReader();
 
       reader.addEventListener('loadend', (event: Event) => {
+        // TODO: fix definition
         // @ts-ignore
         resolve(reader.result);
       });

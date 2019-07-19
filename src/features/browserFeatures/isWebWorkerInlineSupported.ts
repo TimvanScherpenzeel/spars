@@ -3,11 +3,9 @@
  */
 export default (() => {
   try {
-    // @ts-ignore missing type definition
-    const URL = window.URL || window.webkitURL;
+    const URL = window.URL || (window as any).webkitURL;
 
-    // @ts-ignore missing type definition
-    if (URL === undefined || window.Blob === undefined || window.Worker === undefined) {
+    if (URL === undefined || window.Blob === undefined || (window as any).Worker === undefined) {
       return false;
     }
 

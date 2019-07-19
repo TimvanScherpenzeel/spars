@@ -1,5 +1,4 @@
 /**
  * Tests for Paint Worklet support
  */
-// @ts-ignore missing type definition
-export default (() => (!!window.CSS && !!window.CSS.paintWorklet) || false)();
+export default (() => (!!(window as any).CSS && !!(window as any).CSS.paintWorklet) || false)();

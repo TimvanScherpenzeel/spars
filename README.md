@@ -11,10 +11,6 @@ Alpine Toolkit is not a framework but a minimalistic toolkit that has a strong f
 
 ## API
 
-### Generated
-
-Contains automatically generated GPU benchmarking data. This is done by scraping the latest version of `https://www.notebookcheck.net/`.
-
 ### Analytics
 
 Contains code to help you set up Google Analytics tracking and reporting of individual events. The reporting of events are optionally throttled using `requestIdleCallback` which guarantees no interference with higher priority code.
@@ -26,10 +22,6 @@ Contains code to help you with audio autoplay unlocking in the browser.
 ### Cache
 
 Contains code to set up persistent caching using IndexedDB and with an in-memory cache as fallback.
-
-### Config
-
-Contains code to enable and disable global configuration settings e.g. logging verbosity.
 
 ### Events
 
@@ -43,17 +35,13 @@ Contains code to check the support of various browser features, test for browser
 
 Contains code for an `AssetLoader` class used for preloading commonly used assets like images, GPU compressed images, bitmaps, video, audio, fonts, WebAssembly, JSON, SVG, etc..).
 
-### Logger
-
-Contains code to wrap logging statements which can be conditionally turned on or off by setting the earlier mentioned global configuration.
-
 ### Polyfills
 
 Contains a fullscreen and pointerlock polyfill that can be used without having to worry about vendor prefixes.
 
 ### Utilities
 
-Contains some commonly used utilities (assertions, UUID, query parameters, etc..).
+Contains some commonly used utilities (assertions, query parameters, etc..).
 
 ## Browser support
 

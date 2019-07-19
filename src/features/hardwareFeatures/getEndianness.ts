@@ -2,8 +2,7 @@
  * Gets the device byte endianness
  */
 export default (() => {
-  // @ts-ignore missing type definition
-  if (window.ArrayBuffer !== null) {
+  if ((window as any).ArrayBuffer !== null) {
     const buffer = new ArrayBuffer(4);
     const intView = new Uint32Array(buffer);
     const byteView = new Uint8Array(buffer);

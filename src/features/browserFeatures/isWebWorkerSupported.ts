@@ -1,5 +1,4 @@
 /**
  * Tests for inline web worker support
  */
-// @ts-ignore missing type definition
-export default (() => !!window.Worker || false)();
+export default (() => !!(window as any).Worker || false)();

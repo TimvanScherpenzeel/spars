@@ -1,5 +1,4 @@
 /**
  * Tests for BroadcastChannel support
  */
-// @ts-ignore missing type definition
-export default (() => !!window.BroadcastChannel || false)();
+export default (() => !!(window as any).BroadcastChannel || false)();

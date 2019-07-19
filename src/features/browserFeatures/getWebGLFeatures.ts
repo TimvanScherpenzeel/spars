@@ -80,7 +80,7 @@ export default (() => {
       aliasedLineWidthRange: gl.getParameter(GL_ALIASED_LINE_WIDTH_RANGE).toString(),
       aliasedPointSizeRange: gl.getParameter(GL_ALIASED_POINT_SIZE_RANGE).toString(),
       alphaBits: gl.getParameter(GL_ALPHA_BITS),
-      // @ts-ignore
+      // @ts-ignore gl.getContextAttributes could return null
       antialias: !!gl.getContextAttributes().antialias,
       blueBits: gl.getParameter(GL_BLUE_BITS),
       depthBits: gl.getParameter(GL_DEPTH_BITS),
@@ -98,56 +98,56 @@ export default (() => {
       maxViewportDimensions: gl.getParameter(GL_MAX_VIEWPORT_DIMS).toString(),
       precision: {
         fragmentShaderHighPrecision: [
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT).rangeMin,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT).rangeMax,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT).precision,
         ].toString(),
 
         fragmentShaderLowPrecision: [
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_LOW_FLOAT).rangeMin,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_LOW_FLOAT).rangeMax,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_LOW_FLOAT).precision,
         ].toString(),
 
         fragmentShaderMediumPrecision: [
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_MEDIUM_FLOAT).rangeMin,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_MEDIUM_FLOAT).rangeMax,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_MEDIUM_FLOAT).precision,
         ].toString(),
 
         vertexShaderHighPrecision: [
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_HIGH_FLOAT).rangeMin,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_HIGH_FLOAT).rangeMax,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_HIGH_FLOAT).precision,
         ].toString(),
 
         vertexShaderLowPrecision: [
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_LOW_FLOAT).rangeMin,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_LOW_FLOAT).rangeMax,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_LOW_FLOAT).precision,
         ].toString(),
 
         vertexShaderMediumPrecision: [
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_MEDIUM_FLOAT).rangeMin,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_MEDIUM_FLOAT).rangeMax,
-          // @ts-ignore
+          // @ts-ignore gl.getShaderPrecisionFormat could return null
           gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_MEDIUM_FLOAT).precision,
         ].toString(),
       },

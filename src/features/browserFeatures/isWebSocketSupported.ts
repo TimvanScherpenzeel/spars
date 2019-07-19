@@ -1,5 +1,4 @@
 /**
  * Tests for WebSocket support
  */
-// @ts-ignore missing type definition
-export default (() => !!window.WebSocket || false)();
+export default (() => !!(window as any).WebSocket || false)();

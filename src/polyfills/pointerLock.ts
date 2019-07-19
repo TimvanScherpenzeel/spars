@@ -40,24 +40,19 @@ const prefix =
   [];
 
 export const pointerLock = {
-  // @ts-ignore implicit any, has no index structure
-  requestPointerLock: (element: HTMLElement) => element[prefix[key.requestPointerLock]](),
+  requestPointerLock: (element: HTMLElement) => (element as any)[prefix[key.requestPointerLock]](),
 
   get exitPointerLock() {
-    // @ts-ignore implicit any, has no index structure
-    return document[prefix[key.exitPointerLock]].bind(document);
+    return (document as any)[prefix[key.exitPointerLock]].bind(document);
   },
 
   addEventListener: (type: string, handler: () => void, options?: any) =>
-    // @ts-ignore implicit any, has no index structure
-    document.addEventListener(prefix[key[type]], handler, options),
+    document.addEventListener(prefix[(key as any)[type]], handler, options),
 
   removeEventListener: (type: string, handler: () => void, options?: any) =>
-    // @ts-ignore implicit any, has no index structure
-    document.removeEventListener(prefix[key[type]], handler, options),
+    document.removeEventListener(prefix[(key as any)[type]], handler, options),
 
   get pointerlockEnabled() {
-    // @ts-ignore implicit any, has no index structure
     return Boolean(
       'pointerLockElement' in document ||
         webkit[0] in document ||
@@ -70,30 +65,25 @@ export const pointerLock = {
   set pointerlockEnabled(val) {},
 
   get pointerLockElement() {
-    // @ts-ignore implicit any, has no index structure
-    return document[prefix[key.pointerLockElement]];
+    return (document as any)[prefix[(key as any).pointerLockElement]];
   },
 
   // tslint:disable-next-line:no-empty
   set pointerLockElement(val) {},
 
   get onpointerlockchange() {
-    // @ts-ignore implicit any, has no index structure
-    return document[`on${prefix[key.pointerlockchange]}`.toLowerCase()];
+    return (document as any)[`on${prefix[key.pointerlockchange]}`.toLowerCase()];
   },
 
   set onpointerlockchange(handler) {
-    // @ts-ignore implicit any, has no index structure
-    return (document[`on${prefix[key.pointerlockchange]}`.toLowerCase()] = handler);
+    (document as any)[`on${prefix[key.pointerlockchange]}`.toLowerCase()] = handler;
   },
 
   get onpointerlockerror() {
-    // @ts-ignore implicit any, has no index structure
-    return document[`on${prefix[key.pointerlockerror]}`.toLowerCase()];
+    return (document as any)[`on${prefix[key.pointerlockerror]}`.toLowerCase()];
   },
 
   set onpointerlockerror(handler) {
-    // @ts-ignore implicit any, has no index structure
-    document[`on${prefix[key.pointerlockerror]}`.toLowerCase()] = handler;
+    (document as any)[`on${prefix[key.pointerlockerror]}`.toLowerCase()] = handler;
   },
 };

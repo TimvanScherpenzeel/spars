@@ -1,5 +1,5 @@
 // Vendor
-// @ts-ignore
+// @ts-ignore missing type definition
 import FontFaceObserver from 'fontfaceobserver-es';
 
 // Events
@@ -282,7 +282,7 @@ export class AssetLoader {
                 // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
                 // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
                 // https://www.khronos.org/registry/webgl/specs/latest/1.0/#PIXEL_STORAGE_PARAMETERS
-                // @ts-ignore
+                // @ts-ignore createImageBitmap expects 1 or 5 parameters but now optionally supports 6
                 return createImageBitmap(data, sx, sy, sw, sh, options);
               } else {
                 return createImageBitmap(data, sx, sy, sw, sh);
@@ -291,7 +291,7 @@ export class AssetLoader {
               // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
               // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
               // https://www.khronos.org/registry/webgl/specs/latest/1.0/#PIXEL_STORAGE_PARAMETERS
-              // @ts-ignore
+              // @ts-ignore createImageBitmap expects 1 or 5 parameters but now optionally supports 2
               return createImageBitmap(data, options);
             } else {
               return createImageBitmap(data);
@@ -525,23 +525,20 @@ export class AssetLoader {
    */
   private static loadWebAssembly = (item: ILoadItem) => {
     if (isWebAssemblySupported) {
-      // @ts-ignore
-      if (window.WebAssembly.instantiateStreaming) {
-        // @ts-ignore
-        return window.WebAssembly.instantiateStreaming(
+      if ((window as any).WebAssembly.instantiateStreaming) {
+        return (window as any).instantiateStreaming(
           AssetLoader.fetchItem(item),
           item.loaderOptions.importObject
         );
       } else {
-        return (
-          AssetLoader.fetchItem(item)
-            .then(response => response.arrayBuffer())
-            // @ts-ignore
-            .then(data => window.WebAssembly.instantiate(data, item.loaderOptions.importObject))
-            .catch(err => {
-              console.warn(err);
-            })
-        );
+        return AssetLoader.fetchItem(item)
+          .then(response => response.arrayBuffer())
+          .then(data =>
+            (window as any).WebAssembly.instantiate(data, item.loaderOptions.importObject)
+          )
+          .catch(err => {
+            console.warn(err);
+          });
       }
     } else {
       console.warn('WebAssembly is not supported');

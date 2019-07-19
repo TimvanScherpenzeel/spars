@@ -3,8 +3,7 @@
  */
 export default (() => {
   try {
-    // @ts-ignore missing type definition
-    return !!navigator.userActivation;
+    return !!(navigator as any).userActivation;
   } catch (err) {
     return false;
   }

@@ -97,21 +97,18 @@ export const registerAnalytics = (trackingIdentifier: string) => {
  * }
  */
 export const recordAnalyticsEvent = (record = {}) => {
-  // @ts-ignore Google Analytics snippet
-  if (window.ga !== undefined && typeof window.ga === 'function') {
+  if ((window as any).ga !== undefined && typeof (window as any).ga === 'function') {
     if (Object.keys(record).length <= 0) {
       console.warn('Analytics -> Record cannot be empty');
       return;
     }
 
     const callback = () => {
-      // @ts-ignore Google Analytics snippet
-      window.ga('send', record);
+      (window as any).ga('send', record);
     };
 
     if (isRequestIdleCallbackSupported) {
-      // @ts-ignore missing type definition
-      window.requestIdleCallback(callback);
+      (window as any).requestIdleCallback(callback);
     } else {
       callback();
     }
