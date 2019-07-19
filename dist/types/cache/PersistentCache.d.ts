@@ -4,6 +4,19 @@
  * IndexedDB is promisified by `idb-keyval`, a small abstraction around the IndexedDB API.
  */
 export declare class PersistentCache {
+    /**
+     * Convert ArrayBuffer to Blob
+     *
+     * @param buffer Buffer to convert
+     * @param type MIME type of ArrayBuffer to store
+     */
+    static convertArrayBufferToBlob: (buffer: ArrayBuffer, type: string) => Blob;
+    /**
+     * Convert Blob to ArrayBuffer
+     *
+     * @param blob Blob to convert
+     */
+    static convertBlobToArrayBuffer: (blob: Blob) => Promise<{}>;
     private memoryCache;
     private store;
     /**
@@ -17,7 +30,7 @@ export declare class PersistentCache {
      * Sets a { key: value } pair in the persistent cache
      *
      * NOTE: In order to store ArrayBuffers in IndexedDB you will need to convert them to Blobs
-     * See `utilities/convertArrayBufferToBlob.ts` and `utilities/convertBlobToArrayBuffer.ts`
+     * See `PersistentCache.convertArrayBufferToBlob()` and `PersistentCache.convertBlobToArrayBuffer()`
      *
      * @param key Key to set cache entry with
      * @param value Value to set cache entry with

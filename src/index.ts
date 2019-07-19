@@ -34,11 +34,4 @@ export { AssetLoader } from './loaders';
 export { fullScreen, pointerLock } from './polyfills';
 
 // Utilities
-export {
-  assert,
-  convertArrayBufferToBlob,
-  convertBlobToArrayBuffer,
-  createUUID,
-  debounce,
-  getQueryParameters,
-} from './utilities';
+export { assert, debounce, getQueryParameters } from './utilities';

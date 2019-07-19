@@ -408,7 +408,7 @@ var PersistentCache = /** @class */ (function () {
      * Sets a { key: value } pair in the persistent cache
      *
      * NOTE: In order to store ArrayBuffers in IndexedDB you will need to convert them to Blobs
-     * See `utilities/convertArrayBufferToBlob.ts` and `utilities/convertBlobToArrayBuffer.ts`
+     * See `PersistentCache.convertArrayBufferToBlob()` and `PersistentCache.convertBlobToArrayBuffer()`
      *
      * @param key Key to set cache entry with
      * @param value Value to set cache entry with
@@ -477,6 +477,31 @@ var PersistentCache = /** @class */ (function () {
         clear(this.store).catch(function (err) {
             console.warn("PersistentCache -> Clear: Store clearing has failed with error: " + err);
             _this.memoryCache.clear();
+        });
+    };
+    /**
+     * Convert ArrayBuffer to Blob
+     *
+     * @param buffer Buffer to convert
+     * @param type MIME type of ArrayBuffer to store
+     */
+    PersistentCache.convertArrayBufferToBlob = function (buffer, type) {
+        return new Blob([buffer], { type: type });
+    };
+    /**
+     * Convert Blob to ArrayBuffer
+     *
+     * @param blob Blob to convert
+     */
+    PersistentCache.convertBlobToArrayBuffer = function (blob) {
+        return new Promise(function (resolve, reject) {
+            var reader = new FileReader();
+            reader.addEventListener('loadend', function (event) {
+                // @ts-ignore
+                resolve(reader.result);
+            });
+            reader.addEventListener('error', reject);
+            reader.readAsArrayBuffer(blob);
         });
     };
     return PersistentCache;
@@ -2622,135 +2647,6 @@ _defineProperty(FontFaceObserver, "SUPPORTS_NATIVE_FONT_LOADING", null);
 _defineProperty(FontFaceObserver, "DEFAULT_TIMEOUT", 3000);
 
 /**
- * Convert ArrayBuffer to Blob
- *
- * @param buffer Buffer to convert
- * @param type MIME type of ArrayBuffer to store
- */
-var convertArrayBufferToBlob = function (buffer, type) {
-    return new Blob([buffer], { type: type });
-};
-
-/**
- * Convert Blob to ArrayBuffer
- *
- * @param blob Blob to convert
- */
-var convertBlobToArrayBuffer = function (blob) {
-    return new Promise(function (resolve, reject) {
-        var reader = new FileReader();
-        reader.addEventListener('loadend', function (event) {
-            // @ts-ignore
-            resolve(reader.result);
-        });
-        reader.addEventListener('error', reject);
-        reader.readAsArrayBuffer(blob);
-    });
-};
-
-/**
- * Creates a single interface around the Crypto API (IE 11 requires a `ms` prefix)
- *
- * For current browser support please refer to: https://caniuse.com/#search=crypto
- */
-var getRandomValuesInterface = (typeof crypto !== 'undefined' &&
-    crypto.getRandomValues &&
-    crypto.getRandomValues.bind(crypto)) ||
-    // @ts-ignore msCrypto does not have a type entry but is valid in IE 11
-    (typeof msCrypto !== 'undefined' &&
-        // @ts-ignore msCrypto does not have a type entry but is valid in IE 11
-        typeof window.msCrypto.getRandomValues === 'function' &&
-        // @ts-ignore msCrypto does not have a type entry but is valid in IE 11
-        msCrypto.getRandomValues.bind(msCrypto));
-/**
- * Get a 16 random byte values array either using the Crypto API or the Math.random() fallback
- */
-var getRandomValues = function () {
-    if (getRandomValuesInterface) {
-        var data = new Uint8Array(16);
-        getRandomValuesInterface(data);
-        return data;
-    }
-    else {
-        var data = new Array(16);
-        var r = 0;
-        for (var i = 0; i < 16; i++) {
-            if ((i & 0x03) === 0) {
-                r = Math.random() * 0x100000000;
-            }
-            data[i] = (r >>> ((i & 0x03) << 3)) & 0xff;
-        }
-        return data;
-    }
-};
-/**
- * Compute byte to hexadecimal array
- */
-var hex = [];
-for (var i = 0; i < 256; i++) {
-    hex[i] = (i + 0x100).toString(16).substr(1);
-}
-/**
- * Create a 32 character RFC-compliant V4 unique identifier
- *
- * https://www.ietf.org/rfc/rfc4122.txt
- */
-var createUUID = function () {
-    var r = getRandomValues();
-    /**
-     * Convert array of 16 byte values to UUID string format of the form:
-     * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-     */
-    // Per V4.4, set bits for version and `clock_seq_hi_and_reserved`
-    r[6] = (r[6] & 0x0f) | 0x40;
-    r[8] = (r[8] & 0x3f) | 0x80;
-    // Possibly necessary to work out a memory issue in Chrome and Node
-    // https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
-    // return [
-    //   hex[r[0]],
-    //   hex[r[1]],
-    //   hex[r[2]],
-    //   hex[r[3]],
-    //   '-',
-    //   hex[r[4]],
-    //   hex[r[5]],
-    //   '-',
-    //   hex[r[6]],
-    //   hex[r[7]],
-    //   '-',
-    //   hex[r[8]],
-    //   hex[r[9]],
-    //   '-',
-    //   hex[r[10]],
-    //   hex[r[11]],
-    //   hex[r[12]],
-    //   hex[r[13]],
-    //   hex[r[14]],
-    //   hex[r[15]],
-    // ].join('');
-    return (hex[r[0]] +
-        hex[r[1]] +
-        hex[r[2]] +
-        hex[r[3]] +
-        '-' +
-        hex[r[4]] +
-        hex[r[5]] +
-        '-' +
-        hex[r[6]] +
-        hex[r[7]] +
-        '-' +
-        hex[r[8]] +
-        hex[r[9]] +
-        '-' +
-        hex[r[10]] +
-        hex[r[11]] +
-        hex[r[12]] +
-        hex[r[13]] +
-        hex[r[14]] +
-        hex[r[15]]);
-};
-
-/**
  * Get search parameters from URL
  *
  * ?isDebug=false&isGUI=true would result in { isDebug: false, isGUI: true }
@@ -3566,4 +3462,4 @@ var pointerLock = {
 
 // Analytics
 
-export { AssetLoader, mitt as EventEmitter, PersistentCache, assert, convertArrayBufferToBlob, convertBlobToArrayBuffer, createAudioContext, createUUID, debounce, deleteCookie, eventEmitter, features, fullScreen, getCookie, getQueryParameters, isAutoplayAllowed, listenToConnectionChange, listenToOrientationChange, listenToVisibilityChange, listenToWindowSizeChange, pointerLock, recordAnalyticsEvent, registerAnalytics, setCookie, stopListeningToConnectionChange, stopListeningToOrientationChange, stopListeningToVisibilityChange, stopListeningToWindowSizeChange, unlockAutoplay };
+export { AssetLoader, mitt as EventEmitter, PersistentCache, assert, createAudioContext, debounce, deleteCookie, eventEmitter, features, fullScreen, getCookie, getQueryParameters, isAutoplayAllowed, listenToConnectionChange, listenToOrientationChange, listenToVisibilityChange, listenToWindowSizeChange, pointerLock, recordAnalyticsEvent, registerAnalytics, setCookie, stopListeningToConnectionChange, stopListeningToOrientationChange, stopListeningToVisibilityChange, stopListeningToWindowSizeChange, unlockAutoplay };

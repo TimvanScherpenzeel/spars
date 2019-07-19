@@ -42,9 +42,6 @@ exports.pointerLock = polyfills_1.pointerLock;
 // Utilities
 var utilities_1 = require("./utilities");
 exports.assert = utilities_1.assert;
-exports.convertArrayBufferToBlob = utilities_1.convertArrayBufferToBlob;
-exports.convertBlobToArrayBuffer = utilities_1.convertBlobToArrayBuffer;
-exports.createUUID = utilities_1.createUUID;
 exports.debounce = utilities_1.debounce;
 exports.getQueryParameters = utilities_1.getQueryParameters;
 //# sourceMappingURL=index.js.map

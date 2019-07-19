@@ -6,4 +6,4 @@ export { EventEmitter, eventEmitter, listenToConnectionChange, listenToOrientati
 export { features } from './features';
 export { AssetLoader } from './loaders';
 export { fullScreen, pointerLock } from './polyfills';
-export { assert, convertArrayBufferToBlob, convertBlobToArrayBuffer, createUUID, debounce, getQueryParameters, } from './utilities';
+export { assert, debounce, getQueryParameters } from './utilities';

@@ -47,7 +47,7 @@ var PersistentCache = /** @class */ (function () {
      * Sets a { key: value } pair in the persistent cache
      *
      * NOTE: In order to store ArrayBuffers in IndexedDB you will need to convert them to Blobs
-     * See `utilities/convertArrayBufferToBlob.ts` and `utilities/convertBlobToArrayBuffer.ts`
+     * See `PersistentCache.convertArrayBufferToBlob()` and `PersistentCache.convertBlobToArrayBuffer()`
      *
      * @param key Key to set cache entry with
      * @param value Value to set cache entry with
@@ -116,6 +116,31 @@ var PersistentCache = /** @class */ (function () {
         idb_keyval_1.clear(this.store).catch(function (err) {
             console.warn("PersistentCache -> Clear: Store clearing has failed with error: " + err);
             _this.memoryCache.clear();
+        });
+    };
+    /**
+     * Convert ArrayBuffer to Blob
+     *
+     * @param buffer Buffer to convert
+     * @param type MIME type of ArrayBuffer to store
+     */
+    PersistentCache.convertArrayBufferToBlob = function (buffer, type) {
+        return new Blob([buffer], { type: type });
+    };
+    /**
+     * Convert Blob to ArrayBuffer
+     *
+     * @param blob Blob to convert
+     */
+    PersistentCache.convertBlobToArrayBuffer = function (blob) {
+        return new Promise(function (resolve, reject) {
+            var reader = new FileReader();
+            reader.addEventListener('loadend', function (event) {
+                // @ts-ignore
+                resolve(reader.result);
+            });
+            reader.addEventListener('error', reject);
+            reader.readAsArrayBuffer(blob);
         });
     };
     return PersistentCache;

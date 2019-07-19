@@ -35,6 +35,34 @@ const isAllowedAsKey = (key: any) => {
  */
 
 export class PersistentCache {
+  /**
+   * Convert ArrayBuffer to Blob
+   *
+   * @param buffer Buffer to convert
+   * @param type MIME type of ArrayBuffer to store
+   */
+  public static convertArrayBufferToBlob = (buffer: ArrayBuffer, type: string) =>
+    new Blob([buffer], { type });
+
+  /**
+   * Convert Blob to ArrayBuffer
+   *
+   * @param blob Blob to convert
+   */
+  public static convertBlobToArrayBuffer = (blob: Blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.addEventListener('loadend', (event: Event) => {
+        // @ts-ignore
+        resolve(reader.result);
+      });
+
+      reader.addEventListener('error', reject);
+      reader.readAsArrayBuffer(blob);
+    });
+  };
+
   // Back persistent cache with in-memory cache in order to maintain functionality
   // in case IndexedDB is not available (private browsing mode)
   private memoryCache: Map<IDBValidKey, any> = new Map();
@@ -58,7 +86,7 @@ export class PersistentCache {
    * Sets a { key: value } pair in the persistent cache
    *
    * NOTE: In order to store ArrayBuffers in IndexedDB you will need to convert them to Blobs
-   * See `utilities/convertArrayBufferToBlob.ts` and `utilities/convertBlobToArrayBuffer.ts`
+   * See `PersistentCache.convertArrayBufferToBlob()` and `PersistentCache.convertBlobToArrayBuffer()`
    *
    * @param key Key to set cache entry with
    * @param value Value to set cache entry with
