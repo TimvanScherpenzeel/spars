@@ -19,16 +19,17 @@ function onPointerUp(event: any): void {
 }
 
 function onPointerMove(event: any): void {
-  eventEmitter.emit('ALPINE::POINTER_MOVE_CHANGE', {
-    isPointerDown,
-    isTouch,
-    positionX: isTouch ? event.touches[0].clientX : event.clientX,
-    positionY: isTouch ? event.touches[0].clientY : event.clientY,
-  });
+  if (isPointerDown) {
+    eventEmitter.emit('ALPINE::POINTER_CHANGE', {
+      isTouch,
+      positionX: isTouch ? event.touches[0].clientX : event.clientX,
+      positionY: isTouch ? event.touches[0].clientY : event.clientY,
+    });
+  }
 }
 
 /**
- * Start listening to pointer change events
+ * Start listening to keycode change events
  */
 export const listenToPointerChange = (element = window): void => {
   element.addEventListener('touchstart', onPointerDown, false);
@@ -40,7 +41,7 @@ export const listenToPointerChange = (element = window): void => {
 };
 
 /**
- * Stop listening to pointer change events
+ * Stop listening to keycode change events
  */
 export const stopListeningToPointerChange = (element = window): void => {
   element.removeEventListener('touchstart', onPointerDown, false);

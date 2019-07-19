@@ -140,11 +140,11 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 
 AlpineToolkit.listenToPointerChange();
 
-const pointerChangeMoveHandler = event => {
+const pointerChangeHandler = event => {
   console.log(event);
 };
 
-AlpineToolkit.eventEmitter.on('ALPINE::POINTER_MOVE_CHANGE', pointerChangeMoveHandler);
+AlpineToolkit.eventEmitter.on('ALPINE::POINTER_CHANGE', pointerChangeHandler);
 
 // AlpineToolkit.listenToVisibilityChange();
 
