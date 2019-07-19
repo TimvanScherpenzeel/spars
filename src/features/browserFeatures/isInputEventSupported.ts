@@ -1,3 +1,6 @@
+// Types
+import { TNullable } from '../../types';
+
 /**
  * Tests for InputEvent support
  */
@@ -10,14 +13,18 @@ export default ((): boolean => {
 
     let isSupported = false;
 
-    const inputElement = document.createElement('input');
-    inputElement.addEventListener('input', (event: any) => {
+    const handler = (event: any): void => {
       if (event.inputType === 'deleteContentForward') {
         isSupported = true;
       }
-    });
+    };
 
+    let inputElement: TNullable<HTMLInputElement> = document.createElement('input');
+    inputElement.addEventListener('input', (event: any) => handler(event), false);
     inputElement.dispatchEvent(inputEvent);
+    inputElement.removeEventListener('input', handler, false);
+    inputElement.remove();
+    inputElement = null;
 
     return isSupported;
   } catch (err) {

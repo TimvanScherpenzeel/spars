@@ -56,5 +56,5 @@ export const listenToKeyCodeChange = (): void => {
  * Stop listening to keycode change events
  */
 export const stopListeningToKeyCodeChange = (): void => {
-  window.removeEventListener('keydown', (event: KeyboardEvent) => onKeyCodeChange(event), false);
+  window.removeEventListener('keydown', onKeyCodeChange, false);
 };
