@@ -12,7 +12,7 @@ const debouncedOnWindowSizeChange = debounce(onWindowSizeChange, 100);
 /**
  * Monitor window size changes
  */
-function onWindowSizeChange() {
+function onWindowSizeChange(): void {
   eventEmitter.emit('ALPINE::WINDOW_SIZE_CHANGE', {
     windowHeight: window.innerHeight,
     windowWidth: window.innerWidth,
@@ -22,7 +22,7 @@ function onWindowSizeChange() {
 /**
  * Start listening to window size change events
  */
-export const listenToWindowSizeChange = () => {
+export const listenToWindowSizeChange = (): void => {
   window.addEventListener('resize', debouncedOnWindowSizeChange, false);
   window.addEventListener('orientationchange', debouncedOnWindowSizeChange, false);
 };
@@ -30,7 +30,7 @@ export const listenToWindowSizeChange = () => {
 /**
  * Stop listening to window size change events
  */
-export const stopListeningToWindowSizeChange = () => {
+export const stopListeningToWindowSizeChange = (): void => {
   window.removeEventListener('resize', debouncedOnWindowSizeChange, false);
   window.removeEventListener('orientationchange', debouncedOnWindowSizeChange, false);
 };

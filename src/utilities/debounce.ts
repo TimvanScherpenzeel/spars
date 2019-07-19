@@ -6,15 +6,15 @@
  * @param wait Amount of milliseconds to wait
  * @param immediate Trigger function on the leader edge instead of the trailing
  */
-export const debounce = (func: any, wait: number, immediate: boolean = false) => {
+export const debounce = (func: any, wait: number, immediate: boolean = false): (() => void) => {
   let timeout: any;
 
-  return function executedFunction() {
+  return function executedFunction(): void {
     // @ts-ignore this implicitly has any type, (this as any) does not fix it
     const context = this;
     const args = arguments;
 
-    const later = () => {
+    const later = (): void => {
       timeout = null;
 
       if (!immediate) {

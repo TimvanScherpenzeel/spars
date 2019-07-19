@@ -1,4 +1,4 @@
 /**
  * Tests for ServiceWorker support
  */
-export default (() => !!navigator.serviceWorker || false)();
+export default ((): boolean => !!navigator.serviceWorker || false)();

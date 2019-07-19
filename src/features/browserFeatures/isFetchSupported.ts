@@ -1,4 +1,4 @@
 /**
  * Tests for fetch support
  */
-export default (() => !!window.fetch || false)();
+export default ((): boolean => !!window.fetch || false)();

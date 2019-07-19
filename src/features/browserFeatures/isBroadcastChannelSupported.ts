@@ -1,4 +1,4 @@
 /**
  * Tests for BroadcastChannel support
  */
-export default (() => !!(window as any).BroadcastChannel || false)();
+export default ((): boolean => !!(window as any).BroadcastChannel || false)();

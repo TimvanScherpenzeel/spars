@@ -9,7 +9,7 @@ import { assert } from '../utilities/assert';
  *
  * @param key Key to validate
  */
-const isAllowedAsKey = (key: any) => {
+const isAllowedAsKey = (key: any): boolean => {
   if (typeof key === 'number' || typeof key === 'string') {
     return true;
   }
@@ -41,7 +41,7 @@ export class PersistentCache {
    * @param buffer Buffer to convert
    * @param type MIME type of ArrayBuffer to store
    */
-  public static convertArrayBufferToBlob = (buffer: ArrayBuffer, type: string) =>
+  public static convertArrayBufferToBlob = (buffer: ArrayBuffer, type: string): Blob =>
     new Blob([buffer], { type });
 
   /**
@@ -49,19 +49,21 @@ export class PersistentCache {
    *
    * @param blob Blob to convert
    */
-  public static convertBlobToArrayBuffer = (blob: Blob) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
+  public static convertBlobToArrayBuffer = (blob: Blob): Promise<void> => {
+    return new Promise(
+      (resolve, reject): void => {
+        const reader = new FileReader();
 
-      reader.addEventListener('loadend', (event: Event) => {
-        // TODO: fix definition
-        // @ts-ignore
-        resolve(reader.result);
-      });
+        reader.addEventListener('loadend', (event: Event) => {
+          // TODO: fix definition
+          // @ts-ignore
+          resolve(reader.result);
+        });
 
-      reader.addEventListener('error', reject);
-      reader.readAsArrayBuffer(blob);
-    });
+        reader.addEventListener('error', reject);
+        reader.readAsArrayBuffer(blob);
+      }
+    );
   };
 
   // Back persistent cache with in-memory cache in order to maintain functionality
@@ -92,7 +94,7 @@ export class PersistentCache {
    * @param key Key to set cache entry with
    * @param value Value to set cache entry with
    */
-  public set(key: IDBValidKey, value: any) {
+  public set(key: IDBValidKey, value: any): void {
     assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
 
     set(key, value, this.store).catch(err => {
@@ -109,37 +111,41 @@ export class PersistentCache {
    *
    * @param key Key of cache entry to get
    */
-  public get(key: IDBValidKey) {
+  public get(key: IDBValidKey): Promise<any> {
     assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
 
-    return new Promise(resolve => {
-      get(key, this.store)
-        .then(value => {
-          resolve(value);
-        })
-        .catch(err => {
-          console.warn(`PersistentCache -> Get: { key: ${key} } has failed with error: ${err}`);
+    return new Promise(
+      (resolve): void => {
+        get(key, this.store)
+          .then(value => {
+            resolve(value);
+          })
+          .catch(err => {
+            console.warn(`PersistentCache -> Get: { key: ${key} } has failed with error: ${err}`);
 
-          this.memoryCache.get(key);
-        });
-    });
+            this.memoryCache.get(key);
+          });
+      }
+    );
   }
 
   /**
    * Gets all { key: value } pairs in the persistent cache
    */
-  public getKeys() {
-    return new Promise(resolve => {
-      keys(this.store)
-        .then(storeKeys => {
-          resolve(storeKeys);
-        })
-        .catch(err => {
-          console.warn(`PersistentCache -> Keys: { key: ${keys} } has failed with error: ${err}`);
+  public getKeys(): Promise<any[]> {
+    return new Promise(
+      (resolve): void => {
+        keys(this.store)
+          .then(storeKeys => {
+            resolve(storeKeys);
+          })
+          .catch(err => {
+            console.warn(`PersistentCache -> Keys: { key: ${keys} } has failed with error: ${err}`);
 
-          this.memoryCache.keys();
-        });
-    });
+            this.memoryCache.keys();
+          });
+      }
+    );
   }
 
   /**
@@ -147,7 +153,7 @@ export class PersistentCache {
    *
    * @param key Key of cache entry to delete
    */
-  public delete(key: IDBValidKey) {
+  public delete(key: IDBValidKey): void {
     assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
 
     del(key, this.store).catch(err => {
@@ -160,7 +166,7 @@ export class PersistentCache {
   /**
    * Clear the entire persistent cache from { key: value } pairs
    */
-  public clear() {
+  public clear(): void {
     clear(this.store).catch(err => {
       console.warn(`PersistentCache -> Clear: Store clearing has failed with error: ${err}`);
 

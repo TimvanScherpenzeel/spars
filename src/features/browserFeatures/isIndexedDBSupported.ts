@@ -1,7 +1,7 @@
 /**
  * Tests for IndexedDB support
  */
-export default (() => {
+export default ((): boolean => {
   try {
     return !!window.indexedDB;
   } catch (err) {

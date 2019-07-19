@@ -40,19 +40,20 @@ const prefix =
   [];
 
 export const pointerLock = {
-  requestPointerLock: (element: HTMLElement) => (element as any)[prefix[key.requestPointerLock]](),
+  requestPointerLock: (element: HTMLElement): void =>
+    (element as any)[prefix[key.requestPointerLock]](),
 
   get exitPointerLock() {
     return (document as any)[prefix[key.exitPointerLock]].bind(document);
   },
 
-  addEventListener: (type: string, handler: () => void, options?: any) =>
+  addEventListener: (type: string, handler: () => void, options?: any): void =>
     document.addEventListener(prefix[(key as any)[type]], handler, options),
 
-  removeEventListener: (type: string, handler: () => void, options?: any) =>
+  removeEventListener: (type: string, handler: () => void, options?: any): void =>
     document.removeEventListener(prefix[(key as any)[type]], handler, options),
 
-  get pointerlockEnabled() {
+  get pointerlockEnabled(): boolean {
     return Boolean(
       'pointerLockElement' in document ||
         webkit[0] in document ||
@@ -64,14 +65,14 @@ export const pointerLock = {
   // tslint:disable-next-line:no-empty
   set pointerlockEnabled(val) {},
 
-  get pointerLockElement() {
+  get pointerLockElement(): void {
     return (document as any)[prefix[(key as any).pointerLockElement]];
   },
 
   // tslint:disable-next-line:no-empty
   set pointerLockElement(val) {},
 
-  get onpointerlockchange() {
+  get onpointerlockchange(): void {
     return (document as any)[`on${prefix[key.pointerlockchange]}`.toLowerCase()];
   },
 
@@ -79,7 +80,7 @@ export const pointerLock = {
     (document as any)[`on${prefix[key.pointerlockchange]}`.toLowerCase()] = handler;
   },
 
-  get onpointerlockerror() {
+  get onpointerlockerror(): void {
     return (document as any)[`on${prefix[key.pointerlockerror]}`.toLowerCase()];
   },
 

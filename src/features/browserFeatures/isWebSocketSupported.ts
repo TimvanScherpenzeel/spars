@@ -1,4 +1,4 @@
 /**
  * Tests for WebSocket support
  */
-export default (() => !!(window as any).WebSocket || false)();
+export default ((): boolean => !!(window as any).WebSocket || false)();

@@ -35,7 +35,8 @@ import {
 /**
  * Collect and structure all major device and browser specific WebGL features
  */
-export default (() => {
+// TODO: add proper type definition
+export default ((): any => {
   const attributes = {
     stencil: true,
   };

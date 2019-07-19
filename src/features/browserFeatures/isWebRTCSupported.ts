@@ -1,7 +1,7 @@
 /**
  * Tests for WebRTC support
  */
-export default (() =>
+export default ((): boolean =>
   (!!(window as any).RTCPeerConnection && !!(window as any).RTCDataChannelEvent) ||
   !!(window as any).webkitRTCPeerConnection ||
   !!(window as any).mozRTCPeerConnection ||

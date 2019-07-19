@@ -43,33 +43,34 @@ const prefix =
   [];
 
 export const fullScreen = {
-  requestFullscreen: (element: HTMLElement) => (element as any)[prefix[key.requestFullscreen]](),
+  requestFullscreen: (element: HTMLElement): void =>
+    (element as any)[prefix[key.requestFullscreen]](),
 
-  get exitFullscreen() {
+  get exitFullscreen(): void {
     return (document as any)[prefix[key.exitFullscreen]].bind(document);
   },
 
-  addEventListener: (type: string, handler: () => void, options?: any) =>
+  addEventListener: (type: string, handler: () => void, options?: any): void =>
     document.addEventListener(prefix[(key as any)[type]], handler, options),
 
-  removeEventListener: (type: string, handler: () => void, options?: any) =>
+  removeEventListener: (type: string, handler: () => void, options?: any): void =>
     document.removeEventListener(prefix[(key as any)[type]], handler, options),
 
-  get fullscreenSupported() {
+  get fullscreenSupported(): boolean {
     return Boolean((document as any)[prefix[key.fullscreenEnabled]]);
   },
 
   // tslint:disable-next-line:no-empty
   set fullscreenSupported(val) {},
 
-  get fullscreenElement() {
+  get fullscreenElement(): void {
     return (document as any)[prefix[key.fullscreenElement]];
   },
 
   // tslint:disable-next-line:no-empty
   set fullscreenElement(val) {},
 
-  get onfullscreenchange() {
+  get onfullscreenchange(): void {
     return (document as any)[`on${prefix[key.fullscreenchange]}`.toLowerCase()];
   },
 
@@ -77,7 +78,7 @@ export const fullScreen = {
     (document as any)[`on${prefix[key.fullscreenchange]}`.toLowerCase()] = handler;
   },
 
-  get onfullscreenerror() {
+  get onfullscreenerror(): void {
     return (document as any)[`on${prefix[key.fullscreenerror]}`.toLowerCase()];
   },
 

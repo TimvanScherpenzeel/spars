@@ -5,7 +5,9 @@
  *
  * @param url query parameters
  */
-export const getQueryParameters = (url = window.location.search) =>
+export const getQueryParameters = (
+  url = window.location.search
+): { [parameter: string]: boolean } =>
   url
     // Remove ?
     .slice(1)

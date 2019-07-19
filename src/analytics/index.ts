@@ -7,7 +7,7 @@ import isDoNotTrackEnabled from '../features/browserSettings/isDoNotTrackEnabled
  *
  * @param trackingIdentifier Tracking identifier in format: UA-XXXX-YY
  */
-export const registerAnalytics = (trackingIdentifier: string) => {
+export const registerAnalytics = (trackingIdentifier: string): void => {
   if (
     trackingIdentifier === undefined ||
     !/^ua-\d{4,9}-\d{1,4}$/i.test(trackingIdentifier.toString())
@@ -19,7 +19,7 @@ export const registerAnalytics = (trackingIdentifier: string) => {
   if (!isDoNotTrackEnabled) {
     // Default async GA snippet as provided by Google
     // tslint:disable-next-line:only-arrow-functions
-    (function(i, s, o, g, r, a, m) {
+    (function(i, s, o, g, r, a, m): void {
       // @ts-ignore Google Analytics snippet
       i.GoogleAnalyticsObject = r;
       // @ts-ignore Google Analytics snippet
@@ -27,7 +27,7 @@ export const registerAnalytics = (trackingIdentifier: string) => {
         // @ts-ignore Google Analytics snippet
         i[r] ||
         // tslint:disable-next-line:only-arrow-functions
-        function() {
+        function(): void {
           // @ts-ignore Google Analytics snippet
           (i[r].q = i[r].q || []).push(arguments);
         }),
@@ -96,14 +96,14 @@ export const registerAnalytics = (trackingIdentifier: string) => {
  *   exFatal: false,
  * }
  */
-export const recordAnalyticsEvent = (record = {}) => {
+export const recordAnalyticsEvent = (record = {}): void => {
   if ((window as any).ga !== undefined && typeof (window as any).ga === 'function') {
     if (Object.keys(record).length <= 0) {
       console.warn('Analytics -> Record cannot be empty');
       return;
     }
 
-    const callback = () => {
+    const callback = (): void => {
       (window as any).ga('send', record);
     };
 

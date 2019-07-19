@@ -1,6 +1,9 @@
 // Features
 import isCookieEnabled from '../features/browserSettings/isCookieEnabled';
 
+// Types
+import { TUndefinable } from '../types';
+
 // NOTE: When blocking cookies Firefox throws a security error for localStorage and indexedDB blocking further execution.
 /**
  * Set a cookie
@@ -9,7 +12,7 @@ import isCookieEnabled from '../features/browserSettings/isCookieEnabled';
  * @param value Value of cookie
  * @param expiryDays After how many days the cookie expires
  */
-export const setCookie = (key: string, value: string, expiryDays = 365) => {
+export const setCookie = (key: string, value: string, expiryDays = 365): void => {
   if (isCookieEnabled) {
     const date = new Date();
     date.setTime(date.getTime() + expiryDays * 86400000); // 24 * 60 * 60 * 1000 = 1 day
@@ -29,7 +32,8 @@ export const setCookie = (key: string, value: string, expiryDays = 365) => {
  *
  * @param key Key of cookie to get
  */
-export const getCookie = (key: string) => {
+// TODO: look at if we can get rid of TUndefinable
+export const getCookie = (key: string): TUndefinable<string | boolean> => {
   if (isCookieEnabled) {
     const result = document.cookie.match(`(^|;)\\s*${key}\\s*=\\s*([^;]+)`);
 
@@ -46,7 +50,7 @@ export const getCookie = (key: string) => {
  *
  * @param key Key of cookie to delete
  */
-export const deleteCookie = (key: string) => {
+export const deleteCookie = (key: string): void => {
   if (isCookieEnabled) {
     document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=${window.location.hostname.replace(
       'www.',

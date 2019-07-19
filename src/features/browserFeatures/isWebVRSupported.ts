@@ -1,4 +1,4 @@
 /**
  * Tests for WebVR support
  */
-export default (() => !!navigator.getVRDisplays || false)();
+export default ((): boolean => !!navigator.getVRDisplays || false)();

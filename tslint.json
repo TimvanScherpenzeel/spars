@@ -6,7 +6,7 @@
     "no-bitwise": false,
     "no-console": false,
     "trailing-comma": true,
-    "only-arrow-functions": false
+    "typedef": [true, "call-signature", "property-declaration", "arrow-call-signature"]
   },
   "rulesDirectory": []
 }

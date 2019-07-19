@@ -1,11 +1,11 @@
 /**
  * Get supported media formats (audio & video)
  */
-export default (() => {
+export default ((): any => {
   const audio = new Audio();
   const video = document.createElement('video');
 
-  function canPlay(type: HTMLAudioElement | HTMLVideoElement, mimeType: string) {
+  function canPlay(type: HTMLAudioElement | HTMLVideoElement, mimeType: string): boolean {
     const support = type.canPlayType(mimeType);
 
     return !!(support === 'probably' || support === 'maybe');

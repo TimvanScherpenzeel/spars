@@ -1,7 +1,7 @@
 /**
  * Tests for inline web worker support
  */
-export default (() => {
+export default ((): boolean => {
   try {
     const URL = window.URL || (window as any).webkitURL;
 

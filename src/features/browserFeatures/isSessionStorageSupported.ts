@@ -1,7 +1,7 @@
 /**
  * Tests for SessionStorage support
  */
-export default (() => {
+export default ((): boolean => {
   try {
     return !!window.sessionStorage;
   } catch (err) {

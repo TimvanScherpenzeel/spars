@@ -12,7 +12,7 @@ const debouncedOnOrientationChange = debounce(onOrientationChange, 100);
 /**
  * Monitor orientation changes
  */
-function onOrientationChange() {
+function onOrientationChange(): void {
   const isLandscape = window.innerWidth > window.innerHeight;
   const isPortrait = !isLandscape;
 
@@ -25,13 +25,13 @@ function onOrientationChange() {
 /**
  * Start listening to orientation change events
  */
-export const listenToOrientationChange = () => {
+export const listenToOrientationChange = (): void => {
   window.addEventListener('orientationchange', debouncedOnOrientationChange, false);
 };
 
 /**
  * Stop listening to orientation change events
  */
-export const stopListeningToOrientationChange = () => {
+export const stopListeningToOrientationChange = (): void => {
   window.removeEventListener('orientationchange', debouncedOnOrientationChange, false);
 };

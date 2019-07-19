@@ -1,7 +1,7 @@
 /**
  * Tests for WebGL support
  */
-export default (() => {
+export default ((): boolean => {
   const canvas = document.createElement('canvas');
   const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 

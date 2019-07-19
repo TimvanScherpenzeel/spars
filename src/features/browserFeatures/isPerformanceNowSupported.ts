@@ -1,4 +1,4 @@
 /**
  * Tests for performance.now support
  */
-export default (() => !!(window.performance && window.performance.now) || false)();
+export default ((): boolean => !!(window.performance && window.performance.now) || false)();

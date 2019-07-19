@@ -14,14 +14,15 @@ import isUserActivationSupported from '../features/browserFeatures/isUserActivat
 // - On mobile, the user has [added the site to their home screen].
 
 let autoplayAllowed = false;
-export const isAutoplayAllowed = () => autoplayAllowed;
+
+export const isAutoplayAllowed = (): boolean => autoplayAllowed;
 
 /**
  * Creates a new iOS safe Web Audio context (https://github.com/Jam3/ios-safe-audio-context/blob/master/index.js)
  *
  * @param desiredSampleRate Desired sample rate of reated audio context
  */
-export const createAudioContext = (desiredSampleRate = 44100) => {
+export const createAudioContext = (desiredSampleRate = 44100): AudioContext => {
   let context = new ((window as any).AudioContext || (window as any).webkitAudioContext)();
 
   // https://stackoverflow.com/questions/17892345/webkit-audio-distorts-on-ios-6-iphone-5-first-time-after-power-cycling
@@ -49,51 +50,53 @@ export const createAudioContext = (desiredSampleRate = 44100) => {
  *
  * @param element DOM element to attach the unlock listener to
  */
-export const unlockAutoplay = (element: HTMLElement) =>
-  new Promise((resolve, reject) => {
-    // https://developers.google.com/web/updates/2019/01/nic72#user-activation
-    if (isUserActivationSupported && (navigator as any).userActivation.hasBeenActive === true) {
-      autoplayAllowed = true;
+export const unlockAutoplay = (element: HTMLElement): Promise<boolean> =>
+  new Promise(
+    (resolve, reject): void => {
+      // https://developers.google.com/web/updates/2019/01/nic72#user-activation
+      if (isUserActivationSupported && (navigator as any).userActivation.hasBeenActive === true) {
+        autoplayAllowed = true;
 
-      resolve(true);
-    }
+        resolve(true);
+      }
 
-    const context = createAudioContext();
+      const context = createAudioContext();
 
-    if (context.state === 'suspended') {
-      autoplayAllowed = false;
+      if (context.state === 'suspended') {
+        autoplayAllowed = false;
 
-      eventEmitter.emit('ALPINE::AUTOPLAY_CHANGE', {
-        autoplayAllowed,
-      });
+        eventEmitter.emit('ALPINE::AUTOPLAY_CHANGE', {
+          autoplayAllowed,
+        });
 
-      const unlock = () => {
-        context
-          .resume()
-          .then(() => {
-            element.removeEventListener('click', unlock);
-            element.removeEventListener('touchstart', unlock);
-            element.removeEventListener('touchend', unlock);
+        const unlock = (): void => {
+          context
+            .resume()
+            .then(() => {
+              element.removeEventListener('click', unlock);
+              element.removeEventListener('touchstart', unlock);
+              element.removeEventListener('touchend', unlock);
 
-            autoplayAllowed = true;
+              autoplayAllowed = true;
 
-            eventEmitter.emit('ALPINE::AUTOPLAY_CHANGE', {
-              autoplayAllowed,
+              eventEmitter.emit('ALPINE::AUTOPLAY_CHANGE', {
+                autoplayAllowed,
+              });
+
+              resolve(true);
+            })
+            .catch((err: Error) => {
+              reject(err);
             });
+        };
 
-            resolve(true);
-          })
-          .catch((err: Error) => {
-            reject(err);
-          });
-      };
+        element.addEventListener('click', unlock, false);
+        element.addEventListener('touchstart', unlock, false);
+        element.addEventListener('touchend', unlock, false);
+      } else {
+        autoplayAllowed = true;
 
-      element.addEventListener('click', unlock, false);
-      element.addEventListener('touchstart', unlock, false);
-      element.addEventListener('touchend', unlock, false);
-    } else {
-      autoplayAllowed = true;
-
-      resolve(true);
+        resolve(true);
+      }
     }
-  });
+  );

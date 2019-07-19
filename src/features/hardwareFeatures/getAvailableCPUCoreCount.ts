@@ -1,4 +1,4 @@
 /**
  * Gets the CPU cores available for web worker threading
  */
-export default (() => navigator.hardwareConcurrency || 0)();
+export default ((): number => navigator.hardwareConcurrency || 0)();

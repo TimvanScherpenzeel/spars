@@ -1,4 +1,4 @@
 /**
  * Tests for PerformanceObserver support
  */
-export default (() => !!(window as any).PerformanceObserver || false)();
+export default ((): boolean => !!(window as any).PerformanceObserver || false)();

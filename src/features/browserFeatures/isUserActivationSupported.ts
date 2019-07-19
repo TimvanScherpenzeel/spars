@@ -1,7 +1,7 @@
 /**
  * Tests for UserActivation support
  */
-export default (() => {
+export default ((): boolean => {
   try {
     return !!(navigator as any).userActivation;
   } catch (err) {

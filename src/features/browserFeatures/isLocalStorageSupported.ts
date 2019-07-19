@@ -1,7 +1,7 @@
 /**
  * Tests for LocalStorage support
  */
-export default (() => {
+export default ((): boolean => {
   try {
     return !!window.localStorage;
   } catch (err) {

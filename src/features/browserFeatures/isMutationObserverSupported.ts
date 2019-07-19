@@ -1,4 +1,4 @@
 /**
  * Tests for MutationObserver support
  */
-export default (() => !!(window as any).MutationObserver || false)();
+export default ((): boolean => !!(window as any).MutationObserver || false)();

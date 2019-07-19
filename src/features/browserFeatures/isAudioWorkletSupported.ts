@@ -1,4 +1,4 @@
 /**
  * Tests for Audio Worklet support
  */
-export default (() => !!(window as any).AudioWorklet || false)();
+export default ((): boolean => !!(window as any).AudioWorklet || false)();
