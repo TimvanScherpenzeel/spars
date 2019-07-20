@@ -2,6 +2,7 @@
 import { eventEmitter } from '../events/EventEmitter';
 
 // Features
+import getBrowserType from '../features/browserFeatures/getBrowserType';
 import isUserActivationSupported from '../features/browserFeatures/isUserActivationSupported';
 
 // https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
@@ -27,7 +28,7 @@ export const createAudioContext = (desiredSampleRate = 44100): AudioContext => {
 
   // https://stackoverflow.com/questions/17892345/webkit-audio-distorts-on-ios-6-iphone-5-first-time-after-power-cycling
   // Only occurs in iOS6+ devices and only when you first boot the iPhone, or play a audio/video with a different sample rate
-  if (/(iPhone|iPad)/i.test(navigator.userAgent) && context.sampleRate !== desiredSampleRate) {
+  if (getBrowserType.isiOS && context.sampleRate !== desiredSampleRate) {
     const buffer = context.createBuffer(1, 1, desiredSampleRate);
     const dummy = context.createBufferSource();
 

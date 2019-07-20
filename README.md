@@ -11,6 +11,7 @@
 - Add GUI support
 - Add state container
 - Hot reloading shaders
+- Add device orientation / motion API
 
 ## API
 
