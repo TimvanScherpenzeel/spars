@@ -1,4 +1,4 @@
-// Internal
+// Threads
 import { Task } from './Task';
 
 // Types

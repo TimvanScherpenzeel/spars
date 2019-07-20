@@ -1,5 +1,3 @@
-// Enums
-
 /**
  * Keys used for the loaders
  */
@@ -17,8 +15,6 @@ export enum ELoaderKey {
   WebAssembly = 'WebAssembly',
   XML = 'XML',
 }
-
-// Interfaces
 
 /**
  * Conditionally load by device type
@@ -55,8 +51,6 @@ export interface ILoadItem {
   body?: TBodyMethod;
   mimeType?: SupportedType;
 }
-
-// Types
 
 /**
  * Methods that can be called on a Request (object returned by fetch and that implements the [Body](https://developer.mozilla.org/en-US/docs/Web/API/Body) interface)

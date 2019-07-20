@@ -16,15 +16,13 @@ import isWebAssemblySupported from '../features/browserFeatures/isWebAssemblySup
 import { assert } from '../utilities';
 
 // Types
+import { TUndefinable, TVoidable } from '../types';
 import {
   ELoaderKey,
   IByDeviceTypeOptions,
   IBySupportedCompressedTextureOptions,
   ILoadItem,
 } from './types';
-
-// Types
-import { TUndefinable, TVoidable } from '../types';
 
 /**
  * Loader types and the extensions they handle

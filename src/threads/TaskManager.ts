@@ -1,4 +1,4 @@
-// Internal
+// Threads
 import { config } from './config';
 import { Task } from './Task';
 import { worklet } from './worklet';
