@@ -36,7 +36,7 @@ function onConnectionChangeHandler(): void {
     }
   }
 
-  eventEmitter.emit('ALPINE::CONNECTION_CHANGE', {
+  eventEmitter.emit('SPAR::CONNECTION_CHANGE', {
     connectionIsOnline,
     connectionSaveData,
     connectionSpeed,

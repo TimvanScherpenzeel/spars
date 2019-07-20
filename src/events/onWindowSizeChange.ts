@@ -13,7 +13,7 @@ const debouncedOnWindowSizeChange = debounce(onWindowSizeChangeHandler, 100);
  * Monitor window size changes
  */
 function onWindowSizeChangeHandler(): void {
-  eventEmitter.emit('ALPINE::WINDOW_SIZE_CHANGE', {
+  eventEmitter.emit('SPAR::WINDOW_SIZE_CHANGE', {
     windowHeight: window.innerHeight,
     windowWidth: window.innerWidth,
   });

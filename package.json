@@ -1,11 +1,11 @@
 {
-  "name": "alpine-toolkit",
+  "name": "spar",
   "version": "0.1.2",
   "description": "A general toolkit for creating interactive web experiences.",
-  "main": "dist/alpine-toolkit.cjs.js",
-  "browser": "dist/alpine-toolkit.umd.js",
-  "module": "dist/alpine-toolkit.esm.js",
-  "jsnext:main": "dist/alpine-toolkit.esm.js",
+  "main": "dist/spar.cjs.js",
+  "browser": "dist/spar.umd.js",
+  "module": "dist/spar.esm.js",
+  "jsnext:main": "dist/spar.esm.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
     "start": "concurrently \"rollup -c rollup.config.ts -w\" \"parcel examples/index.html --open\"",

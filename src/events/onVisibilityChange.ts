@@ -47,7 +47,7 @@ const visibility = {
  * Monitor visibility changes
  */
 function onVisibilityChangeHandler(): void {
-  eventEmitter.emit('ALPINE::VISIBILITY_CHANGE', {
+  eventEmitter.emit('SPAR::VISIBILITY_CHANGE', {
     isVisible: !visibility.hidden,
   });
 }

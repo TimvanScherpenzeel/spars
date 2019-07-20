@@ -692,7 +692,7 @@ export class AssetLoader {
       promise.then(asset => {
         progress++;
 
-        eventEmitter.emit('ALPINE::ASSET_LOADED', {
+        eventEmitter.emit('SPAR::ASSET_LOADED', {
           id: asset.id,
           progress: `${(progress / loadingAssets.length).toFixed(2)}`,
           timeToLoad: `${asset.timeToLoad.toFixed(2)}ms`,

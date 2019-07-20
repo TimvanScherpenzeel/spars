@@ -1,11 +1,11 @@
 // Vendor
-import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
+import * as Spar from '../dist/spar.umd';
 
 // Analytics
 // ---------
 
-// AlpineToolkit.registerAnalytics('UA-71404844-4');
-// AlpineToolkit.recordAnalyticsEvent({
+// Spar.registerAnalytics('UA-71404844-4');
+// Spar.recordAnalyticsEvent({
 //   hitType: 'event',
 //   eventCategory: 'string',
 //   eventAction: 'play',
@@ -25,12 +25,12 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 //   button.innerHTML = 'unlock audio';
 //   document.getElementById('root').appendChild(button);
 
-//   if (AlpineToolkit.isAutoplayAllowed()) {
+//   if (Spar.isAutoplayAllowed()) {
 //     console.log('allowed!');
 //   } else {
 //     console.log('not allowed, waiting for user interaction');
 
-//     AlpineToolkit.unlockAutoplay(button)
+//     Spar.unlockAutoplay(button)
 //       .then(unlocked => {
 //         console.log('allowed!');
 //       })
@@ -43,7 +43,7 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 // Cache
 // -----
 
-// const persistentCache = new AlpineToolkit.PersistentCache();
+// const persistentCache = new Spar.PersistentCache();
 
 // persistentCache.set('key1', 'value1');
 // persistentCache.set('key2', 'value2');
@@ -65,23 +65,23 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 // Cookie
 // ------
 
-// AlpineToolkit.setCookie('key1', 'value1');
-// AlpineToolkit.setCookie('key2', 'value2');
+// Spar.setCookie('key1', 'value1');
+// Spar.setCookie('key2', 'value2');
 // console.log(document.cookie);
 
-// const exampleKeyCookie = AlpineToolkit.getCookie('key1');
+// const exampleKeyCookie = Spar.getCookie('key1');
 // console.log(exampleKeyCookie);
 
-// AlpineToolkit.deleteCookie('key1');
+// Spar.deleteCookie('key1');
 // console.log(document.cookie);
 
-// AlpineToolkit.deleteCookie('key2');
+// Spar.deleteCookie('key2');
 // console.log(document.cookie);
 
 // Events
 // ------
 
-// class Test extends AlpineToolkit.EventEmitter {
+// class Test extends Spar.EventEmitter {
 //   constructor() {
 //     super();
 
@@ -91,26 +91,26 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 
 // new Test();
 
-// AlpineToolkit.onConnectionChange();
+// Spar.onConnectionChange();
 
 // const connectionChangeHandler = event => {
 //   console.log(event);
 
-//   AlpineToolkit.eventEmitter.off('ALPINE::CONNECTION_CHANGE', connectionChangeHandler);
-//   AlpineToolkit.offConnectionChange();
+//   Spar.eventEmitter.off('SPAR::CONNECTION_CHANGE', connectionChangeHandler);
+//   Spar.offConnectionChange();
 // };
 
-// AlpineToolkit.eventEmitter.on('ALPINE::CONNECTION_CHANGE', connectionChangeHandler);
+// Spar.eventEmitter.on('SPAR::CONNECTION_CHANGE', connectionChangeHandler);
 
-// AlpineToolkit.onKeyChange();
+// Spar.onKeyChange();
 
 // const keyChangeDownHandler = event => {
 //   console.log(`keyDown: ${event.key}`);
 
 //   document.getElementById('root').appendChild(document.createTextNode(event.key));
 
-//   // AlpineToolkit.eventEmitter.off('ALPINE::KEY_DOWN_CHANGE', keyChangeDownHandler);
-//   // AlpineToolkit.offKeyChange();
+//   // Spar.eventEmitter.off('SPAR::KEY_DOWN_CHANGE', keyChangeDownHandler);
+//   // Spar.offKeyChange();
 // };
 
 // const keyChangeUpHandler = event => {
@@ -118,63 +118,63 @@ import * as AlpineToolkit from '../dist/alpine-toolkit.umd';
 
 //   document.getElementById('root').appendChild(document.createTextNode(event.key));
 
-//   // AlpineToolkit.eventEmitter.off('ALPINE::KEY_UP_CHANGE', keyChangeDownHandler);
-//   // AlpineToolkit.offKeyChange();
+//   // Spar.eventEmitter.off('SPAR::KEY_UP_CHANGE', keyChangeDownHandler);
+//   // Spar.offKeyChange();
 // };
 
-// AlpineToolkit.eventEmitter.on('ALPINE::KEY_DOWN_CHANGE', keyChangeDownHandler);
-// AlpineToolkit.eventEmitter.on('ALPINE::KEY_UP_CHANGE', keyChangeUpHandler);
+// Spar.eventEmitter.on('SPAR::KEY_DOWN_CHANGE', keyChangeDownHandler);
+// Spar.eventEmitter.on('SPAR::KEY_UP_CHANGE', keyChangeUpHandler);
 
 // document.getElementById('root').appendChild(document.createElement('textarea'));
 
-// AlpineToolkit.onOrientationChange();
+// Spar.onOrientationChange();
 
 // const orientationChangeHandler = event => {
 //   console.log(event);
 
-//   AlpineToolkit.eventEmitter.off('ALPINE::ORIENTATION_CHANGE');
-//   AlpineToolkit.offOrientationChange();
+//   Spar.eventEmitter.off('SPAR::ORIENTATION_CHANGE');
+//   Spar.offOrientationChange();
 // };
 
-// AlpineToolkit.eventEmitter.on('ALPINE::ORIENTATION_CHANGE', orientationChangeHandler);
+// Spar.eventEmitter.on('SPAR::ORIENTATION_CHANGE', orientationChangeHandler);
 
-// AlpineToolkit.onVisibilityChange();
+// Spar.onVisibilityChange();
 
 // const visibilityChangeHandler = event => {
 //   console.log(event);
 
-//   AlpineToolkit.eventEmitter.off('ALPINE::VISIBILITY_CHANGE');
-//   AlpineToolkit.offVisibilityChange();
+//   Spar.eventEmitter.off('SPAR::VISIBILITY_CHANGE');
+//   Spar.offVisibilityChange();
 // };
 
-// AlpineToolkit.eventEmitter.on('ALPINE::VISIBILITY_CHANGE', visibilityChangeHandler);
+// Spar.eventEmitter.on('SPAR::VISIBILITY_CHANGE', visibilityChangeHandler);
 
-// AlpineToolkit.onWindowSizeChange();
+// Spar.onWindowSizeChange();
 
 // const windowSizeChangeHandler = event => {
 //   console.log(event);
 
-//   AlpineToolkit.eventEmitter.off('ALPINE::WINDOW_SIZE_CHANGE');
-//   AlpineToolkit.offWindowSizeChange();
+//   Spar.eventEmitter.off('SPAR::WINDOW_SIZE_CHANGE');
+//   Spar.offWindowSizeChange();
 // };
 
-// AlpineToolkit.eventEmitter.on('ALPINE::WINDOW_SIZE_CHANGE', windowSizeChangeHandler);
+// Spar.eventEmitter.on('SPAR::WINDOW_SIZE_CHANGE', windowSizeChangeHandler);
 
 // Features
 // --------
 
-console.log(AlpineToolkit.features);
+console.log(Spar.features);
 
 // Loaders
 // -------
 
-// AlpineToolkit.eventEmitter.on('ALPINE::ASSET_LOADED', event => {
+// Spar.eventEmitter.on('SPAR::ASSET_LOADED', event => {
 //   console.log(event);
 // });
 
-// const { isDesktop, isTablet, isMobile } = AlpineToolkit.features.browserFeatures.browserType;
+// const { isDesktop, isTablet, isMobile } = Spar.features.browserFeatures.browserType;
 
-// const assetLoader = new AlpineToolkit.AssetLoader();
+// const assetLoader = new Spar.AssetLoader();
 
 // assetLoader
 //   .loadAssets([
@@ -218,7 +218,7 @@ console.log(AlpineToolkit.features);
 
 //     {
 //       id: './assets/1-device.png',
-//       src: AlpineToolkit.AssetLoader.byDeviceType({
+//       src: Spar.AssetLoader.byDeviceType({
 //         DESKTOP: './assets/1-desktop.png',
 //         TABLET: './assets/1-tablet.png',
 //         MOBILE: './assets/1-mobile.png',
@@ -227,7 +227,7 @@ console.log(AlpineToolkit.features);
 
 //     {
 //       id: './assets/example.ktx',
-//       src: AlpineToolkit.AssetLoader.bySupportedCompressedTexture({
+//       src: Spar.AssetLoader.bySupportedCompressedTexture({
 //         ASTC: './assets/example-astc-4x4.ktx',
 //         ETC: './assets/example-etc2.ktx',
 //         PVRTC: './assets/example-pvrtc4BPP.ktx',
@@ -238,7 +238,7 @@ console.log(AlpineToolkit.features);
 
 //     {
 //       id: './assets/example-mipmaps.ktx',
-//       src: AlpineToolkit.AssetLoader.bySupportedCompressedTexture({
+//       src: Spar.AssetLoader.bySupportedCompressedTexture({
 //         ASTC: './assets/example-astc-4x4-mipmaps.ktx',
 //         ETC: './assets/example-etc2-mipmaps.ktx',
 //         PVRTC: './assets/example-pvrtc4BPP-mipmaps.ktx',
@@ -253,7 +253,7 @@ console.log(AlpineToolkit.features);
 
 //     isDesktop && {
 //       id: './assets/green_point_park_4k_ibl.ktx',
-//       src: AlpineToolkit.AssetLoader.bySupportedCompressedTexture({
+//       src: Spar.AssetLoader.bySupportedCompressedTexture({
 //         ASTC: './assets/green_point_park_4k_ibl_astc.ktx',
 //         ETC: './assets/green_point_park_4k_ibl_etc.ktx',
 //         S3TC: './assets/green_point_park_4k_ibl_s3tc.ktx',
@@ -263,7 +263,7 @@ console.log(AlpineToolkit.features);
 
 //     isDesktop && {
 //       id: './assets/green_point_park_4k_skybox.ktx',
-//       src: AlpineToolkit.AssetLoader.bySupportedCompressedTexture({
+//       src: Spar.AssetLoader.bySupportedCompressedTexture({
 //         ASTC: './assets/green_point_park_4k_skybox_astc.ktx',
 //         ETC: './assets/green_point_park_4k_skybox_etc.ktx',
 //         S3TC: './assets/green_point_park_4k_skybox_s3tc.ktx',
@@ -294,16 +294,16 @@ console.log(AlpineToolkit.features);
 // const element = document.getElementById('root');
 
 // element.onclick = () => {
-//   if (AlpineToolkit.fullScreen.fullscreenSupported) {
-//     if (AlpineToolkit.fullScreen.fullscreenElement) {
-//       AlpineToolkit.fullScreen.exitFullscreen();
+//   if (Spar.fullScreen.fullscreenSupported) {
+//     if (Spar.fullScreen.fullscreenElement) {
+//       Spar.fullScreen.exitFullscreen();
 //     } else {
-//       AlpineToolkit.fullScreen.requestFullscreen(element);
+//       Spar.fullScreen.requestFullscreen(element);
 //     }
 //   }
 // };
 
-// console.log(AlpineToolkit.fullScreen);
+// console.log(Spar.fullScreen);
 
 // Pointer lock
 
@@ -314,19 +314,19 @@ console.log(AlpineToolkit.features);
 // element.onclick = () => {
 //   if (pointerLockEnabled) {
 //     pointerLockEnabled = false;
-//     AlpineToolkit.pointerLock.exitPointerLock();
+//     Spar.pointerLock.exitPointerLock();
 //   } else {
 //     pointerLockEnabled = true;
-//     AlpineToolkit.pointerLock.requestPointerLock(element);
+//     Spar.pointerLock.requestPointerLock(element);
 //   }
 // };
 
-// console.log(AlpineToolkit.pointerLock);
+// console.log(Spar.pointerLock);
 
 // Threads
 
 // (async () => {
-//   const pool = AlpineToolkit.threadPool;
+//   const pool = Spar.threadPool;
 
 //   console.time('synchronous');
 //   await pool.add(

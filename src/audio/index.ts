@@ -65,7 +65,7 @@ export const unlockAutoplay = (element: HTMLElement): Promise<boolean> =>
       if (context.state === 'suspended') {
         autoplayAllowed = false;
 
-        eventEmitter.emit('ALPINE::AUTOPLAY_CHANGE', {
+        eventEmitter.emit('SPAR::AUTOPLAY_CHANGE', {
           autoplayAllowed,
         });
 
@@ -79,7 +79,7 @@ export const unlockAutoplay = (element: HTMLElement): Promise<boolean> =>
 
               autoplayAllowed = true;
 
-              eventEmitter.emit('ALPINE::AUTOPLAY_CHANGE', {
+              eventEmitter.emit('SPAR::AUTOPLAY_CHANGE', {
                 autoplayAllowed,
               });
 
