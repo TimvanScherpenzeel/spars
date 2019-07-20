@@ -44,6 +44,7 @@ import isDoNotTrackEnabled from './browserSettings/isDoNotTrackEnabled';
 import getAvailableCPUCoreCount from './hardwareFeatures/getAvailableCPUCoreCount';
 import getDevicePixelRatio from './hardwareFeatures/getDevicePixelRatio';
 import getEndianness from './hardwareFeatures/getEndianness';
+import getGPUTier from './hardwareFeatures/getGPUTier';
 
 export const features = {
   // Browser features
@@ -99,6 +100,7 @@ export const features = {
 
   // Hardware features
   hardwareFeatures: {
+    GPUTier: getGPUTier,
     availableCPUCores: getAvailableCPUCoreCount,
     devicePixelRatio: getDevicePixelRatio,
     endianness: getEndianness,

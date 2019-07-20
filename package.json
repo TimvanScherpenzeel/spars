@@ -19,6 +19,7 @@
   "author": "Tim van Scherpenzeel",
   "license": "MIT",
   "dependencies": {
+    "detect-gpu": "^1.1.0",
     "detect-ua": "^0.0.11",
     "fontfaceobserver-es": "^3.3.1",
     "idb-keyval": "^3.2.0",
