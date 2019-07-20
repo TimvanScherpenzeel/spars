@@ -8,10 +8,13 @@
 
 ## Roadmap
 
+- Look into creating native bindings
+- Look more into the latest Hydra experience release of Active Theory
 - Add GUI support
 - Add state container
 - Hot reloading shaders
 - Add device orientation / motion API
+- Add task / frame scheduler
 
 ## API
 
