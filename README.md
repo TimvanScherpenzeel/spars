@@ -45,6 +45,48 @@ Contains code for an `AssetLoader` class used for preloading commonly used asset
 
 Contains a fullscreen and pointerlock polyfill that can be used without having to worry about vendor prefixes.
 
+### Threads
+
+_Does not work on Internet Explorer 11_
+
+A small module to run arbitrary tasks efficiently off of the main thread. The module is heavily based on the [Task Worklet polyfill](https://github.com/developit/task-worklet/) by [Jason Miller](https://github.com/developit).
+
+`Sticky threads` allow you to use re-usable generic `worklets` (modularized web workers) retrieved from a centralized `sticky thread pool`. In order to maximize concurrency and minimize transfer overhead the library distributes work across multiple threads through an implicit data flow graph that is formed based on how the different tasks are linked.
+
+Results from one task can be directly passed into another task but instead of pulling the result of the first task back to the main thread and sending it to the thread running the second task the second task will instead be routed to the thread that already has the first result ready.
+
+```ts
+(async () => {
+  // Create a new thread pool (highly recommended to only create a single instance)
+  // Pass a number with the maximum size of the pool which defaults to CPU cores with a maximum of 4 threads.
+  const pool = new ThreadPool();
+
+  // Add a new executable module to the thread pool
+  await pool.add(
+    // Executable module name
+    'sum',
+    // Method to execute (must be named process)
+    /* ts */ `
+    process(a, b) {
+      return a + b;
+    }
+  `
+  );
+
+  // Execute a task
+  const sum1Task = pool.run('sum', 1, 2);
+
+  // Keep the result of sum1Task on the same thread as it is a dependency
+  // which reduces unnecessary threadhops
+  const sum2Task = pool.run('sum', sum1Task, 2);
+
+  // Get the result of the executed task
+  const sum2TaskResult = await sum2Task.get();
+
+  console.log(sum2TaskResult); // -> 5
+)();
+```
+
 ### Utilities
 
 Contains some commonly used utilities (assertions, query parameters, etc..).
