@@ -32,8 +32,11 @@ export { features } from './features';
 // Loaders
 export { AssetLoader } from './loaders';
 
-// Polyfill
+// Polyfills
 export { fullScreen, pointerLock } from './polyfills';
+
+// Threads
+export { threadPool } from './threads';
 
 // Utilities
 export { assert, debounce, getQueryParameters } from './utilities';

@@ -322,3 +322,108 @@ console.log(AlpineToolkit.features);
 // };
 
 // console.log(AlpineToolkit.pointerLock);
+
+// Threads
+
+// (async () => {
+//   const pool = AlpineToolkit.threadPool;
+
+//   console.time('synchronous');
+//   await pool.add(
+//     'sum',
+//     /* ts */ `
+//     process(a, b) {
+//         return a + b;
+//     }
+//   `
+//   );
+
+//   const sum1Task = pool.run('sum', 1, 2);
+//   const sum2Task = pool.run('sum', sum1Task, 2);
+//   const sum3Task = pool.run('sum', sum2Task, 5);
+//   const sum4Task = pool.run('sum', 20, 5);
+
+//   // @ts-ignore
+//   const sumTask2Result = await sum2Task.get();
+
+//   document.getElementById('synchronous').appendChild(document.createTextNode(sumTask2Result));
+
+//   // @ts-ignore
+//   const sumTask3Result = await sum3Task.get();
+
+//   document.getElementById('synchronous').appendChild(document.createTextNode(sumTask3Result));
+
+//   // @ts-ignore
+//   const sumTask4Result = await sum4Task.get();
+
+//   // console.log(sumTask3Result, sumTask4Result, sumTask5Result, sumTask6Result);
+
+//   document.getElementById('synchronous').appendChild(document.createTextNode(sumTask4Result));
+//   console.timeEnd('synchronous');
+
+//   console.time('asynchronous');
+//   await pool.add(
+//     'fetch',
+//     /* ts */ `
+//     async process(url) {
+//       return await new Promise((resolve, reject) => {
+//         fetch(url).then((response) => response.json()).then((json) => resolve(json)).catch((err) => reject(new Error(err)));
+//       });
+//     }
+//   `
+//   );
+
+//   const fetchTask = pool.run('fetch', 'https://jsonplaceholder.typicode.com/todos/1');
+
+//   // @ts-ignore
+//   const fetchTaskResult = await fetchTask.get();
+
+//   document
+//     .getElementById('asynchronous')
+//     .appendChild(document.createTextNode(fetchTaskResult.title));
+
+//   console.timeEnd('asynchronous');
+
+//   console.time('wasm');
+//   await pool.add(
+//     'wasm',
+//     /* ts */ `
+//       async process(wasm) {
+//         return await new Promise((resolve, reject) => {
+//           fetch(wasm)
+//             .then((response) => response.arrayBuffer())
+//             .then((bytes) => WebAssembly.compile(bytes))
+//             .then((module) => new WebAssembly.Instance(module))
+//             .then(instance => {
+//               const { sum, memory, malloc } = instance.exports;
+
+//               const jsArray = [1, 2, 3, 4, 5, 6];
+
+//               const cArrayPointer = malloc(jsArray.length * 4);
+
+//               const cArray = new Uint32Array(memory.buffer, cArrayPointer, jsArray.length);
+
+//               // Copy the values from JS to C.
+//               cArray.set(jsArray);
+
+//               // Run the function, passing the starting address and length.
+//               resolve(sum(cArrayPointer, cArray.length));
+//             })
+//             .catch((err) => reject(new Error(err)));
+//         });
+//       }
+//     `
+//   );
+
+//   const wasmTask = pool.run(
+//     'wasm',
+//     'data:application/octet-stream;base64,AGFzbQEAAAABEwRgAABgAX8Bf2ABfwBgAn9/AX8DBQQAAQIDBQQBAIEBBhsEfwBBkIiABAt/AEGECAt/AEGACAt/AEGACAsHbQkGbWVtb3J5AgARX193YXNtX2NhbGxfY3RvcnMAAAtfX2hlYXBfYmFzZQMACl9fZGF0YV9lbmQDAQxfX2Rzb19oYW5kbGUDAgZtYWxsb2MAAQRmcmVlAAIDc3VtAAMMYnVtcF9wb2ludGVyAwMKSwQDAAELFQBBgAggAEGACCgCACIAajYCACAACwMAAQsrAQF/IAFBAU4EQANAIAAoAgAgAmohAiAAQQRqIQAgAUF/aiIBDQALCyACCwsKAQBBgAgLAxAEgA=='
+//   );
+
+//   const wasmTaskResult = await wasmTask.get();
+
+//   document.getElementById('webassembly').appendChild(document.createTextNode(wasmTaskResult));
+//   console.timeEnd('wasm');
+
+//   // pool.dispose();
+// })();
