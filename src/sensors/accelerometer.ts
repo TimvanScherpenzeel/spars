@@ -39,12 +39,17 @@ interface IExternalState {
   orientationQuaternion: number[];
 }
 
+// Accelerometer data is very noisy, but stable over the long term
+// Gyroscope data is smooth, but tends to drift over the long term
+
+// https://github.com/jeromeetienne/AR.js/blob/048eebc113e1cd136c4fdbbaa491868d5a208887/three.js/examples/vendor/webvr-polyfill.js#L4842-L4988
 // https://github.com/marquizzo/three-gimbal/blob/master/src/Gimbal.js
 
 // TODO: reset on visibilitychange
 // TODO: android has flipped axis
 // TODO: iOS needs permissions
 // TODO: take window orientation into account
+// TODO: add lerping functionality
 
 // NOTE: Chrome / iOS sensor only works on secure contexts
 
