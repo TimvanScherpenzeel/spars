@@ -1,22 +1,70 @@
 // Features
 import getBrowserType from '../features/browserFeatures/getBrowserType';
 
+// Types
+import { TNullable } from '../types';
+
+interface IInternalState {
+  orientation: {
+    absolute: boolean;
+    alpha: TNullable<number>;
+    beta: TNullable<number>;
+    gamma: TNullable<number>;
+  };
+
+  acceleration: {
+    x: TNullable<number>;
+    y: TNullable<number>;
+    z: TNullable<number>;
+  };
+
+  accelerationIncludingGravity: {
+    x: TNullable<number>;
+    y: TNullable<number>;
+    z: TNullable<number>;
+  };
+
+  rotationRate: {
+    alpha: TNullable<number>;
+    beta: TNullable<number>;
+    gamma: TNullable<number>;
+  };
+}
+
+interface IExternalState {
+  accelerationIncludingGravityQuaternion: number[];
+  accelerationQuaternion: number[];
+  orientationQuaternion: number[];
+}
+
+// TODO: reset on visibilitychange
+// TODO: android has flipped axis
+// TODO: iOS needs permissions
+
+// NOTE: Chrome / iOS sensor only works on secure contexts
+
+// event.beta has values between -90 and 90 on mobile Safari and between 180 and -180 on Firefox.
+// event.gamma has values between -180 and 180 on mobile Safari and between 90 and -90 on Firefox.
+
 export class Accelerometer {
   private static degreesToRadians = Math.PI / 180;
 
-  private accelerationQuaternion: number[] = [0, 0, 0, 0];
-  private accelerationIncludingGravityQuaternion: number[] = [0, 0, 0, 0];
-  private orientationQuaternion: number[] = [0, 0, 0, 0];
+  private externalState: IExternalState = {
+    accelerationIncludingGravityQuaternion: [0, 0, 0, 0],
+    accelerationQuaternion: [0, 0, 0, 0],
+    orientationQuaternion: [0, 0, 0, 0],
+  };
 
-  private state = {
+  private internalState: IInternalState = {
     // Device orientation
     orientation: {
-      absolute: 0,
+      absolute: false,
       alpha: 0,
       beta: 0,
       gamma: 0,
     },
 
+    // Device motion
     acceleration: {
       x: 0,
       y: 0,
@@ -36,23 +84,17 @@ export class Accelerometer {
     },
   };
 
-  // Device orientation
-  // Acceleration
-
-  // TODO: reset on visibilitychange
-  // TODO: android has flipped axis
-  // TODO: iOS needs permissions
-
-  // Chrome / iOS sensor only works on secure contexts
-
-  // event.beta has values between -90 and 90 on mobile Safari and between 180 and -180 on Firefox.
-  // event.gamma has values between -180 and 180 on mobile Safari and between 90 and -90 on Firefox.
-
   public start(): void {
     if ((window as any).DeviceMotionEvent) {
       window.addEventListener('devicemotion', this.onDeviceMotionChangeHandler, false);
     } else {
-      console.warn('onDeviceOrientationChange -> Device does not support devicemotion event');
+      console.warn('Accelerometer -> Device does not support devicemotion event');
+    }
+
+    if ((window as any).DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', this.onDeviceOrientationChangeHandler, false);
+    } else {
+      console.warn('Accelerometer -> Device does not support deviceorientation event');
     }
   }
 
@@ -60,46 +102,91 @@ export class Accelerometer {
     if ((window as any).DeviceMotionEvent) {
       window.removeEventListener('devicemotion', this.onDeviceMotionChangeHandler, false);
     } else {
-      console.warn('onDeviceOrientationChange -> Device does not support devicemotion event');
+      console.warn('Accelerometer -> Device does not support devicemotion event');
+    }
+
+    if ((window as any).DeviceOrientationEvent) {
+      window.removeEventListener('deviceorientation', this.onDeviceOrientationChangeHandler, false);
+    } else {
+      console.warn('Accelerometer -> Device does not support deviceorientation event');
     }
   }
 
   // Get the sensor update at a fixed rate independently of the actual native sensor sampling rate
-  public update(): {
-    accelerationQuaternion: number[];
-    accelerationIncludingGravityQuaternion: number[];
-    orientation: number[];
-  } {
-    return {
-      accelerationIncludingGravityQuaternion: this.accelerationIncludingGravityQuaternion,
-      accelerationQuaternion: this.accelerationQuaternion,
-      orientation: this.orientationQuaternion,
-    };
+  public update(): IExternalState {
+    // orientationQuaternion
+    this.externalState.orientationQuaternion = this.convertEulerToQuaternion(
+      this.internalState.orientation.beta,
+      this.internalState.orientation.gamma,
+      this.internalState.orientation.alpha
+    );
+
+    // accelerationQuaternion
+    this.externalState.accelerationQuaternion = this.convertEulerToQuaternion(
+      this.internalState.acceleration.x,
+      this.internalState.acceleration.y,
+      this.internalState.acceleration.z
+    );
+
+    // acceleartionQuaternionIncludingGravity
+    this.externalState.accelerationIncludingGravityQuaternion = this.convertEulerToQuaternion(
+      this.internalState.accelerationIncludingGravity.x,
+      this.internalState.accelerationIncludingGravity.y,
+      this.internalState.accelerationIncludingGravity.z
+    );
+
+    return this.externalState;
+  }
+
+  private convertEulerToQuaternion(
+    beta: TNullable<number>,
+    gamma: TNullable<number>,
+    alpha: TNullable<number>
+  ): number[] {
+    const eX = beta ? beta * Accelerometer.degreesToRadians : 0;
+    const eY = gamma ? gamma * Accelerometer.degreesToRadians : 0;
+    const eZ = alpha ? alpha * Accelerometer.degreesToRadians : 0;
+
+    const cZ = Math.cos(eZ * 0.5);
+    const sZ = Math.sin(eZ * 0.5);
+    const cY = Math.cos(eY * 0.5);
+    const sY = Math.sin(eY * 0.5);
+    const cX = Math.cos(eX * 0.5);
+    const sX = Math.sin(eX * 0.5);
+
+    return [
+      sX * cY * cZ - cX * sY * sZ,
+      cX * sY * cZ + sX * cY * sZ,
+      cX * cY * sZ + sX * sY * cZ,
+      cX * cY * cZ - sX * sY * sZ,
+    ];
+  }
+
+  private onDeviceOrientationChangeHandler(event: DeviceOrientationEvent): void {
+    this.internalState.orientation.alpha = event.alpha;
+    this.internalState.orientation.beta = event.beta;
+    this.internalState.orientation.gamma = event.gamma;
+    this.internalState.orientation.absolute = event.absolute;
   }
 
   private onDeviceMotionChangeHandler(event: DeviceMotionEvent): void {
-    const { alpha, beta, gamma } = (event as any).rotationRate;
+    if (event.acceleration) {
+      this.internalState.acceleration.x = event.acceleration.x;
+      this.internalState.acceleration.y = event.acceleration.y;
+      this.internalState.acceleration.z = event.acceleration.z;
+    }
 
-    const x = beta ? beta * Accelerometer.degreesToRadians : 0;
-    const y = gamma ? gamma * Accelerometer.degreesToRadians : 0;
-    const z = alpha ? alpha * Accelerometer.degreesToRadians : 0;
+    if (event.accelerationIncludingGravity) {
+      this.internalState.accelerationIncludingGravity.x = event.accelerationIncludingGravity.x;
+      this.internalState.accelerationIncludingGravity.y = event.accelerationIncludingGravity.y;
+      this.internalState.accelerationIncludingGravity.z = event.accelerationIncludingGravity.z;
+    }
 
-    const cZ = Math.cos(z * 0.5);
-    const sZ = Math.sin(z * 0.5);
-    const cY = Math.cos(y * 0.5);
-    const sY = Math.sin(y * 0.5);
-    const cX = Math.cos(x * 0.5);
-    const sX = Math.sin(x * 0.5);
-
-    const qx = sX * cY * cZ - cX * sY * sZ;
-    const qy = cX * sY * cZ + sX * cY * sZ;
-    const qz = cX * cY * sZ + sX * sY * cZ;
-    const qw = cX * cY * cZ - sX * sY * sZ;
-
-    this.orientationQuaternion[0] = qx;
-    this.orientationQuaternion[1] = qy;
-    this.orientationQuaternion[2] = qz;
-    this.orientationQuaternion[3] = qw;
+    if (event.rotationRate) {
+      this.internalState.rotationRate.alpha = event.rotationRate.alpha;
+      this.internalState.rotationRate.beta = event.rotationRate.beta;
+      this.internalState.rotationRate.gamma = event.rotationRate.gamma;
+    }
   }
 }
 
