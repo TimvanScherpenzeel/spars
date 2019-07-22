@@ -20,7 +20,7 @@ import { FusionPoseSensor } from './FusionPoseSensor';
 export class Accelerometer {
   private kFilter: number;
   private predictionTime: number;
-  private fusionSensor!: FusionPoseSensor;
+  private fusionSensor: FusionPoseSensor;
 
   constructor(kFilter: number, predictionTime: number) {
     this.kFilter = kFilter;
