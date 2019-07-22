@@ -93,6 +93,8 @@ export class Accelerometer {
   };
 
   public start(): void {
+    this.onScreenOrientationChangeHandler();
+
     if ((window as any).ScreenOrientation) {
       window.addEventListener('orientationchange', this.onScreenOrientationChangeHandler, false);
     } else {
@@ -182,7 +184,7 @@ export class Accelerometer {
     ];
   }
 
-  private onScreenOrientationChangeHandler(event: any): void {
+  private onScreenOrientationChangeHandler(): void {
     this.internalState.screenOrientation =
       Number(window.orientation) * Accelerometer.degreesToRadians;
   }
