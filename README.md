@@ -12,7 +12,7 @@
 - Look more into the latest Hydra experience release of Active Theory
 - Add GUI support
 - Hot reloading shaders
-- Add device orientation / motion API
+- Add accelerometer / device orientation / motion API
 - Add task / frame scheduler
 
 ## API

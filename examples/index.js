@@ -102,6 +102,18 @@ import * as Spar from '../dist/spar.umd';
 
 // Spar.eventEmitter.on('SPAR::CONNECTION_CHANGE', connectionChangeHandler);
 
+Spar.onDeviceOrientationChange();
+
+const deviceOrientationChangeHandler = event => {
+  document.getElementById('deviceorientation').innerHTML = `Rotation [${[
+    event.alpha.toFixed(3),
+    event.beta.toFixed(3),
+    event.gamma.toFixed(3),
+  ]}]`;
+};
+
+Spar.eventEmitter.on('SPAR::DEVICE_ORIENTATION_CHANGE', deviceOrientationChangeHandler);
+
 // Spar.onKeyChange();
 
 // const keyChangeDownHandler = event => {

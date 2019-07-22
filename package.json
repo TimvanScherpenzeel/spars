@@ -8,7 +8,7 @@
   "jsnext:main": "dist/spar.esm.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "start": "concurrently \"rollup -c rollup.config.ts -w\" \"parcel examples/index.html --open\"",
+    "start": "concurrently \"rollup -c rollup.config.ts -w\" \"parcel examples/index.html --open --https\"",
     "lint": "tslint --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "test": "jest --verbose=false",
     "test:watch": "jest --watch",

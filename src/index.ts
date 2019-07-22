@@ -14,16 +14,16 @@ export { deleteCookie, getCookie, setCookie } from './cookie';
 export {
   EventEmitter,
   eventEmitter,
-  onConnectionChange,
-  onKeyChange,
-  onOrientationChange,
-  onVisibilityChange,
-  onWindowSizeChange,
   offConnectionChange,
   offKeyChange,
   offOrientationChange,
   offVisibilityChange,
   offWindowSizeChange,
+  onConnectionChange,
+  onKeyChange,
+  onOrientationChange,
+  onVisibilityChange,
+  onWindowSizeChange,
 } from './events';
 
 // Features
@@ -34,6 +34,9 @@ export { AssetLoader } from './loaders';
 
 // Polyfills
 export { fullScreen, pointerLock } from './polyfills';
+
+// Sensors
+export { accelerometer } from './sensors';
 
 // Threads
 export { threadPool } from './threads';
