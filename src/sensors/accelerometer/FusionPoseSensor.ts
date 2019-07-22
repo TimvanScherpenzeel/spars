@@ -10,7 +10,6 @@ import { isLandscapeMode, MAX_TIMESTEP, MIN_TIMESTEP } from './utilities';
 export class FusionPoseSensor {
   private accelerometer = new Vector3();
   private gyroscope = new Vector3();
-
   private filter: ComplementaryFilter;
   private posePredictor: PosePredictor;
   private filterToWorldQuaternion: Quaternion = new Quaternion();
@@ -20,7 +19,6 @@ export class FusionPoseSensor {
   private resetQuaternion: Quaternion = new Quaternion();
   private orientationOutput: Float32Array = new Float32Array(4);
   private previousTimestamp: number = 0;
-
   private isDeviceMotionInRadians: boolean = false;
 
   constructor(kFilter: number, predictionTime: number) {

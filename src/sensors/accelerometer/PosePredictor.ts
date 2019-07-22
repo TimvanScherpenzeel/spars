@@ -5,8 +5,7 @@ import { degreesToRadians, Quaternion, Vector3 } from './math';
 import { TNullable } from '../../types';
 
 export class PosePredictor {
-  public predictionTime: number;
-
+  private predictionTime: number;
   private previousQuaternion: Quaternion = new Quaternion();
   private deltaQuaternion: Quaternion = new Quaternion();
   private outputQuaternion: Quaternion = new Quaternion();

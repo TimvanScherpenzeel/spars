@@ -1,6 +1,3 @@
-// Sensors
-import { MIN_TIMESTEP } from './utilities';
-
 export const degreesToRadians = Math.PI / 180;
 export const radiansToDegrees = 180 / Math.PI;
 
@@ -246,7 +243,7 @@ export class Quaternion {
     const halfTheta = Math.acos(cosHalfTheta);
     const sinHalfTheta = Math.sqrt(1.0 - cosHalfTheta * cosHalfTheta);
 
-    if (Math.abs(sinHalfTheta) < MIN_TIMESTEP) {
+    if (Math.abs(sinHalfTheta) < 0.001) {
       this.w = 0.5 * (w + this.w);
       this.x = 0.5 * (x + this.x);
       this.y = 0.5 * (y + this.y);

@@ -31,12 +31,11 @@ const SENSOR_FREQUENCY = 60;
 // TODO: ?? https://github.com/immersive-web/cardboard-vr-display/blob/13e4fe62ce1ceb31f0fe60955fa242b50c0d998d/src/pose-sensor.js#L118-L122
 
 export class PoseSensor {
-  public kFilter: number;
-  public predictionTime: number;
-  public output: Float32Array = new Float32Array(4);
-  public sensorQuaternion: Quaternion = new Quaternion();
-  public outputQuaternion: Quaternion = new Quaternion();
-
+  private kFilter: number;
+  private predictionTime: number;
+  private output: Float32Array = new Float32Array(4);
+  private sensorQuaternion: Quaternion = new Quaternion();
+  private outputQuaternion: Quaternion = new Quaternion();
   private errors: Error[] = [];
   private sensor: any; // RelativeOrientationSensor
   private fusionSensor!: FusionPoseSensor;

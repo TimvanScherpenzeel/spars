@@ -7,20 +7,16 @@ import { SensorSample } from './sensorSample';
 import { isTimestampDeltaValid } from './utilities';
 
 export class ComplementaryFilter {
-  public currentAccelerometerMeasurement: SensorSample = new SensorSample();
-  public currentGyroscopeMeasurement: SensorSample = new SensorSample();
-  public previousGyroscopeMeasurement: SensorSample = new SensorSample();
-
+  private currentAccelerometerMeasurement: SensorSample = new SensorSample();
+  private currentGyroscopeMeasurement: SensorSample = new SensorSample();
+  private previousGyroscopeMeasurement: SensorSample = new SensorSample();
   private kFilter: number;
-
   private filterQuaternion: Quaternion;
   private previousFilterQuaternion: Quaternion = new Quaternion();
-
   private accelerationQuaternion: Quaternion = new Quaternion();
   private isOrientationInitialized: boolean = false;
   private estimatedGravity: Vector3 = new Vector3();
   private measuredGravity: Vector3 = new Vector3();
-
   private gyroscopeIntegralQuaternion: Quaternion = new Quaternion();
 
   constructor(kFilter: number) {
