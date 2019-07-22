@@ -27,7 +27,6 @@ export class FusionPoseSensor {
     this.filter = new ComplementaryFilter(kFilter);
     this.posePredictor = new PosePredictor(predictionTime);
 
-    // isFirefoxAndroid
     const chromeVersion = getBrowserType.isChrome && parseInt(getBrowserType.browserVersion, 10);
     this.isDeviceMotionInRadians = !getBrowserType.isiOS && chromeVersion && chromeVersion < 66;
 
@@ -44,7 +43,6 @@ export class FusionPoseSensor {
 
     this.setScreenTransform();
 
-    // Landscape
     if (isLandscapeMode()) {
       this.filterToWorldQuaternion.multiply(this.inverseWorldToScreenQuaternion);
     }
@@ -75,16 +73,33 @@ export class FusionPoseSensor {
     return this.orientationOutput;
   }
 
-  public onDeviceMotionChangeHandler(event): void {
+  public resetPose(): void {
+    this.resetQuaternion.copy(this.filter.getOrientation());
+    this.resetQuaternion.x = 0;
+    this.resetQuaternion.y = 0;
+    this.resetQuaternion.z *= -1;
+    this.resetQuaternion.normalize();
+
+    if (isLandscapeMode()) {
+      this.resetQuaternion.multiply(this.inverseWorldToScreenQuaternion);
+    }
+
+    this.resetQuaternion.multiply(this.originalPoseAdjustQuaternion);
+  }
+
+  public onDeviceMotionChangeHandler(event: DeviceMotionEvent): void {
     this.updateDeviceMotion(event);
   }
 
-  public updateDeviceMotion(event): void {
+  public updateDeviceMotion(event: DeviceMotionEvent): void {
     const accelerationIncludingGravity = event.accelerationIncludingGravity;
     const rotationRate = event.rotationRate;
-    const timestamp = event.timestamp / 1000;
+    const timestamp = event.timeStamp / 1000;
     const deltaT = timestamp - this.previousTimestamp;
 
+    // On Firefox/iOS the `timeStamp` properties can come in out of order.
+    // so emit a warning about it and then stop.
+    // The rotation still ends up working.
     if (deltaT < 0 || deltaT <= MIN_TIMESTEP || deltaT > MAX_TIMESTEP) {
       this.previousTimestamp = timestamp;
       return;
