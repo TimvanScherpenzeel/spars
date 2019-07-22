@@ -95,7 +95,7 @@ export class FusionPoseSensor {
     const timestamp = event.timeStamp / 1000;
     const deltaT = timestamp - this.previousTimestamp;
 
-    // On Firefox/iOS the `timeStamp` properties can come in out of order.
+    // On Firefox / iOS the `timeStamp` properties can come in out of order.
     // so emit a warning about it and then stop. The rotation still ends up working.
     if (deltaT < 0 || deltaT <= MIN_TIMESTEP || deltaT > MAX_TIMESTEP) {
       this.previousTimestamp = timestamp;
