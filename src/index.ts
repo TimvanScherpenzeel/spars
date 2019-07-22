@@ -36,7 +36,7 @@ export { AssetLoader } from './loaders';
 export { fullScreen, pointerLock } from './polyfills';
 
 // Sensors
-export { accelerometer } from './sensors';
+// export { accelerometer } from './sensors';
 
 // Threads
 export { threadPool } from './threads';
