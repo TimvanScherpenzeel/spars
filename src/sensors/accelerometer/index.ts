@@ -39,6 +39,12 @@ interface IExternalState {
   orientationQuaternion: number[];
 }
 
+// Use the RelativeOrientationSensor polyfill
+
+// https://github.com/immersive-web/cardboard-vr-display/blob/13e4fe62ce1ceb31f0fe60955fa242b50c0d998d/src/pose-sensor.js
+// https://github.com/immersive-web/cardboard-vr-display/tree/13e4fe62ce1ceb31f0fe60955fa242b50c0d998d/src/sensor-fusion
+
+// https://intel.github.io/generic-sensor-demos/orientation-phone/?relative=1
 // https://smus.com/sensor-fusion-prediction-webvr/
 // Accelerometer data is very noisy, but stable over the long term
 // Gyroscope data is smooth, but tends to drift over the long term
