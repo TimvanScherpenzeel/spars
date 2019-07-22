@@ -42,6 +42,7 @@ interface IExternalState {
 // TODO: reset on visibilitychange
 // TODO: android has flipped axis
 // TODO: iOS needs permissions
+// TODO: take window orientation into account
 
 // NOTE: Chrome / iOS sensor only works on secure contexts
 
