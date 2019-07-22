@@ -28,7 +28,7 @@ export class FusionPoseSensor {
     this.posePredictor = new PosePredictor(predictionTime);
 
     const chromeVersion = getBrowserType.isChrome && parseInt(getBrowserType.browserVersion, 10);
-    this.isDeviceMotionInRadians = !getBrowserType.isiOS && chromeVersion && chromeVersion < 66;
+    this.isDeviceMotionInRadians = !!(!getBrowserType.isiOS && chromeVersion && chromeVersion < 66);
 
     if (getBrowserType.isiOS) {
       this.filterToWorldQuaternion.setFromAxisAngle(new Vector3(1, 0, 0), Math.PI / 2);
@@ -105,12 +105,27 @@ export class FusionPoseSensor {
       return;
     }
 
-    this.accelerometer.set(
-      -accelerationIncludingGravity.x,
-      -accelerationIncludingGravity.y,
-      -accelerationIncludingGravity.z
-    );
-    this.gyroscope.set(rotationRate.alpha, rotationRate.beta, rotationRate.gamma);
+    if (
+      accelerationIncludingGravity !== null &&
+      accelerationIncludingGravity.x !== null &&
+      accelerationIncludingGravity.y !== null &&
+      accelerationIncludingGravity.z !== null
+    ) {
+      this.accelerometer.set(
+        -accelerationIncludingGravity.x,
+        -accelerationIncludingGravity.y,
+        -accelerationIncludingGravity.z
+      );
+    }
+
+    if (
+      rotationRate !== null &&
+      rotationRate.alpha !== null &&
+      rotationRate.beta !== null &&
+      rotationRate.gamma !== null
+    ) {
+      this.gyroscope.set(rotationRate.alpha, rotationRate.beta, rotationRate.gamma);
+    }
 
     if (!this.isDeviceMotionInRadians) {
       this.gyroscope.multiplyScalar(Math.PI / 180);
