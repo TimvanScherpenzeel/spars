@@ -39,6 +39,7 @@ interface IExternalState {
   orientationQuaternion: number[];
 }
 
+// https://smus.com/sensor-fusion-prediction-webvr/
 // Accelerometer data is very noisy, but stable over the long term
 // Gyroscope data is smooth, but tends to drift over the long term
 
