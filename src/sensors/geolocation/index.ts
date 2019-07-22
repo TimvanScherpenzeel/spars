@@ -1,15 +1,21 @@
-// Add geolocation sensor
-
-// https://github.com/kenchris/sensor-polyfills/blob/master/src/geolocation-sensor.js
-
 export class Geolocation {
+  private static getGeolocation = (): Promise<Coordinates> =>
+    new Promise((resolve, reject): void => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            resolve(position.coords);
+          },
+          err => {
+            reject(err);
+          }
+        );
+      } else {
+        reject('Geolocation sensor is unavailable');
+      }
+    });
+
   constructor() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        console.log(position);
-      });
-    } else {
-      console.error('Geolocation sensor is unavailable');
-    }
+    return Geolocation.getGeolocation();
   }
 }

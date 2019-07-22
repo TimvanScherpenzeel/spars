@@ -14,26 +14,13 @@
 // TODO: event.beta has values between -90 and 90 on mobile Safari and between 180 and -180 on Firefox.
 // TODO: event.gamma has values between -180 and 180 on mobile Safari and between 90 and -90 on Firefox.
 
-// Sensors
-import { FusionPoseSensor } from './FusionPoseSensor';
-
 export class Accelerometer {
-  private kFilter: number;
-  private predictionTime: number;
-  private fusionSensor: FusionPoseSensor;
+  private static getAccelerometer = (): Promise<any> =>
+    new Promise((resolve, reject): void => {
+      resolve('d');
+    });
 
-  constructor(kFilter: number, predictionTime: number) {
-    this.kFilter = kFilter;
-    this.predictionTime = predictionTime;
-
-    this.fusionSensor = new FusionPoseSensor(this.kFilter, this.predictionTime);
-  }
-
-  public getOrientation(): Float32Array {
-    return this.fusionSensor.getOrientation();
-  }
-
-  public resetPose(): void {
-    return this.fusionSensor.resetPose();
+  constructor() {
+    return Accelerometer.getAccelerometer();
   }
 }

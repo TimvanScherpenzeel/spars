@@ -102,18 +102,6 @@ import * as Spar from '../dist/spar.umd';
 
 // Spar.eventEmitter.on('SPAR::CONNECTION_CHANGE', connectionChangeHandler);
 
-Spar.onDeviceOrientationChange();
-
-const deviceOrientationChangeHandler = event => {
-  document.getElementById('deviceorientation').innerHTML = `Rotation [${[
-    event.alpha.toFixed(3),
-    event.beta.toFixed(3),
-    event.gamma.toFixed(3),
-  ]}]`;
-};
-
-Spar.eventEmitter.on('SPAR::DEVICE_ORIENTATION_CHANGE', deviceOrientationChangeHandler);
-
 // Spar.onKeyChange();
 
 // const keyChangeDownHandler = event => {
@@ -335,7 +323,18 @@ console.log(Spar.features);
 
 // console.log(Spar.pointerLock);
 
+// Sensors
+// -------
+(async () => {
+  const accelerometer = await new Spar.Accelerometer();
+  console.log(accelerometer);
+
+  // const geolocation = await new Spar.Geolocation();
+  // console.log(geolocation);
+})();
+
 // Threads
+// -------
 
 // (async () => {
 //   const pool = Spar.threadPool;
