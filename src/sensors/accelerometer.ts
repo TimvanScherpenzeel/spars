@@ -166,6 +166,7 @@ export class Accelerometer {
     return this.externalState;
   }
 
+  // [β, γ, α] ->  [qx, qy, qz, qw]
   private convertEulerToQuaternion(
     beta: TNullable<number>,
     gamma: TNullable<number>,
