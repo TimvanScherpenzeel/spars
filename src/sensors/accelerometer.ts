@@ -37,6 +37,8 @@ interface IExternalState {
   orientationQuaternion: number[];
 }
 
+// https://github.com/marquizzo/three-gimbal/blob/master/src/Gimbal.js
+
 // TODO: reset on visibilitychange
 // TODO: android has flipped axis
 // TODO: iOS needs permissions
