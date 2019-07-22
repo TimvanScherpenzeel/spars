@@ -5,6 +5,8 @@ import getBrowserType from '../features/browserFeatures/getBrowserType';
 import { TNullable } from '../types';
 
 interface IInternalState {
+  screenOrientation: number;
+
   orientation: {
     absolute: boolean;
     alpha: TNullable<number>;
@@ -59,6 +61,9 @@ export class Accelerometer {
   };
 
   private internalState: IInternalState = {
+    // Screen orientation
+    screenOrientation: 0,
+
     // Device orientation
     orientation: {
       absolute: false,
@@ -88,6 +93,12 @@ export class Accelerometer {
   };
 
   public start(): void {
+    if ((window as any).ScreenOrientation) {
+      window.addEventListener('orientationchange', this.onScreenOrientationChangeHandler, false);
+    } else {
+      console.warn('Accelerometer -> Device does not support orientationchange event');
+    }
+
     if ((window as any).DeviceMotionEvent) {
       window.addEventListener('devicemotion', this.onDeviceMotionChangeHandler, false);
     } else {
@@ -102,6 +113,12 @@ export class Accelerometer {
   }
 
   public stop(): void {
+    if ((window as any).ScreenOrientation) {
+      window.removeEventListener('orientationchange', this.onScreenOrientationChangeHandler, false);
+    } else {
+      console.warn('Accelerometer -> Device does not support orientationchange event');
+    }
+
     if ((window as any).DeviceMotionEvent) {
       window.removeEventListener('devicemotion', this.onDeviceMotionChangeHandler, false);
     } else {
@@ -163,6 +180,10 @@ export class Accelerometer {
       cX * cY * sZ + sX * sY * cZ,
       cX * cY * cZ - sX * sY * sZ,
     ];
+  }
+
+  private onScreenOrientationChangeHandler(event: any): void {
+    this.internalState.screenOrientation = Number(window.orientation);
   }
 
   private onDeviceOrientationChangeHandler(event: DeviceOrientationEvent): void {
