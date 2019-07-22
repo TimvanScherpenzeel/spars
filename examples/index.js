@@ -323,16 +323,6 @@ console.log(Spar.features);
 
 // console.log(Spar.pointerLock);
 
-// Sensors
-// -------
-(async () => {
-  const accelerometer = await new Spar.Accelerometer();
-  console.log(accelerometer);
-
-  // const geolocation = await new Spar.Geolocation();
-  // console.log(geolocation);
-})();
-
 // Threads
 // -------
 

@@ -5038,6 +5038,11 @@ mkdirp@0.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.1:
   dependencies:
     minimist "0.0.8"
 
+motion-sensors-polyfill@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/motion-sensors-polyfill/-/motion-sensors-polyfill-0.3.1.tgz#f8dfe18614b719c75d8c466914a3931bfc8c8d1f"
+  integrity sha1-+N/hhhS3GcddjEZpFKOTG/yMjR8=
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
