@@ -183,7 +183,8 @@ export class Accelerometer {
   }
 
   private onScreenOrientationChangeHandler(event: any): void {
-    this.internalState.screenOrientation = Number(window.orientation);
+    this.internalState.screenOrientation =
+      Number(window.orientation) * Accelerometer.degreesToRadians;
   }
 
   private onDeviceOrientationChangeHandler(event: DeviceOrientationEvent): void {
