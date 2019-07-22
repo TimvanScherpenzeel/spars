@@ -32,4 +32,8 @@ export class Accelerometer {
   public getOrientation(): Float32Array {
     return this.fusionSensor.getOrientation();
   }
+
+  public resetPose(): void {
+    return this.fusionSensor.resetPose();
+  }
 }
