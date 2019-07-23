@@ -35,8 +35,8 @@ export { AssetLoader } from './loaders';
 // Polyfills
 export { fullScreen, pointerLock } from './polyfills';
 
-// Structures
-export { LinkedList, Stack } from './structures';
+// Scheduler
+export { scheduleTask } from './scheduler';
 
 // Threads
 export { threadPool } from './threads';
