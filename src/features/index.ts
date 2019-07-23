@@ -1,3 +1,4 @@
+// Features
 // Browser features
 import getBrowserType from './browserFeatures/getBrowserType';
 import getMediaFeatures from './browserFeatures/getMediaFeatures';

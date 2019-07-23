@@ -35,8 +35,8 @@ export { AssetLoader } from './loaders';
 // Polyfills
 export { fullScreen, pointerLock } from './polyfills';
 
-// Sensors
-export { GeolocationSensor, RelativeOrientationSensor } from './sensors';
+// Structures
+export { LinkedList, Stack } from './structures';
 
 // Threads
 export { threadPool } from './threads';
