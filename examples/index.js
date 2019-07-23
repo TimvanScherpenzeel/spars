@@ -328,14 +328,14 @@ console.log(Spar.features);
 //   () => {
 //     result.push('A');
 //   },
-//   { priority: Spar.TASK_PRIORITY.LOW }
+//   { priority: Spar.priorities.LOW }
 // );
 
 // Spar.scheduleFrame(
 //   () => {
 //     result.push('C');
 //   },
-//   { priority: Spar.TASK_PRIORITY.IMPORTANT }
+//   { priority: Spar.priorities.IMPORTANT }
 // );
 
 // Spar.scheduleFrame(

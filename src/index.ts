@@ -36,7 +36,7 @@ export { assetLoader } from './assetLoader';
 export { fullScreen, pointerLock } from './polyfills';
 
 // FrameScheduler
-export { scheduleFrame, TASK_PRIORITY } from './frameScheduler';
+export { priorities, scheduleFrame } from './frameScheduler';
 
 // ThreadPool
 export { threadPool } from './threadPool';
