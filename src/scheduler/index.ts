@@ -36,10 +36,10 @@ export const createScheduler = (): (() => void) => {
   };
 
   const runJobs = (): void => {
-    const timeRun = Date.now();
+    const timeRan = Date.now();
 
     while (true) {
-      if (heapJobs.isEmpty() || Date.now() - timeRun > TIME_LIFE_FRAME) {
+      if (heapJobs.isEmpty() || Date.now() - timeRan > TIME_LIFE_FRAME) {
         break;
       } else {
         const jobs = heapJobs.peek();
