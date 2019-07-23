@@ -5,7 +5,7 @@ export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 export { createAudioContext, isAutoplayAllowed, unlockAutoplay } from './audio';
 
 // Cache
-export { PersistentCache } from './cache';
+export { persistentCache } from './persistentCache';
 
 // Cookie
 export { deleteCookie, getCookie, setCookie } from './cookie';

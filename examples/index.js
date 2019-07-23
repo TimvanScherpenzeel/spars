@@ -43,20 +43,18 @@ import * as Spar from '../dist/spar.umd';
 // Cache
 // -----
 
-// const persistentCache = new Spar.PersistentCache();
-
-// persistentCache.set('key1', 'value1');
-// persistentCache.set('key2', 'value2');
-// persistentCache.get('key1').then(key => console.log(key));
-// persistentCache.getKeys().then(keys => {
+// Spar.persistentCache.set('key1', 'value1');
+// Spar.persistentCache.set('key2', 'value2');
+// Spar.persistentCache.get('key1').then(key => console.log(key));
+// Spar.persistentCache.getKeys().then(keys => {
 //   console.log(keys);
-//   persistentCache.delete('key1');
+//   Spar.persistentCache.delete('key1');
 
-//   persistentCache.getKeys().then(keys => {
+//   Spar.persistentCache.getKeys().then(keys => {
 //     console.log(keys);
-//     persistentCache.clear();
+//     Spar.persistentCache.clear();
 
-//     persistentCache.getKeys().then(keys => {
+//     Spar.persistentCache.getKeys().then(keys => {
 //       console.log(keys);
 //     });
 //   });
@@ -174,9 +172,7 @@ console.log(Spar.features);
 
 // const { isDesktop, isTablet, isMobile } = Spar.features.browserFeatures.browserType;
 
-// const assetLoader = new Spar.AssetLoader();
-
-// assetLoader
+// Spar.assetLoader
 //   .loadAssets([
 //     isDesktop && {
 //       loader: 'ImageBitmap',
