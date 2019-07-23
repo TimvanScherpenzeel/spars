@@ -13,7 +13,7 @@ export const TASK_PRIORITY = {
   IMPORTANT: 10,
 };
 
-export const createFrameScheduling = (lifeFrame: number = TIME_LIFE_FRAME): any => {
+export const createFrameScheduling = (): any => {
   const heapJobs = new PriorityUniqueQueue<LinkedList>();
   let deferScheduled = false;
 
@@ -39,7 +39,7 @@ export const createFrameScheduling = (lifeFrame: number = TIME_LIFE_FRAME): any 
     const timeRun = Date.now();
 
     while (true) {
-      if (heapJobs.isEmpty() || Date.now() - timeRun > lifeFrame) {
+      if (heapJobs.isEmpty() || Date.now() - timeRun > TIME_LIFE_FRAME) {
         break;
       } else {
         const jobs = heapJobs.peek();
