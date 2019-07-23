@@ -173,35 +173,33 @@ export class AssetLoader {
       .then(response => response.blob())
       .then(
         blob =>
-          new Promise(
-            (resolve, reject): void => {
-              const audio = document.createElement('audio');
-              audio.preload = 'auto';
-              audio.autoplay = false;
+          new Promise((resolve, reject): void => {
+            const audio = document.createElement('audio');
+            audio.preload = 'auto';
+            audio.autoplay = false;
 
-              if (IS_MEDIA_PRELOAD_SUPPORTED) {
-                audio.addEventListener('canplaythrough', function handler(): void {
-                  audio.removeEventListener('canplaythrough', handler);
-                  URL.revokeObjectURL(audio.src);
-                  resolve(audio);
-                });
-
-                audio.addEventListener('error', function handler(): void {
-                  audio.removeEventListener('error', handler);
-                  URL.revokeObjectURL(audio.src);
-                  reject(audio);
-                });
-              }
-
-              audio.src = URL.createObjectURL(blob);
-
-              if (!IS_MEDIA_PRELOAD_SUPPORTED) {
-                // Force the audio to load but resolve immediately as `canplaythrough` event will never be fired
-                audio.load();
+            if (IS_MEDIA_PRELOAD_SUPPORTED) {
+              audio.addEventListener('canplaythrough', function handler(): void {
+                audio.removeEventListener('canplaythrough', handler);
+                URL.revokeObjectURL(audio.src);
                 resolve(audio);
-              }
+              });
+
+              audio.addEventListener('error', function handler(): void {
+                audio.removeEventListener('error', handler);
+                URL.revokeObjectURL(audio.src);
+                reject(audio);
+              });
             }
-          )
+
+            audio.src = URL.createObjectURL(blob);
+
+            if (!IS_MEDIA_PRELOAD_SUPPORTED) {
+              // Force the audio to load but resolve immediately as `canplaythrough` event will never be fired
+              audio.load();
+              resolve(audio);
+            }
+          })
       )
       .catch(err => {
         console.warn(err);
@@ -233,38 +231,36 @@ export class AssetLoader {
    * @param item Item to load
    */
   private static loadImage = (item: ILoadItem): Promise<HTMLImageElement> =>
-    new Promise(
-      (resolve, reject): void => {
-        const image = new Image();
+    new Promise((resolve, reject): void => {
+      const image = new Image();
 
-        // Check if we can decode non-blocking by loading the image asynchronously using image.decode().then(() => ...)
-        // https://www.chromestatus.com/feature/5637156160667648 (Chrome / Safari / Safari iOS)
-        if (isImageDecodeSupported) {
-          image.src = item.src;
-          image
-            .decode()
-            .then(() => {
-              resolve(image);
-            })
-            .catch(err => {
-              reject(err);
-            });
-        } else {
-          // Fallback solution
-          // Decode as synchronous blocking on the main thread
-          // This is the least favorable method and should preferably only be used in old browsers (Edge, Firefox)
-          image.onload = (): void => {
+      // Check if we can decode non-blocking by loading the image asynchronously using image.decode().then(() => ...)
+      // https://www.chromestatus.com/feature/5637156160667648 (Chrome / Safari / Safari iOS)
+      if (isImageDecodeSupported) {
+        image.src = item.src;
+        image
+          .decode()
+          .then(() => {
             resolve(image);
-          };
-
-          image.onerror = (err): void => {
+          })
+          .catch(err => {
             reject(err);
-          };
+          });
+      } else {
+        // Fallback solution
+        // Decode as synchronous blocking on the main thread
+        // This is the least favorable method and should preferably only be used in old browsers (Edge, Firefox)
+        image.onload = (): void => {
+          resolve(image);
+        };
 
-          image.src = item.src;
-        }
+        image.onerror = (err): void => {
+          reject(err);
+        };
+
+        image.src = item.src;
       }
-    );
+    });
 
   /**
    * Load an item and parse the Response as ImageBitmap element
@@ -506,37 +502,35 @@ export class AssetLoader {
       .then(response => response.blob())
       .then(
         blob =>
-          new Promise(
-            (resolve, reject): void => {
-              const video = document.createElement('video');
-              video.preload = 'auto';
-              video.autoplay = false;
-              // @ts-ignore playsinline is not recognized as a valid type but it is valid syntax
-              video.playsinline = true;
+          new Promise((resolve, reject): void => {
+            const video = document.createElement('video');
+            video.preload = 'auto';
+            video.autoplay = false;
+            // @ts-ignore playsinline is not recognized as a valid type but it is valid syntax
+            video.playsinline = true;
 
-              if (IS_MEDIA_PRELOAD_SUPPORTED) {
-                video.addEventListener('canplaythrough', function handler(): void {
-                  video.removeEventListener('canplaythrough', handler);
-                  URL.revokeObjectURL(video.src);
-                  resolve(video);
-                });
-
-                video.addEventListener('error', function handler(): void {
-                  video.removeEventListener('error', handler);
-                  URL.revokeObjectURL(video.src);
-                  reject(video);
-                });
-              }
-
-              video.src = URL.createObjectURL(blob);
-
-              if (!IS_MEDIA_PRELOAD_SUPPORTED) {
-                // Force the audio to load but resolve immediately as `canplaythrough` event will never be fired
-                video.load();
+            if (IS_MEDIA_PRELOAD_SUPPORTED) {
+              video.addEventListener('canplaythrough', function handler(): void {
+                video.removeEventListener('canplaythrough', handler);
+                URL.revokeObjectURL(video.src);
                 resolve(video);
-              }
+              });
+
+              video.addEventListener('error', function handler(): void {
+                video.removeEventListener('error', handler);
+                URL.revokeObjectURL(video.src);
+                reject(video);
+              });
             }
-          )
+
+            video.src = URL.createObjectURL(blob);
+
+            if (!IS_MEDIA_PRELOAD_SUPPORTED) {
+              // Force the audio to load but resolve immediately as `canplaythrough` event will never be fired
+              video.load();
+              resolve(video);
+            }
+          })
       )
       .catch(err => {
         console.warn(err);
@@ -610,78 +604,76 @@ export class AssetLoader {
       .map(item => {
         const startTime = window.performance.now();
 
-        return new Promise(
-          (resolve): void => {
-            const cacheHit = this.assets.get(item.src);
+        return new Promise((resolve): void => {
+          const cacheHit = this.assets.get(item.src);
 
-            if (cacheHit) {
-              resolve({
-                fromCache: true,
-                id: item.id || item.src,
-                item: cacheHit,
-                timeToLoad: window.performance.now() - startTime,
-              });
-            }
-
-            const loaderType = item.loader || AssetLoader.getLoaderByFileExtension(item.src);
-
-            let loadedItem;
-
-            switch (loaderType) {
-              case ELoaderKey.ArrayBuffer:
-                loadedItem = AssetLoader.loadArrayBuffer(item);
-                break;
-              case ELoaderKey.Audio:
-                loadedItem = AssetLoader.loadAudio(item);
-                break;
-              case ELoaderKey.Blob:
-                loadedItem = AssetLoader.loadBlob(item);
-                break;
-              case ELoaderKey.Font:
-                loadedItem = AssetLoader.loadFont(item);
-                break;
-              case ELoaderKey.Image:
-                loadedItem = AssetLoader.loadImage(item);
-                break;
-              case ELoaderKey.ImageBitmap:
-                loadedItem = AssetLoader.loadImageBitmap(item);
-                break;
-              case ELoaderKey.ImageCompressed:
-                loadedItem = AssetLoader.loadImageCompressed(item);
-                break;
-              case ELoaderKey.JSON:
-                loadedItem = AssetLoader.loadJSON(item);
-                break;
-              case ELoaderKey.Text:
-                loadedItem = AssetLoader.loadText(item);
-                break;
-              case ELoaderKey.Video:
-                loadedItem = AssetLoader.loadVideo(item);
-                break;
-              case ELoaderKey.WebAssembly:
-                loadedItem = AssetLoader.loadWebAssembly(item);
-                break;
-              case ELoaderKey.XML:
-                loadedItem = AssetLoader.loadXML(item);
-                break;
-              default:
-                console.warn('Missing loader, falling back to loading as ArrayBuffer');
-                loadedItem = AssetLoader.loadArrayBuffer(item);
-                break;
-            }
-
-            loadedItem.then((asset: any) => {
-              this.assets.set(item.src, asset);
-
-              resolve({
-                fromCache: false,
-                id: item.id || item.src,
-                item: asset,
-                timeToLoad: window.performance.now() - startTime,
-              });
+          if (cacheHit) {
+            resolve({
+              fromCache: true,
+              id: item.id || item.src,
+              item: cacheHit,
+              timeToLoad: window.performance.now() - startTime,
             });
           }
-        );
+
+          const loaderType = item.loader || AssetLoader.getLoaderByFileExtension(item.src);
+
+          let loadedItem;
+
+          switch (loaderType) {
+            case ELoaderKey.ArrayBuffer:
+              loadedItem = AssetLoader.loadArrayBuffer(item);
+              break;
+            case ELoaderKey.Audio:
+              loadedItem = AssetLoader.loadAudio(item);
+              break;
+            case ELoaderKey.Blob:
+              loadedItem = AssetLoader.loadBlob(item);
+              break;
+            case ELoaderKey.Font:
+              loadedItem = AssetLoader.loadFont(item);
+              break;
+            case ELoaderKey.Image:
+              loadedItem = AssetLoader.loadImage(item);
+              break;
+            case ELoaderKey.ImageBitmap:
+              loadedItem = AssetLoader.loadImageBitmap(item);
+              break;
+            case ELoaderKey.ImageCompressed:
+              loadedItem = AssetLoader.loadImageCompressed(item);
+              break;
+            case ELoaderKey.JSON:
+              loadedItem = AssetLoader.loadJSON(item);
+              break;
+            case ELoaderKey.Text:
+              loadedItem = AssetLoader.loadText(item);
+              break;
+            case ELoaderKey.Video:
+              loadedItem = AssetLoader.loadVideo(item);
+              break;
+            case ELoaderKey.WebAssembly:
+              loadedItem = AssetLoader.loadWebAssembly(item);
+              break;
+            case ELoaderKey.XML:
+              loadedItem = AssetLoader.loadXML(item);
+              break;
+            default:
+              console.warn('Missing loader, falling back to loading as ArrayBuffer');
+              loadedItem = AssetLoader.loadArrayBuffer(item);
+              break;
+          }
+
+          loadedItem.then((asset: any) => {
+            this.assets.set(item.src, asset);
+
+            resolve({
+              fromCache: false,
+              id: item.id || item.src,
+              item: asset,
+              timeToLoad: window.performance.now() - startTime,
+            });
+          });
+        });
       });
 
     const loadedAssets = Promise.all(loadingAssets);
@@ -715,3 +707,5 @@ export class AssetLoader {
     });
   };
 }
+
+export const assetLoader = new AssetLoader();

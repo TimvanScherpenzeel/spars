@@ -30,7 +30,7 @@ export {
 export { features } from './features';
 
 // Loaders
-export { AssetLoader } from './loaders';
+export { assetLoader } from './assetLoader';
 
 // Polyfills
 export { fullScreen, pointerLock } from './polyfills';

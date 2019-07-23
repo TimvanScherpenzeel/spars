@@ -22,6 +22,10 @@
 
 Contains code to help you set up Google Analytics tracking and reporting of individual events. The reporting of events are optionally throttled using `requestIdleCallback` which guarantees no interference with higher priority code.
 
+### AssetLoader
+
+Contains code for an `AssetLoader` used for preloading commonly used assets like images, GPU compressed images, bitmaps, video, audio, fonts, WebAssembly, JSON, SVG, etc..).
+
 ### Audio
 
 Contains code to help you with audio autoplay unlocking in the browser.
@@ -41,10 +45,6 @@ Contains code to check the support of various browser features, test for browser
 ### FrameScheduler
 
 Contains a scheduler to schedule tasks over multiple frames to avoid dropping below 16 frames per second.
-
-### Loaders
-
-Contains code for an `AssetLoader` class used for preloading commonly used assets like images, GPU compressed images, bitmaps, video, audio, fonts, WebAssembly, JSON, SVG, etc..).
 
 ### Polyfills
 
