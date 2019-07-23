@@ -36,12 +36,12 @@ export { AssetLoader } from './loaders';
 export { fullScreen, pointerLock } from './polyfills';
 
 // Remote
-export { installRemoteErrorHandler } from './errorHandling';
+export { installRemoteErrorHandler } from './remote';
 
-// Scheduler
+// FrameScheduler
 export { scheduleFrame, TASK_PRIORITY } from './frameScheduler';
 
-// Threads
+// ThreadPool
 export { threadPool } from './threadPool';
 
 // Utilities
