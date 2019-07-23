@@ -18,52 +18,52 @@ export const priorities = {
 };
 
 export const createFrameScheduler = (): (() => void) => {
-  const heapJobs = new PriorityUniqueQueue<LinkedList>();
+  const heapTasks = new PriorityUniqueQueue<LinkedList>();
   let deferScheduled = false;
 
   const runDefer = (): void => {
     if (!deferScheduled) {
       deferScheduled = true;
-      window.requestAnimationFrame(runJobs);
+      window.requestAnimationFrame(runTasks);
     }
   };
 
-  const addJob = (callback: () => void, priority: number): void => {
-    let job = heapJobs.get(priority);
+  const addTask = (callback: () => void, priority: number): void => {
+    let task = heapTasks.get(priority);
 
-    if (!job) {
-      job = new LinkedList();
-      heapJobs.add(priority, job);
+    if (!task) {
+      task = new LinkedList();
+      heapTasks.add(priority, task);
     }
 
-    job.push(callback);
+    task.push(callback);
   };
 
-  const runJobs = (): void => {
+  const runTasks = (): void => {
     const timeRan = performance.now();
 
     while (true) {
-      if (heapJobs.isEmpty() || performance.now() - timeRan > TIME_LIFE_FRAME) {
+      if (heapTasks.isEmpty() || performance.now() - timeRan > TIME_LIFE_FRAME) {
         break;
       } else {
-        const jobs = heapJobs.peek();
+        const tasks = heapTasks.peek();
 
         try {
-          jobs.shift()();
+          tasks.shift()();
         } catch (err) {
           console.error(err);
         }
 
-        if (jobs.isEmpty()) {
-          heapJobs.poll();
+        if (tasks.isEmpty()) {
+          heapTasks.poll();
         }
       }
     }
 
     deferScheduled = false;
 
-    if (!heapJobs.isEmpty()) {
-      heapJobs.rising();
+    if (!heapTasks.isEmpty()) {
+      heapTasks.rising();
 
       runDefer();
     }
@@ -72,7 +72,7 @@ export const createFrameScheduler = (): (() => void) => {
   // TODO: fix definition
   // @ts-ignore
   return function scheduling(callback: () => void, { priority = priorities.NORMAL } = {}): void {
-    addJob(callback, priority);
+    addTask(callback, priority);
 
     runDefer();
   };
