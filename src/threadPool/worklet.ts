@@ -1,4 +1,4 @@
-// Threads
+// ThreadPool
 import { Task } from './Task';
 
 // Types

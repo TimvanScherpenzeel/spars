@@ -1,4 +1,4 @@
-// Threads
+// ThreadPool
 import { config } from './config';
 import { Task } from './Task';
 import { worklet } from './worklet';
@@ -51,12 +51,10 @@ export class TaskManager {
       isRequested: false, // Has the task result been requested from the worker?
     });
 
-    resultController.result = new Promise(
-      (resolve, reject): void => {
-        resultController[0] = resolve;
-        resultController[1] = reject;
-      }
-    );
+    resultController.result = new Promise((resolve, reject): void => {
+      resultController[0] = resolve;
+      resultController[1] = reject;
+    });
 
     const tasksToResolveIndices: any[] = [];
     const tasksToResolve: Array<Promise<any>> = [];

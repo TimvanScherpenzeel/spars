@@ -1,4 +1,4 @@
-// Threads
+// ThreadPool
 import { config } from './config';
 import { Task } from './Task';
 import { TaskManager } from './TaskManager';

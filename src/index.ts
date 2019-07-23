@@ -42,7 +42,7 @@ export { installRemoteErrorHandler } from './errorHandling';
 export { scheduleFrame, TASK_PRIORITY } from './frameScheduler';
 
 // Threads
-export { threadPool } from './threads';
+export { threadPool } from './threadPool';
 
 // Utilities
 export { assert, debounce, getQueryParameters } from './utilities';

@@ -1,4 +1,4 @@
-// Scheduler
+// FrameScheduler
 import { LinkedList } from './LinkedList';
 import { PriorityUniqueQueue } from './PriorityUniqueQueue';
 
