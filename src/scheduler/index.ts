@@ -2,68 +2,75 @@
 import { LinkedList } from './LinkedList';
 import { PriorityUniqueQueue } from './PriorityUniqueQueue';
 
-class TaskScheduler {
-  public PRIORITY_LOWER: number = 1;
-  public PRIORITY_LOW: number = 3;
-  public PRIORITY_NORMAL: number = 5;
-  public PRIORITY_HIGH: number = 7;
-  public PRIORITY_IMPORTANT: number = 10;
+const TIME_LIFE_FRAME = 16;
 
-  private lifeFrame: number;
-  private heapJobs: PriorityUniqueQueue<LinkedList> = new PriorityUniqueQueue();
-  private deferScheduled: boolean = false;
+export const TASK_PRIORITY = {
+  LOWER: 1,
+  // tslint:disable-next-line:object-literal-sort-keys
+  LOW: 3,
+  NORMAL: 5,
+  HIGH: 7,
+  IMPORTANT: 10,
+};
 
-  constructor(lifeFrame: number = 16) {
-    this.lifeFrame = lifeFrame;
-  }
+export const createFrameScheduling = (lifeFrame: number = TIME_LIFE_FRAME): any => {
+  const heapJobs = new PriorityUniqueQueue<LinkedList>();
+  let deferScheduled = false;
 
-  public runDefer(): void {
-    if (!this.deferScheduled) {
-      this.deferScheduled = true;
-      window.requestAnimationFrame(this.runJobs);
+  const runDefer = (): void => {
+    if (!deferScheduled) {
+      deferScheduled = true;
+      window.requestAnimationFrame(runJobs);
     }
-  }
+  };
 
-  public addJob = (callback: () => void, priority: number): void => {
-    let job = this.heapJobs.get(priority);
+  const addJob = (callback: () => void, priority: number): void => {
+    let job = heapJobs.get(priority);
 
     if (!job) {
       job = new LinkedList();
-      this.heapJobs.add(priority, job);
+      heapJobs.add(priority, job);
     }
 
     job.push(callback);
   };
 
-  private runJobs(): void {
+  const runJobs = (): void => {
     const timeRun = Date.now();
 
     while (true) {
-      if (this.heapJobs.isEmpty() || Date.now() - timeRun > this.lifeFrame) {
+      if (heapJobs.isEmpty() || Date.now() - timeRun > lifeFrame) {
         break;
       } else {
-        const jobs = this.heapJobs.peek();
+        const jobs = heapJobs.peek();
 
         try {
           jobs.shift()();
-        } catch (e) {
-          console.error(e); // tslint:disable-line
+        } catch (err) {
+          console.error(err);
         }
 
         if (jobs.isEmpty()) {
-          this.heapJobs.poll();
+          heapJobs.poll();
         }
       }
     }
 
-    this.deferScheduled = false;
+    deferScheduled = false;
 
-    if (!this.heapJobs.isEmpty()) {
-      this.heapJobs.rising();
+    if (!heapJobs.isEmpty()) {
+      heapJobs.rising();
 
-      this.runDefer();
+      runDefer();
     }
-  }
-}
+  };
 
-export const scheduleTask = new TaskScheduler();
+  // @ts-ignore
+  return function scheduling(callback: () => void, { priority = TASK_PRIORITY.NORMAL } = {}): void {
+    addJob(callback, priority);
+
+    runDefer();
+  };
+};
+
+export default createFrameScheduling();

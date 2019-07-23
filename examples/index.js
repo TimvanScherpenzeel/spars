@@ -323,6 +323,40 @@ console.log(Spar.features);
 
 // console.log(Spar.pointerLock);
 
+// Scheduler
+// ---------
+
+// const result = [];
+
+// Spar.scheduleTask(
+//   () => {
+//     result.push('A');
+//   },
+//   { priority: Spar.TASK_PRIORITY.LOW }
+// );
+
+// Spar.scheduleTask(
+//   () => {
+//     result.push('C');
+//   },
+//   { priority: Spar.TASK_PRIORITY.IMPORTANT }
+// );
+
+// Spar.scheduleTask(
+//   () => {
+//     result.push('D');
+//   },
+//   { priority: 1000 }
+// );
+
+// Spar.scheduleTask(() => {
+//   result.push('B');
+// });
+
+// setTimeout(() => {
+//   console.log(result); // -> ["D", "C", "B", "A"]
+// }, 1000);
+
 // Threads
 // -------
 

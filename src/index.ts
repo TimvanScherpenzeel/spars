@@ -36,7 +36,8 @@ export { AssetLoader } from './loaders';
 export { fullScreen, pointerLock } from './polyfills';
 
 // Scheduler
-export { scheduleTask } from './scheduler';
+import scheduleTask, { TASK_PRIORITY } from './scheduler';
+export { scheduleTask, TASK_PRIORITY };
 
 // Threads
 export { threadPool } from './threads';
