@@ -328,28 +328,28 @@ console.log(Spar.features);
 
 // const result = [];
 
-// Spar.scheduleTask(
+// Spar.scheduleFrame(
 //   () => {
 //     result.push('A');
 //   },
 //   { priority: Spar.TASK_PRIORITY.LOW }
 // );
 
-// Spar.scheduleTask(
+// Spar.scheduleFrame(
 //   () => {
 //     result.push('C');
 //   },
 //   { priority: Spar.TASK_PRIORITY.IMPORTANT }
 // );
 
-// Spar.scheduleTask(
+// Spar.scheduleFrame(
 //   () => {
 //     result.push('D');
 //   },
 //   { priority: 1000 }
 // );
 
-// Spar.scheduleTask(() => {
+// Spar.scheduleFrame(() => {
 //   result.push('B');
 // });
 

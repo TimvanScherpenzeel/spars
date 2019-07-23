@@ -13,7 +13,7 @@ export const TASK_PRIORITY = {
   IMPORTANT: 10,
 };
 
-export const createScheduler = (): (() => void) => {
+export const createFrameScheduler = (): (() => void) => {
   const heapJobs = new PriorityUniqueQueue<LinkedList>();
   let deferScheduled = false;
 
@@ -36,10 +36,10 @@ export const createScheduler = (): (() => void) => {
   };
 
   const runJobs = (): void => {
-    const timeRan = Date.now();
+    const timeRan = performance.now();
 
     while (true) {
-      if (heapJobs.isEmpty() || Date.now() - timeRan > TIME_LIFE_FRAME) {
+      if (heapJobs.isEmpty() || performance.now() - timeRan > TIME_LIFE_FRAME) {
         break;
       } else {
         const jobs = heapJobs.peek();
@@ -65,6 +65,7 @@ export const createScheduler = (): (() => void) => {
     }
   };
 
+  // TODO: fix definition
   // @ts-ignore
   return function scheduling(callback: () => void, { priority = TASK_PRIORITY.NORMAL } = {}): void {
     addJob(callback, priority);
@@ -73,4 +74,4 @@ export const createScheduler = (): (() => void) => {
   };
 };
 
-export const scheduleTask = createScheduler();
+export const scheduleFrame = createFrameScheduler();
