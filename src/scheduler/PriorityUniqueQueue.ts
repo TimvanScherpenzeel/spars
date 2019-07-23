@@ -62,8 +62,8 @@ export class PriorityUniqueQueue<T> {
     }
   }
 
-  private pushUp(customStartIndex?: number): void {
-    let currentIndex = customStartIndex || this.heapContainer.length - 1;
+  private pushUp(): void {
+    let currentIndex = this.heapContainer.length - 1;
 
     while (
       PriorityUniqueQueue.hasParent(currentIndex) &&
@@ -77,8 +77,8 @@ export class PriorityUniqueQueue<T> {
     }
   }
 
-  private pushDown(customStartIndex?: number): void {
-    let currentIndex = customStartIndex || 0;
+  private pushDown(): void {
+    let currentIndex = 0;
     let nextIndex = null;
 
     while (PriorityUniqueQueue.getLeftChildIndex(currentIndex) < this.heapContainer.length) {
@@ -109,9 +109,9 @@ export class PriorityUniqueQueue<T> {
     return firstElement.priority >= secondElement.priority;
   }
 
-  private swap(indexOne: number, indexTwo: number): void {
-    const tmp = this.heapContainer[indexTwo];
-    this.heapContainer[indexTwo] = this.heapContainer[indexOne];
-    this.heapContainer[indexOne] = tmp;
+  private swap(indexA: number, indexB: number): void {
+    const tmp = this.heapContainer[indexB];
+    this.heapContainer[indexB] = this.heapContainer[indexA];
+    this.heapContainer[indexA] = tmp;
   }
 }
