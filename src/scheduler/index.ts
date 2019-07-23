@@ -13,7 +13,7 @@ export const TASK_PRIORITY = {
   IMPORTANT: 10,
 };
 
-export const createFrameScheduling = (): any => {
+export const createScheduler = (): (() => void) => {
   const heapJobs = new PriorityUniqueQueue<LinkedList>();
   let deferScheduled = false;
 
@@ -73,4 +73,4 @@ export const createFrameScheduling = (): any => {
   };
 };
 
-export default createFrameScheduling();
+export const scheduleTask = createScheduler();
