@@ -2,7 +2,7 @@
 import { LinkedList } from './LinkedList';
 import { PriorityUniqueQueue } from './PriorityUniqueQueue';
 
-const TIME_LIFE_FRAME = 16;
+const TIME_LIFE_FRAME = 16.67;
 
 export const TASK_PRIORITY = {
   LOWER: 1,

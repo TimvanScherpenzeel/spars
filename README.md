@@ -38,6 +38,10 @@ Contains code to handle network connection changes, device orietation changes, d
 
 Contains code to check the support of various browser features, test for browser settings and check for certain hardware features.
 
+### FrameScheduler
+
+Contains a scheduler to schedule tasks over multiple frames to avoid dropping below 16 frames per second.
+
 ### Loaders
 
 Contains code for an `AssetLoader` class used for preloading commonly used assets like images, GPU compressed images, bitmaps, video, audio, fonts, WebAssembly, JSON, SVG, etc..).
@@ -46,7 +50,7 @@ Contains code for an `AssetLoader` class used for preloading commonly used asset
 
 Contains a fullscreen and pointerlock polyfill that can be used without having to worry about vendor prefixes.
 
-### Threads
+### ThreadPool
 
 _Does not work on Internet Explorer 11_
 

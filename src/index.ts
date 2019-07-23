@@ -35,9 +35,6 @@ export { AssetLoader } from './loaders';
 // Polyfills
 export { fullScreen, pointerLock } from './polyfills';
 
-// Remote
-export { installRemoteErrorHandler } from './remote';
-
 // FrameScheduler
 export { scheduleFrame, TASK_PRIORITY } from './frameScheduler';
 

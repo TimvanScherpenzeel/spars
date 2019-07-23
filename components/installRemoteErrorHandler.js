@@ -1,6 +1,6 @@
-export const installRemoteErrorHandler = (endpoint: string): void => {
-  window.addEventListener('error', (event: ErrorEvent) => {
-    return new Promise((resolve, reject): void => {
+const installRemoteErrorHandler = endpoint => {
+  window.addEventListener('error', event => {
+    return new Promise((resolve, reject) => {
       fetch(endpoint, {
         body: JSON.stringify({
           columnNumber: event.colno,
