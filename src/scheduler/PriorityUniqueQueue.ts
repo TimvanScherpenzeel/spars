@@ -8,13 +8,8 @@ export class PriorityUniqueQueue<T> {
     PriorityUniqueQueue.getParentIndex(childIndex) >= 0;
   private static getLeftChildIndex = (parentIndex: number): number => 2 * parentIndex + 1;
 
-  private heapContainer: Array<IQueueItem<T>>;
-  private hashPriority: Record<string, T>;
-
-  constructor() {
-    this.heapContainer = [];
-    this.hashPriority = Object.create(null);
-  }
+  private heapContainer: Array<IQueueItem<T>> = [];
+  private hashPriority: Record<string, T> = {};
 
   public peek(): any {
     return this.heapContainer[0].value;
@@ -30,7 +25,7 @@ export class PriorityUniqueQueue<T> {
 
       this.heapContainer[0] = this.heapContainer.pop() as IQueueItem<T>;
 
-      this.heapifyDown();
+      this.pushDown();
     }
 
     delete this.hashPriority[item.priority];
@@ -40,7 +35,7 @@ export class PriorityUniqueQueue<T> {
 
   public add(priority: number, value: T): void {
     this.heapContainer.push({ priority, value });
-    this.heapifyUp();
+    this.pushUp();
     this.hashPriority[priority] = value;
   }
 
@@ -65,13 +60,9 @@ export class PriorityUniqueQueue<T> {
     for (const heap of this.heapContainer) {
       heap.priority += 1;
     }
-
-    // for (let j = 0; j < this.heapContainer.length; j++) {
-    //   this.heapContainer[j].priority += 1;
-    // }
   }
 
-  private heapifyUp(customStartIndex?: number): void {
+  private pushUp(customStartIndex?: number): void {
     let currentIndex = customStartIndex || this.heapContainer.length - 1;
 
     while (
@@ -86,7 +77,7 @@ export class PriorityUniqueQueue<T> {
     }
   }
 
-  private heapifyDown(customStartIndex?: number): void {
+  private pushDown(customStartIndex?: number): void {
     let currentIndex = customStartIndex || 0;
     let nextIndex = null;
 

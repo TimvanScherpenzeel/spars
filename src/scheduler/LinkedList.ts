@@ -3,15 +3,9 @@ import { TNullable } from '../types';
 import { IListNode } from './types';
 
 export class LinkedList {
-  private length: number;
-  private head: TNullable<IListNode>;
-  private last: TNullable<IListNode>;
-
-  constructor() {
-    this.head = null;
-    this.last = null;
-    this.length = 0;
-  }
+  private length: number = 0;
+  private head: TNullable<IListNode> = null;
+  private last: TNullable<IListNode> = null;
 
   public push(value: () => void): void {
     const node: IListNode = {
