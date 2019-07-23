@@ -1,3 +1,7 @@
+/**
+ * Inspired by https://github.com/Tom910/frame-scheduling
+ */
+
 // FrameScheduler
 import { LinkedList } from './LinkedList';
 import { PriorityUniqueQueue } from './PriorityUniqueQueue';
