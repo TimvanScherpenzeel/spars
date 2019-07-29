@@ -541,8 +541,7 @@ export class AssetLoader {
    *
    * @param item Item to load
    */
-  // TODO: any must be WebAssembly.Instance
-  private static loadWebAssembly = (item: ILoadItem): Promise<TVoidable<any>> => {
+  private static loadWebAssembly = (item: ILoadItem): Promise<TVoidable<WebAssembly.Instance>> => {
     if (isWebAssemblySupported) {
       if ((window as any).WebAssembly.instantiateStreaming) {
         return (window as any).instantiateStreaming(
