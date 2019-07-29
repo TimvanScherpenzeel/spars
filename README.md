@@ -8,8 +8,9 @@
 
 ## Roadmap
 
-- Add task / frame scheduler
+- Add screen lock API polyfill
 - Add accelerometer / device orientation / motion API
+
 - Look into creating native bindings (doesn't make sense yet without native clients)
 - Look more into the latest Hydra experience release of Active Theory
 - Add GUI support
