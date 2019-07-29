@@ -4,6 +4,12 @@ import { degreesToRadians, Quaternion, Vector3 } from './math';
 // Types
 import { TNullable } from '../../types';
 
+/**
+ * Given an orientation and the gyroscope data, predicts the future orientation
+ * of the head. This makes rendering appear faster.
+ *
+ * Also see: http://msl.cs.uiuc.edu/~lavalle/papers/LavYerKatAnt14.pdf
+ */
 export class PosePredictor {
   public predictionTime: number;
 
@@ -43,7 +49,8 @@ export class PosePredictor {
     }
 
     // Get the predicted angle based on the time delta and latency
-    const deltaT = timestamp - this.previousTimestamp;
+    // TODO: remove unused deltaTime?
+    const deltaTime = timestamp - this.previousTimestamp;
     const predictedAngle = angularSpeed * this.predictionTime;
 
     this.deltaQuaternion.setFromAxisAngle(axis, predictedAngle);

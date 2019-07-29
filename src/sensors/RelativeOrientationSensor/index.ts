@@ -1,3 +1,4 @@
+// Sensors
 import { FusionPoseSensor } from './FusionPoseSensor';
 import { Quaternion, Vector3 } from './math';
 
@@ -25,10 +26,15 @@ if (screen.orientation) {
   });
 }
 
+/**
+ * Polyfill for RelativeOrientationSensor of the Generic Sensor API
+ *
+ * https://smus.com/sensor-fusion-prediction-webvr/
+ */
 export class RelativeOrientationSensor {
   private sensor: any;
   private fallbackSensor: TNullable<FusionPoseSensor> = null;
-  private kFilter: number;
+  private kalmanFilterWeight: number;
   private predictionTime: number;
   private errors: any[] = [];
   private sensorQuaternion: Quaternion = new Quaternion();
@@ -36,8 +42,8 @@ export class RelativeOrientationSensor {
   private outputArray: Float32Array = new Float32Array(4);
   private outputQuaternion: Quaternion = new Quaternion();
 
-  constructor(kFilter: number, predictionTime: number) {
-    this.kFilter = kFilter;
+  constructor(kalmanFilterWeight: number, predictionTime: number) {
+    this.kalmanFilterWeight = kalmanFilterWeight;
     this.predictionTime = predictionTime;
   }
 
@@ -97,6 +103,7 @@ export class RelativeOrientationSensor {
     const outputQuaternion = this.outputQuaternion;
 
     // TODO: add VR support?
+    // https://github.com/immersive-web/cardboard-vr-display/blob/b2fd5b03fa579fecead1b3842782d7640e8ae61f/src/pose-sensor.js#L149-L166
 
     outputQuaternion.multiply(this.sensorQuaternion);
     outputQuaternion.multiply(this.worldToScreenQuaternion);
@@ -132,7 +139,7 @@ export class RelativeOrientationSensor {
   }
 
   private useDeviceMotion(): void {
-    this.fallbackSensor = new FusionPoseSensor(this.kFilter, this.predictionTime);
+    this.fallbackSensor = new FusionPoseSensor(this.kalmanFilterWeight, this.predictionTime);
 
     if (this.sensor) {
       this.sensor.removeEventListener('reading', this.onSensorReadHandler);

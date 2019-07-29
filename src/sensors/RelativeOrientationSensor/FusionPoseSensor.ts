@@ -10,7 +10,6 @@ import { isLandscapeMode, MAX_TIMESTEP, MIN_TIMESTEP } from './utilities';
 export class FusionPoseSensor {
   private accelerometer = new Vector3();
   private gyroscope = new Vector3();
-
   private filter: ComplementaryFilter;
   private posePredictor: PosePredictor;
   private filterToWorldQuaternion: Quaternion = new Quaternion();
@@ -20,11 +19,10 @@ export class FusionPoseSensor {
   private resetQuaternion: Quaternion = new Quaternion();
   private orientationOutput: Float32Array = new Float32Array(4);
   private previousTimestamp: number = 0;
-
   private isDeviceMotionInRadians: boolean = false;
 
-  constructor(kFilter: number, predictionTime: number) {
-    this.filter = new ComplementaryFilter(kFilter);
+  constructor(kalmanFilterWeight: number, predictionTime: number) {
+    this.filter = new ComplementaryFilter(kalmanFilterWeight);
     this.posePredictor = new PosePredictor(predictionTime);
 
     const chromeVersion = getBrowserType.isChrome && parseInt(getBrowserType.browserVersion, 10);
@@ -95,12 +93,12 @@ export class FusionPoseSensor {
     const accelerationIncludingGravity = event.accelerationIncludingGravity;
     const rotationRate = event.rotationRate;
     const timestamp = event.timeStamp / 1000;
-    const deltaT = timestamp - this.previousTimestamp;
+    const deltaTime = timestamp - this.previousTimestamp;
 
     // On Firefox/iOS the `timeStamp` properties can come in out of order.
     // so emit a warning about it and then stop.
     // The rotation still ends up working.
-    if (deltaT < 0 || deltaT <= MIN_TIMESTEP || deltaT > MAX_TIMESTEP) {
+    if (deltaTime < 0 || deltaTime <= MIN_TIMESTEP || deltaTime > MAX_TIMESTEP) {
       this.previousTimestamp = timestamp;
       return;
     }

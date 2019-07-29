@@ -6,25 +6,35 @@ import { Quaternion, Vector3 } from './math';
 import { SensorSample } from './sensorSample';
 import { isTimestampDeltaValid } from './utilities';
 
+/**
+ * An implementation of a simple complementary filter, which fuses gyroscope and
+ * accelerometer data from the 'devicemotion' event
+ *
+ * Accelerometer data is very noisy, but stable over the long term
+ * Gyroscope data is smooth, but tends to drift over the long term
+ *
+ * This fusion is relatively simple:
+ *
+ * 1 Get orientation estimates from accelerometer by applying a low-pass filter on that data
+ * 2 Get orientation estimates from gyroscope by integrating over time
+ * 3 Combine the two estimates, weighing (1) in the long term, but (2) for the short term
+ */
 export class ComplementaryFilter {
   public currentAccelerometerMeasurement: SensorSample = new SensorSample();
   public currentGyroscopeMeasurement: SensorSample = new SensorSample();
   public previousGyroscopeMeasurement: SensorSample = new SensorSample();
 
-  private kFilter: number;
-
+  private kalmanFilterWeight: number;
   private filterQuaternion: Quaternion;
   private previousFilterQuaternion: Quaternion = new Quaternion();
-
   private accelerationQuaternion: Quaternion = new Quaternion();
   private isOrientationInitialized: boolean = false;
   private estimatedGravity: Vector3 = new Vector3();
   private measuredGravity: Vector3 = new Vector3();
-
   private gyroscopeIntegralQuaternion: Quaternion = new Quaternion();
 
-  constructor(kFilter: number) {
-    this.kFilter = kFilter;
+  constructor(kalmanFilterWeight: number) {
+    this.kalmanFilterWeight = kalmanFilterWeight;
 
     if (getBrowserType.isiOS) {
       this.filterQuaternion = new Quaternion(-1, 0, 0, 1);
@@ -42,9 +52,9 @@ export class ComplementaryFilter {
   public addGyroscopeMeasurement(vector: Vector3, timestamp: number): void {
     this.currentGyroscopeMeasurement.set(vector, timestamp);
 
-    const deltaT = timestamp - this.previousGyroscopeMeasurement.timestamp;
+    const deltaTime = timestamp - this.previousGyroscopeMeasurement.timestamp;
 
-    if (isTimestampDeltaValid(deltaT)) {
+    if (isTimestampDeltaValid(deltaTime)) {
       this.run();
     }
 
@@ -62,12 +72,12 @@ export class ComplementaryFilter {
       return;
     }
 
-    const deltaT =
+    const deltaTime =
       this.currentGyroscopeMeasurement.timestamp - this.previousGyroscopeMeasurement.timestamp;
 
     const gyroscopeDeltaQuaternion = this.gyroscopeToQuaternionDelta(
       this.currentGyroscopeMeasurement.sample,
-      deltaT
+      deltaTime
     );
 
     this.gyroscopeIntegralQuaternion.multiply(gyroscopeDeltaQuaternion);
@@ -102,7 +112,7 @@ export class ComplementaryFilter {
     targetQuaternion.multiply(deltaQuaternion);
 
     // SLERP factor, 0 is pure gyroscope, 1 is pure accelerometer
-    this.filterQuaternion.slerp(targetQuaternion, 1 - this.kFilter);
+    this.filterQuaternion.slerp(targetQuaternion, 1 - this.kalmanFilterWeight);
 
     this.previousFilterQuaternion.copy(this.filterQuaternion);
   }
@@ -123,13 +133,13 @@ export class ComplementaryFilter {
     return accelerationQuaternion;
   }
 
-  private gyroscopeToQuaternionDelta(gyroscope: Vector3, deltaT: number): Quaternion {
+  private gyroscopeToQuaternionDelta(gyroscope: Vector3, deltaTime: number): Quaternion {
     const deltaQuaternion = new Quaternion();
     const axis = new Vector3();
     axis.copy(gyroscope);
     axis.normalize();
 
-    deltaQuaternion.setFromAxisAngle(axis, gyroscope.length() * deltaT);
+    deltaQuaternion.setFromAxisAngle(axis, gyroscope.length() * deltaTime);
 
     return deltaQuaternion;
   }
