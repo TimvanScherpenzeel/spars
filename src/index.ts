@@ -38,6 +38,9 @@ export { fullScreen, pointerLock } from './polyfills';
 // FrameScheduler
 export { priorities, scheduleFrame } from './frameScheduler';
 
+// Sensors
+export { RelativeOrientationSensor } from './sensors';
+
 // ThreadPool
 export { threadPool } from './threadPool';
 
