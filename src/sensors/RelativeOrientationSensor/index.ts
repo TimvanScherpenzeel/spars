@@ -31,7 +31,7 @@ if (screen.orientation) {
  *
  * https://smus.com/sensor-fusion-prediction-webvr/
  */
-export class RelativeOrientationSensor {
+class RelativeOrientationSensor {
   private sensor: any;
   private fallbackSensor: TNullable<FusionPoseSensor> = null;
   private kalmanFilterWeight: number;
@@ -42,7 +42,7 @@ export class RelativeOrientationSensor {
   private outputArray: Float32Array = new Float32Array(4);
   private outputQuaternion: Quaternion = new Quaternion();
 
-  constructor(kalmanFilterWeight: number, predictionTime: number) {
+  constructor(kalmanFilterWeight: number = 0.98, predictionTime: number = 0.04) {
     this.kalmanFilterWeight = kalmanFilterWeight;
     this.predictionTime = predictionTime;
   }
@@ -148,3 +148,5 @@ export class RelativeOrientationSensor {
     }
   }
 }
+
+export const relativeOrientationSensor = new RelativeOrientationSensor();
