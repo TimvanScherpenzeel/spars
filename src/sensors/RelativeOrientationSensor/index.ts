@@ -5,9 +5,8 @@ import { Quaternion, Vector3 } from './math';
 // Types
 import { TNullable } from '../../types';
 
-// Frequency which the Sensors will attempt to fire their
-// `reading` functions at. Use 60hz since we generally
-// can't get higher without native VR hardware.
+// Frequency which the Sensors will attempt to fire their `reading` functions at
+// Use 60hz since we generally can't get higher without native VR hardware
 const SENSOR_FREQUENCY = 60;
 
 const Z_AXIS = new Vector3(0, 0, 1);
@@ -29,7 +28,7 @@ if (screen.orientation) {
 /**
  * Polyfill for RelativeOrientationSensor of the Generic Sensor API
  *
- * https://smus.com/sensor-fusion-prediction-webvr/
+ * See: https://smus.com/sensor-fusion-prediction-webvr/
  */
 class RelativeOrientationSensor {
   private sensor: any;
@@ -47,12 +46,27 @@ class RelativeOrientationSensor {
     this.predictionTime = predictionTime;
   }
 
-  public init(): void {
+  public on(): void {
     let sensor = null;
 
     try {
-      sensor = new (window as any).RelativeOrientationSensor({ frequency: SENSOR_FREQUENCY });
-      sensor.addEventListener('error', this.onSensorErrorHandler);
+      if (navigator.permissions) {
+        Promise.all([
+          navigator.permissions.query({ name: 'accelerometer' }),
+          navigator.permissions.query({ name: 'magnetometer' }),
+          navigator.permissions.query({ name: 'gyroscope' }),
+        ]).then(permissionStatuses => {
+          if (permissionStatuses.every(permissionStatus => permissionStatus.state === 'granted')) {
+            sensor = new (window as any).RelativeOrientationSensor({ frequency: SENSOR_FREQUENCY });
+            sensor.addEventListener('error', this.onSensorErrorHandler);
+          } else {
+            console.warn('Required sensor access is not granted or available');
+          }
+        });
+      } else {
+        sensor = new (window as any).RelativeOrientationSensor({ frequency: SENSOR_FREQUENCY });
+        sensor.addEventListener('error', this.onSensorErrorHandler);
+      }
     } catch (error) {
       this.errors.push(error);
 
@@ -62,8 +76,8 @@ class RelativeOrientationSensor {
           'Attempting to fall back using "devicemotion"; however this will fail in the future without correct permissions.'
         );
       } else if (error.name === 'ReferenceError') {
-        // Fall back to devicemotion.
-        this.useDeviceMotion();
+        // Fall back to the devicemotion API
+        this.useFallbackSensor();
       } else {
         console.error(error);
       }
@@ -75,7 +89,13 @@ class RelativeOrientationSensor {
       this.sensor.start();
     }
 
-    window.addEventListener('orientationchange', this.onOrientationChangeHandler);
+    window.addEventListener('orientationchange', this.onOrientationChangeHandler, false);
+  }
+
+  public off(): void {
+    // TODO: make sure to stop the sensor
+
+    window.removeEventListener('orientationchange', this.onOrientationChangeHandler, false);
   }
 
   public getOrientation(): Float32Array {
@@ -127,7 +147,7 @@ class RelativeOrientationSensor {
       console.error(event.error);
     }
 
-    this.useDeviceMotion();
+    this.useFallbackSensor();
   }
 
   // tslint:disable-next-line:no-empty
@@ -138,7 +158,7 @@ class RelativeOrientationSensor {
     this.worldToScreenQuaternion.setFromAxisAngle(Z_AXIS, angle);
   }
 
-  private useDeviceMotion(): void {
+  private useFallbackSensor(): void {
     this.fallbackSensor = new FusionPoseSensor(this.kalmanFilterWeight, this.predictionTime);
 
     if (this.sensor) {
