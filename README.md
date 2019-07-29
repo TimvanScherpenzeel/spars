@@ -8,6 +8,7 @@
 
 ## Roadmap
 
+- Convert relativeOrientationSensor to singleton API
 - Comment sensors/RelativeOrientationSensor, threadPool, frameScheduler
 - Add screen lock API polyfill
 - Add accelerometer / device orientation / motion API
