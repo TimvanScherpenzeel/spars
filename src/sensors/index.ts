@@ -1,3 +1,3 @@
 // Sensors
-export { Geolocation } from './Geolocation';
+export { geolocationSensor } from './geolocationSensor';
 export { RelativeOrientationSensor } from './RelativeOrientationSensor';

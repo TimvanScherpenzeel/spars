@@ -39,7 +39,7 @@ export { fullScreen, pointerLock } from './polyfills';
 export { priorities, scheduleFrame } from './frameScheduler';
 
 // Sensors
-export { Geolocation, RelativeOrientationSensor } from './sensors';
+export { geolocationSensor, RelativeOrientationSensor } from './sensors';
 
 // ThreadPool
 export { threadPool } from './threadPool';
