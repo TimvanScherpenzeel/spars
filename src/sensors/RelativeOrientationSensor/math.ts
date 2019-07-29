@@ -268,7 +268,7 @@ export class Quaternion {
 
   public setFromUnitVectors(vectorA: Vector3, vectorB: Vector3): Quaternion {
     // http://lolengine.net/blog/2014/02/24/quaternion-from-two-vectors-final
-    // assumes direction vectors vectorA and vectorB are normalized
+    // Assumes direction vectors vectorA and vectorB are normalized
 
     let realPart = vectorA.dot(vectorB) + 1;
 
