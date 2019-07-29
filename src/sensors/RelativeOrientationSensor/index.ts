@@ -5,8 +5,6 @@ import { Quaternion, Vector3 } from './math';
 // Types
 import { TNullable } from '../../types';
 
-// Frequency which the Sensors will attempt to fire their `reading` functions at
-// Use 60hz since we generally can't get higher without native VR hardware
 const SENSOR_FREQUENCY = 60;
 
 const Z_AXIS = new Vector3(0, 0, 1);
@@ -32,11 +30,12 @@ if (screen.orientation) {
  * See: https://smus.com/sensor-fusion-prediction-webvr/
  */
 class RelativeOrientationSensor {
+  public errors: any[] = [];
+
   private sensor: any;
   private fallbackSensor: TNullable<FusionPoseSensor> = null;
   private kalmanFilterWeight: number;
   private predictionTime: number;
-  private errors: any[] = [];
   private sensorQuaternion: Quaternion = new Quaternion();
   private worldToScreenQuaternion: Quaternion = new Quaternion();
   private outputArray: Float32Array = new Float32Array(4);
@@ -47,7 +46,7 @@ class RelativeOrientationSensor {
     this.predictionTime = predictionTime;
   }
 
-  public on(): void {
+  public on(frequency: number = SENSOR_FREQUENCY): void {
     let sensor = null;
 
     try {
@@ -58,15 +57,15 @@ class RelativeOrientationSensor {
           navigator.permissions.query({ name: 'gyroscope' }),
         ]).then(permissionStatuses => {
           if (permissionStatuses.every(permissionStatus => permissionStatus.state === 'granted')) {
-            sensor = new (window as any).RelativeOrientationSensor({ frequency: SENSOR_FREQUENCY });
-            sensor.addEventListener('error', this.onSensorErrorHandler);
+            sensor = new (window as any).RelativeOrientationSensor({ frequency });
+            sensor.addEventListener('error', this.onSensorErrorHandler, false);
           } else {
             console.warn('Required sensor access is not granted or available');
           }
         });
       } else {
-        sensor = new (window as any).RelativeOrientationSensor({ frequency: SENSOR_FREQUENCY });
-        sensor.addEventListener('error', this.onSensorErrorHandler);
+        sensor = new (window as any).RelativeOrientationSensor({ frequency });
+        sensor.addEventListener('error', this.onSensorErrorHandler, false);
       }
     } catch (error) {
       this.errors.push(error);
@@ -86,7 +85,7 @@ class RelativeOrientationSensor {
 
     if (sensor) {
       this.sensor = sensor;
-      this.sensor.addEventListener('reading', this.onSensorReadHandler);
+      this.sensor.addEventListener('reading', this.onSensorReadHandler, false);
       this.sensor.start();
     }
 
@@ -95,8 +94,9 @@ class RelativeOrientationSensor {
 
   public off(): void {
     if (this.sensor) {
-      this.sensor.removeEventListener('reading', this.onSensorReadHandler);
-      this.sensor.removeEventListener('error', this.onSensorErrorHandler);
+      this.sensor.stop();
+      this.sensor.removeEventListener('reading', this.onSensorReadHandler, false);
+      this.sensor.removeEventListener('error', this.onSensorErrorHandler, false);
       this.sensor = null;
     }
 

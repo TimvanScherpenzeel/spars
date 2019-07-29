@@ -4,42 +4,73 @@ import { eventEmitter } from '../../events/EventEmitter';
 // Types
 import { TNullable } from '../../types';
 
+const SENSOR_FREQUENCY = 10;
+
 class GeolocationSensor {
+  public errors: any[] = [];
+
+  private sensor: any;
   private watchId: TNullable<number> = null;
 
   /**
    * Start listening to geolocation change events
    */
-  public on(): TNullable<number> {
-    if (navigator.geolocation) {
+  public on(frequency: number = SENSOR_FREQUENCY): void {
+    let sensor = null;
+
+    if ((window as any).GeolocationSensor) {
       if (navigator.permissions) {
         navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
           if (permissionStatus.state === 'granted') {
-            this.watchId = navigator.geolocation.watchPosition(
-              this.onChangeHandler,
-              this.onErrorHandler
-            );
+            sensor = new (window as any).GeolocationSensor({ frequency });
+            sensor.addEventListener('error', this.onSensorErrorHandler);
           } else {
-            console.warn('Geolocation sensor access is not granted or available');
+            console.warn('Ambient light sensor access is not granted or available');
           }
         });
-      } else {
-        this.watchId = navigator.geolocation.watchPosition(
-          this.onChangeHandler,
-          this.onErrorHandler
-        );
+      }
+
+      if (sensor) {
+        this.sensor = sensor;
+        this.sensor.addEventListener('reading', this.onSensorReadHandler, false);
+        this.sensor.start();
       }
     } else {
-      console.warn('Geolocation sensor is unavailable');
+      if (navigator.geolocation) {
+        if (navigator.permissions) {
+          navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
+            if (permissionStatus.state === 'granted') {
+              this.watchId = navigator.geolocation.watchPosition(
+                this.onSensorReadHandler,
+                this.onSensorErrorHandler
+              );
+            } else {
+              console.warn('Geolocation sensor access is not granted or available');
+            }
+          });
+        } else {
+          this.watchId = navigator.geolocation.watchPosition(
+            this.onSensorReadHandler,
+            this.onSensorErrorHandler
+          );
+        }
+      } else {
+        console.warn('Geolocation sensor is unavailable');
+      }
     }
-
-    return this.watchId;
   }
 
   /**
    * Stop listening to geolocation change events
    */
   public off(): void {
+    if (this.sensor) {
+      this.sensor.stop();
+      this.sensor.removeEventListener('reading', this.onSensorReadHandler, false);
+      this.sensor.removeEventListener('error', this.onSensorErrorHandler, false);
+      this.sensor = null;
+    }
+
     if (navigator.geolocation && this.watchId !== null) {
       navigator.geolocation.clearWatch(this.watchId);
     }
@@ -47,19 +78,29 @@ class GeolocationSensor {
 
   /**
    * Monitor geolocation changes
+   *
+   * @param position Geolocation position update
    */
-  private onChangeHandler(position: Position): void {
-    eventEmitter.emit('SPAR::GEOLOCATION_CHANGE', {
-      position,
-    });
+  private onSensorReadHandler(position: Position): void {
+    if (this.sensor) {
+      eventEmitter.emit('SPAR::GEOLOCATION_CHANGE', {
+        position,
+      });
+    }
+
+    if (position) {
+      eventEmitter.emit('SPAR::GEOLOCATION_CHANGE', {
+        position,
+      });
+    }
   }
 
   /**
    * Catch any errors when monitoring geolocation changes
    *
-   * @param err Geolocation errors
+   * @param err Geolocation sensor error event
    */
-  private onErrorHandler(err: PositionError): PositionError {
+  private onSensorErrorHandler(err: PositionError): PositionError {
     console.warn(err);
 
     return err;
