@@ -5,7 +5,7 @@ import { eventEmitter } from '../../events/EventEmitter';
 import { TNullable } from '../../types';
 
 class GeolocationSensor {
-  public watchId: TNullable<number> = null;
+  private watchId: TNullable<number> = null;
 
   /**
    * Start listening to geolocation change events
@@ -15,17 +15,19 @@ class GeolocationSensor {
       if (navigator.permissions) {
         navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
           if (permissionStatus.state === 'granted') {
-            this.watchId = navigator.geolocation.watchPosition(this.onChangeHandler, err => {
-              console.warn(err);
-            });
+            this.watchId = navigator.geolocation.watchPosition(
+              this.onChangeHandler,
+              this.onErrorHandler
+            );
           } else {
             console.warn('Geolocation sensor access is not granted or available');
           }
         });
       } else {
-        this.watchId = navigator.geolocation.watchPosition(this.onChangeHandler, err => {
-          console.warn(err);
-        });
+        this.watchId = navigator.geolocation.watchPosition(
+          this.onChangeHandler,
+          this.onErrorHandler
+        );
       }
     } else {
       console.warn('Geolocation sensor is unavailable');
@@ -50,6 +52,17 @@ class GeolocationSensor {
     eventEmitter.emit('SPAR::GEOLOCATION_CHANGE', {
       position,
     });
+  }
+
+  /**
+   * Catch any errors when monitoring geolocation changes
+   *
+   * @param err Geolocation errors
+   */
+  private onErrorHandler(err: PositionError): PositionError {
+    console.warn(err);
+
+    return err;
   }
 }
 
