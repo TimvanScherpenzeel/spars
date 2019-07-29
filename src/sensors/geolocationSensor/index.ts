@@ -4,6 +4,8 @@ import { eventEmitter } from '../../events/EventEmitter';
 // Types
 import { TNullable } from '../../types';
 
+// TODO: add Generic Sensor API interface
+
 class GeolocationSensor {
   public errors: any[] = [];
 
