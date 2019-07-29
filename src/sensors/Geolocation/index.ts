@@ -1,35 +1,49 @@
-export class Geolocation {
-  constructor() {
+// Events
+import { eventEmitter } from '../../events/EventEmitter';
+
+// Types
+import { TUndefinable } from '../../types';
+
+/**
+ * Monitor geolocation changes
+ */
+function onGeolocationChangeHandler(position: Position): void {
+  eventEmitter.emit('SPAR::GEOLOCATION_CHANGE', {
+    position,
+  });
+}
+
+export const onGeolocationChange = (): TUndefinable<number> => {
+  let watchId;
+
+  if (navigator.geolocation) {
     if (navigator.permissions) {
-      navigator.permissions.query({ name: 'geolocation' }).then(
-        (permissionStatus): Promise<Position | boolean> => {
-          if (permissionStatus.state === 'granted') {
-            return this.getCurrentPosition();
-          } else {
-            return Promise.resolve(false);
-          }
+      navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
+        if (permissionStatus.state === 'granted') {
+          watchId = navigator.geolocation.watchPosition(onGeolocationChangeHandler, err => {
+            console.warn(err);
+          });
+        } else {
+          console.warn('Geolocation sensor access is not granted or available');
         }
-      );
+      });
     } else {
-      this.getCurrentPosition();
+      watchId = navigator.geolocation.watchPosition(onGeolocationChangeHandler, err => {
+        console.warn(err);
+      });
     }
+  } else {
+    console.warn('Geolocation sensor is unavailable');
   }
 
-  private getCurrentPosition(): Promise<Position> {
-    return new Promise((resolve, reject): void => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          position => {
-            resolve(position);
-          },
-          err => {
-            reject(err);
-          }
-        );
-      } else {
-        console.warn('Geolocation sensor is unavailable');
-        reject();
-      }
-    });
+  return watchId;
+};
+
+/**
+ * Stop listening to geolocation change events
+ */
+export const offGeolocationChange = (watchId: number): void => {
+  if (navigator.geolocation) {
+    navigator.geolocation.clearWatch(watchId);
   }
-}
+};
