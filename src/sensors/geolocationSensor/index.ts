@@ -10,7 +10,7 @@ class GeolocationSensor {
   /**
    * Start listening to geolocation change events
    */
-  public on(): TNullable<number> {
+  public on(): void {
     if (navigator.geolocation) {
       if (navigator.permissions) {
         navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
@@ -32,8 +32,6 @@ class GeolocationSensor {
     } else {
       console.warn('Geolocation sensor is unavailable');
     }
-
-    return this.watchId;
   }
 
   /**
