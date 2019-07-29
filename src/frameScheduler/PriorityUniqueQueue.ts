@@ -3,9 +3,12 @@ import { IQueueItem } from './types';
 
 export class PriorityUniqueQueue<T> {
   private static getParentIndex = (childIndex: number): number => Math.floor((childIndex - 1) / 2);
+
   private static getRightChildIndex = (parentIndex: number): number => 2 * parentIndex + 2;
+
   private static hasParent = (childIndex: number): boolean =>
     PriorityUniqueQueue.getParentIndex(childIndex) >= 0;
+
   private static getLeftChildIndex = (parentIndex: number): number => 2 * parentIndex + 1;
 
   private heapContainer: Array<IQueueItem<T>> = [];
