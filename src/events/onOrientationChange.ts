@@ -13,10 +13,13 @@ const debouncedOnOrientationChange = debounce(onOrientationChangeHandler, 100);
  * Monitor orientation changes
  */
 function onOrientationChangeHandler(): void {
+  const angle = (screen.orientation as ScreenOrientation).angle;
+  // TODO: isLandscape check is too fast and returns the inverse result
   const isLandscape = window.innerWidth > window.innerHeight;
   const isPortrait = !isLandscape;
 
   eventEmitter.emit('SPAR::ORIENTATION_CHANGE', {
+    angle,
     isLandscape,
     isPortrait,
   });

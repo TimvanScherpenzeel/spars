@@ -63,7 +63,7 @@ class GeolocationSensor {
    *
    * @param err Geolocation sensor error event
    */
-  private onSensorErrorHandler(err: PositionError): PositionError {
+  private onSensorErrorHandler(err: PositionError): void {
     this.errors.push(err.message);
 
     console.error(err.message);
