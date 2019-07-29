@@ -74,9 +74,7 @@ export const features = {
     isUserActivationSupported,
     isWebAssemblySupported,
     isWebAudioSupported,
-    // !! Device driver bug: Work around bug on Samsung Galaxy S and A series
-    // !! it appears to have problems with immediately evaluated support checking for WebGL 2 (not WebGL)
-    isWebGL2Supported: isWebGL2Supported(),
+    isWebGL2Supported,
     isWebGLSupported,
     isWebPSupported,
     isWebRTCSupported,
@@ -87,9 +85,7 @@ export const features = {
     isWebXRSupported,
 
     mediaFeatures: getMediaFeatures,
-    // !! Device driver bug: Work around bug on Samsung Galaxy S and A series
-    // !! it appears to have problems with immediately evaluated support checking for WebGL 2 (not WebGL)
-    webGL2Features: getWebGL2Features(),
+    webGL2Features: getWebGL2Features,
     webGLFeatures: getWebGLFeatures,
   },
 

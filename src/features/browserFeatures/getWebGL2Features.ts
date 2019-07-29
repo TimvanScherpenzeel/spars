@@ -60,7 +60,7 @@ import {
  * Collect and structure all major device and browser specific WebGL2 features
  */
 // TODO: add proper type definition
-export default (): any => {
+export default ((): any => {
   const attributes = {
     stencil: true,
   };
@@ -247,4 +247,4 @@ export default (): any => {
   };
 
   return features;
-};
+})();
