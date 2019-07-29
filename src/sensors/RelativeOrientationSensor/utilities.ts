@@ -26,9 +26,10 @@ export const isTimestampDeltaValid = (timestampDelta: number): boolean => {
   return true;
 };
 
-export const isR7 = navigator.userAgent.indexOf('R7 Build') !== -1;
-
 export const isLandscapeMode = (): boolean => {
-  const rotation = getOrientation().angle === 90 || getOrientation().orientation === -90;
-  return isR7 ? !rotation : rotation;
+  const angle = getOrientation().angle;
+  const isLandscape = angle === 90 || angle === -90;
+
+  // R7 device appearantly has the direction switched
+  return navigator.userAgent.indexOf('R7 Build') !== -1 ? !isLandscape : isLandscape;
 };

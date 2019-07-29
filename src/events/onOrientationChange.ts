@@ -28,7 +28,6 @@ function onOrientationChangeHandler(): void {
   let isLandscape = false;
   const angle = getOrientation().angle;
 
-  // TODO: double check if these orientations are correct, heart that Android might be different
   if (angle === 90 || angle === -90) {
     isLandscape = true;
   } else {
