@@ -13,6 +13,7 @@ const Z_AXIS = new Vector3(0, 0, 1);
 
 let orientation = {};
 
+// TODO: port this to onOrientationChange event?
 if (screen.orientation) {
   orientation = screen.orientation;
 } else if ((screen as any).msOrientation) {
@@ -93,7 +94,15 @@ class RelativeOrientationSensor {
   }
 
   public off(): void {
-    // TODO: make sure to stop the sensor
+    if (this.sensor) {
+      this.sensor.removeEventListener('reading', this.onSensorReadHandler);
+      this.sensor.removeEventListener('error', this.onSensorErrorHandler);
+      this.sensor = null;
+    }
+
+    if (this.fallbackSensor) {
+      this.fallbackSensor.stop();
+    }
 
     window.removeEventListener('orientationchange', this.onOrientationChangeHandler, false);
   }
