@@ -142,6 +142,7 @@ export class FusionPoseSensor {
   public setScreenTransform(): void {
     this.worldToScreenQuaternion.set(0, 0, 0, 1);
 
+    // TODO: change this to Number(screen.orientation)?
     switch (window.orientation) {
       case 0:
         break;
