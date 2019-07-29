@@ -32,6 +32,22 @@ import {
   GL_VERTEX_SHADER,
 } from 'webgl-constants';
 
+export const getParameter = (
+  gl: WebGLRenderingContext | WebGL2RenderingContext,
+  parameter: GLenum
+): any => gl.getParameter(parameter);
+
+export const getShaderPrecisionFormat = (
+  gl: WebGLRenderingContext | WebGL2RenderingContext,
+  shaderType: GLenum,
+  precisionType: GLenum
+): any => gl.getShaderPrecisionFormat(shaderType, precisionType);
+
+export const getExtension = (
+  gl: WebGLRenderingContext | WebGL2RenderingContext,
+  extension: string
+): any => gl.getExtension(extension);
+
 /**
  * Collect and structure all major device and browser specific WebGL features
  */
@@ -49,136 +65,136 @@ export default ((): any => {
     return false;
   }
 
-  const glExtensionDebugRendererInfo = gl.getExtension('WEBGL_debug_renderer_info');
+  const glExtensionDebugRendererInfo = getExtension(gl, 'WEBGL_debug_renderer_info');
 
   // Enable features
   gl.enable(GL_STENCIL_TEST);
 
   // Enable extensions
   const glAnisotropicExtension =
-    gl.getExtension('EXT_texture_filter_anisotropic') ||
-    gl.getExtension('WEBKIT_EXT_texture_filter_anisotropic') ||
-    gl.getExtension('MOZ_EXT_texture_filter_anisotropic');
-  const glDrawBufferExtension = gl.getExtension('WEBGL_draw_buffers');
+    getExtension(gl, 'EXT_texture_filter_anisotropic') ||
+    getExtension(gl, 'WEBKIT_EXT_texture_filter_anisotropic') ||
+    getExtension(gl, 'MOZ_EXT_texture_filter_anisotropic');
+  const glDrawBufferExtension = getExtension(gl, 'WEBGL_draw_buffers');
 
   const features = {
     // Base
     base: {
-      renderer: gl.getParameter(GL_RENDERER),
+      renderer: getParameter(gl, GL_RENDERER),
       rendererUnmasked:
         glExtensionDebugRendererInfo &&
-        gl.getParameter(glExtensionDebugRendererInfo.UNMASKED_RENDERER_WEBGL),
-      shaderVersion: gl.getParameter(GL_SHADING_LANGUAGE_VERSION),
-      vendor: gl.getParameter(GL_VENDOR),
+        getParameter(gl, glExtensionDebugRendererInfo.UNMASKED_RENDERER_WEBGL),
+      shaderVersion: getParameter(gl, GL_SHADING_LANGUAGE_VERSION),
+      vendor: getParameter(gl, GL_VENDOR),
       vendorUnmasked:
         glExtensionDebugRendererInfo &&
-        gl.getParameter(glExtensionDebugRendererInfo.UNMASKED_VENDOR_WEBGL),
-      version: gl.getParameter(GL_VERSION),
+        getParameter(gl, glExtensionDebugRendererInfo.UNMASKED_VENDOR_WEBGL),
+      version: getParameter(gl, GL_VERSION),
     },
 
     // General
     general: {
-      aliasedLineWidthRange: gl.getParameter(GL_ALIASED_LINE_WIDTH_RANGE).toString(),
-      aliasedPointSizeRange: gl.getParameter(GL_ALIASED_POINT_SIZE_RANGE).toString(),
-      alphaBits: gl.getParameter(GL_ALPHA_BITS),
+      aliasedLineWidthRange: getParameter(gl, GL_ALIASED_LINE_WIDTH_RANGE).toString(),
+      aliasedPointSizeRange: getParameter(gl, GL_ALIASED_POINT_SIZE_RANGE).toString(),
+      alphaBits: getParameter(gl, GL_ALPHA_BITS),
       // @ts-ignore gl.getContextAttributes could return null
       antialias: !!gl.getContextAttributes().antialias,
-      blueBits: gl.getParameter(GL_BLUE_BITS),
-      depthBits: gl.getParameter(GL_DEPTH_BITS),
-      greenBits: gl.getParameter(GL_GREEN_BITS),
-      maxCombinedTextureImageUnits: gl.getParameter(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS),
-      maxCubeMapTextureSize: gl.getParameter(GL_MAX_CUBE_MAP_TEXTURE_SIZE),
-      maxFragmentUniformVectors: gl.getParameter(GL_MAX_FRAGMENT_UNIFORM_VECTORS),
-      maxRenderBufferSize: gl.getParameter(GL_MAX_RENDERBUFFER_SIZE),
-      maxTextureImageUnits: gl.getParameter(GL_MAX_TEXTURE_IMAGE_UNITS),
-      maxTextureSize: gl.getParameter(GL_MAX_TEXTURE_SIZE),
-      maxVaryingVectors: gl.getParameter(GL_MAX_VARYING_VECTORS),
-      maxVertexAttributes: gl.getParameter(GL_MAX_VERTEX_ATTRIBS),
-      maxVertexTextureImageUnits: gl.getParameter(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS),
-      maxVertexUniformVectors: gl.getParameter(GL_MAX_VERTEX_UNIFORM_VECTORS),
-      maxViewportDimensions: gl.getParameter(GL_MAX_VIEWPORT_DIMS).toString(),
+      blueBits: getParameter(gl, GL_BLUE_BITS),
+      depthBits: getParameter(gl, GL_DEPTH_BITS),
+      greenBits: getParameter(gl, GL_GREEN_BITS),
+      maxCombinedTextureImageUnits: getParameter(gl, GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS),
+      maxCubeMapTextureSize: getParameter(gl, GL_MAX_CUBE_MAP_TEXTURE_SIZE),
+      maxFragmentUniformVectors: getParameter(gl, GL_MAX_FRAGMENT_UNIFORM_VECTORS),
+      maxRenderBufferSize: getParameter(gl, GL_MAX_RENDERBUFFER_SIZE),
+      maxTextureImageUnits: getParameter(gl, GL_MAX_TEXTURE_IMAGE_UNITS),
+      maxTextureSize: getParameter(gl, GL_MAX_TEXTURE_SIZE),
+      maxVaryingVectors: getParameter(gl, GL_MAX_VARYING_VECTORS),
+      maxVertexAttributes: getParameter(gl, GL_MAX_VERTEX_ATTRIBS),
+      maxVertexTextureImageUnits: getParameter(gl, GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS),
+      maxVertexUniformVectors: getParameter(gl, GL_MAX_VERTEX_UNIFORM_VECTORS),
+      maxViewportDimensions: getParameter(gl, GL_MAX_VIEWPORT_DIMS).toString(),
       precision: {
         fragmentShaderHighPrecision: [
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT).rangeMin,
+          getShaderPrecisionFormat(gl, GL_FRAGMENT_SHADER, GL_HIGH_FLOAT).rangeMin,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT).rangeMax,
+          getShaderPrecisionFormat(gl, GL_FRAGMENT_SHADER, GL_HIGH_FLOAT).rangeMax,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT).precision,
+          getShaderPrecisionFormat(gl, GL_FRAGMENT_SHADER, GL_HIGH_FLOAT).precision,
         ].toString(),
 
         fragmentShaderLowPrecision: [
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_LOW_FLOAT).rangeMin,
+          getShaderPrecisionFormat(gl, GL_FRAGMENT_SHADER, GL_LOW_FLOAT).rangeMin,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_LOW_FLOAT).rangeMax,
+          getShaderPrecisionFormat(gl, GL_FRAGMENT_SHADER, GL_LOW_FLOAT).rangeMax,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_LOW_FLOAT).precision,
+          getShaderPrecisionFormat(gl, GL_FRAGMENT_SHADER, GL_LOW_FLOAT).precision,
         ].toString(),
 
         fragmentShaderMediumPrecision: [
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_MEDIUM_FLOAT).rangeMin,
+          getShaderPrecisionFormat(gl, GL_FRAGMENT_SHADER, GL_MEDIUM_FLOAT).rangeMin,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_MEDIUM_FLOAT).rangeMax,
+          getShaderPrecisionFormat(gl, GL_FRAGMENT_SHADER, GL_MEDIUM_FLOAT).rangeMax,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_MEDIUM_FLOAT).precision,
+          getShaderPrecisionFormat(gl, GL_FRAGMENT_SHADER, GL_MEDIUM_FLOAT).precision,
         ].toString(),
 
         vertexShaderHighPrecision: [
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_HIGH_FLOAT).rangeMin,
+          getShaderPrecisionFormat(gl, GL_VERTEX_SHADER, GL_HIGH_FLOAT).rangeMin,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_HIGH_FLOAT).rangeMax,
+          getShaderPrecisionFormat(gl, GL_VERTEX_SHADER, GL_HIGH_FLOAT).rangeMax,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_HIGH_FLOAT).precision,
+          getShaderPrecisionFormat(gl, GL_VERTEX_SHADER, GL_HIGH_FLOAT).precision,
         ].toString(),
 
         vertexShaderLowPrecision: [
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_LOW_FLOAT).rangeMin,
+          getShaderPrecisionFormat(gl, GL_VERTEX_SHADER, GL_LOW_FLOAT).rangeMin,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_LOW_FLOAT).rangeMax,
+          getShaderPrecisionFormat(gl, GL_VERTEX_SHADER, GL_LOW_FLOAT).rangeMax,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_LOW_FLOAT).precision,
+          getShaderPrecisionFormat(gl, GL_VERTEX_SHADER, GL_LOW_FLOAT).precision,
         ].toString(),
 
         vertexShaderMediumPrecision: [
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_MEDIUM_FLOAT).rangeMin,
+          getShaderPrecisionFormat(gl, GL_VERTEX_SHADER, GL_MEDIUM_FLOAT).rangeMin,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_MEDIUM_FLOAT).rangeMax,
+          getShaderPrecisionFormat(gl, GL_VERTEX_SHADER, GL_MEDIUM_FLOAT).rangeMax,
           // @ts-ignore gl.getShaderPrecisionFormat could return null
-          gl.getShaderPrecisionFormat(GL_VERTEX_SHADER, GL_MEDIUM_FLOAT).precision,
+          getShaderPrecisionFormat(gl, GL_VERTEX_SHADER, GL_MEDIUM_FLOAT).precision,
         ].toString(),
       },
-      redBits: gl.getParameter(GL_RED_BITS),
-      stencilBits: gl.getParameter(GL_STENCIL_BITS),
-      subPixelBits: gl.getParameter(GL_SUBPIXEL_BITS),
+      redBits: getParameter(gl, GL_RED_BITS),
+      stencilBits: getParameter(gl, GL_STENCIL_BITS),
+      subPixelBits: getParameter(gl, GL_SUBPIXEL_BITS),
     },
 
     // Extensions
     extensions: {
       maxAnisotropy: glAnisotropicExtension
-        ? gl.getParameter(glAnisotropicExtension.MAX_TEXTURE_MAX_ANISOTROPY_EXT)
+        ? getParameter(gl, glAnisotropicExtension.MAX_TEXTURE_MAX_ANISOTROPY_EXT)
         : 0,
       maxDrawBuffers: glDrawBufferExtension
-        ? gl.getParameter(glDrawBufferExtension.MAX_DRAW_BUFFERS_WEBGL)
+        ? getParameter(gl, glDrawBufferExtension.MAX_DRAW_BUFFERS_WEBGL)
         : 0,
       supportedExtensions: gl.getSupportedExtensions(),
 
       // Compressed texture extensions
-      compressedTextureASTCExtension: gl.getExtension('WEBGL_compressed_texture_astc') || null,
-      compressedTextureATCExtension: gl.getExtension('WEBGL_compressed_texture_atc') || null,
-      compressedTextureETC1Extension: gl.getExtension('WEBGL_compressed_texture_etc1') || null,
-      compressedTextureETCExtension: gl.getExtension('WEBGL_compressed_texture_etc') || null,
+      compressedTextureASTCExtension: getExtension(gl, 'WEBGL_compressed_texture_astc') || null,
+      compressedTextureATCExtension: getExtension(gl, 'WEBGL_compressed_texture_atc') || null,
+      compressedTextureETC1Extension: getExtension(gl, 'WEBGL_compressed_texture_etc1') || null,
+      compressedTextureETCExtension: getExtension(gl, 'WEBGL_compressed_texture_etc') || null,
       compressedTexturePVRTCExtension:
-        gl.getExtension('WEBGL_compressed_texture_pvrtc') ||
-        gl.getExtension('WEBKIT_WEBGL_compressed_texture_pvrtc') ||
+        getExtension(gl, 'WEBGL_compressed_texture_pvrtc') ||
+        getExtension(gl, 'WEBKIT_WEBGL_compressed_texture_pvrtc') ||
         null,
-      compressedTextureS3TCExtension: gl.getExtension('WEBGL_compressed_texture_s3tc') || null,
+      compressedTextureS3TCExtension: getExtension(gl, 'WEBGL_compressed_texture_s3tc') || null,
       compressedTextureS3TCSRGBExtension:
-        gl.getExtension('WEBGL_compressed_texture_s3tc_srgb') || null,
+        getExtension(gl, 'WEBGL_compressed_texture_s3tc_srgb') || null,
     },
   };
 
