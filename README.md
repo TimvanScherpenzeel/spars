@@ -8,6 +8,7 @@
 
 ## Roadmap
 
+- Add webcam and microphone support
 - Add Generic Sensor API to geolocation sensor
 - Comment sensors/RelativeOrientationSensor, threadPool, frameScheduler
 - Add screen lock API polyfill
