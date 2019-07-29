@@ -32,17 +32,36 @@ import {
   GL_VERTEX_SHADER,
 } from 'webgl-constants';
 
+/**
+ * Wrapper function for better minification (saves ~ 1kB)
+ *
+ * @param gl WebGL rendering context
+ * @param parameter Context parameter
+ */
 export const getParameter = (
   gl: WebGLRenderingContext | WebGL2RenderingContext,
   parameter: GLenum
 ): any => gl.getParameter(parameter);
 
+/**
+ * Wrapper function for better minification (saves ~ 1kB)
+ *
+ * @param gl WebGL rendering context
+ * @param shaderType Shader type
+ * @param precisionType Precision type
+ */
 export const getShaderPrecisionFormat = (
   gl: WebGLRenderingContext | WebGL2RenderingContext,
   shaderType: GLenum,
   precisionType: GLenum
 ): any => gl.getShaderPrecisionFormat(shaderType, precisionType);
 
+/**
+ * Wrapper function for better minification (saves ~ 1kB)
+ *
+ * @param gl WebGL rendering context
+ * @param extension WebGL extension
+ */
 export const getExtension = (
   gl: WebGLRenderingContext | WebGL2RenderingContext,
   extension: string
