@@ -8,6 +8,7 @@
 
 ## Roadmap
 
+- Add shake sensor (acceleration)
 - Add audio synthesizer / toolchain
 - Add webcam and microphone support
 - Add Generic Sensor API to geolocation sensor
