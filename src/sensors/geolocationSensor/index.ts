@@ -46,7 +46,7 @@ class GeolocationSensor {
   }
 
   /**
-   * Monitor geolocation changes
+   * Monitor any geolocation change events
    *
    * @param position Geolocation position update
    */
