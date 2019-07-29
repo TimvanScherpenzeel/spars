@@ -4,6 +4,18 @@ import { eventEmitter } from './EventEmitter';
 // Utilities
 import { debounce } from '../utilities/debounce';
 
+const getOrientation = (): any => {
+  let orientation: { angle?: number } = {};
+
+  if (screen.orientation) {
+    orientation = screen.orientation;
+  } else {
+    orientation.angle = Number(window.orientation) || 0;
+  }
+
+  return orientation;
+};
+
 /**
  * Store reference allowing debounced function to be removed again
  */
@@ -14,10 +26,11 @@ const debouncedOnOrientationChange = debounce(onOrientationChangeHandler, 100);
  */
 function onOrientationChangeHandler(): void {
   let isLandscape = false;
-  const angle = screen.orientation && screen.orientation.angle;
+  const orientation = getOrientation();
+  const angle = orientation.angle;
 
-  if (screen.orientation) {
-    if (angle && (angle === -90 || angle === 90)) {
+  if (orientation) {
+    if (angle === 90 || angle === -90) {
       isLandscape = true;
     } else {
       isLandscape = false;

@@ -14,8 +14,6 @@ let orientation = {};
 // TODO: port this to onOrientationChange event?
 if (screen.orientation) {
   orientation = screen.orientation;
-} else if ((screen as any).msOrientation) {
-  orientation = (screen as any).msOrientation;
 } else {
   Object.defineProperty(orientation, 'angle', {
     get: (): number => {

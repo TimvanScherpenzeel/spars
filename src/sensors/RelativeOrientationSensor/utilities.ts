@@ -1,6 +1,18 @@
 export const MIN_TIMESTEP = 0.001;
 export const MAX_TIMESTEP = 1;
 
+export const getOrientation = (): any => {
+  let orientation: { angle?: number } = {};
+
+  if (screen.orientation) {
+    orientation = screen.orientation;
+  } else {
+    orientation.angle = Number(window.orientation) || 0;
+  }
+
+  return orientation;
+};
+
 export const isTimestampDeltaValid = (timestampDelta: number): boolean => {
   if (isNaN(timestampDelta)) {
     return false;
@@ -17,6 +29,6 @@ export const isTimestampDeltaValid = (timestampDelta: number): boolean => {
 export const isR7 = navigator.userAgent.indexOf('R7 Build') !== -1;
 
 export const isLandscapeMode = (): boolean => {
-  const rotation = window.orientation === 90 || window.orientation === -90;
+  const rotation = getOrientation().angle === 90 || getOrientation().orientation === -90;
   return isR7 ? !rotation : rotation;
 };

@@ -5,7 +5,7 @@ import getBrowserType from '../../features/browserFeatures/getBrowserType';
 import { ComplementaryFilter } from './ComplementaryFilter';
 import { Quaternion, Vector3 } from './math';
 import { PosePredictor } from './PosePredictor';
-import { isLandscapeMode, MAX_TIMESTEP, MIN_TIMESTEP } from './utilities';
+import { getOrientation, isLandscapeMode, MAX_TIMESTEP, MIN_TIMESTEP } from './utilities';
 
 export class FusionPoseSensor {
   private accelerometer = new Vector3();
@@ -36,7 +36,7 @@ export class FusionPoseSensor {
 
     this.originalPoseAdjustQuaternion.setFromAxisAngle(
       new Vector3(0, 0, 1),
-      (-window.orientation * Math.PI) / 180
+      (-getOrientation() * Math.PI) / 180
     );
 
     this.setScreenTransform();
@@ -50,7 +50,7 @@ export class FusionPoseSensor {
 
   public getOrientation(): Float32Array {
     const filterOrientation = this.filter.getOrientation();
-    const orientation = this.posePredictor.getPrediction(
+    const poseOrientation = this.posePredictor.getPrediction(
       filterOrientation,
       this.gyroscope,
       this.previousTimestamp
@@ -60,7 +60,7 @@ export class FusionPoseSensor {
     const outputQuaternion = new Quaternion();
     outputQuaternion.copy(this.filterToWorldQuaternion);
     outputQuaternion.multiply(this.resetQuaternion);
-    outputQuaternion.multiply(orientation);
+    outputQuaternion.multiply(poseOrientation);
     outputQuaternion.multiply(this.worldToScreenQuaternion);
 
     this.orientationOutput[0] = outputQuaternion.x;
@@ -143,7 +143,7 @@ export class FusionPoseSensor {
     this.worldToScreenQuaternion.set(0, 0, 0, 1);
 
     // TODO: change this to Number(screen.orientation)?
-    switch (window.orientation) {
+    switch (getOrientation()) {
       case 0:
         break;
       case 90:
