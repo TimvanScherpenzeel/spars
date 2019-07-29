@@ -27,8 +27,6 @@ import isSessionStorageSupported from './browserFeatures/isSessionStorageSupport
 import isUserActivationSupported from './browserFeatures/isUserActivationSupported';
 import isWebAssemblySupported from './browserFeatures/isWebAssemblySupported';
 import isWebAudioSupported from './browserFeatures/isWebAudioSupported';
-import isWebGL2Supported from './browserFeatures/isWebGL2Supported';
-import isWebGLSupported from './browserFeatures/isWebGLSupported';
 import isWebPSupported from './browserFeatures/isWebPSupported';
 import isWebRTCSupported from './browserFeatures/isWebRTCSupported';
 import isWebSocketSupported from './browserFeatures/isWebSocketSupported';
@@ -74,8 +72,8 @@ export const features = {
     isUserActivationSupported,
     isWebAssemblySupported,
     isWebAudioSupported,
-    isWebGL2Supported,
-    isWebGLSupported,
+    isWebGL2Supported: getWebGL2Features !== false,
+    isWebGLSupported: getWebGLFeatures !== false,
     isWebPSupported,
     isWebRTCSupported,
     isWebSocketSupported,
