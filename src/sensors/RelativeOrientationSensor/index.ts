@@ -1,6 +1,7 @@
 // Sensors
 import { FusionPoseSensor } from './FusionPoseSensor';
 import { Quaternion, Vector3 } from './math';
+import { getOrientation } from './utilities';
 
 // Types
 import { TNullable } from '../../types';
@@ -8,19 +9,6 @@ import { TNullable } from '../../types';
 const SENSOR_FREQUENCY = 60;
 
 const Z_AXIS = new Vector3(0, 0, 1);
-
-let orientation = {};
-
-// TODO: port this to onOrientationChange event?
-if (screen.orientation) {
-  orientation = screen.orientation;
-} else {
-  Object.defineProperty(orientation, 'angle', {
-    get: (): number => {
-      return Number(window.orientation) || 0;
-    },
-  });
-}
 
 /**
  * Polyfill for RelativeOrientationSensor of the Generic Sensor API
@@ -161,7 +149,7 @@ class RelativeOrientationSensor {
   private onSensorReadHandler(event: any): void {}
 
   private onOrientationChangeHandler(): void {
-    const angle = (-(orientation as ScreenOrientation).angle * Math.PI) / 180;
+    const angle = (-getOrientation().angle * Math.PI) / 180;
     this.worldToScreenQuaternion.setFromAxisAngle(Z_AXIS, angle);
   }
 

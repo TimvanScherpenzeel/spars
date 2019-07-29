@@ -4,9 +4,9 @@ import { eventEmitter } from './EventEmitter';
 // Utilities
 import { debounce } from '../utilities/debounce';
 
-const getOrientation = (): any => {
-  let orientation: { angle?: number } = {};
+let orientation: { angle?: number } = {};
 
+const getOrientation = (): any => {
   if (screen.orientation) {
     orientation = screen.orientation;
   } else {
@@ -26,17 +26,13 @@ const debouncedOnOrientationChange = debounce(onOrientationChangeHandler, 100);
  */
 function onOrientationChangeHandler(): void {
   let isLandscape = false;
-  const orientation = getOrientation();
-  const angle = orientation.angle;
+  const angle = getOrientation().angle;
 
-  if (orientation) {
-    if (angle === 90 || angle === -90) {
-      isLandscape = true;
-    } else {
-      isLandscape = false;
-    }
-  } else {
+  // TODO: double check if these orientations are correct, heart that Android might be different
+  if (angle === 90 || angle === -90) {
     isLandscape = true;
+  } else {
+    isLandscape = false;
   }
 
   const isPortrait = !isLandscape;

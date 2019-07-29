@@ -1,9 +1,9 @@
 export const MIN_TIMESTEP = 0.001;
 export const MAX_TIMESTEP = 1;
 
-export const getOrientation = (): any => {
-  let orientation: { angle?: number } = {};
+let orientation: { angle?: number } = {};
 
+export const getOrientation = (): any => {
   if (screen.orientation) {
     orientation = screen.orientation;
   } else {
