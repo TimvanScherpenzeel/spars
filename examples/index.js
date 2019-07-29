@@ -125,16 +125,18 @@ import * as Spar from '../dist/spar.umd';
 
 // document.getElementById('root').appendChild(document.createElement('textarea'));
 
-Spar.onOrientationChange();
+// Spar.onOrientationChange();
 
-const orientationChangeHandler = event => {
-  console.log(event);
+// const orientationChangeHandler = event => {
+//   console.log(event);
 
-  // Spar.eventEmitter.off('SPAR::ORIENTATION_CHANGE');
-  // Spar.offOrientationChange();
-};
+//   Spar.eventEmitter.off('SPAR::ORIENTATION_CHANGE');
+//   Spar.offOrientationChange();
 
-Spar.eventEmitter.on('SPAR::ORIENTATION_CHANGE', orientationChangeHandler);
+//   document.getElementById('root').appendChild(document.createTextNode(event.angle));
+// };
+
+// Spar.eventEmitter.on('SPAR::ORIENTATION_CHANGE', orientationChangeHandler);
 
 // Spar.onVisibilityChange();
 
