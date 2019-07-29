@@ -6,7 +6,7 @@
 import { LinkedList } from './LinkedList';
 import { PriorityUniqueQueue } from './PriorityUniqueQueue';
 
-const TIME_LIFE_FRAME = 16.67;
+const TIME_LIFE_FRAME = 16.6667;
 
 export const priorities = {
   LOWER: 1,

@@ -4,6 +4,9 @@ import { clear, del, get, keys, set, Store } from 'idb-keyval';
 // Utilities
 import { assert } from '../utilities/assert';
 
+// Types
+import { TNullable } from '../types';
+
 /**
  * Check if key is allowed to be stored in IndexedDB
  *
@@ -49,13 +52,13 @@ export class PersistentCache {
    *
    * @param blob Blob to convert
    */
-  public static convertBlobToArrayBuffer = (blob: Blob): Promise<void> => {
+  public static convertBlobToArrayBuffer = (
+    blob: Blob
+  ): Promise<TNullable<string | ArrayBuffer>> => {
     return new Promise((resolve, reject): void => {
       const reader = new FileReader();
 
       reader.addEventListener('loadend', (event: Event) => {
-        // TODO: fix definition
-        // @ts-ignore
         resolve(reader.result);
       });
 
