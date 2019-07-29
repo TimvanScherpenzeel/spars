@@ -5,6 +5,8 @@ import { eventEmitter } from '../../events/EventEmitter';
 import { TNullable } from '../../types';
 
 class GeolocationSensor {
+  public errors: any[] = [];
+
   private watchId: TNullable<number> = null;
 
   /**
@@ -60,9 +62,9 @@ class GeolocationSensor {
    * @param err Geolocation sensor error event
    */
   private onSensorErrorHandler(err: PositionError): PositionError {
-    console.warn(err);
+    this.errors.push(err.message);
 
-    return err;
+    console.error(err.message);
   }
 }
 
