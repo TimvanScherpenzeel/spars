@@ -10,6 +10,9 @@ export { persistentCache } from './persistentCache';
 // Cookie
 export { deleteCookie, getCookie, setCookie } from './cookie';
 
+// Enum
+export { ENUM } from './enum';
+
 // Events
 export {
   EventEmitter,
@@ -37,6 +40,9 @@ export { fullScreen, pointerLock } from './polyfills';
 
 // FrameScheduler
 export { priorities, scheduleFrame } from './frameScheduler';
+
+// FrameTicker
+export { frameTicker } from './frameTicker';
 
 // Sensors
 export { ambientLightSensor, geolocationSensor, relativeOrientationSensor } from './sensors';

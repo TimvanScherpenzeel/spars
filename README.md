@@ -8,11 +8,14 @@
 
 ## Roadmap
 
+- Add Generic Sensor API to geolocation sensor
+- Comment sensors/RelativeOrientationSensor, threadPool, frameScheduler, frameTicker and other newly added code
+- Add getUserMedia polyfill (https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia & https://medium.com/samsung-internet-dev/web-audio-on-different-platforms-67fc9ffc2c4e)
+- Add tween library (animejs?)
+- Add audio manager and audio filter chain
 - Add shake sensor (acceleration)
 - Add audio synthesizer / toolchain
 - Add webcam and microphone support
-- Add Generic Sensor API to geolocation sensor
-- Comment sensors/RelativeOrientationSensor, threadPool, frameScheduler
 - Add screen lock API polyfill
 - Add accelerometer / device orientation / motion API
 
@@ -36,9 +39,13 @@ Contains code for an `AssetLoader` used for preloading commonly used assets like
 
 Contains code to help you with audio autoplay unlocking in the browser.
 
-### Cache
+### Cookie
 
-Contains code to set up persistent caching using IndexedDB and with an in-memory cache as fallback.
+Contains code to help you with getting and setting cookies.
+
+### Enum
+
+Contains Enums used in Spar for more consistent access and the advantage of having a single entry point of exposed internals.
 
 ### Events
 
@@ -52,9 +59,21 @@ Contains code to check the support of various browser features, test for browser
 
 Contains a scheduler to schedule tasks over multiple frames to avoid dropping below 16 frames per second.
 
+### FrameTicker
+
+Global requestAnimationFrame ticker, fires `ENUM.FRAME_TICK` event.
+
+### PersistentCache
+
+Contains code to set up persistent caching using IndexedDB and with an in-memory `Map` cache as fallback.
+
 ### Polyfills
 
 Contains a fullscreen and pointerlock polyfill that can be used without having to worry about vendor prefixes.
+
+### Sensors
+
+Features an ambientLightSensor, geolocationSensor and relativeOrientationSensor (including a sensor fusion fallback based on Cardboard VR).
 
 ### ThreadPool
 

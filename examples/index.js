@@ -12,163 +12,10 @@ import * as Spar from '../dist/spar.umd';
 //   eventLabel: 'Fall Campaign',
 // });
 
-// Audio
-// -----
+// AssetLoader
+// -----------
 
-// let button;
-
-// if (!document.getElementById('audio-unlock')) {
-//   button = document.createElement('button');
-//   button.id = 'audio-unlock';
-//   button.width = '50px';
-//   button.height = '50px';
-//   button.innerHTML = 'unlock audio';
-//   document.getElementById('root').appendChild(button);
-
-//   if (Spar.isAutoplayAllowed()) {
-//     console.log('allowed!');
-//   } else {
-//     console.log('not allowed, waiting for user interaction');
-
-//     Spar.unlockAutoplay(button)
-//       .then(unlocked => {
-//         console.log('allowed!');
-//       })
-//       .catch(err => {
-//         console.log(err);
-//       });
-//   }
-// }
-
-// Cache
-// -----
-
-// Spar.persistentCache.set('key1', 'value1');
-// Spar.persistentCache.set('key2', 'value2');
-// Spar.persistentCache.get('key1').then(key => console.log(key));
-// Spar.persistentCache.getKeys().then(keys => {
-//   console.log(keys);
-//   Spar.persistentCache.delete('key1');
-
-//   Spar.persistentCache.getKeys().then(keys => {
-//     console.log(keys);
-//     Spar.persistentCache.clear();
-
-//     Spar.persistentCache.getKeys().then(keys => {
-//       console.log(keys);
-//     });
-//   });
-// });
-
-// Cookie
-// ------
-
-// Spar.setCookie('key1', 'value1');
-// Spar.setCookie('key2', 'value2');
-// console.log(document.cookie);
-
-// const exampleKeyCookie = Spar.getCookie('key1');
-// console.log(exampleKeyCookie);
-
-// Spar.deleteCookie('key1');
-// console.log(document.cookie);
-
-// Spar.deleteCookie('key2');
-// console.log(document.cookie);
-
-// Events
-// ------
-
-// class Test extends Spar.EventEmitter {
-//   constructor() {
-//     super();
-
-//     console.log(this);
-//   }
-// }
-
-// new Test();
-
-// Spar.onConnectionChange();
-
-// const connectionChangeHandler = event => {
-//   console.log(event);
-
-//   Spar.eventEmitter.off('SPAR::CONNECTION_CHANGE', connectionChangeHandler);
-//   Spar.offConnectionChange();
-// };
-
-// Spar.eventEmitter.on('SPAR::CONNECTION_CHANGE', connectionChangeHandler);
-
-// Spar.onKeyChange();
-
-// const keyChangeDownHandler = event => {
-//   console.log(`keyDown: ${event.key}`);
-
-//   document.getElementById('root').appendChild(document.createTextNode(event.key));
-
-//   // Spar.eventEmitter.off('SPAR::KEY_DOWN_CHANGE', keyChangeDownHandler);
-//   // Spar.offKeyChange();
-// };
-
-// const keyChangeUpHandler = event => {
-//   console.log(`keyUp: ${event.key}`);
-
-//   document.getElementById('root').appendChild(document.createTextNode(event.key));
-
-//   // Spar.eventEmitter.off('SPAR::KEY_UP_CHANGE', keyChangeDownHandler);
-//   // Spar.offKeyChange();
-// };
-
-// Spar.eventEmitter.on('SPAR::KEY_DOWN_CHANGE', keyChangeDownHandler);
-// Spar.eventEmitter.on('SPAR::KEY_UP_CHANGE', keyChangeUpHandler);
-
-// document.getElementById('root').appendChild(document.createElement('textarea'));
-
-// Spar.onOrientationChange();
-
-// const orientationChangeHandler = event => {
-//   console.log(event);
-
-//   Spar.eventEmitter.off('SPAR::ORIENTATION_CHANGE');
-//   Spar.offOrientationChange();
-
-//   document.getElementById('root').appendChild(document.createTextNode(event.angle));
-// };
-
-// Spar.eventEmitter.on('SPAR::ORIENTATION_CHANGE', orientationChangeHandler);
-
-// Spar.onVisibilityChange();
-
-// const visibilityChangeHandler = event => {
-//   console.log(event);
-
-//   Spar.eventEmitter.off('SPAR::VISIBILITY_CHANGE');
-//   Spar.offVisibilityChange();
-// };
-
-// Spar.eventEmitter.on('SPAR::VISIBILITY_CHANGE', visibilityChangeHandler);
-
-// Spar.onWindowSizeChange();
-
-// const windowSizeChangeHandler = event => {
-//   console.log(event);
-
-//   Spar.eventEmitter.off('SPAR::WINDOW_SIZE_CHANGE');
-//   Spar.offWindowSizeChange();
-// };
-
-// Spar.eventEmitter.on('SPAR::WINDOW_SIZE_CHANGE', windowSizeChangeHandler);
-
-// Features
-// --------
-
-console.log(Spar.features);
-
-// Loaders
-// -------
-
-// Spar.eventEmitter.on('SPAR::ASSET_LOADED', event => {
+// Spar.eventEmitter.on(Spar.ENUM.ASSET_LOADED, event => {
 //   console.log(event);
 // });
 
@@ -284,6 +131,206 @@ console.log(Spar.features);
 //   }
 // }
 
+// Audio
+// -----
+
+// let button;
+
+// if (!document.getElementById('audio-unlock')) {
+//   button = document.createElement('button');
+//   button.id = 'audio-unlock';
+//   button.width = '50px';
+//   button.height = '50px';
+//   button.innerHTML = 'unlock audio';
+//   document.getElementById('root').appendChild(button);
+
+//   if (Spar.isAutoplayAllowed()) {
+//     console.log('allowed!');
+//   } else {
+//     console.log('not allowed, waiting for user interaction');
+
+//     Spar.unlockAutoplay(button)
+//       .then(unlocked => {
+//         console.log('allowed!');
+//       })
+//       .catch(err => {
+//         console.log(err);
+//       });
+//   }
+// }
+
+// Cookie
+// ------
+
+// Spar.setCookie('key1', 'value1');
+// Spar.setCookie('key2', 'value2');
+// console.log(document.cookie);
+
+// const exampleKeyCookie = Spar.getCookie('key1');
+// console.log(exampleKeyCookie);
+
+// Spar.deleteCookie('key1');
+// console.log(document.cookie);
+
+// Spar.deleteCookie('key2');
+// console.log(document.cookie);
+
+// Events
+// ------
+
+// class Test extends Spar.EventEmitter {
+//   constructor() {
+//     super();
+
+//     console.log(this);
+//   }
+// }
+
+// new Test();
+
+// Spar.onConnectionChange();
+
+// const connectionChangeHandler = event => {
+//   console.log(event);
+
+//   Spar.eventEmitter.off(Spar.ENUM.CONNECTION_CHANGE, connectionChangeHandler);
+//   Spar.offConnectionChange();
+// };
+
+// Spar.eventEmitter.on(Spar.ENUM.CONNECTION_CHANGE, connectionChangeHandler);
+
+// Spar.onKeyChange();
+
+// const keyChangeDownHandler = event => {
+//   console.log(`keyDown: ${event.key}`);
+
+//   document.getElementById('root').appendChild(document.createTextNode(event.key));
+
+//   // Spar.eventEmitter.off(Spar.ENUM.KEY_DOWN_CHANGE, keyChangeDownHandler);
+//   // Spar.offKeyChange();
+// };
+
+// const keyChangeUpHandler = event => {
+//   console.log(`keyUp: ${event.key}`);
+
+//   document.getElementById('root').appendChild(document.createTextNode(event.key));
+
+//   // Spar.eventEmitter.off(Spar.ENUM.KEY_UP_CHANGE, keyChangeDownHandler);
+//   // Spar.offKeyChange();
+// };
+
+// Spar.eventEmitter.on(Spar.ENUM.KEY_DOWN_CHANGE, keyChangeDownHandler);
+// Spar.eventEmitter.on(Spar.ENUM.KEY_UP_CHANGE, keyChangeUpHandler);
+
+// document.getElementById('root').appendChild(document.createElement('textarea'));
+
+// Spar.onOrientationChange();
+
+// const orientationChangeHandler = event => {
+//   console.log(event);
+
+//   Spar.eventEmitter.off(Spar.ENUM.ORIENTATION_CHANGE);
+//   Spar.offOrientationChange();
+
+//   document.getElementById('root').appendChild(document.createTextNode(event.angle));
+// };
+
+// Spar.eventEmitter.on(Spar.ENUM.ORIENTATION_CHANGE, orientationChangeHandler);
+
+// Spar.onVisibilityChange();
+
+// const visibilityChangeHandler = event => {
+//   console.log(event);
+
+//   Spar.eventEmitter.off(Spar.ENUM.VISIBILITY_CHANGE);
+//   Spar.offVisibilityChange();
+// };
+
+// Spar.eventEmitter.on(Spar.ENUM.VISIBILITY_CHANGE, visibilityChangeHandler);
+
+// Spar.onWindowSizeChange();
+
+// const windowSizeChangeHandler = event => {
+//   console.log(event);
+
+//   Spar.eventEmitter.off(Spar.ENUM.WINDOW_SIZE_CHANGE);
+//   Spar.offWindowSizeChange();
+// };
+
+// Spar.eventEmitter.on(Spar.ENUM.WINDOW_SIZE_CHANGE, windowSizeChangeHandler);
+
+// Features
+// --------
+
+console.log(Spar.features);
+
+// FrameScheduler
+// --------------
+
+// const result = [];
+
+// Spar.scheduleFrame(
+//   () => {
+//     result.push('A');
+//   },
+//   { priority: Spar.priorities.LOW }
+// );
+
+// Spar.scheduleFrame(
+//   () => {
+//     result.push('C');
+//   },
+//   { priority: Spar.priorities.IMPORTANT }
+// );
+
+// Spar.scheduleFrame(
+//   () => {
+//     result.push('D');
+//   },
+//   { priority: 1000 }
+// );
+
+// Spar.scheduleFrame(() => {
+//   result.push('B');
+// });
+
+// setTimeout(() => {
+//   console.log(result); // -> ["D", "C", "B", "A"]
+// }, 1000);
+
+// FrameTicker
+// ---------
+
+// Spar.frameTicker.on();
+
+// const tickHandler = event => {
+//   console.log(event);
+// };
+
+// Spar.eventEmitter.on(Spar.ENUM.FRAME_TICK, tickHandler);
+
+// Spar.frameTicker.off();
+
+// PersistentCache
+// ---------------
+
+// Spar.persistentCache.set('key1', 'value1');
+// Spar.persistentCache.set('key2', 'value2');
+// Spar.persistentCache.get('key1').then(key => console.log(key));
+// Spar.persistentCache.getKeys().then(keys => {
+//   console.log(keys);
+//   Spar.persistentCache.delete('key1');
+
+//   Spar.persistentCache.getKeys().then(keys => {
+//     console.log(keys);
+//     Spar.persistentCache.clear();
+
+//     Spar.persistentCache.getKeys().then(keys => {
+//       console.log(keys);
+//     });
+//   });
+// });
+
 // Polyfills
 // ---------
 
@@ -321,42 +368,43 @@ console.log(Spar.features);
 
 // console.log(Spar.pointerLock);
 
-// Scheduler
-// ---------
-
-// const result = [];
-
-// Spar.scheduleFrame(
-//   () => {
-//     result.push('A');
-//   },
-//   { priority: Spar.priorities.LOW }
-// );
-
-// Spar.scheduleFrame(
-//   () => {
-//     result.push('C');
-//   },
-//   { priority: Spar.priorities.IMPORTANT }
-// );
-
-// Spar.scheduleFrame(
-//   () => {
-//     result.push('D');
-//   },
-//   { priority: 1000 }
-// );
-
-// Spar.scheduleFrame(() => {
-//   result.push('B');
-// });
-
-// setTimeout(() => {
-//   console.log(result); // -> ["D", "C", "B", "A"]
-// }, 1000);
-
-// Threads
+// Sensors
 // -------
+// Spar.geolocationSensor.on();
+
+// const geolocationHandler = event => {
+//   const { latitude, longitude } = event.position.coords;
+
+//   document.getElementById('root').appendChild(document.createTextNode([latitude, longitude]));
+
+//   // Spar.geolocationSensor.off();
+// };
+
+// Spar.eventEmitter.on(Spar.ENUM.GEOLOCATION_CHANGE, geolocationHandler);
+
+// Spar.ambientLightSensor.on();
+
+// const ambientLightHandler = event => {
+//   console.log(event);
+// };
+
+// Spar.eventEmitter.on(Spar.ENUM.AMBIENT_LIGHT_CHANGE, ambientLightHandler);
+
+Spar.relativeOrientationSensor.on();
+Spar.frameTicker.on();
+
+const tickHandler = event => {
+  const orientation = Spar.relativeOrientationSensor.getOrientation();
+  console.log(orientation);
+  // if (orientation[0] !== 0) {
+  //   document.getElementById('root').appendChild(document.createTextNode(orientation));
+  // }
+};
+
+Spar.eventEmitter.on(Spar.ENUM.FRAME_TICK, tickHandler);
+
+// ThreadPool
+// ----------
 
 // (async () => {
 //   const pool = Spar.threadPool;

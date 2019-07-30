@@ -1,3 +1,6 @@
+// Enum
+import { ENUM } from '../enum';
+
 // Events
 import { eventEmitter } from './EventEmitter';
 
@@ -36,7 +39,7 @@ function onConnectionChangeHandler(): void {
     }
   }
 
-  eventEmitter.emit('SPAR::CONNECTION_CHANGE', {
+  eventEmitter.emit(ENUM.CONNECTION_CHANGE, {
     connectionIsOnline,
     connectionSaveData,
     connectionSpeed,

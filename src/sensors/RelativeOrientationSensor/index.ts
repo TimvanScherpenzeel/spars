@@ -35,7 +35,7 @@ class RelativeOrientationSensor {
   public on(frequency: number = SENSOR_FREQUENCY): void {
     let sensor = null;
 
-    try {
+    if ((window as any).RelativeOrientationSensor) {
       if (navigator.permissions) {
         Promise.all([
           navigator.permissions.query({ name: 'accelerometer' }),
@@ -53,26 +53,14 @@ class RelativeOrientationSensor {
         sensor = new (window as any).RelativeOrientationSensor({ frequency });
         sensor.addEventListener('error', this.onSensorErrorHandler, false);
       }
-    } catch (error) {
-      this.errors.push(error);
 
-      if (error.name === 'SecurityError') {
-        console.error('Cannot construct sensors due to the Feature Policy');
-        console.warn(
-          'Attempting to fall back using "devicemotion"; however this will fail in the future without correct permissions.'
-        );
-      } else if (error.name === 'ReferenceError') {
-        // Fall back to the devicemotion API
-        this.useFallbackSensor();
-      } else {
-        console.error(error);
+      if (sensor) {
+        this.sensor = sensor;
+        this.sensor.addEventListener('reading', this.onSensorReadHandler, false);
+        this.sensor.start();
       }
-    }
-
-    if (sensor) {
-      this.sensor = sensor;
-      this.sensor.addEventListener('reading', this.onSensorReadHandler, false);
-      this.sensor.start();
+    } else {
+      this.useFallbackSensor();
     }
 
     window.addEventListener('orientationchange', this.onOrientationChangeHandler, false);
@@ -131,7 +119,7 @@ class RelativeOrientationSensor {
     return this.outputArray;
   }
 
-  private onSensorErrorHandler(event: any): void {
+  private onSensorErrorHandler = (event: any): void => {
     this.errors.push(event.error);
 
     if (event.error.name === 'NotAllowedError') {
@@ -143,15 +131,15 @@ class RelativeOrientationSensor {
     }
 
     this.useFallbackSensor();
-  }
+  };
 
   // tslint:disable-next-line:no-empty
-  private onSensorReadHandler(event: any): void {}
+  private onSensorReadHandler = (event: any): void => {};
 
-  private onOrientationChangeHandler(): void {
+  private onOrientationChangeHandler = (): void => {
     const angle = (-getOrientation().angle * Math.PI) / 180;
     this.worldToScreenQuaternion.setFromAxisAngle(Z_AXIS, angle);
-  }
+  };
 
   private useFallbackSensor(): void {
     this.fallbackSensor = new FusionPoseSensor(this.kalmanFilterWeight, this.predictionTime);

@@ -1,10 +1,17 @@
+// Enum
+import { ENUM } from '../../enum';
+
 // Events
 import { eventEmitter } from '../../events/EventEmitter';
 
 // Types
 import { TNullable } from '../../types';
 
-// TODO: add Generic Sensor API interface
+const SENSOR_OPTIONS = {
+  enableHighAccuracy: true,
+  maximumAge: 0,
+  timeout: 5000,
+};
 
 class GeolocationSensor {
   public errors: any[] = [];
@@ -18,10 +25,11 @@ class GeolocationSensor {
     if (navigator.geolocation) {
       if (navigator.permissions) {
         navigator.permissions.query({ name: 'geolocation' }).then(permissionStatus => {
-          if (permissionStatus.state === 'granted') {
+          if (permissionStatus.state === 'granted' || permissionStatus.state === 'prompt') {
             this.watchId = navigator.geolocation.watchPosition(
               this.onSensorReadHandler,
-              this.onSensorErrorHandler
+              this.onSensorErrorHandler,
+              SENSOR_OPTIONS
             );
           } else {
             console.warn('Geolocation sensor access is not granted or available');
@@ -30,7 +38,8 @@ class GeolocationSensor {
       } else {
         this.watchId = navigator.geolocation.watchPosition(
           this.onSensorReadHandler,
-          this.onSensorErrorHandler
+          this.onSensorErrorHandler,
+          SENSOR_OPTIONS
         );
       }
     } else {
@@ -52,22 +61,24 @@ class GeolocationSensor {
    *
    * @param position Geolocation position update
    */
-  private onSensorReadHandler(position: Position): void {
-    eventEmitter.emit('SPAR::GEOLOCATION_CHANGE', {
+  private onSensorReadHandler = (position: Position): void => {
+    eventEmitter.emit(ENUM.GEOLOCATION_CHANGE, {
       position,
     });
-  }
+  };
 
   /**
    * Catch any errors when monitoring geolocation changes
    *
    * @param err Geolocation sensor error event
    */
-  private onSensorErrorHandler(err: PositionError): void {
-    this.errors.push(err.message);
+  private onSensorErrorHandler = (event: any): void => {
+    if (event.message) {
+      this.errors.push(event.message);
 
-    console.error(err.message);
-  }
+      console.error(event.message);
+    }
+  };
 }
 
 export const geolocationSensor = new GeolocationSensor();
