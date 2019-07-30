@@ -4,16 +4,21 @@ import { ENUM } from '../enum';
 // Events
 import { eventEmitter } from '../events/EventEmitter';
 
+/**
+ * Create a new global requestAnimationFrame ticker
+ *
+ * It is more efficient to have a single requestAnimationFrame than
+ * to have multiple independent ones.
+ */
 class FrameTicker {
   private isPlaying: boolean = false;
   private previousTickId: number = 0;
   private tickId: number = 0;
 
-  constructor() {
-    this.tick = this.tick.bind(this);
-  }
-
-  public tick(time: number): void {
+  /**
+   * Fire a frame tick
+   */
+  public tick = (time: number): void => {
     if (this.isPlaying) {
       this.previousTickId = this.tickId;
 
@@ -24,13 +29,19 @@ class FrameTicker {
         time,
       });
     }
-  }
+  };
 
+  /**
+   * Start the frame ticker
+   */
   public on(): void {
     this.isPlaying = true;
     window.requestAnimationFrame(this.tick);
   }
 
+  /**
+   * Stop the frame ticker
+   */
   public off(): void {
     this.isPlaying = false;
     window.cancelAnimationFrame(this.tickId);
