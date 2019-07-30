@@ -8,6 +8,8 @@
 
 ## Roadmap
 
+- Add tween library
+- Add audio manager and audio filter chain
 - Add shake sensor (acceleration)
 - Add audio synthesizer / toolchain
 - Add webcam and microphone support
