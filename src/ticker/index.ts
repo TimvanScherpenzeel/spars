@@ -3,6 +3,7 @@ import { eventEmitter } from '../events/EventEmitter';
 
 class Ticker {
   private isPlaying: boolean = false;
+  private previousTickId: number = 0;
   private tickId: number = 0;
 
   constructor() {
@@ -10,12 +11,15 @@ class Ticker {
   }
 
   public tick(time: number): void {
-    eventEmitter.emit('SPAR::ANIMATION_FRAME', {
-      time,
-    });
-
     if (this.isPlaying) {
+      this.previousTickId = this.tickId;
+
       this.tickId = window.requestAnimationFrame(this.tick);
+
+      eventEmitter.emit('SPAR::ANIMATION_FRAME', {
+        delta: this.tickId - this.previousTickId,
+        time,
+      });
     }
   }
 

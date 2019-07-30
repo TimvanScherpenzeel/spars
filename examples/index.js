@@ -23,7 +23,7 @@ const tickHandler = event => {
 
 Spar.eventEmitter.on('SPAR::ANIMATION_FRAME', tickHandler);
 
-Spar.ticker.off();
+// Spar.ticker.off();
 
 // Audio
 // -----
