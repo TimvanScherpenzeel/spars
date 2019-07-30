@@ -17,6 +17,13 @@ export const priorities = {
   IMPORTANT: 10,
 };
 
+/**
+ * Create a new frame scheduler
+ *
+ * A frame scheduler schedules a limited amount of tasks each frame in order to keep
+ * a consistent 60 frames per second. If a task is expected to not fit in a single frame
+ * it is transferred to the next frame.
+ */
 export const createFrameScheduler = (): (() => void) => {
   const heapTasks = new PriorityUniqueQueue<LinkedList>();
   let deferScheduled = false;
@@ -28,6 +35,12 @@ export const createFrameScheduler = (): (() => void) => {
     }
   };
 
+  /**
+   * Add a task to the scheduler
+   *
+   * @param callback Task to run
+   * @param priority Priority of the task
+   */
   const addTask = (callback: () => void, priority: number): void => {
     let task = heapTasks.get(priority);
 
@@ -39,6 +52,9 @@ export const createFrameScheduler = (): (() => void) => {
     task.push(callback);
   };
 
+  /**
+   * Start the frame scheduler and run the tasks
+   */
   const runTasks = (): void => {
     const timeRan = performance.now();
 
@@ -69,6 +85,9 @@ export const createFrameScheduler = (): (() => void) => {
     }
   };
 
+  /**
+   * Add a task to the scheduler
+   */
   // TODO: fix definition
   // @ts-ignore
   return function scheduling(callback: () => void, { priority = priorities.NORMAL } = {}): void {

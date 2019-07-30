@@ -1,23 +1,44 @@
 // Types
 import { IQueueItem } from './types';
 
+/**
+ * A priority queue implementation with a heap implementation containing unique elements
+ */
 export class PriorityUniqueQueue<T> {
+  /**
+   * Get the index of the parent
+   */
   private static getParentIndex = (childIndex: number): number => Math.floor((childIndex - 1) / 2);
 
+  /**
+   * get the left child index
+   */
+  private static getLeftChildIndex = (parentIndex: number): number => 2 * parentIndex + 1;
+
+  /**
+   * Get the right child index
+   */
   private static getRightChildIndex = (parentIndex: number): number => 2 * parentIndex + 2;
 
+  /**
+   * Check if the child has a parent
+   */
   private static hasParent = (childIndex: number): boolean =>
     PriorityUniqueQueue.getParentIndex(childIndex) >= 0;
-
-  private static getLeftChildIndex = (parentIndex: number): number => 2 * parentIndex + 1;
 
   private heapContainer: Array<IQueueItem<T>> = [];
   private hashPriority: Record<string, T> = {};
 
+  /**
+   * Peek at the heap container head node
+   */
   public peek(): any {
     return this.heapContainer[0].value;
   }
 
+  /**
+   * Poll the heap container for the next queue item in the heap container
+   */
   public poll(): any {
     let item;
 
@@ -36,20 +57,37 @@ export class PriorityUniqueQueue<T> {
     return item.value;
   }
 
+  /**
+   * Add a queue item to the priority queue
+   *
+   * @param priority Priority of the queue item
+   * @param value Task to store
+   */
   public add(priority: number, value: T): void {
     this.heapContainer.push({ priority, value });
     this.pushUp();
     this.hashPriority[priority] = value;
   }
 
+  /**
+   * Check if the heap container is empty
+   */
   public isEmpty(): boolean {
     return !this.heapContainer.length;
   }
 
+  /**
+   * Get a priority slot
+   *
+   * @param priority Priority slot
+   */
   public get(priority: number): any {
     return this.hashPriority[priority];
   }
 
+  /**
+   * Move the priority pointer
+   */
   public rising(): void {
     const keys = Object.keys(this.hashPriority);
 
@@ -65,6 +103,9 @@ export class PriorityUniqueQueue<T> {
     }
   }
 
+  /**
+   * Push a queue item up the heap
+   */
   private pushUp(): void {
     let currentIndex = this.heapContainer.length - 1;
 
@@ -80,6 +121,9 @@ export class PriorityUniqueQueue<T> {
     }
   }
 
+  /**
+   * Push a queue item down the heap
+   */
   private pushDown(): void {
     let currentIndex = 0;
     let nextIndex = null;
@@ -108,10 +152,22 @@ export class PriorityUniqueQueue<T> {
     }
   }
 
+  /**
+   * Verify is a pair is ordered correctly
+   *
+   * @param firstElement First queue item
+   * @param secondElement Second queue item
+   */
   private pairIsInCorrectOrder(firstElement: IQueueItem<T>, secondElement: IQueueItem<T>): boolean {
     return firstElement.priority >= secondElement.priority;
   }
 
+  /**
+   * Swap the pointer to the item in the heap
+   *
+   * @param indexA First index
+   * @param indexB Second index
+   */
   private swap(indexA: number, indexB: number): void {
     const tmp = this.heapContainer[indexB];
     this.heapContainer[indexB] = this.heapContainer[indexA];
