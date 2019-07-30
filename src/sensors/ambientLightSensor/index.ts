@@ -20,7 +20,7 @@ class AmbientLightSensor {
     if ((window as any).AmbientLightSensor) {
       if (navigator.permissions) {
         navigator.permissions.query({ name: 'ambient-light-sensor' }).then(permissionStatus => {
-          if (permissionStatus.state === 'granted') {
+          if (permissionStatus.state === 'granted' || permissionStatus.state === 'prompt') {
             sensor = new (window as any).AmbientLightSensor({ frequency });
             sensor.addEventListener('error', this.onSensorErrorHandler);
           } else {
@@ -57,18 +57,18 @@ class AmbientLightSensor {
   /**
    * Monitor any ambient light change events
    */
-  private onSensorReadHandler(): void {
+  private onSensorReadHandler = (): void => {
     eventEmitter.emit(ENUM.AMBIENT_LIGHT_CHANGE, {
       illuminance: this.sensor.illuminance,
     });
-  }
+  };
 
   /**
    * Catch any errors when monitoring ambient light changes
    *
    * @param event Ambient Light sensor error event
    */
-  private onSensorErrorHandler(event: any): void {
+  private onSensorErrorHandler = (event: any): void => {
     this.errors.push(event.error);
 
     if (event.error.name === 'NotAllowedError') {
@@ -78,7 +78,7 @@ class AmbientLightSensor {
     } else {
       console.error(event.error);
     }
-  }
+  };
 }
 
 export const ambientLightSensor = new AmbientLightSensor();

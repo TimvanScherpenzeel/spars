@@ -131,7 +131,7 @@ class RelativeOrientationSensor {
     return this.outputArray;
   }
 
-  private onSensorErrorHandler(event: any): void {
+  private onSensorErrorHandler = (event: any): void => {
     this.errors.push(event.error);
 
     if (event.error.name === 'NotAllowedError') {
@@ -143,15 +143,15 @@ class RelativeOrientationSensor {
     }
 
     this.useFallbackSensor();
-  }
+  };
 
   // tslint:disable-next-line:no-empty
-  private onSensorReadHandler(event: any): void {}
+  private onSensorReadHandler = (event: any): void => {};
 
-  private onOrientationChangeHandler(): void {
+  private onOrientationChangeHandler = (): void => {
     const angle = (-getOrientation().angle * Math.PI) / 180;
     this.worldToScreenQuaternion.setFromAxisAngle(Z_AXIS, angle);
-  }
+  };
 
   private useFallbackSensor(): void {
     this.fallbackSensor = new FusionPoseSensor(this.kalmanFilterWeight, this.predictionTime);
