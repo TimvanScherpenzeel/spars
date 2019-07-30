@@ -1,6 +1,9 @@
 // Audio
 import { createAudioContext } from './createAudioContext';
 
+// Enum
+import { ENUM } from '../enum';
+
 // Events
 import { eventEmitter } from '../events/EventEmitter';
 
@@ -39,7 +42,7 @@ export const unlockAutoplay = (element: HTMLElement): Promise<boolean> =>
     if (context.state === 'suspended') {
       autoplayAllowed = false;
 
-      eventEmitter.emit('SPAR::AUTOPLAY_CHANGE', {
+      eventEmitter.emit(ENUM.AUTOPLAY_UNLOCKED, {
         autoplayAllowed,
       });
 
@@ -53,7 +56,7 @@ export const unlockAutoplay = (element: HTMLElement): Promise<boolean> =>
 
             autoplayAllowed = true;
 
-            eventEmitter.emit('SPAR::AUTOPLAY_CHANGE', {
+            eventEmitter.emit(ENUM.AUTOPLAY_UNLOCKED, {
               autoplayAllowed,
             });
 
