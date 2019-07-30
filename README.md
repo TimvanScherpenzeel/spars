@@ -59,6 +59,10 @@ Contains a scheduler to schedule tasks over multiple frames to avoid dropping be
 
 Contains a fullscreen and pointerlock polyfill that can be used without having to worry about vendor prefixes.
 
+### Sensors
+
+Features an ambientLightSensor, geolocationSensor and relativeOrientationSensor (including a sensor fusion fallback based on Cardboard VR).
+
 ### ThreadPool
 
 _Does not work on Internet Explorer 11_
@@ -100,6 +104,10 @@ Results from one task can be directly passed into another task but instead of pu
   console.log(sum2TaskResult); // -> 5
 )();
 ```
+
+### Ticker
+
+Global requestAnimationFrame ticker, fires `SPAR::ANIMATION_FRAME` event.
 
 ### Utilities
 
