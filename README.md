@@ -55,6 +55,10 @@ Contains code to check the support of various browser features, test for browser
 
 Contains a scheduler to schedule tasks over multiple frames to avoid dropping below 16 frames per second.
 
+### FrameTicker
+
+Global requestAnimationFrame ticker, fires `SPAR::ANIMATION_FRAME` event.
+
 ### Polyfills
 
 Contains a fullscreen and pointerlock polyfill that can be used without having to worry about vendor prefixes.
@@ -104,10 +108,6 @@ Results from one task can be directly passed into another task but instead of pu
   console.log(sum2TaskResult); // -> 5
 )();
 ```
-
-### Ticker
-
-Global requestAnimationFrame ticker, fires `SPAR::ANIMATION_FRAME` event.
 
 ### Utilities
 

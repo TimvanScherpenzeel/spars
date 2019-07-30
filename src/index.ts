@@ -38,14 +38,14 @@ export { fullScreen, pointerLock } from './polyfills';
 // FrameScheduler
 export { priorities, scheduleFrame } from './frameScheduler';
 
+// FrameTicker
+export { frameTicker } from './frameTicker';
+
 // Sensors
 export { ambientLightSensor, geolocationSensor, relativeOrientationSensor } from './sensors';
 
 // ThreadPool
 export { threadPool } from './threadPool';
-
-// Ticker
-export { ticker } from './ticker';
 
 // Utilities
 export { assert, debounce, getQueryParameters } from './utilities';

@@ -15,15 +15,15 @@ import * as Spar from '../dist/spar.umd';
 // Animation
 // ---------
 
-Spar.ticker.on();
+// Spar.frameTicker.on();
 
-const tickHandler = event => {
-  console.log(event);
-};
+// const tickHandler = event => {
+//   console.log(event);
+// };
 
-Spar.eventEmitter.on('SPAR::ANIMATION_FRAME', tickHandler);
+// Spar.eventEmitter.on('SPAR::FRAME_TICK', tickHandler);
 
-// Spar.ticker.off();
+// Spar.frameTicker.off();
 
 // Audio
 // -----

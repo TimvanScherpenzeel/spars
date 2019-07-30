@@ -1,7 +1,7 @@
 // Events
 import { eventEmitter } from '../events/EventEmitter';
 
-class Ticker {
+class FrameTicker {
   private isPlaying: boolean = false;
   private previousTickId: number = 0;
   private tickId: number = 0;
@@ -16,7 +16,7 @@ class Ticker {
 
       this.tickId = window.requestAnimationFrame(this.tick);
 
-      eventEmitter.emit('SPAR::ANIMATION_FRAME', {
+      eventEmitter.emit('SPAR::FRAME_TICK', {
         delta: this.tickId - this.previousTickId,
         time,
       });
@@ -34,4 +34,4 @@ class Ticker {
   }
 }
 
-export const ticker = new Ticker();
+export const frameTicker = new FrameTicker();
