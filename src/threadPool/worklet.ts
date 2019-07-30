@@ -141,7 +141,7 @@ export const worklet = URL.createObjectURL(
           // Queue has tasks, but all are pending
           if (taskDescription == null) {
             console.error(
-              `Queue deadlocked: all ${queue.length} tasks have unresolved dependencies.`
+              `ThreadPool -> Queue deadlocked: all ${queue.length} tasks have unresolved dependencies.`
             );
 
             // This is dead time, flush any pending results
@@ -164,7 +164,7 @@ export const worklet = URL.createObjectURL(
           const result: any = (results[id] = resolved
             .then(() => {
               if (typeof $$TASK_PROCESSOR !== 'function') {
-                throw new Error(`Unknown task processor "${name}".`);
+                throw new Error(`ThreadPool -> Unknown task processor "${name}".`);
               }
 
               const instance = instances[name] || (instances[name] = new $$TASK_PROCESSOR());
@@ -314,7 +314,7 @@ export const worklet = URL.createObjectURL(
             }
 
             if ((!id as any) in results) {
-              throw new Error(`Result ${id} not found.`);
+              throw new Error(`ThreadPool -> Result ${id} not found.`);
             }
 
             const result = results[id];

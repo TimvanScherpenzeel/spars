@@ -5,6 +5,7 @@ import { worklet } from './worklet';
 
 // Types
 import { TVoidable } from '../types';
+import { assert } from '../utilities';
 import { IThread } from './types';
 
 export class TaskManager {
@@ -68,7 +69,7 @@ export class TaskManager {
         const controller = this.results[value.id];
 
         console.warn(
-          `Task#${value.id} passed to ${taskName}[${
+          `ThreadPool -> Task#${value.id} passed to ${taskName}[${
             task.id
           }] was invoked in a different context. The result will be ${
             controller.isFulfilled ? '' : 'materialized & '
@@ -153,10 +154,7 @@ export class TaskManager {
   public getTaskResult(taskId: any): any {
     const resultController = this.results[taskId];
 
-    if (!resultController) {
-      // This should never happen!
-      throw new Error(`Unknown result for Task: ${taskId}`);
-    }
+    assert(resultController, `ThreadPool -> Unknown result for Task: ${taskId}`);
 
     if (resultController.isPending === true) {
       resultController.isRequested = true;

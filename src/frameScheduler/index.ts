@@ -51,7 +51,7 @@ export const createFrameScheduler = (): (() => void) => {
         try {
           tasks.shift()();
         } catch (err) {
-          console.error(err);
+          console.error(`FrameScheduler -> ${err}`);
         }
 
         if (tasks.isEmpty()) {
