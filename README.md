@@ -8,14 +8,14 @@
 
 ## Roadmap
 
+- Add Generic Sensor API to geolocation sensor
+- Comment sensors/RelativeOrientationSensor, threadPool, frameScheduler, frameTicker and other newly added code
 - Add getUserMedia polyfill (https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia & https://medium.com/samsung-internet-dev/web-audio-on-different-platforms-67fc9ffc2c4e)
 - Add tween library (animejs?)
 - Add audio manager and audio filter chain
 - Add shake sensor (acceleration)
 - Add audio synthesizer / toolchain
 - Add webcam and microphone support
-- Add Generic Sensor API to geolocation sensor
-- Comment sensors/RelativeOrientationSensor, threadPool, frameScheduler
 - Add screen lock API polyfill
 - Add accelerometer / device orientation / motion API
 
