@@ -18,6 +18,7 @@ export const createAudioContext = (desiredSampleRate = 44100): AudioContext => {
     dummy.buffer = buffer;
     dummy.connect(context.destination);
     dummy.start(0);
+    dummy.stop(0);
     dummy.disconnect();
 
     // Dispose old context

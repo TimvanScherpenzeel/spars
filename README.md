@@ -8,8 +8,8 @@
 
 ## Roadmap
 
+- Add global web audio manager (mute / unmute, store preference, fade in / fade out on document.visibility, support for sound groups, filter chain)
 - Add tween library (animejs?)
-- Add audio manager and audio filter chain
 - Add shake sensor (acceleration)
 - Add audio synthesizer / toolchain
 - Add webcam and microphone support
