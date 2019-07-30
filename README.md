@@ -8,7 +8,6 @@
 
 ## Roadmap
 
-- Add global requestAnimationFrame ticker that various parts of the application can hook into
 - Add getUserMedia polyfill (https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia & https://medium.com/samsung-internet-dev/web-audio-on-different-platforms-67fc9ffc2c4e)
 - Add tween library (animejs?)
 - Add audio manager and audio filter chain
