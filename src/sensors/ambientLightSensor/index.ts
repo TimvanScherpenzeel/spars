@@ -1,3 +1,6 @@
+// Enum
+import { ENUM_AMBIENT_LIGHT_CHANGE } from '../../enum';
+
 // Events
 import { eventEmitter } from '../../events/EventEmitter';
 
@@ -55,7 +58,7 @@ class AmbientLightSensor {
    * Monitor any ambient light change events
    */
   private onSensorReadHandler(): void {
-    eventEmitter.emit('SPAR::AMBIENT_LIGHT_CHANGE', {
+    eventEmitter.emit(ENUM_AMBIENT_LIGHT_CHANGE, {
       illuminance: this.sensor.illuminance,
     });
   }

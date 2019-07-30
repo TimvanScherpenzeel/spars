@@ -1,3 +1,6 @@
+// Enum
+import { ENUM_FRAME_TICK } from '../enum';
+
 // Events
 import { eventEmitter } from '../events/EventEmitter';
 
@@ -16,7 +19,7 @@ class FrameTicker {
 
       this.tickId = window.requestAnimationFrame(this.tick);
 
-      eventEmitter.emit('SPAR::FRAME_TICK', {
+      eventEmitter.emit(ENUM_FRAME_TICK, {
         delta: this.tickId - this.previousTickId,
         time,
       });

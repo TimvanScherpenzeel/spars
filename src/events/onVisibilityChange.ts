@@ -1,3 +1,6 @@
+// Enum
+import { ENUM_VISIBILITY_CHANGE } from '../enum';
+
 // Events
 import { eventEmitter } from './EventEmitter';
 
@@ -47,7 +50,7 @@ const visibility = {
  * Monitor visibility changes
  */
 function onVisibilityChangeHandler(): void {
-  eventEmitter.emit('SPAR::VISIBILITY_CHANGE', {
+  eventEmitter.emit(ENUM_VISIBILITY_CHANGE, {
     isVisible: !visibility.hidden,
   });
 }

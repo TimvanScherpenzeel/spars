@@ -57,7 +57,7 @@ Contains a scheduler to schedule tasks over multiple frames to avoid dropping be
 
 ### FrameTicker
 
-Global requestAnimationFrame ticker, fires `SPAR::ANIMATION_FRAME` event.
+Global requestAnimationFrame ticker, fires `ENUM_FRAME_TICK` event.
 
 ### Polyfills
 

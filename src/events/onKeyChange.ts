@@ -1,8 +1,11 @@
-// Features
-import getBrowserType from '../features/browserFeatures/getBrowserType';
+// Enum
+import { ENUM_KEY_DOWN_CHANGE, ENUM_KEY_UP_CHANGE } from '../enum';
 
 // Events
 import { eventEmitter } from './EventEmitter';
+
+// Features
+import getBrowserType from '../features/browserFeatures/getBrowserType';
 
 // Known issues:
 // TODO: Chrome Android always return 229 on `.keyCode` (see: https://stackoverflow.com/a/41517115, https://clark.engineering/input-on-android-229-unidentified-1d92105b9a04)
@@ -45,7 +48,7 @@ const normalizeKey = (key: string): string => {
  * Monitor keydown changes
  */
 function onKeyDownChangeHandler(event: KeyboardEvent): void {
-  eventEmitter.emit('SPAR::KEY_DOWN_CHANGE', {
+  eventEmitter.emit(ENUM_KEY_DOWN_CHANGE, {
     key: normalizeKey(event.key),
   });
 }
@@ -54,7 +57,7 @@ function onKeyDownChangeHandler(event: KeyboardEvent): void {
  * Monitor keyup changes
  */
 function onKeyUpChangeHandler(event: KeyboardEvent): void {
-  eventEmitter.emit('SPAR::KEY_UP_CHANGE', {
+  eventEmitter.emit(ENUM_KEY_UP_CHANGE, {
     key: normalizeKey(event.key),
   });
 }
