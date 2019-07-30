@@ -8,9 +8,6 @@
 
 ## Roadmap
 
-- Add Generic Sensor API to geolocation sensor
-- Comment sensors/RelativeOrientationSensor, threadPool, frameScheduler, frameTicker and other newly added code
-- Add getUserMedia polyfill (https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia & https://medium.com/samsung-internet-dev/web-audio-on-different-platforms-67fc9ffc2c4e)
 - Add tween library (animejs?)
 - Add audio manager and audio filter chain
 - Add shake sensor (acceleration)
@@ -70,10 +67,6 @@ Contains code to set up persistent caching using IndexedDB and with an in-memory
 ### Polyfills
 
 Contains a fullscreen and pointerlock polyfill that can be used without having to worry about vendor prefixes.
-
-### Sensors
-
-Features an ambientLightSensor, geolocationSensor and relativeOrientationSensor (including a sensor fusion fallback based on Cardboard VR).
 
 ### ThreadPool
 

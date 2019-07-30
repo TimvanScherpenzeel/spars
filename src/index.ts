@@ -44,9 +44,6 @@ export { priorities, scheduleFrame } from './frameScheduler';
 // FrameTicker
 export { frameTicker } from './frameTicker';
 
-// Sensors
-export { ambientLightSensor, geolocationSensor, relativeOrientationSensor } from './sensors';
-
 // ThreadPool
 export { threadPool } from './threadPool';
 
