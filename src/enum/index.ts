@@ -1,3 +1,6 @@
+/**
+ * Global enumeration
+ */
 export const ENUM = {
   // AssetLoader
   ASSET_LOADED: 'SPAR::ASSET_LOADED',
