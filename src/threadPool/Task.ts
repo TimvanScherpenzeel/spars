@@ -1,6 +1,9 @@
 // Types
 import { TTaskState } from './types';
 
+/**
+ * A task to execute
+ */
 export class Task {
   public id!: number;
   public state: TTaskState = 'pending';
@@ -10,6 +13,9 @@ export class Task {
   public $$TASK_IDENTIFIER!: string;
 }
 
+/**
+ * Task description with limited scope
+ */
 Object.defineProperties(Task.prototype, {
   $$TASK_IDENTIFIER: {
     configurable: false,

@@ -8,6 +8,9 @@ import { TVoidable } from '../types';
 import { assert } from '../utilities';
 import { IThread } from './types';
 
+/**
+ * Manage the task queue and interact with the RPC's
+ */
 export class TaskManager {
   private static walkTaskArgs = (
     obj: any[],
@@ -33,10 +36,22 @@ export class TaskManager {
   private results: { [id: number]: any } = {};
   private workerTaskAssignments: { [id: number]: any } = {};
 
+  /**
+   * Sets various configuration options
+   *
+   * @param size Maximum amount of threads to use
+   */
   constructor(size?: number) {
     this.size = size || config.THREAD_POOL_SIZE;
   }
 
+  /**
+   * Execute a task
+   *
+   * @param task Task to execute
+   * @param taskName Name of the task to execute
+   * @param args Any arguments that have been passed along with the task (including dependencies)
+   */
   public exec(task: Task, taskName: string, args: any): void {
     const worker = this.getTaskWorker(taskName, args) || this.getNextWorker();
     this.workerTaskAssignments[task.id] = worker.id;
@@ -122,14 +137,25 @@ export class TaskManager {
       });
   }
 
+  /**
+   * Add a compute module to the task pool
+   *
+   * @param code Compute module source code
+   */
   public addWorklet(code: string): Promise<Task[]> {
     this.worklets.push(code);
 
     return Promise.all(this.workers.map(worker => worker.call('$$eval', [code])));
   }
 
-  // Cancellation isn't guaranteed, however cancellation of a task
-  // known to have been already completed will return `false`.
+  /**
+   * Cancel a task
+   *
+   * Cancellation isn't guaranteed, however cancellation of a task
+   * known to have been already completed will return `false`.
+   *
+   * @param taskId Id of task to cancel
+   */
   public cancelTask(taskId: any): TVoidable<boolean> {
     const task: any = this.tasks[taskId];
     const resultController = this.results[taskId];
@@ -151,6 +177,11 @@ export class TaskManager {
     }
   }
 
+  /**
+   * Get a task result
+   *
+   * @param taskId Id of task to get result of
+   */
   public getTaskResult(taskId: any): any {
     const resultController = this.results[taskId];
 
@@ -172,6 +203,12 @@ export class TaskManager {
     return resultController.result;
   }
 
+  /**
+   * Status of the thread (communicates with the individual thread)
+   *
+   * @param worker Active thread
+   * @param statuses Any statusses to report
+   */
   private statusReceived(worker: any, statuses: any): void {
     for (const status of statuses) {
       const id = status[0];
@@ -201,6 +238,11 @@ export class TaskManager {
     }
   }
 
+  /**
+   * Mark a thread as free for new computation
+   *
+   * @param worker Thread to mark as free
+   */
   private freeWorkerTask(worker: any): void {
     if (--worker.isPending === 0) {
       // TODO: the worker now has no pending tasks.
@@ -210,6 +252,11 @@ export class TaskManager {
     }
   }
 
+  /**
+   * Get an active thread by id
+   *
+   * @param id Id of the thread to get
+   */
   private getWorker(id: any): TVoidable<IThread> {
     for (const worker of this.workers) {
       if (worker.id === id) {
@@ -218,6 +265,9 @@ export class TaskManager {
     }
   }
 
+  /**
+   * Add a thread to the thread pool
+   */
   private addWorker(): IThread {
     const worker: any = new Worker(worklet);
     worker.url = worklet;
@@ -263,6 +313,11 @@ export class TaskManager {
     return worker;
   }
 
+  /**
+   * Get the most suitable worker for this task (keep dependencies in mind)
+   *
+   * @param taskId Id of the task
+   */
   private getWorkerForTask(taskId: number): TVoidable<IThread> {
     const workerId = this.workerTaskAssignments[taskId];
 
@@ -273,6 +328,11 @@ export class TaskManager {
     }
   }
 
+  /**
+   * Get and collect any dependencies of a task
+   *
+   * @param args Task dependencies
+   */
   private getTaskDependencies(args: any[]): Task[] {
     const tasks: Task[] = [];
 
@@ -283,6 +343,12 @@ export class TaskManager {
     return tasks;
   }
 
+  /**
+   * Get the most suitable worker for this task (keep dependencies in mind)
+   *
+   * @param taskName Name of the task
+   * @param args Any arguments that have been passed along with the task (including dependencies)
+   */
   private getTaskWorker(taskName: string, args: any[]): TVoidable<IThread> {
     const tasks = this.getTaskDependencies(args);
     const usage: any = {};
@@ -304,6 +370,9 @@ export class TaskManager {
     }
   }
 
+  /**
+   * If no suitable worker for the task was found get the next available one
+   */
   private getNextWorker(): IThread {
     const size = this.workers.length;
 

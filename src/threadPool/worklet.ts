@@ -4,6 +4,9 @@ import { Task } from './Task';
 // Types
 import { Self } from './types/native';
 
+/**
+ * Generic worklet to execute individual tasks
+ */
 export const worklet = URL.createObjectURL(
   new Blob([
     `(${(): void => {
