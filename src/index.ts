@@ -11,19 +11,7 @@ export { persistentCache } from './persistentCache';
 export { deleteCookie, getCookie, setCookie } from './cookie';
 
 // Enum
-export {
-  ENUM_AMBIENT_LIGHT_CHANGE,
-  ENUM_ASSET_LOADED,
-  ENUM_AUTOPLAY_UNLOCKED,
-  ENUM_CONNECTION_CHANGE,
-  ENUM_FRAME_TICK,
-  ENUM_GEOLOCATION_CHANGE,
-  ENUM_KEY_DOWN_CHANGE,
-  ENUM_KEY_UP_CHANGE,
-  ENUM_ORIENTATION_CHANGE,
-  ENUM_VISIBILITY_CHANGE,
-  ENUM_WINDOW_SIZE_CHANGE,
-} from './enum';
+export { ENUM } from './enum';
 
 // Events
 export {

@@ -1,5 +1,5 @@
 // Enum
-import { ENUM_GEOLOCATION_CHANGE } from '../../enum';
+import { ENUM } from '../../enum';
 
 // Events
 import { eventEmitter } from '../../events/EventEmitter';
@@ -56,7 +56,7 @@ class GeolocationSensor {
    * @param position Geolocation position update
    */
   private onSensorReadHandler(position: Position): void {
-    eventEmitter.emit(ENUM_GEOLOCATION_CHANGE, {
+    eventEmitter.emit(ENUM.GEOLOCATION_CHANGE, {
       position,
     });
   }

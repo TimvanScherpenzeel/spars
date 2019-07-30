@@ -1,5 +1,5 @@
 // Enum
-import { ENUM_AUTOPLAY_UNLOCKED } from '../enum';
+import { ENUM } from '../enum';
 
 // Events
 import { eventEmitter } from '../events/EventEmitter';
@@ -68,7 +68,7 @@ export const unlockAutoplay = (element: HTMLElement): Promise<boolean> =>
     if (context.state === 'suspended') {
       autoplayAllowed = false;
 
-      eventEmitter.emit(ENUM_AUTOPLAY_UNLOCKED, {
+      eventEmitter.emit(ENUM.AUTOPLAY_UNLOCKED, {
         autoplayAllowed,
       });
 
@@ -82,7 +82,7 @@ export const unlockAutoplay = (element: HTMLElement): Promise<boolean> =>
 
             autoplayAllowed = true;
 
-            eventEmitter.emit(ENUM_AUTOPLAY_UNLOCKED, {
+            eventEmitter.emit(ENUM.AUTOPLAY_UNLOCKED, {
               autoplayAllowed,
             });
 
