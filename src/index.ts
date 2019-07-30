@@ -1,6 +1,9 @@
 // Analytics
 export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 
+// Animation
+export { ticker } from './animation/ticker';
+
 // Audio
 export { createAudioContext, isAutoplayAllowed, unlockAutoplay } from './audio';
 

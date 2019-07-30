@@ -12,6 +12,19 @@ import * as Spar from '../dist/spar.umd';
 //   eventLabel: 'Fall Campaign',
 // });
 
+// Animation
+// ---------
+
+Spar.ticker.on();
+
+const tickHandler = event => {
+  console.log(event);
+};
+
+Spar.eventEmitter.on('SPAR::ANIMATION_FRAME', tickHandler);
+
+Spar.ticker.off();
+
 // Audio
 // -----
 
