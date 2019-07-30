@@ -368,41 +368,6 @@ console.log(Spar.features);
 
 // console.log(Spar.pointerLock);
 
-// Sensors
-// -------
-// Spar.geolocationSensor.on();
-
-// const geolocationHandler = event => {
-//   const { latitude, longitude } = event.position.coords;
-
-//   document.getElementById('root').appendChild(document.createTextNode([latitude, longitude]));
-
-//   // Spar.geolocationSensor.off();
-// };
-
-// Spar.eventEmitter.on(Spar.ENUM.GEOLOCATION_CHANGE, geolocationHandler);
-
-// Spar.ambientLightSensor.on();
-
-// const ambientLightHandler = event => {
-//   console.log(event);
-// };
-
-// Spar.eventEmitter.on(Spar.ENUM.AMBIENT_LIGHT_CHANGE, ambientLightHandler);
-
-Spar.relativeOrientationSensor.on();
-Spar.frameTicker.on();
-
-const tickHandler = event => {
-  const orientation = Spar.relativeOrientationSensor.getOrientation();
-  console.log(orientation);
-  // if (orientation[0] !== 0) {
-  //   document.getElementById('root').appendChild(document.createTextNode(orientation));
-  // }
-};
-
-Spar.eventEmitter.on(Spar.ENUM.FRAME_TICK, tickHandler);
-
 // ThreadPool
 // ----------
 
