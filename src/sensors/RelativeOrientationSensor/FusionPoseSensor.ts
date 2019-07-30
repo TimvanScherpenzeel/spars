@@ -85,9 +85,9 @@ export class FusionPoseSensor {
     this.resetQuaternion.multiply(this.originalPoseAdjustQuaternion);
   }
 
-  public onDeviceMotionChangeHandler(event: DeviceMotionEvent): void {
+  public onDeviceMotionChangeHandler = (event: DeviceMotionEvent): void => {
     this.updateDeviceMotion(event);
-  }
+  };
 
   public updateDeviceMotion(event: DeviceMotionEvent): void {
     const accelerationIncludingGravity = event.accelerationIncludingGravity;
@@ -135,9 +135,9 @@ export class FusionPoseSensor {
     this.previousTimestamp = timestamp;
   }
 
-  public onOrientationChangeHandler(): void {
+  public onOrientationChangeHandler = (): void => {
     this.setScreenTransform();
-  }
+  };
 
   public setScreenTransform(): void {
     this.worldToScreenQuaternion.set(0, 0, 0, 1);
