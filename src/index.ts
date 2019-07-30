@@ -1,9 +1,6 @@
 // Analytics
 export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 
-// Animation
-export { ticker } from './animation/ticker';
-
 // Audio
 export { createAudioContext, isAutoplayAllowed, unlockAutoplay } from './audio';
 
@@ -46,6 +43,9 @@ export { ambientLightSensor, geolocationSensor, relativeOrientationSensor } from
 
 // ThreadPool
 export { threadPool } from './threadPool';
+
+// Ticker
+export { ticker } from './ticker';
 
 // Utilities
 export { assert, debounce, getQueryParameters } from './utilities';
