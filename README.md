@@ -39,9 +39,13 @@ Contains code for an `AssetLoader` used for preloading commonly used assets like
 
 Contains code to help you with audio autoplay unlocking in the browser.
 
-### Cache
+### Cookie
 
-Contains code to set up persistent caching using IndexedDB and with an in-memory cache as fallback.
+Contains code to help you with getting and setting cookies.
+
+### Enum
+
+Contains Enums used in Spar for more consistent access and the advantage of having a single entry point of exposed internals.
 
 ### Events
 
@@ -58,6 +62,10 @@ Contains a scheduler to schedule tasks over multiple frames to avoid dropping be
 ### FrameTicker
 
 Global requestAnimationFrame ticker, fires `ENUM.FRAME_TICK` event.
+
+### PersistentCache
+
+Contains code to set up persistent caching using IndexedDB and with an in-memory `Map` cache as fallback.
 
 ### Polyfills
 
