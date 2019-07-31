@@ -18,8 +18,21 @@ class AudioManager {
     Object.keys(this.sources).forEach(source => this.setVolume(source, volume));
   };
 
+  public load = (
+    source: string,
+    arrayBuffer: ArrayBuffer,
+    options: IAudioObjectOptions
+  ): Promise<IAudioObject> =>
+    new Promise((resolve): any => {
+      this.context.decodeAudioData(arrayBuffer, buffer => {
+        resolve(this.createBufferSource(source, buffer, options));
+      });
+    });
+
   public play = (source: string): void => {
     this.possiblyResume().then(() => {
+      this.sources[source].isPlaying = true;
+
       if (this.sources[source].isStarted === false) {
         this.startAudio(source);
       }
@@ -29,6 +42,8 @@ class AudioManager {
   };
 
   public pause = (source: string): void => {
+    this.sources[source].isPlaying = false;
+
     this.updateRate({ source, rate: 0 }, false);
   };
 
@@ -43,9 +58,12 @@ class AudioManager {
 
     this.updateRate({ source, rate: this.sources[source].options.rate || 1 }, true);
     this.sources[source].isStarted = true;
+    this.sources[source].isPlaying = true;
   };
 
   public stop = (source: string): void => {
+    this.sources[source].isPlaying = false;
+    this.sources[source].isStarted = false;
     this.sources[source].audio.stop();
 
     const options = this.sources[source].options;
@@ -130,8 +148,7 @@ class AudioManager {
     audioObject.audio.gainNode.gain.value = options.volume || 1;
 
     if (options.autoPlay) {
-      audioObject.isPlaying = true;
-      audioObject.audio.playbackRate.value = options.rate || 1.0;
+      this.play(source);
     }
 
     audioObject.getFrequency = (): number => this.getFrequency(source);

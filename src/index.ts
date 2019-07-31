@@ -2,7 +2,7 @@
 export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 
 // Audio
-export { createAudioContext, isAutoplayAllowed, unlockAutoplay } from './audio';
+export { audioManager, createAudioContext, isAutoplayAllowed, unlockAutoplay } from './audio';
 
 // Cache
 export { persistentCache } from './persistentCache';

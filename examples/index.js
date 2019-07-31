@@ -134,6 +134,34 @@ import * as Spar from '../dist/spar.umd';
 // Audio
 // -----
 
+Spar.assetLoader.loadAssets([{ src: './assets/audio.mp3', loader: 'ArrayBuffer' }]).then(assets => {
+  console.log(assets);
+
+  Spar.audioManager.load('./assets/audio.mp3', assets.get('./assets/audio.mp3')).then(sound => {
+    console.log(sound);
+
+    sound.start();
+
+    console.log(sound);
+
+    setTimeout(() => {
+      sound.stop();
+
+      console.log(sound);
+
+      setTimeout(() => {
+        sound.start();
+
+        console.log(sound);
+      }, 2500);
+    }, 2500);
+
+    // sound.start();
+
+    // console.log(sound);
+  });
+});
+
 // let button;
 
 // if (!document.getElementById('audio-unlock')) {
