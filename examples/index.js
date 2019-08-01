@@ -201,10 +201,22 @@ Spar.assetLoader
       .then(() => {
         Spar.audioManager
           .load('./assets/audio.mp3', assets.get('./assets/audio.mp3'), {
-            loop: true,
+            // loop: true,
           })
           .then(source => {
             source.play();
+
+            //   setTimeout(() => {
+            //     source.pause();
+
+            //     console.log(source.pausedAt);
+
+            //     setTimeout(() => {
+            //       source.play();
+
+            //       console.log(source.startedAt);
+            //     }, 2000);
+            //   }, 2000);
           });
       })
       .catch(err => {
