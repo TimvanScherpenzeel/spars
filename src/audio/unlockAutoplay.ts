@@ -46,7 +46,11 @@ export const unlockAutoplay = (element?: HTMLElement): Promise<boolean> =>
         autoplayAllowed,
       });
 
+      let isOwnedElement = false;
+
       if (!element) {
+        isOwnedElement = true;
+
         element = document.createElement('div');
         element.style.position = 'fixed';
         element.style.height = '100vh';
@@ -65,7 +69,9 @@ export const unlockAutoplay = (element?: HTMLElement): Promise<boolean> =>
               element.removeEventListener('touchstart', unlock);
               element.removeEventListener('touchend', unlock);
 
-              element.remove();
+              if (isOwnedElement) {
+                element.remove();
+              }
             }
 
             autoplayAllowed = true;
