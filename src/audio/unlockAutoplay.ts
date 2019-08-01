@@ -28,7 +28,7 @@ export const isAutoplayAllowed = (): boolean => autoplayAllowed;
  *
  * @param element DOM element to attach the unlock listener to
  */
-export const unlockAutoplay = (element: HTMLElement): Promise<boolean> =>
+export const unlockAutoplay = (element?: HTMLElement): Promise<boolean> =>
   new Promise((resolve, reject): void => {
     // https://developers.google.com/web/updates/2019/01/nic72#user-activation
     if (isUserActivationSupported && (navigator as any).userActivation.hasBeenActive === true) {
@@ -46,13 +46,27 @@ export const unlockAutoplay = (element: HTMLElement): Promise<boolean> =>
         autoplayAllowed,
       });
 
+      if (!element) {
+        element = document.createElement('div');
+        element.style.position = 'fixed';
+        element.style.height = '100vh';
+        element.style.width = '100vw';
+        element.style.zIndex = '99999';
+
+        document.body.insertBefore(element, document.body.firstChild);
+      }
+
       const unlock = (): void => {
         context
           .resume()
           .then(() => {
-            element.removeEventListener('click', unlock);
-            element.removeEventListener('touchstart', unlock);
-            element.removeEventListener('touchend', unlock);
+            if (element) {
+              element.removeEventListener('click', unlock);
+              element.removeEventListener('touchstart', unlock);
+              element.removeEventListener('touchend', unlock);
+
+              element.remove();
+            }
 
             autoplayAllowed = true;
 

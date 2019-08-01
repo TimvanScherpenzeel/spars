@@ -134,33 +134,33 @@ import * as Spar from '../dist/spar.umd';
 // Audio
 // -----
 
-Spar.assetLoader.loadAssets([{ src: './assets/audio.mp3', loader: 'ArrayBuffer' }]).then(assets => {
-  console.log(assets);
+// Spar.assetLoader.loadAssets([{ src: './assets/audio.mp3', loader: 'ArrayBuffer' }]).then(assets => {
+//   console.log(assets);
 
-  Spar.audioManager.load('./assets/audio.mp3', assets.get('./assets/audio.mp3')).then(sound => {
-    console.log(sound);
+//   Spar.audioManager.load('./assets/audio.mp3', assets.get('./assets/audio.mp3')).then(sound => {
+//     console.log(sound);
 
-    sound.start();
+//     sound.start();
 
-    console.log(sound);
+//     console.log(sound);
 
-    setTimeout(() => {
-      sound.stop();
+//     setTimeout(() => {
+//       sound.stop();
 
-      console.log(sound);
+//       console.log(sound);
 
-      setTimeout(() => {
-        sound.start();
+//       setTimeout(() => {
+//         sound.start();
 
-        console.log(sound);
-      }, 2500);
-    }, 2500);
+//         console.log(sound);
+//       }, 2500);
+//     }, 2500);
 
-    // sound.start();
+//     // sound.start();
 
-    // console.log(sound);
-  });
-});
+//     // console.log(sound);
+//   });
+// });
 
 // let button;
 
@@ -186,6 +186,20 @@ Spar.assetLoader.loadAssets([{ src: './assets/audio.mp3', loader: 'ArrayBuffer' 
 //       });
 //   }
 // }
+
+if (Spar.isAutoplayAllowed()) {
+  console.log('allowed!');
+} else {
+  console.log('not allowed, waiting for user interaction');
+
+  Spar.unlockAutoplay()
+    .then(unlocked => {
+      console.log('allowed!');
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
 
 // Cookie
 // ------
