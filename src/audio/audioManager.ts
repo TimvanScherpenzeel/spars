@@ -12,11 +12,6 @@ interface IAudioManagerLoadOptions {
 class AudioManager {
   private audioSources: any = {};
   private context: AudioContext = createAudioContext();
-  private element: HTMLElement;
-
-  constructor(element: HTMLElement) {
-    this.element = element;
-  }
 
   public load = (
     source: string,
@@ -53,7 +48,7 @@ class AudioManager {
     if (isAutoplayAllowed) {
       this.audioSources[source].audio.start();
     } else {
-      unlockAutoplay(this.element).then(() => {
+      unlockAutoplay().then(() => {
         this.audioSources[source].audio.start();
       });
     }
