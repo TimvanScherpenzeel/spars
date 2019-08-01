@@ -13,6 +13,7 @@ class AudioManager {
     arrayBuffer: ArrayBuffer,
     options: {
       loop?: boolean;
+      effects?: boolean;
     }
   ): Promise<any> => {
     return new Promise((resolve): any => {
@@ -22,11 +23,18 @@ class AudioManager {
         const audioObject: any = {};
 
         audioObject.options = options;
+        audioObject.context = this.context;
 
         audioObject.audio = this.context.createBufferSource();
         audioObject.audio.buffer = buffer;
         audioObject.audio.loop = options.loop || false;
         audioObject.audio.gainNode = this.context.createGain();
+
+        // If there are no effects connect the input node directly to the gain node
+        if (!options.effects) {
+          audioObject.audio.connect(audioObject.audio.gainNode);
+        }
+
         audioObject.audio.gainNode.connect(this.context.destination);
 
         audioObject.play = (): void => this.play(source);

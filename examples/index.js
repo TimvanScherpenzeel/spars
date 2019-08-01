@@ -187,12 +187,29 @@ import * as Spar from '../dist/spar.umd';
 //   }
 // }
 
-Spar.checkAutoplay()
-  .then(() => {
-    console.log('allowed!');
-  })
-  .catch(err => {
-    console.log(err);
+Spar.assetLoader
+  .loadAssets([
+    {
+      src: './assets/audio.mp3',
+      loader: 'ArrayBuffer',
+    },
+  ])
+  .then(assets => {
+    console.log(assets);
+
+    Spar.checkAutoplay()
+      .then(() => {
+        Spar.audioManager
+          .load('./assets/audio.mp3', assets.get('./assets/audio.mp3'), {
+            loop: true,
+          })
+          .then(source => {
+            source.play();
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
 
 // Cookie
