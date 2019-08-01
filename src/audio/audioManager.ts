@@ -5,6 +5,20 @@ import { createAudioContext } from './createAudioContext';
 // TODO: add load, play, pause, stop, mute, muteAll, unmute, unmuteAll, fadeIn, fadeOut, fadeInAll, fadeOutAll
 
 class AudioManager {
+  private static easeInOutQuad = (
+    time: number,
+    beginValue: number,
+    changeInValue: number,
+    duration: number
+  ): number => {
+    // tslint:disable-next-line:no-conditional-assignment
+    if ((time /= duration / 2) < 1) {
+      return (changeInValue / 2) * time * time + beginValue;
+    } else {
+      return (-changeInValue / 2) * (--time * (time - 2) - 1) + beginValue;
+    }
+  };
+
   private audioSources: any = {};
   private context: AudioContext = createAudioContext();
 
@@ -61,11 +75,41 @@ class AudioManager {
   };
 
   public muteAll = (): void => {
-    Object.keys(this.audioSources).forEach(source => this.setVolume(source, 0));
+    const start = performance.now();
+
+    const from = 1;
+    const to = 0;
+    const duration = 3000;
+
+    const timer = setInterval(() => {
+      const time = performance.now() - start;
+      const volume = AudioManager.easeInOutQuad(time, from, to - from, duration);
+
+      Object.keys(this.audioSources).forEach(source => this.setVolume(source, volume));
+
+      if (time >= duration) {
+        clearInterval(timer);
+      }
+    }, 1000 / 60);
   };
 
   public unmuteAll = (): void => {
-    Object.keys(this.audioSources).forEach(source => this.setVolume(source, 1));
+    const start = performance.now();
+
+    const from = 0;
+    const to = 1;
+    const duration = 3000;
+
+    const timer = setInterval(() => {
+      const time = performance.now() - start;
+      const volume = AudioManager.easeInOutQuad(time, from, to - from, duration);
+
+      Object.keys(this.audioSources).forEach(source => this.setVolume(source, volume));
+
+      if (time >= duration) {
+        clearInterval(timer);
+      }
+    }, 1000 / 60);
   };
 
   private play = (source: string): void => {

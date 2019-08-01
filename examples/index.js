@@ -201,10 +201,16 @@ Spar.assetLoader
       .then(() => {
         Spar.audioManager
           .load('./assets/audio.mp3', assets.get('./assets/audio.mp3'), {
-            // loop: true,
+            loop: true,
           })
           .then(source => {
             source.play();
+
+            // Spar.audioManager.muteAll();
+
+            // setTimeout(() => {
+            //   Spar.audioManager.unmuteAll();
+            // }, 3000);
 
             //   setTimeout(() => {
             //     source.pause();
