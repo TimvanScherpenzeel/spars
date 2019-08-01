@@ -1,6 +1,6 @@
 // Audio
-import { createAudioContext } from './createAudioContext';
 import { checkAutoplay } from './checkAutoplay';
+import { createAudioContext } from './createAudioContext';
 
 // TODO: add load, play, pause, stop, mute, muteAll, unmute, unmuteAll, fadeIn, fadeOut, fadeInAll, fadeOutAll
 
@@ -47,7 +47,9 @@ class AudioManager {
   };
 
   public play = (source: string): void => {
-    checkAutoplay().then(() => {});
+    checkAutoplay().then(() => {
+      // Audio clip is allowed to be played
+    });
   };
 
   public pause = (source: string): void => {};
