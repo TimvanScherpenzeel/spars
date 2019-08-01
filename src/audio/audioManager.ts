@@ -5,7 +5,6 @@ import { createAudioContext } from './createAudioContext';
 // TODO: add load, play, pause, stop, mute, muteAll, unmute, unmuteAll, fadeIn, fadeOut, fadeInAll, fadeOutAll
 
 interface IAudioManagerLoadOptions {
-  autoPlay?: boolean;
   loop?: boolean;
 }
 
@@ -25,9 +24,7 @@ class AudioManager {
         const audioObject: any = {};
 
         audioObject.options = options;
-        audioObject.startedAt = 0;
-        audioObject.pausedAt = 0;
-        audioObject.isPlaying = false;
+
         audioObject.audio = this.context.createBufferSource();
         audioObject.audio.buffer = buffer;
         audioObject.audio.loop = options.loop || false;
@@ -37,8 +34,8 @@ class AudioManager {
         audioObject.play = (): void => this.play(source);
         audioObject.pause = (): void => this.pause(source);
         audioObject.stop = (): void => this.stop(source);
-        audioObject.mute = (): void => this.setVolume(source, 0);
-        audioObject.unmute = (): void => this.setVolume(source, 1);
+        audioObject.mute = (): void => this.mute(source);
+        audioObject.unmute = (): void => this.unmute(source);
         audioObject.setVolume = (volume: number): void => this.setVolume(source, volume);
 
         resolve(audioObject);
@@ -58,6 +55,14 @@ class AudioManager {
 
   public setVolume = (source: string, volume: number): void => {
     this.audioSources[source].audio.gainNode.gain.value = volume;
+  };
+
+  public mute = (source: string): void => {
+    this.audioSources[source].setVolume(0);
+  };
+
+  public unmute = (source: string): void => {
+    this.audioSources[source].setVolume(1);
   };
 
   public muteAll = (): void => {
