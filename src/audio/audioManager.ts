@@ -4,10 +4,6 @@ import { createAudioContext } from './createAudioContext';
 
 // TODO: add load, play, pause, stop, mute, muteAll, unmute, unmuteAll, fadeIn, fadeOut, fadeInAll, fadeOutAll
 
-interface IAudioManagerLoadOptions {
-  loop?: boolean;
-}
-
 class AudioManager {
   private audioSources: any = {};
   private context: AudioContext = createAudioContext();
@@ -15,7 +11,9 @@ class AudioManager {
   public load = (
     source: string,
     arrayBuffer: ArrayBuffer,
-    options: IAudioManagerLoadOptions
+    options: {
+      loop?: boolean;
+    }
   ): Promise<any> => {
     return new Promise((resolve): any => {
       this.context.decodeAudioData(arrayBuffer, buffer => {
@@ -43,34 +41,34 @@ class AudioManager {
     });
   };
 
-  public play = (source: string): void => {
-    checkAutoplay().then(() => {
-      // Audio clip is allowed to be played
-    });
-  };
-
-  public pause = (source: string): void => {};
-
-  public stop = (source: string): void => {};
-
-  public setVolume = (source: string, volume: number): void => {
-    this.audioSources[source].audio.gainNode.gain.value = volume;
-  };
-
-  public mute = (source: string): void => {
-    this.audioSources[source].setVolume(0);
-  };
-
-  public unmute = (source: string): void => {
-    this.audioSources[source].setVolume(1);
-  };
-
   public muteAll = (): void => {
     Object.keys(this.audioSources).forEach(source => this.setVolume(source, 0));
   };
 
   public unmuteAll = (): void => {
     Object.keys(this.audioSources).forEach(source => this.setVolume(source, 1));
+  };
+
+  private play = (source: string): void => {
+    checkAutoplay().then(() => {
+      // Audio clip is allowed to be played
+    });
+  };
+
+  private pause = (source: string): void => {};
+
+  private stop = (source: string): void => {};
+
+  private mute = (source: string): void => {
+    this.audioSources[source].setVolume(0);
+  };
+
+  private unmute = (source: string): void => {
+    this.audioSources[source].setVolume(1);
+  };
+
+  private setVolume = (source: string, volume: number): void => {
+    this.audioSources[source].audio.gainNode.gain.value = volume;
   };
 }
 
