@@ -21,17 +21,18 @@ import isUserActivationSupported from '../features/browserFeatures/isUserActivat
 
 let autoplayAllowed = false;
 
-export const isAutoplayAllowed = (): boolean => autoplayAllowed;
-
 /**
- * Unlock the global Web Audio context for autoplay abilities
+ * Check and if necessary unlock the global Web Audio context for autoplay abilities
  *
  * @param element DOM element to attach the unlock listener to
  */
-export const unlockAutoplay = (element?: HTMLElement): Promise<boolean> =>
+export const checkAutoplay = (element?: HTMLElement): Promise<boolean> =>
   new Promise((resolve, reject): void => {
     // https://developers.google.com/web/updates/2019/01/nic72#user-activation
-    if (isUserActivationSupported && (navigator as any).userActivation.hasBeenActive === true) {
+    if (
+      autoplayAllowed === true ||
+      (isUserActivationSupported && (navigator as any).userActivation.hasBeenActive === true)
+    ) {
       autoplayAllowed = true;
 
       resolve(true);
@@ -51,13 +52,20 @@ export const unlockAutoplay = (element?: HTMLElement): Promise<boolean> =>
       if (!element) {
         isOwnedElement = true;
 
-        element = document.createElement('div');
-        element.style.position = 'fixed';
-        element.style.height = '100vh';
-        element.style.width = '100vw';
-        element.style.zIndex = '99999';
+        const elementAlreadyExists = document.getElementById('unlock-autoplay');
 
-        document.body.insertBefore(element, document.body.firstChild);
+        if (elementAlreadyExists) {
+          element = elementAlreadyExists;
+        } else {
+          element = document.createElement('div');
+          element.id = 'unlock-autoplay';
+          element.style.position = 'fixed';
+          element.style.height = '100vh';
+          element.style.width = '100vw';
+          element.style.zIndex = '99999';
+
+          document.body.insertBefore(element, document.body.firstChild);
+        }
       }
 
       const unlock = (): void => {

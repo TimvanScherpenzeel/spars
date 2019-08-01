@@ -177,7 +177,7 @@ import * as Spar from '../dist/spar.umd';
 //   } else {
 //     console.log('not allowed, waiting for user interaction');
 
-//     Spar.unlockAutoplay(button)
+//     Spar.checkAutoplay(button)
 //       .then(unlocked => {
 //         console.log('allowed!');
 //       })
@@ -187,19 +187,13 @@ import * as Spar from '../dist/spar.umd';
 //   }
 // }
 
-if (Spar.isAutoplayAllowed()) {
-  console.log('allowed!');
-} else {
-  console.log('not allowed, waiting for user interaction');
-
-  Spar.unlockAutoplay()
-    .then(unlocked => {
-      console.log('allowed!');
-    })
-    .catch(err => {
-      console.log(err);
-    });
-}
+Spar.checkAutoplay()
+  .then(() => {
+    console.log('allowed!');
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 // Cookie
 // ------

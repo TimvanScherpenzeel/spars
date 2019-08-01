@@ -1,6 +1,6 @@
 // Audio
 import { createAudioContext } from './createAudioContext';
-import { isAutoplayAllowed, unlockAutoplay } from './unlockAutoplay';
+import { checkAutoplay } from './checkAutoplay';
 
 // TODO: add load, play, pause, stop, mute, muteAll, unmute, unmuteAll, fadeIn, fadeOut, fadeInAll, fadeOutAll
 
@@ -25,6 +25,8 @@ class AudioManager {
         const audioObject: any = {};
 
         audioObject.options = options;
+        audioObject.startedAt = 0;
+        audioObject.pausedAt = 0;
         audioObject.isPlaying = false;
         audioObject.audio = this.context.createBufferSource();
         audioObject.audio.buffer = buffer;
@@ -39,19 +41,13 @@ class AudioManager {
         audioObject.unmute = (): void => this.setVolume(source, 1);
         audioObject.setVolume = (volume: number): void => this.setVolume(source, volume);
 
-        return audioObject;
+        resolve(audioObject);
       });
     });
   };
 
   public play = (source: string): void => {
-    if (isAutoplayAllowed) {
-      this.audioSources[source].audio.start();
-    } else {
-      unlockAutoplay().then(() => {
-        this.audioSources[source].audio.start();
-      });
-    }
+    checkAutoplay().then(() => {});
   };
 
   public pause = (source: string): void => {};
