@@ -6,18 +6,22 @@ import { createAudioContext } from './createAudioContext';
 // TODO: add cookie support and document visibility mute
 
 class AudioManager {
-  private static easeInOutQuad = (
+  private static easeInCubic = (
     time: number,
     beginValue: number,
     changeInValue: number,
     duration: number
   ): number => {
-    // tslint:disable-next-line:no-conditional-assignment
-    if ((time /= duration / 2) < 1) {
-      return (changeInValue / 2) * time * time + beginValue;
-    } else {
-      return (-changeInValue / 2) * (--time * (time - 2) - 1) + beginValue;
-    }
+    return changeInValue * (time /= duration) * time * time + beginValue;
+  };
+
+  private static easeOutCubic = (
+    time: number,
+    beginValue: number,
+    changeInValue: number,
+    duration: number
+  ): number => {
+    return changeInValue * ((time = time / duration - 1) * time * time + 1) + beginValue;
   };
 
   private audioSources: any = {};
@@ -88,7 +92,10 @@ class AudioManager {
 
     const fade = (frameId: number): void => {
       const time = performance.now() - start;
-      const volume = AudioManager.easeInOutQuad(time, from, to - from, duration);
+      const volume =
+        from > to
+          ? AudioManager.easeOutCubic(time, from, to - from, duration)
+          : AudioManager.easeInCubic(time, from, to - from, duration);
 
       if (!source) {
         Object.keys(this.audioSources).forEach((audioSource: string) =>
