@@ -2,14 +2,17 @@
 import { checkAutoplay } from './checkAutoplay';
 import { createAudioContext } from './createAudioContext';
 
+// Cookie
+import { getCookie, setCookie } from '../cookie';
+
 // Enum
 import { ENUM } from '../enum';
 
 // Events
 import { eventEmitter, onVisibilityChange } from '../events';
 
-// TODO: add cookie support and document visibility mute
-// TODO: add fade in / fade out to play / pause / stop
+// TODO: add cookie support for keeping track of audio preference upon refresh
+// TODO: add support for adjusted volume (right now unmute resets to 1 instead of original volume)
 
 class AudioManager {
   private static easeInCubic = (
