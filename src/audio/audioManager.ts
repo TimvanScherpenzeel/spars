@@ -3,7 +3,7 @@ import { checkAutoplay } from './checkAutoplay';
 import { createAudioContext } from './createAudioContext';
 
 // Cookie
-import { getCookie, setCookie } from '../cookie';
+// import { getCookie, setCookie } from '../cookie';
 
 // Enum
 import { ENUM } from '../enum';
