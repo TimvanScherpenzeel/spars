@@ -11,6 +11,7 @@ import { ENUM } from '../enum';
 // Events
 import { eventEmitter, onVisibilityChange } from '../events';
 
+// TODO: by default enable all built-in change event listeners to avoid  the problem of having multiple onVisiblityChange()'s
 // TODO: add cookie support for keeping track of audio preference upon refresh
 // TODO: add support for adjusted volume (right now unmute resets to 1 instead of original volume)
 
