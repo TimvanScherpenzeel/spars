@@ -11,9 +11,10 @@ import { ENUM } from '../enum';
 // Events
 import { eventEmitter } from '../events';
 
-// TODO: by default enable all built-in change event listeners to avoid  the problem of having multiple onVisiblityChange()'s
 // TODO: add cookie support for keeping track of audio preference upon refresh
-// TODO: add support for adjusted volume (right now unmute resets to 1 instead of original volume)
+// TODO: add support for adjusted volume (right now unmute resets to 1 instead of original volume the user has supplied)
+// It is important to fix this because that would allow to create a harmony of various sources at different volume levels.
+// If not handled the harmony would be gone upon mute / unmute.
 
 class AudioManager {
   private static easeInCubic = (
@@ -112,20 +113,17 @@ class AudioManager {
   private fadeVolume = (from: number, to: number, duration: number, source?: string): void => {
     const start = performance.now();
 
-    const tmpFrom = from;
-    const tmpTo = to;
-
     const timer = setInterval(() => {
       const time = performance.now() - start;
       const volume =
-        tmpFrom > tmpTo
+        from > to
           ? AudioManager.easeOutCubic(time, from, to - from, duration)
           : AudioManager.easeInCubic(time, from, to - from, duration);
 
       if (!source) {
-        Object.keys(this.audioSources).forEach((audioSource: string) =>
-          this.setVolume(audioSource, volume)
-        );
+        Object.keys(this.audioSources).forEach((audioSource: string) => {
+          this.setVolume(audioSource, volume);
+        });
       } else {
         this.audioSources[source].setVolume(volume);
       }
