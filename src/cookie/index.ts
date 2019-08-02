@@ -32,7 +32,6 @@ export const setCookie = (key: string, value: string, expiryDays = 365): void =>
  *
  * @param key Key of cookie to get
  */
-// TODO: look at if we can get rid of TUndefinable
 export const getCookie = (key: string): TUndefinable<string | boolean> => {
   if (isCookieEnabled) {
     const result = document.cookie.match(`(^|;)\\s*${key}\\s*=\\s*([^;]+)`);
