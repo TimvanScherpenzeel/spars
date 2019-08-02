@@ -2,7 +2,14 @@
 import { checkAutoplay } from './checkAutoplay';
 import { createAudioContext } from './createAudioContext';
 
+// Enum
+import { ENUM } from '../enum';
+
+// Events
+import { onVisibilityChange, eventEmitter } from '../events';
+
 // TODO: add cookie support and document visibility mute
+// TODO: add fade in / fade out to play / pause / stop
 
 class AudioManager {
   private static easeInCubic = (
@@ -25,6 +32,12 @@ class AudioManager {
 
   private audioSources: any = {};
   private context: AudioContext = createAudioContext();
+
+  constructor() {
+    onVisibilityChange();
+
+    eventEmitter.on(ENUM.VISIBILITY_CHANGE, this.onVisibilityChangeHandler);
+  }
 
   public load = (
     source: string,
@@ -84,6 +97,16 @@ class AudioManager {
 
   public unmuteAll = (fadeDuration = 2000): void => {
     this.fadeVolume(0, 1, fadeDuration);
+  };
+
+  private onVisibilityChangeHandler = (event: { isVisible: boolean }): void => {
+    console.log(event);
+
+    if (event.isVisible) {
+      this.unmuteAll(500);
+    } else {
+      this.muteAll(500);
+    }
   };
 
   private fadeVolume = (from: number, to: number, duration: number, source?: string): void => {

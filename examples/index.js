@@ -208,21 +208,21 @@ Spar.assetLoader
 
             Spar.audioManager.muteAll(1000);
 
-            setTimeout(() => {
-              Spar.audioManager.unmuteAll(1000);
-            }, 5000);
+            // setTimeout(() => {
+            //   Spar.audioManager.unmuteAll(1000);
+            // }, 5000);
+
+            // setTimeout(() => {
+            //   source.pause();
+
+            //   console.log(source.pausedAt);
 
             //   setTimeout(() => {
-            //     source.pause();
+            //     source.play();
 
-            //     console.log(source.pausedAt);
-
-            //     setTimeout(() => {
-            //       source.play();
-
-            //       console.log(source.startedAt);
-            //     }, 2000);
+            //     console.log(source.startedAt);
             //   }, 2000);
+            // }, 2000);
           });
       })
       .catch(err => {
