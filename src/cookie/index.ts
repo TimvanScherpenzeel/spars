@@ -32,7 +32,7 @@ export const setCookie = (key: string, value: string, expiryDays = 365): void =>
  *
  * @param key Key of cookie to get
  */
-export const getCookie = (key: string): TUndefinable<string | boolean> => {
+export const getCookie = (key: string): any => {
   if (isCookieEnabled) {
     const result = document.cookie.match(`(^|;)\\s*${key}\\s*=\\s*([^;]+)`);
 

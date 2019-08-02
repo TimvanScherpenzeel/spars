@@ -3,7 +3,7 @@ import { checkAutoplay } from './checkAutoplay';
 import { createAudioContext } from './createAudioContext';
 
 // Cookie
-// import { getCookie, setCookie } from '../cookie';
+import { deleteCookie, getCookie, setCookie } from '../cookie';
 
 // Enum
 import { ENUM } from '../enum';
@@ -12,6 +12,8 @@ import { ENUM } from '../enum';
 import { eventEmitter } from '../events';
 
 // TODO: add cookie support for keeping track of audio preference upon refresh
+// You would set a cookie on muteAll and unmuteAll
+
 // TODO: add support for adjusted volume (right now unmute resets to 1 instead of original volume the user has supplied)
 // It is important to fix this because that would allow to create a harmony of various sources at different volume levels.
 // If not handled the harmony would be gone upon mute / unmute.
@@ -40,6 +42,12 @@ class AudioManager {
 
   constructor() {
     eventEmitter.on(ENUM.VISIBILITY_CHANGE, this.onVisibilityChangeHandler);
+
+    if (getCookie(ENUM.AUDIO_MUTED) === 'true') {
+      Object.keys(this.audioSources).forEach((audioSource: string) => {
+        this.setVolume(audioSource, 0);
+      });
+    }
   }
 
   public load = (
@@ -94,19 +102,27 @@ class AudioManager {
     });
   };
 
-  public muteAll = (fadeDuration = 2000): void => {
+  public muteAll = (fadeDuration = 750): void => {
+    setCookie(ENUM.AUDIO_MUTED, 'true');
+
     this.fadeVolume(1, 0, fadeDuration);
   };
 
-  public unmuteAll = (fadeDuration = 2000): void => {
+  public unmuteAll = (fadeDuration = 750): void => {
+    deleteCookie(ENUM.AUDIO_MUTED);
+
     this.fadeVolume(0, 1, fadeDuration);
   };
 
   private onVisibilityChangeHandler = (event: { isVisible: boolean }): void => {
+    if (getCookie(ENUM.AUDIO_MUTED) === 'true') {
+      return;
+    }
+
     if (event.isVisible) {
-      this.unmuteAll(750);
+      this.fadeVolume(1, 0, 750);
     } else {
-      this.muteAll(750);
+      this.fadeVolume(0, 1, 750);
     }
   };
 
@@ -188,11 +204,11 @@ class AudioManager {
     delete this.audioSources[source];
   };
 
-  private mute = (source: string, fadeDuration = 2000): void => {
+  private mute = (source: string, fadeDuration = 750): void => {
     this.fadeVolume(1, 0, fadeDuration, source);
   };
 
-  private unmute = (source: string, fadeDuration = 2000): void => {
+  private unmute = (source: string, fadeDuration = 750): void => {
     this.fadeVolume(0, 1, fadeDuration, source);
   };
 
