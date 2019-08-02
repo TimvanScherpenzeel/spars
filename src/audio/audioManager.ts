@@ -2,7 +2,6 @@
 import { checkAutoplay } from './checkAutoplay';
 import { createAudioContext } from './createAudioContext';
 
-// TODO: add load, play, pause, stop, mute, muteAll, unmute, unmuteAll, fadeIn, fadeOut, fadeInAll, fadeOutAll
 // TODO: add cookie support and document visibility mute
 
 class AudioManager {
