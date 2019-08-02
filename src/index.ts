@@ -14,7 +14,7 @@ export { deleteCookie, getCookie, setCookie } from './cookie';
 export { ENUM } from './enum';
 
 // Events
-export { EventEmitter, eventEmitter, events } from './events';
+export { EventEmitter, eventEmitter } from './events';
 
 // Features
 export { features } from './features';
