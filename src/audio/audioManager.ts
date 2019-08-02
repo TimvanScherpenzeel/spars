@@ -120,9 +120,9 @@ class AudioManager {
     }
 
     if (event.isVisible) {
-      this.fadeVolume(1, 0, 750);
-    } else {
       this.fadeVolume(0, 1, 750);
+    } else {
+      this.fadeVolume(1, 0, 750);
     }
   };
 
