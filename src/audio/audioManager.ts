@@ -81,8 +81,8 @@ class AudioManager {
         audioObject.pause = (): void => this.pause(source);
         audioObject.stop = (): void => this.stop(source);
         audioObject.dispose = (): void => this.dispose(source);
-        audioObject.mute = (): void => this.mute(source);
-        audioObject.unmute = (): void => this.unmute(source);
+        audioObject.mute = (fadeDuration?: number): void => this.mute(source, fadeDuration);
+        audioObject.unmute = (fadeDuration?: number): void => this.unmute(source, fadeDuration);
         audioObject.setVolume = (volume: number): void => this.setVolume(source, volume);
         audioObject.isPlaying = (): boolean => this.isPlaying(source);
         audioObject.getCurrentTime = (): number => this.getCurrentTime(source);
