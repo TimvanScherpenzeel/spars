@@ -100,14 +100,10 @@ class AudioManager {
   };
 
   private onVisibilityChangeHandler = (event: { isVisible: boolean }): void => {
-    console.log(event);
-
     if (event.isVisible) {
-      console.log('unmuting');
-      this.unmuteAll(500);
+      this.unmuteAll(750);
     } else {
-      console.log('muting');
-      this.muteAll(500);
+      this.muteAll(750);
     }
   };
 
