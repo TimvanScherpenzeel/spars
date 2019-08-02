@@ -49,7 +49,7 @@ function onConnectionChangeHandler(): void {
 /**
  * Start listening to connection change events
  */
-export const onConnectionChange = (): void => {
+export default ((): void => {
   // https://caniuse.com/#feat=netinfo (Chrome only for now)
   if ((navigator as any).connection) {
     (navigator as any).connection.addEventListener('change', onConnectionChangeHandler, false);
@@ -57,12 +57,4 @@ export const onConnectionChange = (): void => {
 
   window.addEventListener('offline', onConnectionChangeHandler, false);
   window.addEventListener('online', onConnectionChangeHandler, false);
-};
-
-/**
- * Stop listening to connection change events
- */
-export const offConnectionChange = (): void => {
-  window.removeEventListener('offline', onConnectionChangeHandler);
-  window.removeEventListener('online', onConnectionChangeHandler);
-};
+})();

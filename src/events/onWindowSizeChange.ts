@@ -25,15 +25,7 @@ function onWindowSizeChangeHandler(): void {
 /**
  * Start listening to window size change events
  */
-export const onWindowSizeChange = (): void => {
+export default ((): void => {
   window.addEventListener('resize', debouncedOnWindowSizeChange, false);
   window.addEventListener('orientationchange', debouncedOnWindowSizeChange, false);
-};
-
-/**
- * Stop listening to window size change events
- */
-export const offWindowSizeChange = (): void => {
-  window.removeEventListener('resize', debouncedOnWindowSizeChange);
-  window.removeEventListener('orientationchange', debouncedOnWindowSizeChange);
-};
+})();

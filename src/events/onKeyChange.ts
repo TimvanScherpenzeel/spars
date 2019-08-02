@@ -65,15 +65,7 @@ function onKeyUpChangeHandler(event: KeyboardEvent): void {
 /**
  * Start listening to keydown change events
  */
-export const onKeyChange = (element = window): void => {
+export default ((element = window): void => {
   element.addEventListener('keydown', onKeyDownChangeHandler, false);
   element.addEventListener('keyup', onKeyUpChangeHandler, false);
-};
-
-/**
- * Stop listening to keydown change events
- */
-export const offKeyChange = (element = window): void => {
-  element.removeEventListener('keydown', onKeyDownChangeHandler);
-  element.removeEventListener('keyup', onKeyUpChangeHandler);
-};
+})();

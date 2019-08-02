@@ -14,20 +14,7 @@ export { deleteCookie, getCookie, setCookie } from './cookie';
 export { ENUM } from './enum';
 
 // Events
-export {
-  EventEmitter,
-  eventEmitter,
-  offConnectionChange,
-  offKeyChange,
-  offOrientationChange,
-  offVisibilityChange,
-  offWindowSizeChange,
-  onConnectionChange,
-  onKeyChange,
-  onOrientationChange,
-  onVisibilityChange,
-  onWindowSizeChange,
-} from './events';
+export { EventEmitter, eventEmitter, events } from './events';
 
 // Features
 export { features } from './features';

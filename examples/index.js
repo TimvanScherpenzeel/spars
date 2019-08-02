@@ -277,18 +277,13 @@ Spar.assetLoader
 
 // new Test();
 
-// Spar.onConnectionChange();
-
 // const connectionChangeHandler = event => {
 //   console.log(event);
 
 //   Spar.eventEmitter.off(Spar.ENUM.CONNECTION_CHANGE, connectionChangeHandler);
-//   Spar.offConnectionChange();
 // };
 
 // Spar.eventEmitter.on(Spar.ENUM.CONNECTION_CHANGE, connectionChangeHandler);
-
-// Spar.onKeyChange();
 
 // const keyChangeDownHandler = event => {
 //   console.log(`keyDown: ${event.key}`);
@@ -296,7 +291,6 @@ Spar.assetLoader
 //   document.getElementById('root').appendChild(document.createTextNode(event.key));
 
 //   // Spar.eventEmitter.off(Spar.ENUM.KEY_DOWN_CHANGE, keyChangeDownHandler);
-//   // Spar.offKeyChange();
 // };
 
 // const keyChangeUpHandler = event => {
@@ -305,7 +299,6 @@ Spar.assetLoader
 //   document.getElementById('root').appendChild(document.createTextNode(event.key));
 
 //   // Spar.eventEmitter.off(Spar.ENUM.KEY_UP_CHANGE, keyChangeDownHandler);
-//   // Spar.offKeyChange();
 // };
 
 // Spar.eventEmitter.on(Spar.ENUM.KEY_DOWN_CHANGE, keyChangeDownHandler);
@@ -313,37 +306,28 @@ Spar.assetLoader
 
 // document.getElementById('root').appendChild(document.createElement('textarea'));
 
-// Spar.onOrientationChange();
-
 // const orientationChangeHandler = event => {
 //   console.log(event);
 
 //   Spar.eventEmitter.off(Spar.ENUM.ORIENTATION_CHANGE);
-//   Spar.offOrientationChange();
 
 //   document.getElementById('root').appendChild(document.createTextNode(event.angle));
 // };
 
 // Spar.eventEmitter.on(Spar.ENUM.ORIENTATION_CHANGE, orientationChangeHandler);
 
-// Spar.onVisibilityChange();
-
 // const visibilityChangeHandler = event => {
 //   console.log(event);
 
 //   Spar.eventEmitter.off(Spar.ENUM.VISIBILITY_CHANGE);
-//   Spar.offVisibilityChange();
 // };
 
 // Spar.eventEmitter.on(Spar.ENUM.VISIBILITY_CHANGE, visibilityChangeHandler);
-
-// Spar.onWindowSizeChange();
 
 // const windowSizeChangeHandler = event => {
 //   console.log(event);
 
 //   Spar.eventEmitter.off(Spar.ENUM.WINDOW_SIZE_CHANGE);
-//   Spar.offWindowSizeChange();
 // };
 
 // Spar.eventEmitter.on(Spar.ENUM.WINDOW_SIZE_CHANGE, windowSizeChangeHandler);

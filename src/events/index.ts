@@ -1,7 +1,16 @@
 // Events
 export { eventEmitter, EventEmitter } from './EventEmitter';
-export { onConnectionChange, offConnectionChange } from './onConnectionChange';
-export { onKeyChange, offKeyChange } from './onKeyChange';
-export { onOrientationChange, offOrientationChange } from './onOrientationChange';
-export { onVisibilityChange, offVisibilityChange } from './onVisibilityChange';
-export { onWindowSizeChange, offWindowSizeChange } from './onWindowSizeChange';
+
+import onConnectionChange from './onConnectionChange';
+import onKeyChange from './onKeyChange';
+import onOrientationChange from './onOrientationChange';
+import onVisibilityChange from './onVisibilityChange';
+import onWindowSizeChange from './onWindowSizeChange';
+
+export const events = {
+  onConnectionChange,
+  onKeyChange,
+  onOrientationChange,
+  onVisibilityChange,
+  onWindowSizeChange,
+};

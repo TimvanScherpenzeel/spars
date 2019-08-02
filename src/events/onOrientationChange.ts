@@ -49,13 +49,6 @@ function onOrientationChangeHandler(): void {
 /**
  * Start listening to orientation change events
  */
-export const onOrientationChange = (): void => {
+export default ((): void => {
   window.addEventListener('orientationchange', debouncedOnOrientationChange, false);
-};
-
-/**
- * Stop listening to orientation change events
- */
-export const offOrientationChange = (): void => {
-  window.removeEventListener('orientationchange', debouncedOnOrientationChange);
-};
+})();

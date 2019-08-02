@@ -9,7 +9,7 @@ import { createAudioContext } from './createAudioContext';
 import { ENUM } from '../enum';
 
 // Events
-import { eventEmitter, onVisibilityChange } from '../events';
+import { eventEmitter } from '../events';
 
 // TODO: by default enable all built-in change event listeners to avoid  the problem of having multiple onVisiblityChange()'s
 // TODO: add cookie support for keeping track of audio preference upon refresh
@@ -38,8 +38,6 @@ class AudioManager {
   private context: AudioContext = createAudioContext();
 
   constructor() {
-    onVisibilityChange();
-
     eventEmitter.on(ENUM.VISIBILITY_CHANGE, this.onVisibilityChangeHandler);
   }
 

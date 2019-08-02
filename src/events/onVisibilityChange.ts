@@ -58,13 +58,6 @@ function onVisibilityChangeHandler(): void {
 /**
  * Start listening to visibility change events
  */
-export const onVisibilityChange = (): void => {
+export default ((): void => {
   visibility.addEventListener('visibilitychange', onVisibilityChangeHandler, false);
-};
-
-/**
- * Stop listening to visibility change events
- */
-export const offVisibilityChange = (): void => {
-  visibility.removeEventListener('visibilitychange', onVisibilityChangeHandler);
-};
+})();
