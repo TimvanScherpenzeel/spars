@@ -3,6 +3,7 @@ import { checkAutoplay } from './checkAutoplay';
 import { createAudioContext } from './createAudioContext';
 
 // TODO: add load, play, pause, stop, mute, muteAll, unmute, unmuteAll, fadeIn, fadeOut, fadeInAll, fadeOutAll
+// TODO: add cookie support and document visibility mute
 
 class AudioManager {
   private static easeInOutQuad = (
@@ -74,42 +75,40 @@ class AudioManager {
     });
   };
 
-  public muteAll = (): void => {
-    const start = performance.now();
-
-    const from = 1;
-    const to = 0;
-    const duration = 3000;
-
-    const timer = setInterval(() => {
-      const time = performance.now() - start;
-      const volume = AudioManager.easeInOutQuad(time, from, to - from, duration);
-
-      Object.keys(this.audioSources).forEach(source => this.setVolume(source, volume));
-
-      if (time >= duration) {
-        clearInterval(timer);
-      }
-    }, 1000 / 60);
+  public muteAll = (fadeDuration = 2000): void => {
+    this.fadeVolume(1, 0, fadeDuration);
   };
 
-  public unmuteAll = (): void => {
+  public unmuteAll = (fadeDuration = 2000): void => {
+    this.fadeVolume(0, 1, fadeDuration);
+  };
+
+  private fadeVolume = (from: number, to: number, duration: number, source?: string): void => {
     const start = performance.now();
 
-    const from = 0;
-    const to = 1;
-    const duration = 3000;
-
-    const timer = setInterval(() => {
+    const fade = (frameId: number): void => {
       const time = performance.now() - start;
       const volume = AudioManager.easeInOutQuad(time, from, to - from, duration);
 
-      Object.keys(this.audioSources).forEach(source => this.setVolume(source, volume));
+      if (!source) {
+        Object.keys(this.audioSources).forEach((audioSource: string) =>
+          this.setVolume(audioSource, volume)
+        );
+      } else {
+        this.audioSources[source].setVolume(volume);
+      }
+
+      console.log(volume);
 
       if (time >= duration) {
-        clearInterval(timer);
+        cancelAnimationFrame(frameId);
+        return;
       }
-    }, 1000 / 60);
+
+      requestAnimationFrame(fade);
+    };
+
+    requestAnimationFrame(fade);
   };
 
   private play = (source: string): void => {
@@ -166,12 +165,12 @@ class AudioManager {
     delete this.audioSources[source];
   };
 
-  private mute = (source: string): void => {
-    this.audioSources[source].setVolume(0);
+  private mute = (source: string, fadeDuration = 2000): void => {
+    this.fadeVolume(1, 0, fadeDuration, source);
   };
 
-  private unmute = (source: string): void => {
-    this.audioSources[source].setVolume(1);
+  private unmute = (source: string, fadeDuration = 2000): void => {
+    this.fadeVolume(0, 1, fadeDuration, source);
   };
 
   private setVolume = (source: string, volume: number): void => {
