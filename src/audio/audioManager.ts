@@ -6,7 +6,7 @@ import { createAudioContext } from './createAudioContext';
 import { ENUM } from '../enum';
 
 // Events
-import { onVisibilityChange, eventEmitter } from '../events';
+import { eventEmitter, onVisibilityChange } from '../events';
 
 // TODO: add cookie support and document visibility mute
 // TODO: add fade in / fade out to play / pause / stop
@@ -103,8 +103,10 @@ class AudioManager {
     console.log(event);
 
     if (event.isVisible) {
+      console.log('unmuting');
       this.unmuteAll(500);
     } else {
+      console.log('muting');
       this.muteAll(500);
     }
   };
@@ -112,10 +114,13 @@ class AudioManager {
   private fadeVolume = (from: number, to: number, duration: number, source?: string): void => {
     const start = performance.now();
 
-    const fade = (frameId: number): void => {
+    const tmpFrom = from;
+    const tmpTo = to;
+
+    const timer = setInterval(() => {
       const time = performance.now() - start;
       const volume =
-        from > to
+        tmpFrom > tmpTo
           ? AudioManager.easeOutCubic(time, from, to - from, duration)
           : AudioManager.easeInCubic(time, from, to - from, duration);
 
@@ -127,17 +132,10 @@ class AudioManager {
         this.audioSources[source].setVolume(volume);
       }
 
-      console.log(volume);
-
       if (time >= duration) {
-        cancelAnimationFrame(frameId);
-        return;
+        clearInterval(timer);
       }
-
-      requestAnimationFrame(fade);
-    };
-
-    requestAnimationFrame(fade);
+    }, 1000 / 60);
   };
 
   private play = (source: string): void => {

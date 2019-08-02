@@ -206,7 +206,7 @@ Spar.assetLoader
           .then(source => {
             source.play();
 
-            Spar.audioManager.muteAll(1000);
+            // Spar.audioManager.muteAll(1000);
 
             // setTimeout(() => {
             //   Spar.audioManager.unmuteAll(1000);
