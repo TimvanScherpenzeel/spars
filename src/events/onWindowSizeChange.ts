@@ -34,6 +34,6 @@ export const onWindowSizeChange = (): void => {
  * Stop listening to window size change events
  */
 export const offWindowSizeChange = (): void => {
-  window.removeEventListener('resize', debouncedOnWindowSizeChange, false);
-  window.removeEventListener('orientationchange', debouncedOnWindowSizeChange, false);
+  window.removeEventListener('resize', debouncedOnWindowSizeChange);
+  window.removeEventListener('orientationchange', debouncedOnWindowSizeChange);
 };

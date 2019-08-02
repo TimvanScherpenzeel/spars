@@ -57,5 +57,5 @@ export const onOrientationChange = (): void => {
  * Stop listening to orientation change events
  */
 export const offOrientationChange = (): void => {
-  window.removeEventListener('orientationchange', debouncedOnOrientationChange, false);
+  window.removeEventListener('orientationchange', debouncedOnOrientationChange);
 };

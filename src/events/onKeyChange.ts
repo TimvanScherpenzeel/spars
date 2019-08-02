@@ -74,6 +74,6 @@ export const onKeyChange = (element = window): void => {
  * Stop listening to keydown change events
  */
 export const offKeyChange = (element = window): void => {
-  element.removeEventListener('keydown', onKeyDownChangeHandler, false);
-  element.removeEventListener('keyup', onKeyUpChangeHandler, false);
+  element.removeEventListener('keydown', onKeyDownChangeHandler);
+  element.removeEventListener('keyup', onKeyUpChangeHandler);
 };

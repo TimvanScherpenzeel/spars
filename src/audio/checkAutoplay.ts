@@ -76,6 +76,7 @@ export const checkAutoplay = (element?: HTMLElement): Promise<boolean> =>
               element.removeEventListener('click', unlock);
               element.removeEventListener('touchstart', unlock);
               element.removeEventListener('touchend', unlock);
+              element.removeEventListener('keydown', unlock);
 
               if (isOwnedElement) {
                 element.remove();
@@ -98,6 +99,7 @@ export const checkAutoplay = (element?: HTMLElement): Promise<boolean> =>
       element.addEventListener('click', unlock, false);
       element.addEventListener('touchstart', unlock, false);
       element.addEventListener('touchend', unlock, false);
+      element.addEventListener('keydown', unlock, false);
     } else {
       autoplayAllowed = true;
 

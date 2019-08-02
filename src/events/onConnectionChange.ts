@@ -55,8 +55,8 @@ export const onConnectionChange = (): void => {
     (navigator as any).connection.addEventListener('change', onConnectionChangeHandler, false);
   }
 
-  window.addEventListener('offline', onConnectionChangeHandler);
-  window.addEventListener('online', onConnectionChangeHandler);
+  window.addEventListener('offline', onConnectionChangeHandler, false);
+  window.addEventListener('online', onConnectionChangeHandler, false);
 };
 
 /**
