@@ -11,9 +11,6 @@ import { ENUM } from '../enum';
 // Events
 import { eventEmitter } from '../events';
 
-// TODO: add cookie support for keeping track of audio preference upon refresh
-// You would set a cookie on muteAll and unmuteAll
-
 // TODO: add support for adjusted volume (right now unmute resets to 1 instead of original volume the user has supplied)
 // It is important to fix this because that would allow to create a harmony of various sources at different volume levels.
 // If not handled the harmony would be gone upon mute / unmute.
