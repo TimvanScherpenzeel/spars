@@ -206,17 +206,20 @@ Spar.assetLoader
           .then(source => {
             source.play();
 
+            // Spar.audioManager.muteAll();
+
             // setTimeout(() => {
-            //   source.stop();
+            //   Spar.audioManager.unmuteAll();
+            //   //   source.stop();
 
-            //   setTimeout(() => {
-            //     source.play();
+            //   //   setTimeout(() => {
+            //   //     source.play();
 
-            //     setTimeout(() => {
-            //       source.stop();
-            //     }, 1000);
-            //   }, 1000);
-            // }, 1000);
+            //   //     setTimeout(() => {
+            //   //       source.stop();
+            //   //     }, 1000);
+            //   //   }, 1000);
+            // }, 5000);
 
             // source.play();
 
