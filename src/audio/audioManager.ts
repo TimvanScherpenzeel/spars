@@ -11,10 +11,6 @@ import { ENUM } from '../enum';
 // Events
 import { eventEmitter } from '../events';
 
-// TODO: add support for adjusted volume (right now unmute resets to 1 instead of original volume the user has supplied)
-// It is important to fix this because that would allow to create a harmony of various sources at different volume levels.
-// If not handled the harmony would be gone upon mute / unmute.
-
 class AudioManager {
   private static easeInCubic = (
     time: number,
@@ -78,6 +74,7 @@ class AudioManager {
         audioObject.audio.gainNode = this.context.createGain();
 
         // If there are no effects connect the input node directly to the gain node
+        // This allows us to control the volume of the track
         if (!options.effects) {
           audioObject.audio.connect(audioObject.audio.gainNode);
         }
