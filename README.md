@@ -8,8 +8,6 @@
 
 ## Roadmap
 
-- Add global web audio manager (mute / unmute, store preference, fade in / fade out on document.visibility, support for sound groups, filter chain)
-- Add tween library (animejs?)
 - Add shake sensor (acceleration)
 - Add audio synthesizer / toolchain
 - Add webcam and microphone support
@@ -34,7 +32,7 @@ Contains code for an `AssetLoader` used for preloading commonly used assets like
 
 ### Audio
 
-Contains code to help you with audio autoplay unlocking in the browser.
+Contains code to help you with managing audio and autoplay unlocking in the browser.
 
 ### Cookie
 
