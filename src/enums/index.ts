@@ -1,5 +1,5 @@
 /**
- * Global enumeration
+ * Global external enums
  */
 export const ENUMS = {
   // AssetLoader
@@ -22,3 +22,8 @@ export const ENUMS = {
   // FrameTicker
   FRAME_TICK: 'SPAR::FRAME_TICK',
 };
+
+/**
+ * Global internal enums
+ */
+export const $ENUMS = {};
