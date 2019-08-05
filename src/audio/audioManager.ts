@@ -145,7 +145,7 @@ class AudioManager {
           ? AudioManager.easeOutCubic(time, from, to - from, duration)
           : AudioManager.easeInCubic(time, from, to - from, duration);
 
-      this.audioSources[source].setVolume(volume);
+      this.audioSources[source].audio.gainNode.gain.value = volume;
 
       if (time >= duration) {
         clearInterval(timer);
