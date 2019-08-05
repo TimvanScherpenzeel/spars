@@ -197,9 +197,9 @@ class AudioManager {
       this.stop(source);
     }
 
-    this.audioSources[source].audio = undefined;
-    this.audioSources[source].context = undefined;
-    this.audioSources[source].buffer = undefined;
+    this.audioSources[source].audio = null;
+    this.audioSources[source].context = null;
+    this.audioSources[source].buffer = null;
 
     delete this.audioSources[source];
   };
