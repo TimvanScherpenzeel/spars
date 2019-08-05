@@ -205,6 +205,7 @@ Spar.assetLoader
           })
           .then(source => {
             source.play();
+            // source.setVolume(0.1);
 
             // Spar.audioManager.muteAll();
 
