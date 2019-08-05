@@ -1,11 +1,11 @@
 // Analytics
 export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 
+// AssetLoaders
+export { assetLoader } from './assetLoader';
+
 // Audio
 export { audioManager, createAudioContext, checkAutoplay } from './audio';
-
-// Cache
-export { persistentCache } from './persistentCache';
 
 // Cookie
 export { deleteCookie, getCookie, setCookie } from './cookie';
@@ -19,17 +19,17 @@ export { EventEmitter, eventEmitter } from './events';
 // Features
 export { features } from './features';
 
-// Loaders
-export { assetLoader } from './assetLoader';
-
-// Polyfills
-export { fullScreen, pointerLock } from './polyfills';
-
 // FrameScheduler
 export { priorities, scheduleFrame } from './frameScheduler';
 
 // FrameTicker
 export { frameTicker } from './frameTicker';
+
+// PersistentCache
+export { persistentCache } from './persistentCache';
+
+// Polyfills
+export { fullScreen, pointerLock } from './polyfills';
 
 // ThreadPool
 export { threadPool } from './threadPool';
