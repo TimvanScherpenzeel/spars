@@ -11,8 +11,6 @@ import { ENUMS } from '../enums';
 // Events
 import { eventEmitter } from '../events';
 
-// TODO: look into using persistentCache instead of cookies (as cookies is synchronous whilst persistentCache is asynchronous)
-
 class AudioManager {
   private static easeInCubic = (
     time: number,

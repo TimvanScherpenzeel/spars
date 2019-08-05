@@ -8,6 +8,7 @@
 
 ## Roadmap
 
+- Add various built-in audio effect chains
 - Add wrappers around various sensors available on smartphones
 - Verify if everything is still working across all targeted browsers (and polyfill the necessary on IE11)
 - Add shake sensor (acceleration)
