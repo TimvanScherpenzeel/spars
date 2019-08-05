@@ -1,7 +1,7 @@
 // Analytics
 export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 
-// AssetLoaders
+// AssetLoader
 export { assetLoader } from './assetLoader';
 
 // Audio
