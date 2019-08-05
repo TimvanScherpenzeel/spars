@@ -1,5 +1,5 @@
-// Enum
-import { ENUM } from '../enum';
+// Enums
+import { ENUMS } from '../enums';
 
 // Events
 import { eventEmitter } from './EventEmitter';
@@ -39,7 +39,7 @@ function onOrientationChangeHandler(): void {
 
   const isPortrait = !isLandscape;
 
-  eventEmitter.emit(ENUM.ORIENTATION_CHANGE, {
+  eventEmitter.emit(ENUMS.ORIENTATION_CHANGE, {
     angle,
     isLandscape,
     isPortrait,

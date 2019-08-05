@@ -1,5 +1,5 @@
-// Enum
-import { ENUM } from '../enum';
+// Enums
+import { ENUMS } from '../enums';
 
 // Events
 import { eventEmitter } from '../events/EventEmitter';
@@ -24,7 +24,7 @@ class FrameTicker {
 
       this.tickId = window.requestAnimationFrame(this.tick);
 
-      eventEmitter.emit(ENUM.FRAME_TICK, {
+      eventEmitter.emit(ENUMS.FRAME_TICK, {
         delta: this.tickId - this.previousTickId,
         time,
       });

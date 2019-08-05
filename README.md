@@ -57,7 +57,7 @@ Contains a scheduler to schedule tasks over multiple frames to avoid dropping be
 
 ### FrameTicker
 
-Global requestAnimationFrame ticker, fires `ENUM.FRAME_TICK` event.
+Global requestAnimationFrame ticker, fires `ENUMS.FRAME_TICK` event.
 
 ### PersistentCache
 

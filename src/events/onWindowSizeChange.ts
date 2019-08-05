@@ -1,5 +1,5 @@
-// Enum
-import { ENUM } from '../enum';
+// Enums
+import { ENUMS } from '../enums';
 
 // Events
 import { eventEmitter } from './EventEmitter';
@@ -16,7 +16,7 @@ const debouncedOnWindowSizeChange = debounce(onWindowSizeChangeHandler, 100);
  * Monitor window size changes
  */
 function onWindowSizeChangeHandler(): void {
-  eventEmitter.emit(ENUM.WINDOW_SIZE_CHANGE, {
+  eventEmitter.emit(ENUMS.WINDOW_SIZE_CHANGE, {
     windowHeight: window.innerHeight,
     windowWidth: window.innerWidth,
   });

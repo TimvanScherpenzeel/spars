@@ -5,8 +5,8 @@ import { createAudioContext } from './createAudioContext';
 // Cookie
 import { deleteCookie, getCookie, setCookie } from '../cookie';
 
-// Enum
-import { ENUM } from '../enum';
+// Enums
+import { ENUMS } from '../enums';
 
 // Events
 import { eventEmitter } from '../events';
@@ -34,9 +34,9 @@ class AudioManager {
   private context: AudioContext = createAudioContext();
 
   constructor() {
-    eventEmitter.on(ENUM.VISIBILITY_CHANGE, this.onVisibilityChangeHandler);
+    eventEmitter.on(ENUMS.VISIBILITY_CHANGE, this.onVisibilityChangeHandler);
 
-    if (getCookie(ENUM.AUDIO_MUTED) === 'true') {
+    if (getCookie(ENUMS.AUDIO_MUTED) === 'true') {
       Object.keys(this.audioSources).forEach((audioSource: string) => {
         this.setVolume(audioSource, 0);
       });
@@ -100,7 +100,7 @@ class AudioManager {
   };
 
   public muteAll = (fadeDuration = 750): void => {
-    setCookie(ENUM.AUDIO_MUTED, 'true');
+    setCookie(ENUMS.AUDIO_MUTED, 'true');
 
     Object.keys(this.audioSources).forEach((audioSource: string) => {
       this.fadeVolume(this.audioSources[audioSource].volume, 0, fadeDuration, audioSource);
@@ -108,7 +108,7 @@ class AudioManager {
   };
 
   public unmuteAll = (fadeDuration = 750): void => {
-    deleteCookie(ENUM.AUDIO_MUTED);
+    deleteCookie(ENUMS.AUDIO_MUTED);
 
     Object.keys(this.audioSources).forEach((audioSource: string) => {
       this.fadeVolume(0, this.audioSources[audioSource].volume, fadeDuration, audioSource);
@@ -116,7 +116,7 @@ class AudioManager {
   };
 
   private onVisibilityChangeHandler = (event: { isVisible: boolean }): void => {
-    if (getCookie(ENUM.AUDIO_MUTED) === 'true') {
+    if (getCookie(ENUMS.AUDIO_MUTED) === 'true') {
       // Avoid fading back in if the user has purposely set the audio to be muted
       return;
     }

@@ -10,8 +10,8 @@ export { audioManager, createAudioContext, checkAutoplay } from './audio';
 // Cookie
 export { deleteCookie, getCookie, setCookie } from './cookie';
 
-// Enum
-export { ENUM } from './enum';
+// Enums
+export { ENUMS } from './enums';
 
 // Events
 export { EventEmitter, eventEmitter } from './events';
