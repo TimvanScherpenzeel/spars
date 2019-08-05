@@ -53,6 +53,7 @@ class AudioManager {
     options: {
       loop?: boolean;
       effects?: boolean;
+      volume?: number;
     }
   ): Promise<any> => {
     return new Promise((resolve): any => {
@@ -68,6 +69,8 @@ class AudioManager {
         audioObject.context = this.context;
 
         audioObject.buffer = buffer;
+
+        audioObject.volume = options.volume || 1;
 
         audioObject.audio = this.context.createBufferSource();
         audioObject.audio.buffer = buffer;
@@ -102,28 +105,37 @@ class AudioManager {
   public muteAll = (fadeDuration = 750): void => {
     setCookie(ENUM.AUDIO_MUTED, 'true');
 
-    this.fadeVolume(1, 0, fadeDuration);
+    Object.keys(this.audioSources).forEach((audioSource: string) => {
+      this.fadeVolume(this.audioSources[audioSource].volume, 0, fadeDuration, audioSource);
+    });
   };
 
   public unmuteAll = (fadeDuration = 750): void => {
     deleteCookie(ENUM.AUDIO_MUTED);
 
-    this.fadeVolume(0, 1, fadeDuration);
+    Object.keys(this.audioSources).forEach((audioSource: string) => {
+      this.fadeVolume(0, this.audioSources[audioSource].volume, fadeDuration, audioSource);
+    });
   };
 
   private onVisibilityChangeHandler = (event: { isVisible: boolean }): void => {
     if (getCookie(ENUM.AUDIO_MUTED) === 'true') {
+      // Avoid fading back in if the user has purposely set the audio to be muted
       return;
     }
 
     if (event.isVisible) {
-      this.fadeVolume(0, 1, 750);
+      Object.keys(this.audioSources).forEach((audioSource: string) => {
+        this.fadeVolume(0, this.audioSources[audioSource].volume, 750, audioSource);
+      });
     } else {
-      this.fadeVolume(1, 0, 750);
+      Object.keys(this.audioSources).forEach((audioSource: string) => {
+        this.fadeVolume(this.audioSources[audioSource].volume, 0, 750, audioSource);
+      });
     }
   };
 
-  private fadeVolume = (from: number, to: number, duration: number, source?: string): void => {
+  private fadeVolume = (from: number, to: number, duration: number, source: string): void => {
     const start = performance.now();
 
     const timer = setInterval(() => {
@@ -133,13 +145,7 @@ class AudioManager {
           ? AudioManager.easeOutCubic(time, from, to - from, duration)
           : AudioManager.easeInCubic(time, from, to - from, duration);
 
-      if (!source) {
-        Object.keys(this.audioSources).forEach((audioSource: string) => {
-          this.setVolume(audioSource, volume);
-        });
-      } else {
-        this.audioSources[source].setVolume(volume);
-      }
+      this.audioSources[source].setVolume(volume);
 
       if (time >= duration) {
         clearInterval(timer);
@@ -202,14 +208,15 @@ class AudioManager {
   };
 
   private mute = (source: string, fadeDuration = 750): void => {
-    this.fadeVolume(1, 0, fadeDuration, source);
+    this.fadeVolume(this.audioSources[source].volume, 0, fadeDuration, source);
   };
 
   private unmute = (source: string, fadeDuration = 750): void => {
-    this.fadeVolume(0, 1, fadeDuration, source);
+    this.fadeVolume(0, this.audioSources[source].volume, fadeDuration, source);
   };
 
   private setVolume = (source: string, volume: number): void => {
+    this.audioSources[source].volume = volume;
     this.audioSources[source].audio.gainNode.gain.value = volume;
   };
 
