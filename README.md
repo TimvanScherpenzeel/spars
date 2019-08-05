@@ -8,6 +8,7 @@
 
 ## Roadmap
 
+- Verify if everything is still working across all targeted browsers (and polyfill the necessary on IE11)
 - Add shake sensor (acceleration)
 - Add audio synthesizer / toolchain
 - Add webcam and microphone support
