@@ -187,70 +187,70 @@ import * as Spar from '../dist/spar.umd';
 //   }
 // }
 
-Spar.assetLoader
-  .loadAssets([
-    {
-      src: './assets/audio.mp3',
-      loader: 'ArrayBuffer',
-    },
-  ])
-  .then(assets => {
-    console.log(assets);
+// Spar.assetLoader
+//   .loadAssets([
+//     {
+//       src: './assets/audio.mp3',
+//       loader: 'ArrayBuffer',
+//     },
+//   ])
+//   .then(assets => {
+//     console.log(assets);
 
-    Spar.checkAutoplay()
-      .then(() => {
-        Spar.audioManager
-          .load('./assets/audio.mp3', assets.get('./assets/audio.mp3'), {
-            loop: true,
-          })
-          .then(source => {
-            source.play();
-            // source.setVolume(0.1);
+//     Spar.checkAutoplay()
+//       .then(() => {
+//         Spar.audioManager
+//           .load('./assets/audio.mp3', assets.get('./assets/audio.mp3'), {
+//             loop: true,
+//           })
+//           .then(source => {
+//             source.play();
+//             // source.setVolume(0.1);
 
-            // Spar.audioManager.muteAll();
+//             // Spar.audioManager.muteAll();
 
-            // setTimeout(() => {
-            //   Spar.audioManager.unmuteAll();
-            //   //   source.stop();
+//             // setTimeout(() => {
+//             //   Spar.audioManager.unmuteAll();
+//             //   //   source.stop();
 
-            //   //   setTimeout(() => {
-            //   //     source.play();
+//             //   //   setTimeout(() => {
+//             //   //     source.play();
 
-            //   //     setTimeout(() => {
-            //   //       source.stop();
-            //   //     }, 1000);
-            //   //   }, 1000);
-            // }, 5000);
+//             //   //     setTimeout(() => {
+//             //   //       source.stop();
+//             //   //     }, 1000);
+//             //   //   }, 1000);
+//             // }, 5000);
 
-            // source.play();
+//             // source.play();
 
-            // source.stop();
+//             // source.stop();
 
-            // source.play();
+//             // source.play();
 
-            // Spar.audioManager.muteAll(1000);
+//             // Spar.audioManager.muteAll(1000);
 
-            // setTimeout(() => {
-            //   Spar.audioManager.unmuteAll(1000);
-            // }, 5000);
+//             // setTimeout(() => {
+//             //   Spar.audioManager.unmuteAll(1000);
+//             // }, 5000);
 
-            // setTimeout(() => {
-            //   source.pause();
+//             // setTimeout(() => {
+//             //   source.pause();
 
-            //   console.log(source.pausedAt);
+//             //   console.log(source.pausedAt);
 
-            //   setTimeout(() => {
-            //     source.play();
+//             //   setTimeout(() => {
+//             //     source.play();
 
-            //     console.log(source.startedAt);
-            //   }, 2000);
-            // }, 2000);
-          });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  });
+//             //     console.log(source.startedAt);
+//             //   }, 2000);
+//             // }, 2000);
+//           });
+//       })
+//       .catch(err => {
+//         console.log(err);
+//       });
+//   });
 
 // Cookie
 // ------

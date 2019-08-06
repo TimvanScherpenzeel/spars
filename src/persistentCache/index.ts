@@ -79,10 +79,7 @@ export class PersistentCache {
    * @param databaseName Name of the persistent cache database
    * @param storeName Name of the persistent cache store
    */
-  constructor(
-    databaseName: string = 'persistent-cache-db',
-    storeName: string = 'persistent-cache-store'
-  ) {
+  constructor(databaseName: string = 'spar-cache-db', storeName: string = 'spar-cache-store') {
     this.store = new Store(databaseName, storeName);
   }
 
