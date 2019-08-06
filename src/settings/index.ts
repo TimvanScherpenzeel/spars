@@ -31,5 +31,9 @@ export const settings = ((): any => {
     queryParameters[key] = value;
   });
 
+  if (queryParameters.debug) {
+    console.log(`⚙ Settings`, defaultSettings);
+  }
+
   return queryParameters;
 })();
