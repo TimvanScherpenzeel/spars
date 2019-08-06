@@ -1,8 +1,13 @@
+// Features
+import getGPUTier from '../features/hardwareFeatures/getGPUTier';
+
 // Utilities
 import { getQueryParameters } from '../utilities/getQueryParameters';
 
 const defaultSettings = {
+  GPUTier: Number(getGPUTier.tier.split('TIER_')[1]),
   debug: process.env.NODE_ENV === 'development',
+  devicePixelRatio: window.devicePixelRatio,
 };
 
 export const settings = ((): any => {
@@ -32,7 +37,7 @@ export const settings = ((): any => {
   });
 
   if (queryParameters.debug) {
-    console.log(`⚙ Settings`, defaultSettings);
+    console.log(`⚙ Settings:`, defaultSettings);
   }
 
   return queryParameters;
