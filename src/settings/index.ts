@@ -19,7 +19,7 @@ export const settings = ((): any => {
     let value: any = queryParameters[key];
 
     // Convert number strings to numbers (integers, floats, hexadecimals)
-    if (/^\d+\.\d+$/.test(value) || /0x[0-9A-Fa-f]{6}/g.test(value)) {
+    if (/^\d+\.\d+$/.test(value) || /0[xX0-9A-Fa-f]{6}/g.test(value)) {
       value = Number(value);
     }
 
