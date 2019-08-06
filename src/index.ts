@@ -31,6 +31,9 @@ export { persistentCache } from './persistentCache';
 // Polyfills
 export { fullScreen, pointerLock } from './polyfills';
 
+// Settings
+export { settings } from './settings';
+
 // ThreadPool
 export { threadPool } from './threadPool';
 

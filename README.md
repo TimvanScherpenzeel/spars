@@ -8,11 +8,12 @@
 
 ## Roadmap
 
+- Add support for microphone input to AudioManager
 - Add various built-in audio effect chains
-- Add wrappers around various sensors available on smartphones
+- Add wrappers around various sensors available on smartphones (ambient light, geolocation, device motion, device orientation, battery)
+
 - Verify if everything is still working across all targeted browsers (and polyfill the necessary on IE11)
 - Add shake sensor (acceleration)
-- Add webcam and microphone support
 - Add screen lock API polyfill
 - Add accelerometer / device orientation / motion API
 
