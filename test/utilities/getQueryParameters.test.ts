@@ -9,6 +9,13 @@ describe('getQueryParameters', () => {
     expect(params).toEqual({ key: 'value' });
   });
 
+  it('can handle empty { key: value } pairs', () => {
+    expect.assertions(1);
+
+    const params = getQueryParameters('');
+    expect(params).toEqual({});
+  });
+
   it('can create multiple { key: value } pairs, sorted alphabetically', () => {
     expect.assertions(1);
 
