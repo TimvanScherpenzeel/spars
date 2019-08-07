@@ -1,5 +1,6 @@
 export const EVENTS = {
   // AssetLoader
+  ASSETS_LOADED: 'SPAR::EVENT_ASSETS_LOADED',
   ASSET_LOADED: 'SPAR::EVENT_ASSET_LOADED',
 
   // Audio

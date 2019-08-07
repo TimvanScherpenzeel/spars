@@ -705,6 +705,10 @@ export class AssetLoader {
         assetMap.set(asset.id, asset.item);
       });
 
+      eventEmitter.emit(EVENTS.ASSETS_LOADED, {
+        assetMap,
+      });
+
       return assetMap;
     });
   };
