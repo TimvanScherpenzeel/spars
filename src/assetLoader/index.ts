@@ -547,7 +547,7 @@ export class AssetLoader {
   private static loadWebAssembly = (item: ILoadItem): Promise<TVoidable<WebAssembly.Instance>> => {
     if (isWebAssemblySupported) {
       if ((window as any).WebAssembly.instantiateStreaming) {
-        return (window as any).instantiateStreaming(
+        return (window as any).WebAssembly.instantiateStreaming(
           AssetLoader.fetchItem(item),
           item.loaderOptions.importObject
         );

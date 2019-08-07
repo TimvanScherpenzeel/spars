@@ -2,7 +2,7 @@
 export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 
 // AssetLoader
-export { assetLoader } from './assetLoader';
+export { assetLoader, AssetLoader } from './assetLoader';
 
 // Audio
 export { audioManager, createAudioContext, checkAutoplay } from './audio';
