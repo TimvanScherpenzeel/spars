@@ -63,7 +63,6 @@ const IS_MEDIA_PRELOAD_SUPPORTED = !getBrowserType.isSafari;
  * Asynchronous asset preloader
  */
 export class AssetLoader {
-
   public assets: Map<string, Promise<Response>> = new Map();
 
   /**
@@ -166,7 +165,7 @@ export class AssetLoader {
               loadedItem = this.loadXML(item);
               break;
             default:
-              console.warn('Missing loader, falling back to loading as ArrayBuffer');
+              console.warn('AssetLoader -> Missing loader, falling back to loading as ArrayBuffer');
               loadedItem = this.loadArrayBuffer(item);
               break;
           }
@@ -205,7 +204,7 @@ export class AssetLoader {
 
       assets.forEach((asset: any) => {
         if (assetMap.get(asset.id)) {
-          console.warn("Detected duplicate id, please use unique id's");
+          console.warn("AssetLoader -> Detected duplicate id, please use unique id's");
         }
 
         assetMap.set(asset.id, asset.item);
@@ -282,7 +281,7 @@ export class AssetLoader {
     this.fetchItem(item)
       .then(response => response.arrayBuffer())
       .catch(err => {
-        console.warn(err);
+        console.warn(err.message);
       });
 
   /**
@@ -324,7 +323,7 @@ export class AssetLoader {
           })
       )
       .catch(err => {
-        console.warn(err);
+        console.error(err);
       });
 
   /**
@@ -336,7 +335,7 @@ export class AssetLoader {
     this.fetchItem(item)
       .then(response => response.blob())
       .catch(err => {
-        console.warn(err);
+        console.error(err);
       });
 
   /**
@@ -429,7 +428,9 @@ export class AssetLoader {
         } else {
           // In case something went wrong with loading the blob or corrupted data
           // Fallback to default image loader
-          console.warn('Received no or corrupt data, falling back to default image loader');
+          console.warn(
+            'AssetLoader -> Received no or corrupt data, falling back to default image loader'
+          );
           return this.loadImage(item);
         }
       });
@@ -599,7 +600,7 @@ export class AssetLoader {
     this.fetchItem(item)
       .then(response => response.json())
       .catch(err => {
-        console.warn(err);
+        console.error(err);
       });
 
   /**
@@ -611,7 +612,7 @@ export class AssetLoader {
     this.fetchItem(item)
       .then(response => response.text())
       .catch(err => {
-        console.warn(err);
+        console.error(err);
       });
 
   /**
@@ -655,7 +656,7 @@ export class AssetLoader {
           })
       )
       .catch(err => {
-        console.warn(err);
+        console.error(err);
       });
 
   /**
@@ -677,11 +678,11 @@ export class AssetLoader {
             (window as any).WebAssembly.instantiate(data, item.loaderOptions.importObject)
           )
           .catch(err => {
-            console.warn(err);
+            console.error(err);
           });
       }
     } else {
-      console.warn('WebAssembly is not supported');
+      console.warn('AssetLoader -> WebAssembly is not supported');
       return Promise.resolve();
     }
   };
@@ -708,7 +709,7 @@ export class AssetLoader {
         }
       })
       .catch(err => {
-        console.warn(err);
+        console.error(err);
       });
   };
 }
