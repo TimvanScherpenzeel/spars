@@ -67,7 +67,7 @@ Spar.assetLoader
 
     {
       id: './assets/1-device.png',
-      src: Spar.AssetLoader.byDeviceType({
+      src: Spar.assetLoader.byDeviceType({
         DESKTOP: './assets/1-desktop.png',
         TABLET: './assets/1-tablet.png',
         MOBILE: './assets/1-mobile.png',
@@ -76,7 +76,7 @@ Spar.assetLoader
 
     {
       id: './assets/example.ktx',
-      src: Spar.AssetLoader.bySupportedCompressedTexture({
+      src: Spar.assetLoader.bySupportedCompressedTexture({
         ASTC: './assets/example-astc-4x4.ktx',
         ETC: './assets/example-etc2.ktx',
         PVRTC: './assets/example-pvrtc4BPP.ktx',
@@ -87,7 +87,7 @@ Spar.assetLoader
 
     {
       id: './assets/example-mipmaps.ktx',
-      src: Spar.AssetLoader.bySupportedCompressedTexture({
+      src: Spar.assetLoader.bySupportedCompressedTexture({
         ASTC: './assets/example-astc-4x4-mipmaps.ktx',
         ETC: './assets/example-etc2-mipmaps.ktx',
         PVRTC: './assets/example-pvrtc4BPP-mipmaps.ktx',
@@ -102,7 +102,7 @@ Spar.assetLoader
 
     isDesktop && {
       id: './assets/green_point_park_4k_ibl.ktx',
-      src: Spar.AssetLoader.bySupportedCompressedTexture({
+      src: Spar.assetLoader.bySupportedCompressedTexture({
         ASTC: './assets/green_point_park_4k_ibl_astc.ktx',
         ETC: './assets/green_point_park_4k_ibl_etc.ktx',
         S3TC: './assets/green_point_park_4k_ibl_s3tc.ktx',
@@ -112,7 +112,7 @@ Spar.assetLoader
 
     isDesktop && {
       id: './assets/green_point_park_4k_skybox.ktx',
-      src: Spar.AssetLoader.bySupportedCompressedTexture({
+      src: Spar.assetLoader.bySupportedCompressedTexture({
         ASTC: './assets/green_point_park_4k_skybox_astc.ktx',
         ETC: './assets/green_point_park_4k_skybox_etc.ktx',
         S3TC: './assets/green_point_park_4k_skybox_s3tc.ktx',

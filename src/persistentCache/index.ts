@@ -38,35 +38,6 @@ const isAllowedAsKey = (key: any): boolean => {
  */
 
 export class PersistentCache {
-  /**
-   * Convert ArrayBuffer to Blob
-   *
-   * @param buffer Buffer to convert
-   * @param type MIME type of ArrayBuffer to store
-   */
-  public static convertArrayBufferToBlob = (buffer: ArrayBuffer, type: string): Blob =>
-    new Blob([buffer], { type });
-
-  /**
-   * Convert Blob to ArrayBuffer
-   *
-   * @param blob Blob to convert
-   */
-  public static convertBlobToArrayBuffer = (
-    blob: Blob
-  ): Promise<TNullable<string | ArrayBuffer>> => {
-    return new Promise((resolve, reject): void => {
-      const reader = new FileReader();
-
-      reader.addEventListener('loadend', (event: Event) => {
-        resolve(reader.result);
-      });
-
-      reader.addEventListener('error', reject);
-      reader.readAsArrayBuffer(blob);
-    });
-  };
-
   // Back persistent cache with in-memory cache in order to maintain functionality
   // in case IndexedDB is not available (private browsing mode)
   private memoryCache: Map<IDBValidKey, any> = new Map();
@@ -82,6 +53,33 @@ export class PersistentCache {
   constructor(databaseName: string = 'spar-cache-db', storeName: string = 'spar-cache-store') {
     this.store = new Store(databaseName, storeName);
   }
+
+  /**
+   * Convert ArrayBuffer to Blob
+   *
+   * @param buffer Buffer to convert
+   * @param type MIME type of ArrayBuffer to store
+   */
+  public convertArrayBufferToBlob = (buffer: ArrayBuffer, type: string): Blob =>
+    new Blob([buffer], { type });
+
+  /**
+   * Convert Blob to ArrayBuffer
+   *
+   * @param blob Blob to convert
+   */
+  public convertBlobToArrayBuffer = (blob: Blob): Promise<TNullable<string | ArrayBuffer>> => {
+    return new Promise((resolve, reject): void => {
+      const reader = new FileReader();
+
+      reader.addEventListener('loadend', (event: Event) => {
+        resolve(reader.result);
+      });
+
+      reader.addEventListener('error', reject);
+      reader.readAsArrayBuffer(blob);
+    });
+  };
 
   /**
    * Sets a { key: value } pair in the persistent cache
