@@ -1,8 +1,8 @@
 // Audio
 import { createAudioContext } from './createAudioContext';
 
-// Enums
-import { ENUMS } from '../enums';
+// Constants
+import { EVENTS } from '../constants';
 
 // Events
 import { eventEmitter } from '../events/EventEmitter';
@@ -43,7 +43,7 @@ export const checkAutoplay = (element?: HTMLElement): Promise<boolean> =>
     if (context.state === 'suspended') {
       autoplayAllowed = false;
 
-      eventEmitter.emit(ENUMS.AUTOPLAY_UNLOCKED, {
+      eventEmitter.emit(EVENTS.AUTOPLAY_UNLOCKED, {
         autoplayAllowed,
       });
 
@@ -85,7 +85,7 @@ export const checkAutoplay = (element?: HTMLElement): Promise<boolean> =>
 
             autoplayAllowed = true;
 
-            eventEmitter.emit(ENUMS.AUTOPLAY_UNLOCKED, {
+            eventEmitter.emit(EVENTS.AUTOPLAY_UNLOCKED, {
               autoplayAllowed,
             });
 

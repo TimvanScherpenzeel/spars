@@ -1,15 +1,12 @@
 /**
  * Global external enums
  */
-export const ENUMS = {
+export const EVENTS = {
   // AssetLoader
   ASSET_LOADED: 'SPAR::ASSET_LOADED',
 
   // Audio
   AUTOPLAY_UNLOCKED: 'SPAR::AUTOPLAY_UNLOCKED',
-
-  // Cookies
-  AUDIO_MUTED: 'SPAR::AUDIO_MUTED',
 
   // Events
   CONNECTION_CHANGE: 'SPAR::CONNECTION_CHANGE',
@@ -21,4 +18,9 @@ export const ENUMS = {
 
   // FrameTicker
   FRAME_TICK: 'SPAR::FRAME_TICK',
+};
+
+export const COOKIES = {
+  // Audio
+  AUDIO_MUTED: 'SPAR::AUDIO_MUTED',
 };

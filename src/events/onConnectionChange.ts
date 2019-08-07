@@ -1,5 +1,5 @@
-// Enums
-import { ENUMS } from '../enums';
+// Constants
+import { EVENTS } from '../constants';
 
 // Events
 import { eventEmitter } from './EventEmitter';
@@ -39,7 +39,7 @@ function onConnectionChangeHandler(): void {
     }
   }
 
-  eventEmitter.emit(ENUMS.CONNECTION_CHANGE, {
+  eventEmitter.emit(EVENTS.CONNECTION_CHANGE, {
     connectionIsOnline,
     connectionSaveData,
     connectionSpeed,

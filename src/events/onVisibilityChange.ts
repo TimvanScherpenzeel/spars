@@ -1,5 +1,5 @@
-// Enums
-import { ENUMS } from '../enums';
+// Constants
+import { EVENTS } from '../constants';
 
 // Events
 import { eventEmitter } from './EventEmitter';
@@ -50,7 +50,7 @@ const visibility = {
  * Monitor visibility changes
  */
 function onVisibilityChangeHandler(): void {
-  eventEmitter.emit(ENUMS.VISIBILITY_CHANGE, {
+  eventEmitter.emit(EVENTS.VISIBILITY_CHANGE, {
     isVisible: !visibility.hidden,
   });
 }

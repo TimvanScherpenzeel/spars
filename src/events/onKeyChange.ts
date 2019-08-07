@@ -1,5 +1,5 @@
-// Enums
-import { ENUMS } from '../enums';
+// Constants
+import { EVENTS } from '../constants';
 
 // Events
 import { eventEmitter } from './EventEmitter';
@@ -48,7 +48,7 @@ const normalizeKey = (key: string): string => {
  * Monitor keydown changes
  */
 function onKeyDownChangeHandler(event: KeyboardEvent): void {
-  eventEmitter.emit(ENUMS.KEY_DOWN_CHANGE, {
+  eventEmitter.emit(EVENTS.KEY_DOWN_CHANGE, {
     key: normalizeKey(event.key),
   });
 }
@@ -57,7 +57,7 @@ function onKeyDownChangeHandler(event: KeyboardEvent): void {
  * Monitor keyup changes
  */
 function onKeyUpChangeHandler(event: KeyboardEvent): void {
-  eventEmitter.emit(ENUMS.KEY_UP_CHANGE, {
+  eventEmitter.emit(EVENTS.KEY_UP_CHANGE, {
     key: normalizeKey(event.key),
   });
 }

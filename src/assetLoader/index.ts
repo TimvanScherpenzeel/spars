@@ -2,8 +2,8 @@
 // @ts-ignore missing type definition
 import FontFaceObserver from 'fontfaceobserver-es';
 
-// Enums
-import { ENUMS } from '../enums';
+// Constants
+import { EVENTS } from '../constants';
 
 // Events
 import { eventEmitter } from '../events/EventEmitter';
@@ -686,7 +686,7 @@ export class AssetLoader {
       promise.then(asset => {
         progress++;
 
-        eventEmitter.emit(ENUMS.ASSET_LOADED, {
+        eventEmitter.emit(EVENTS.ASSET_LOADED, {
           id: asset.id,
           progress: `${(progress / loadingAssets.length).toFixed(2)}`,
           timeToLoad: `${asset.timeToLoad.toFixed(2)}ms`,

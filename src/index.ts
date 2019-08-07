@@ -7,11 +7,11 @@ export { assetLoader } from './assetLoader';
 // Audio
 export { audioManager, createAudioContext, checkAutoplay } from './audio';
 
+// Constants
+export { EVENTS } from './constants';
+
 // Cookie
 export { deleteCookie, getCookie, setCookie } from './cookie';
-
-// Enums
-export { ENUMS } from './enums';
 
 // Events
 export { EventEmitter, eventEmitter } from './events';
