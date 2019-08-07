@@ -1,6 +1,3 @@
-/**
- * Global external enums
- */
 export const EVENTS = {
   // AssetLoader
   ASSET_LOADED: 'SPAR::ASSET_LOADED',

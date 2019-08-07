@@ -15,7 +15,7 @@ import * as Spar from '../dist/spar.umd';
 // AssetLoader
 // -----------
 
-// Spar.eventEmitter.on(Spar.ENUMS.ASSET_LOADED, event => {
+// Spar.eventEmitter.on(Spar.EVENTS.ASSET_LOADED, event => {
 //   console.log(event);
 // });
 
@@ -284,17 +284,17 @@ import * as Spar from '../dist/spar.umd';
 // const connectionChangeHandler = event => {
 //   console.log(event);
 
-//   Spar.eventEmitter.off(Spar.ENUMS.CONNECTION_CHANGE, connectionChangeHandler);
+//   Spar.eventEmitter.off(Spar.EVENTS.CONNECTION_CHANGE, connectionChangeHandler);
 // };
 
-// Spar.eventEmitter.on(Spar.ENUMS.CONNECTION_CHANGE, connectionChangeHandler);
+// Spar.eventEmitter.on(Spar.EVENTS.CONNECTION_CHANGE, connectionChangeHandler);
 
 // const keyChangeDownHandler = event => {
 //   console.log(`keyDown: ${event.key}`);
 
 //   document.getElementById('root').appendChild(document.createTextNode(event.key));
 
-//   // Spar.eventEmitter.off(Spar.ENUMS.KEY_DOWN_CHANGE, keyChangeDownHandler);
+//   // Spar.eventEmitter.off(Spar.EVENTS.KEY_DOWN_CHANGE, keyChangeDownHandler);
 // };
 
 // const keyChangeUpHandler = event => {
@@ -302,39 +302,39 @@ import * as Spar from '../dist/spar.umd';
 
 //   document.getElementById('root').appendChild(document.createTextNode(event.key));
 
-//   // Spar.eventEmitter.off(Spar.ENUMS.KEY_UP_CHANGE, keyChangeDownHandler);
+//   // Spar.eventEmitter.off(Spar.EVENTS.KEY_UP_CHANGE, keyChangeDownHandler);
 // };
 
-// Spar.eventEmitter.on(Spar.ENUMS.KEY_DOWN_CHANGE, keyChangeDownHandler);
-// Spar.eventEmitter.on(Spar.ENUMS.KEY_UP_CHANGE, keyChangeUpHandler);
+// Spar.eventEmitter.on(Spar.EVENTS.KEY_DOWN_CHANGE, keyChangeDownHandler);
+// Spar.eventEmitter.on(Spar.EVENTS.KEY_UP_CHANGE, keyChangeUpHandler);
 
 // document.getElementById('root').appendChild(document.createElement('textarea'));
 
 // const orientationChangeHandler = event => {
 //   console.log(event);
 
-//   Spar.eventEmitter.off(Spar.ENUMS.ORIENTATION_CHANGE);
+//   Spar.eventEmitter.off(Spar.EVENTS.ORIENTATION_CHANGE);
 
 //   document.getElementById('root').appendChild(document.createTextNode(event.angle));
 // };
 
-// Spar.eventEmitter.on(Spar.ENUMS.ORIENTATION_CHANGE, orientationChangeHandler);
+// Spar.eventEmitter.on(Spar.EVENTS.ORIENTATION_CHANGE, orientationChangeHandler);
 
 // const visibilityChangeHandler = event => {
 //   console.log(event);
 
-//   Spar.eventEmitter.off(Spar.ENUMS.VISIBILITY_CHANGE);
+//   Spar.eventEmitter.off(Spar.EVENTS.VISIBILITY_CHANGE);
 // };
 
-// Spar.eventEmitter.on(Spar.ENUMS.VISIBILITY_CHANGE, visibilityChangeHandler);
+// Spar.eventEmitter.on(Spar.EVENTS.VISIBILITY_CHANGE, visibilityChangeHandler);
 
 // const windowSizeChangeHandler = event => {
 //   console.log(event);
 
-//   Spar.eventEmitter.off(Spar.ENUMS.WINDOW_SIZE_CHANGE);
+//   Spar.eventEmitter.off(Spar.EVENTS.WINDOW_SIZE_CHANGE);
 // };
 
-// Spar.eventEmitter.on(Spar.ENUMS.WINDOW_SIZE_CHANGE, windowSizeChangeHandler);
+// Spar.eventEmitter.on(Spar.EVENTS.WINDOW_SIZE_CHANGE, windowSizeChangeHandler);
 
 // Features
 // --------
@@ -384,7 +384,7 @@ console.log(Spar.features);
 //   console.log(event);
 // };
 
-// Spar.eventEmitter.on(Spar.ENUMS.FRAME_TICK, tickHandler);
+// Spar.eventEmitter.on(Spar.EVENTS.FRAME_TICK, tickHandler);
 
 // Spar.frameTicker.off();
 
