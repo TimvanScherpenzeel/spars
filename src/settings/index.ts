@@ -37,7 +37,7 @@ export const settings = ((): any => {
   });
 
   if (queryParameters.debug) {
-    console.log(`⚙ Settings:`, defaultSettings);
+    console.log(`⚙ Settings:`, queryParameters);
   }
 
   return queryParameters;

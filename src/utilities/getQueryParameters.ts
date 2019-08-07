@@ -13,6 +13,8 @@ export const getQueryParameters = (url = window.location.search): { [parameter: 
     .split('&')
     // Find parameters
     .map(param => param.split('='))
+    // Remove any empty string entries
+    .filter(param => param.length > 1)
     // Construct { key: value } pairs
     .reduce((values, [key, value]) => {
       (values as any)[key] = value;
