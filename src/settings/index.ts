@@ -10,7 +10,9 @@ const defaultSettings = {
   devicePixelRatio: window.devicePixelRatio,
 };
 
-export const settings = ((): any => {
+export const settings = ((): {
+  [setting: string]: boolean | undefined | null | number | string;
+} => {
   const queryParameters: any = Object.assign(defaultSettings, getQueryParameters());
 
   const keywords = {
@@ -21,7 +23,7 @@ export const settings = ((): any => {
   };
 
   Object.keys(queryParameters).map(key => {
-    let value: any = queryParameters[key];
+    let value = queryParameters[key];
 
     // Convert number strings to numbers (integers, floats, hexadecimals)
     if (/^\d+\.\d+$/.test(value) || /0[xX0-9A-Fa-f]{6}/g.test(value)) {
