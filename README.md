@@ -8,6 +8,7 @@
 
 ## Roadmap
 
+- Add support for KTX2 textures and Basis textures
 - Add support for microphone input to AudioManager
 - Add various built-in audio effect chains
 - Add wrappers around various sensors available on smartphones (ambient light, geolocation, device motion, device orientation, battery)
