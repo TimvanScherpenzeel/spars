@@ -5,8 +5,8 @@ import { createAudioContext } from './createAudioContext';
 // Constants
 import { COOKIES, EVENTS } from '../constants';
 
-// Cookie
-import { deleteCookie, getCookie, setCookie } from '../cookie';
+// Cookies
+import { deleteCookie, getCookie, setCookie } from '../cookies';
 
 // Events
 import { eventEmitter } from '../events';

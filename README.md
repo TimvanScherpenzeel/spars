@@ -4,7 +4,7 @@
 
 ## Statement
 
-`Spar` is not a framework but a minimalistic toolkit that has a strong focus on creating progressivily enhanced interactive experiences on a wide range of consumer devices. The goal of the toolkit is to empower the developer to focus on the creative process and less on implementation details, repetitive work and browser specific workarounds. The components in the core of the library are things you will likely need when developing an interactive experience, handle edge-cases (like vendor prefixing, experimental feature support testing and fallbacks) or are things that should inspire the developer to make use of more advanced optimisations that one normally does not have the time to implement and test under short deadlines.
+`Spar` is not a framework but a minimalistic toolkit with a strong focus on creating progressivily enhanced interactive experiences on a wide range of consumer devices. The goal of the toolkit is to empower the developer to focus on the creative process and less on implementation details, repetitive work and browser specific workarounds. The components in the core of the library are things you will likely need when developing an interactive experience, handle edge-cases (like vendor prefixing, experimental feature support testing and fallbacks) or are things that should inspire the developer to make use of more advanced optimisations that one normally does not have the time to implement and test under short deadlines.
 
 ## Roadmap
 
@@ -36,15 +36,15 @@ Contains code for an `AssetLoader` used for preloading commonly used assets like
 
 ### Audio
 
-Contains code to help you with managing audio and autoplay unlocking in the browser.
+Contains code to help you with managing audio, audio effects and autoplay unlocking in the browser.
+
+### Constants
+
+Contains constant values used inside of the library and offers a forward compatible way of handling changes of these constants (such as event names or cookie names)
 
 ### Cookie
 
 Contains code to help you with getting and setting cookies.
-
-### Enum
-
-Contains Enums used in Spar for more consistent access and the advantage of having a single entry point of exposed internals.
 
 ### Events
 
@@ -69,6 +69,10 @@ Contains code to set up persistent caching using IndexedDB and with an in-memory
 ### Polyfills
 
 Contains a fullscreen and pointerlock polyfill that can be used without having to worry about vendor prefixes.
+
+### Settings
+
+Contains code to parse `?key1=value&key2=value` queries to override application wide settings.
 
 ### ThreadPool
 
@@ -114,7 +118,7 @@ Results from one task can be directly passed into another task but instead of pu
 
 ### Utilities
 
-Contains some commonly used utilities (assertions, query parameters, etc..).
+Contains some commonly used utilities.
 
 ## Browser support
 

@@ -1,3 +1,8 @@
+export const COOKIES = {
+  // Audio
+  AUDIO_MUTED: 'SPAR::COOKIE_AUDIO_MUTED',
+};
+
 export const EVENTS = {
   // AssetLoader
   ASSETS_LOADED: 'SPAR::EVENT_ASSETS_LOADED',
@@ -16,9 +21,4 @@ export const EVENTS = {
 
   // FrameTicker
   FRAME_TICK: 'SPAR::EVENT_FRAME_TICK',
-};
-
-export const COOKIES = {
-  // Audio
-  AUDIO_MUTED: 'SPAR::COOKIE_AUDIO_MUTED',
 };
