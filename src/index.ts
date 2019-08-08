@@ -10,8 +10,8 @@ export { audioManager, createAudioContext, checkAutoplay } from './audio';
 // Constants
 export { COOKIES, EVENTS } from './constants';
 
-// Cookie
-export { deleteCookie, getCookie, setCookie } from './cookie';
+// Cookies
+export { deleteCookie, getCookie, setCookie } from './cookies';
 
 // Events
 export { EventEmitter, eventEmitter } from './events';
