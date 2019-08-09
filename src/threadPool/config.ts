@@ -11,5 +11,5 @@ export const config = {
     .substr(2, 8)}`,
 
   // Default thread pool size based on reported available CPU cores minus the main thread
-  THREAD_POOL_SIZE: Math.min(4, Math.max(2, getAvailableCPUCoreCount - 1)),
+  THREAD_POOL_SIZE: Math.min(6, Math.max(2, getAvailableCPUCoreCount - 1)),
 };

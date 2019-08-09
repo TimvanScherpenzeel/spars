@@ -84,7 +84,7 @@ Results from one task can be directly passed into another task but instead of pu
 ```ts
 (async () => {
   // Create a new thread pool (highly recommended to only create a single instance)
-  // Pass a number with the maximum size of the pool which defaults to CPU cores with a maximum of 4 threads.
+  // Pass a number with the maximum size of the pool which defaults to CPU cores with a maximum of 6 threads (if available, defaults to AVAILABLE_CPU_CORE_COUNT - 1).
   const pool = new ThreadPool();
 
   // Add a new executable module to the thread pool
