@@ -89,7 +89,7 @@ export class AssetLoader {
       return data.ASTC && getWebGLFeatures.extensions.compressedTextureASTCExtension
         ? data.ASTC
         : data.ETC && getWebGLFeatures.extensions.compressedTextureETCExtension
-        ? data.S3TC
+        ? data.ETC
         : data.PVRTC && getWebGLFeatures.extensions.compressedTexturePVRTCExtension
         ? data.PVRTC
         : data.S3TC && getWebGLFeatures.extensions.compressedTextureS3TCExtension

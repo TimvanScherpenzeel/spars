@@ -8,16 +8,12 @@
 
 ## Roadmap
 
-- Add support for KTX2 textures and Basis textures
-- Add support for microphone input to AudioManager
-- Add various built-in audio effect chains
-- Add wrappers around various sensors available on smartphones (ambient light, geolocation, device motion, device orientation, battery)
-
 - Verify if everything is still working across all targeted browsers (and polyfill the necessary on IE11)
-- Add shake sensor (acceleration)
-- Add screen lock API polyfill
-- Add accelerometer / device orientation / motion API
+- Add support for microphone input to AudioManager
+- Add screen lock API polyfill (lock screen from orientation switches when in fullscreen mode)
 
+- Add support for KTX2 textures and Basis textures (once a stabalized version has landed)
+- Add wrappers around various sensors available on smartphones (ambient light, geolocation, device motion, device orientation, battery)
 - Look into creating native bindings (doesn't make sense yet without native clients)
 - Look more into the latest Hydra experience release of Active Theory
 - Add GUI support
