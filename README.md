@@ -11,6 +11,7 @@
 - Verify if everything is still working across all targeted browsers (and polyfill the necessary on IE11)
 - Add support for microphone input to AudioManager
 - Add screen lock API polyfill (lock screen from orientation switches when in fullscreen mode)
+- Look if it is possible to use GPU compressed textures in 2D canvas contexts (likely it won't be)
 
 - Add support for KTX2 textures and Basis Universal textures (once a stabalized version has landed)
 - Add wrappers around various sensors available on smartphones (ambient light, geolocation, device motion, device orientation, battery)
@@ -52,7 +53,7 @@ Contains code to check the support of various browser features, test for browser
 
 ### FrameScheduler
 
-Contains a scheduler to schedule tasks over multiple frames to avoid dropping below 16 frames per second.
+Contains a scheduler to schedule tasks over multiple frames to avoid dropping below 60 frames per second.
 
 ### FrameTicker
 
@@ -60,7 +61,7 @@ Global requestAnimationFrame ticker, fires `ENUMS.FRAME_TICK` event.
 
 ### PersistentCache
 
-Contains code to set up persistent caching using IndexedDB and with an in-memory `Map` cache as fallback.
+Contains code to set up persistent caching using `IndexedDB` and with an in-memory `Map` cache as fallback.
 
 ### Polyfills
 
@@ -68,7 +69,7 @@ Contains a fullscreen and pointerlock polyfill that can be used without having t
 
 ### Settings
 
-Contains code to parse `?key1=value&key2=value` queries to override application wide settings.
+Contains code to parse `?key1=value&key2=value` search queries in the URL to override application wide settings. Useful for toggling settings on any device without requiring special builds.
 
 ### ThreadPool
 
