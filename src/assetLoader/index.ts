@@ -494,43 +494,43 @@ export class AssetLoader {
 
         // Determine of the remaining header values are recorded
         // in the opposite endianness and require conversion
-        const bigEndian = header[0] === 0x01020304;
+        const isBigEndian = header[0] === 0x01020304;
 
         // Must be 0 for compressed textures
-        const glType = bigEndian ? switchEndianness(header[1]) : header[1];
+        const glType = isBigEndian ? switchEndianness(header[1]) : header[1];
 
         // Must be 1 for compressed textures
-        // const glTypeSize = bigEndian ? switchEndianness(header[2]) : header[2];
+        // const glTypeSize = isBigEndian ? switchEndianness(header[2]) : header[2];
 
         // Must be 0 for compressed textures
-        // const glFormat = bigEndian ? switchEndianness(header[3]) : header[3];
+        // const glFormat = isBigEndian ? switchEndianness(header[3]) : header[3];
 
         // The value to be passed to gl.compressedTexImage2D(,,x,,,,)
-        const glInternalFormat = bigEndian ? switchEndianness(header[4]) : header[4];
+        const glInternalFormat = isBigEndian ? switchEndianness(header[4]) : header[4];
 
         // Specify GL_RGB, GL_RGBA, GL_ALPHA, etc (un-compressed only)
-        const glBaseInternalFormat = bigEndian ? switchEndianness(header[5]) : header[5];
+        const glBaseInternalFormat = isBigEndian ? switchEndianness(header[5]) : header[5];
 
         // Level 0 value to be passed to gl.compressedTexImage2D(,,,x,,,)
-        const pixelWidth = bigEndian ? switchEndianness(header[6]) : header[6];
+        const pixelWidth = isBigEndian ? switchEndianness(header[6]) : header[6];
 
         // Level 0 value to be passed to gl.compressedTexImage2D(,,,,x,,)
-        const pixelHeight = bigEndian ? switchEndianness(header[7]) : header[7];
+        const pixelHeight = isBigEndian ? switchEndianness(header[7]) : header[7];
 
         // Level 0 value to be passed to gl.compressedTexImage3D(,,,,,x,,)
-        const pixelDepth = bigEndian ? switchEndianness(header[8]) : header[8];
+        const pixelDepth = isBigEndian ? switchEndianness(header[8]) : header[8];
 
         // Used for texture arrays
-        const numberOfArrayElements = bigEndian ? switchEndianness(header[9]) : header[9];
+        const numberOfArrayElements = isBigEndian ? switchEndianness(header[9]) : header[9];
 
         // Used for cubemap textures, should either be 1 or 6
-        const numberOfFaces = bigEndian ? switchEndianness(header[10]) : header[10];
+        const numberOfFaces = isBigEndian ? switchEndianness(header[10]) : header[10];
 
         // Number of levels; disregard possibility of 0 for compressed textures
-        let numberOfMipmapLevels = bigEndian ? switchEndianness(header[11]) : header[11];
+        let numberOfMipmapLevels = isBigEndian ? switchEndianness(header[11]) : header[11];
 
         // The amount of space after the header for meta-data
-        const bytesOfKeyValueData = bigEndian ? switchEndianness(header[12]) : header[12];
+        const bytesOfKeyValueData = isBigEndian ? switchEndianness(header[12]) : header[12];
 
         // Value of zero is an indication to generate mipmaps at runtime.
         // Not usually allowed for compressed, so disregard.
