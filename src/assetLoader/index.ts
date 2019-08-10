@@ -388,7 +388,7 @@ export class AssetLoader {
    *
    * NOTE: Please be cautious when using loadImageBitmap as browser support is still spotty and unreliable
    *
-   *  See:
+   *  SEE:
    * - https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#dom-createimagebitmap
    * - https://caniuse.com/createimagebitmap
    * - https://bugzilla.mozilla.org/show_bug.cgi?id=1335594

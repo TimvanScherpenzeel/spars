@@ -85,7 +85,7 @@ export class PersistentCache {
    * Sets a { key: value } pair in the persistent cache
    *
    * NOTE: In order to store ArrayBuffers in IndexedDB you will need to convert them to Blobs
-   * See `PersistentCache.convertArrayBufferToBlob()` and `PersistentCache.convertBlobToArrayBuffer()`
+   * SEE: `PersistentCache.convertArrayBufferToBlob()` and `PersistentCache.convertBlobToArrayBuffer()`
    *
    * @param key Key to set cache entry with
    * @param value Value to set cache entry with
