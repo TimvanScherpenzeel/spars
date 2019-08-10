@@ -554,3 +554,6 @@ console.log(Spar.features);
 
 //   // pool.dispose();
 // })();
+
+// Utilities
+// console.log(Spar.getUUID());
