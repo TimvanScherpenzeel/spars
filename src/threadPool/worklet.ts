@@ -7,6 +7,7 @@ import { Self } from './types/native';
 /**
  * Generic worklet to execute individual tasks
  */
+// TODO: possibly dynamically inject a promise polyfill into the worker for IE 11 support
 export const worklet = URL.createObjectURL(
   new Blob([
     `(${(): void => {
