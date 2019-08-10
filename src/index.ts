@@ -38,4 +38,4 @@ export { settings } from './settings';
 export { threadPool } from './threadPool';
 
 // Utilities
-export { assert, debounce, getQueryParameters, getUUID } from './utilities';
+export { assert, debounce, getQueryParameters, getUUID, hashString } from './utilities';
