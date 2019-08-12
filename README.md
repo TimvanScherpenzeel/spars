@@ -120,7 +120,7 @@ Contains some commonly used utilities.
 
 ## Browser support
 
-`Spar` supports the latest two versions of `evergreen` browsers and `Internet Explorer 11`:
+`Spar` supports the latest two versions of `evergreen` browsers (not `Internet Explorer 11` and lower):
 
 - Edge
 - Firefox

@@ -7,6 +7,7 @@ import getWebGLFeatures from './browserFeatures/getWebGLFeatures';
 import isAnimationWorkletSupported from './browserFeatures/isAnimationWorkletSupported';
 import isAudioWorkletSupported from './browserFeatures/isAudioWorkletSupported';
 import isBroadcastChannelSupported from './browserFeatures/isBroadcastChannelSupported';
+import isCryptoSupported from './browserFeatures/isCryptoSupported';
 import isFetchSupported from './browserFeatures/isFetchSupported';
 import isGamepadSupported from './browserFeatures/isGamepadSupported';
 import isImageBitmapSupported from './browserFeatures/isImageBitmapSupported';
@@ -51,6 +52,7 @@ export const features = {
     isAnimationWorkletSupported,
     isAudioWorkletSupported,
     isBroadcastChannelSupported,
+    isCryptoSupported,
     isFetchSupported,
     isGamepadSupported,
     isImageBitmapSupported,

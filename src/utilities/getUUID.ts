@@ -1,28 +1,14 @@
-/**
- * Creates a single interface around the Crypto API (IE 11 requires a `ms` prefix)
- *
- * For current browser support please refer to: https://caniuse.com/#search=crypto
- */
-
-const getRandomValuesInterface =
-  (typeof crypto !== 'undefined' &&
-    crypto.getRandomValues &&
-    crypto.getRandomValues.bind(crypto)) ||
-  // @ts-ignore msCrypto does not have a type entry but is valid in IE 11
-  (typeof msCrypto !== 'undefined' &&
-    // @ts-ignore msCrypto does not have a type entry but is valid in IE 11
-    typeof window.msCrypto.getRandomValues === 'function' &&
-    // @ts-ignore msCrypto does not have a type entry but is valid in IE 11
-    msCrypto.getRandomValues.bind(msCrypto));
+// Features
+import isCryptoSupported from '../features/browserFeatures/isCryptoSupported';
 
 /**
  * Get a 16 random byte values array either using the Crypto API or the Math.random() fallback
  */
 export const getRandomValues = (): Uint8Array | number[] => {
-  if (getRandomValuesInterface) {
+  if (isCryptoSupported) {
     const data = new Uint8Array(16);
 
-    getRandomValuesInterface(data);
+    window.crypto.getRandomValues(data);
 
     return data;
   } else {
