@@ -4,9 +4,6 @@ import { Task } from './Task';
 // Types
 import { Self } from './types/native';
 
-// TODO: possibly dynamically inject a promise polyfill into the worker for IE 11 support
-// https://cdn.jsdelivr.net/npm/promise-polyfill/dist/polyfill.min.js
-
 /**
  * Generic worklet to execute individual tasks
  */
