@@ -8,7 +8,6 @@
 
 ## Roadmap
 
-- Verify if everything is still working across all targeted browsers (and polyfill the necessary on IE11)
 - Add support for microphone input to AudioManager
 - Add screen lock API polyfill (lock screen from orientation switches when in fullscreen mode)
 - Look if it is possible to use GPU compressed textures in 2D canvas contexts (likely it won't be)
