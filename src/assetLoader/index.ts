@@ -474,17 +474,17 @@ export class AssetLoader {
         const identifier = new Uint8Array(data, 0, 12);
 
         assert(
-          identifier[0] === 0xab ||
-            identifier[1] === 0x4b ||
-            identifier[2] === 0x54 ||
-            identifier[3] === 0x58 ||
-            identifier[4] === 0x20 ||
-            identifier[5] === 0x31 ||
-            identifier[6] === 0x31 ||
-            identifier[7] === 0xbb ||
-            identifier[8] === 0x0d ||
-            identifier[9] === 0x0a ||
-            identifier[10] === 0x1a ||
+          identifier[0] === 0xab &&
+            identifier[1] === 0x4b &&
+            identifier[2] === 0x54 &&
+            identifier[3] === 0x58 &&
+            identifier[4] === 0x20 &&
+            identifier[5] === 0x31 &&
+            identifier[6] === 0x31 &&
+            identifier[7] === 0xbb &&
+            identifier[8] === 0x0d &&
+            identifier[9] === 0x0a &&
+            identifier[10] === 0x1a &&
             identifier[11] === 0x0a,
           'Texture missing KTX identifier, currently only supporting KTX containers'
         );
