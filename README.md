@@ -74,8 +74,6 @@ Contains code to parse `?key1=value&key2=value` search queries in the URL to ove
 
 ### ThreadPool
 
-_Does not work on Internet Explorer 11_
-
 A small module to run arbitrary tasks efficiently off of the main thread. The module is heavily based on the [Task Worklet polyfill](https://github.com/developit/task-worklet/) by [Jason Miller](https://github.com/developit).
 
 `Sticky threads` allow you to use re-usable generic `worklets` (modularized web workers) retrieved from a centralized `sticky thread pool`. In order to maximize concurrency and minimize transfer overhead the library distributes work across multiple threads through an implicit data flow graph that is formed based on how the different tasks are linked.
