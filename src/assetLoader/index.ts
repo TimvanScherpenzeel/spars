@@ -486,7 +486,7 @@ export class AssetLoader {
             identifier[9] === 0x0a &&
             identifier[10] === 0x1a &&
             identifier[11] === 0x0a,
-          'Texture missing KTX identifier, currently only supporting KTX containers'
+          'AssetLoader -> Texture missing KTX identifier, currently only supporting KTX containers'
         );
 
         // Load the rest of the header in 32 bit int
@@ -537,10 +537,16 @@ export class AssetLoader {
         numberOfMipmapLevels = Math.max(1, numberOfMipmapLevels);
 
         // Check for 2D texture
-        assert(pixelHeight !== 0 && pixelDepth === 0, 'Only 2D textures currently supported');
+        assert(
+          pixelHeight !== 0 && pixelDepth === 0,
+          'AssetLoader -> Only 2D textures currently supported'
+        );
 
         // Check for texture arrays, currently not supported
-        assert(numberOfArrayElements === 0, 'Texture arrays not currently supported');
+        assert(
+          numberOfArrayElements === 0,
+          'AssetLoader -> Texture arrays not currently supported'
+        );
 
         const mipmaps = [];
 

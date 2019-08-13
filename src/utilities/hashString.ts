@@ -17,7 +17,7 @@ import { assert } from './assert';
  */
 export const hashString = (str: string): number => {
   // Verify that the input string only has ASCII characters (negligible overhead)
-  assert(/^[\x00-\x7F]*$/.test(str), 'String contains non-ASCII characters');
+  assert(/^[\x00-\x7F]*$/.test(str), 'HashString -> String contains non-ASCII characters');
 
   let hash = 5381;
   const stringLength = str.length;
