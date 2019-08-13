@@ -34,9 +34,12 @@ export const setCookie = (key: string, value: string, expiryDays = 365): void =>
  */
 export const getCookie = (key: string): TUndefinable<string | boolean> => {
   if (isCookieEnabled) {
-    const result = document.cookie.match(`(^|;)\\s*${key}\\s*=\\s*([^;]+)`);
+    const match = document.cookie.match(`(^|;)\\s*${key}\\s*=\\s*([^;]+)`);
+    const result = match ? match.pop() : '';
 
-    return result ? result.pop() : '';
+    // TODO: convert string to built-in types for easier access (boolean / null / undefined / number)
+
+    return result;
   }
 
   console.warn('Cookie -> Cookies are disabled, no cookie was retrieved');
