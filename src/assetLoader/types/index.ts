@@ -4,6 +4,7 @@
 export enum ELoaderKey {
   ArrayBuffer = 'ArrayBuffer',
   Audio = 'Audio',
+  Binpack = 'Binpack',
   Blob = 'Blob',
   Font = 'Font',
   Image = 'Image',

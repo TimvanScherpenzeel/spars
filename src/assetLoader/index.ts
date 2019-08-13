@@ -32,8 +32,9 @@ import {
  * Allows the omission of the loader key for some generic extensions used on the web
  */
 const LOADER_EXTENSIONS_MAP = new Map([
-  [ELoaderKey.ArrayBuffer, { extensions: ['bin']}],
+  [ELoaderKey.ArrayBuffer, { extensions: ['bin'] }],
   [ELoaderKey.Audio, { extensions: ['mp3', 'ogg', 'wav', 'flac'] }],
+  [ELoaderKey.Binpack, { extensions: ['binpack'] }],
   [ELoaderKey.Font, { extensions: ['woff2', 'woff', 'ttf', 'otf', 'eot'] }],
   [ELoaderKey.Image, { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
   [ELoaderKey.ImageBitmap, { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
@@ -326,6 +327,76 @@ export class AssetLoader {
       .catch(err => {
         console.error(err);
       });
+
+  private loadBinpack = (item: ILoadItem): Promise<any> =>
+    this.loadArrayBuffer(item).then(data => {
+      const BINPACKER_HEADER_MAGIC = 'BINP';
+      const BINPACKER_HEADER_LENGTH = 12;
+      const BINPACKER_CHUNK_TYPE_JSON = 0x4e4f534a;
+      const BINPACKER_CHUNK_TYPE_BINARY = 0x004e4942;
+
+      if (data) {
+        let content = null;
+        let contentArray = null;
+        let binaryChunk: ArrayBuffer | null = null;
+        let byteOffset = null;
+        let chunkIndex = 0;
+        let chunkLength = 0;
+        let chunkType = null;
+
+        const headerView = new DataView(data, BINPACKER_HEADER_LENGTH);
+        const headerMagic = new Uint8Array(data, 0, 4).reduce(
+          (magic, char) => (magic += String.fromCharCode(char)),
+          ''
+        );
+
+        assert(
+          headerMagic === BINPACKER_HEADER_MAGIC,
+          'AssetLoader -> Unsupported Binpacker header'
+        );
+
+        const chunkView = new DataView(data, BINPACKER_HEADER_LENGTH);
+
+        while (chunkIndex < chunkView.byteLength) {
+          chunkLength = chunkView.getUint32(chunkIndex, true);
+          chunkIndex += 4;
+
+          chunkType = chunkView.getUint32(chunkIndex, true);
+          chunkIndex += 4;
+
+          if (chunkType === BINPACKER_CHUNK_TYPE_JSON) {
+            contentArray = new Uint8Array(data, BINPACKER_HEADER_LENGTH + chunkIndex, chunkLength);
+            content = contentArray.reduce((str, char) => (str += String.fromCharCode(char)), '');
+          } else if (chunkType === BINPACKER_CHUNK_TYPE_BINARY) {
+            byteOffset = BINPACKER_HEADER_LENGTH + chunkIndex;
+            binaryChunk = data.slice(byteOffset, byteOffset + chunkLength);
+          }
+
+          chunkIndex += chunkLength;
+        }
+
+        assert(content !== null, 'AssetLoader -> JSON content chunk not found');
+
+        if (content && binaryChunk) {
+          const jsonChunk = JSON.parse(content);
+
+          jsonChunk.map(
+            (entry: { name: string; mimeType: string; bufferStart: number; bufferEnd: number }) => {
+              const { name, mimeType } = entry;
+              const binary = binaryChunk.slice(entry.bufferStart, entry.bufferEnd);
+              const blob = new Blob([new Uint8Array(binary)], {
+                type: mimeType,
+              });
+              const url = URL.createObjectURL(blob);
+
+              // this.loadImage()
+
+              // name, mimeType, url
+            }
+          );
+        }
+      }
+    });
 
   /**
    * Load an item and parse the Response as blob
