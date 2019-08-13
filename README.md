@@ -13,7 +13,8 @@
 - Look if it is possible to use GPU compressed textures in 2D canvas contexts (likely it won't be)
 - Add primary support for efficient spritesheets reading / splitting (possibly in the asset loader)
 - Add support for KTX2 textures and Basis Universal textures (once a stabalized version has landed)
-- Look into creating native bindings (doesn't make sense yet without native clients)
+- Look into creating native bindings for iOS (ARKit especially but other sensors as well)
+- Add primary support for WebSockets
 
 ## API
 
