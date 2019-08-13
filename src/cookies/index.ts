@@ -32,7 +32,7 @@ export const setCookie = (key: string, value: string, expiryDays = 365): void =>
  *
  * @param key Key of cookie to get
  */
-export const getCookie = (key: string): TNullable<TUndefinable<string | number | boolean>> => {
+export const getCookie = (key: string): boolean | undefined | null | number | string => {
   if (isCookieEnabled) {
     const match = document.cookie.match(`(^|;)\\s*${key}\\s*=\\s*([^;]+)`);
     const result = match ? match.pop() : '';
