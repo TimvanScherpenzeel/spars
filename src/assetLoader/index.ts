@@ -32,6 +32,7 @@ import {
  * Allows the omission of the loader key for some generic extensions used on the web
  */
 const LOADER_EXTENSIONS_MAP = new Map([
+  [ELoaderKey.ArrayBuffer, { extensions: ['bin']}],
   [ELoaderKey.Audio, { extensions: ['mp3', 'ogg', 'wav', 'flac'] }],
   [ELoaderKey.Font, { extensions: ['woff2', 'woff', 'ttf', 'otf', 'eot'] }],
   [ELoaderKey.Image, { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
