@@ -45,7 +45,7 @@ Contains code to help you with getting and setting cookies.
 
 ### Events
 
-Contains code to handle network connection changes, device orietation changes, document visibility changes, keyboard key changes and window size changes. It also exposes an `EventEmitter` wrapper around [mitt](https://github.com/developit/mitt).
+Contains code to handle network connection changes, device orietation changes, document visibility changes and window size changes. It also exposes an `EventEmitter` wrapper around [mitt](https://github.com/developit/mitt).
 
 ### Features
 
