@@ -293,27 +293,6 @@ import * as Spar from '../dist/spar.umd';
 
 // Spar.eventEmitter.on(Spar.EVENTS.CONNECTION_CHANGE, connectionChangeHandler);
 
-// const keyChangeDownHandler = event => {
-//   console.log(`keyDown: ${event.key}`);
-
-//   document.getElementById('root').appendChild(document.createTextNode(event.key));
-
-//   // Spar.eventEmitter.off(Spar.EVENTS.KEY_DOWN_CHANGE, keyChangeDownHandler);
-// };
-
-// const keyChangeUpHandler = event => {
-//   console.log(`keyUp: ${event.key}`);
-
-//   document.getElementById('root').appendChild(document.createTextNode(event.key));
-
-//   // Spar.eventEmitter.off(Spar.EVENTS.KEY_UP_CHANGE, keyChangeDownHandler);
-// };
-
-// Spar.eventEmitter.on(Spar.EVENTS.KEY_DOWN_CHANGE, keyChangeDownHandler);
-// Spar.eventEmitter.on(Spar.EVENTS.KEY_UP_CHANGE, keyChangeUpHandler);
-
-// document.getElementById('root').appendChild(document.createElement('textarea'));
-
 // const orientationChangeHandler = event => {
 //   console.log(event);
 
