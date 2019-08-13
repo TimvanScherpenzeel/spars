@@ -36,7 +36,7 @@ class AudioManager {
   constructor() {
     eventEmitter.on(EVENTS.VISIBILITY_CHANGE, this.onVisibilityChangeHandler);
 
-    if (getCookie(COOKIES.AUDIO_MUTED) === 'true') {
+    if (getCookie(COOKIES.AUDIO_MUTED)) {
       Object.keys(this.audioSources).forEach((audioSource: string) => {
         this.setVolume(audioSource, 0);
       });
@@ -116,7 +116,7 @@ class AudioManager {
   };
 
   private onVisibilityChangeHandler = (event: { isVisible: boolean }): void => {
-    if (getCookie(COOKIES.AUDIO_MUTED) === 'true') {
+    if (getCookie(COOKIES.AUDIO_MUTED)) {
       // Avoid fading back in if the user has purposely set the audio to be muted
       return;
     }

@@ -2,7 +2,7 @@
 import isCookieEnabled from '../features/browserSettings/isCookieEnabled';
 
 // Types
-import { TUndefinable } from '../types';
+import { TNullable, TUndefinable } from '../types';
 
 // NOTE: When blocking cookies Firefox throws a security error for localStorage and indexedDB blocking further execution.
 /**
@@ -32,14 +32,29 @@ export const setCookie = (key: string, value: string, expiryDays = 365): void =>
  *
  * @param key Key of cookie to get
  */
-export const getCookie = (key: string): TUndefinable<string | boolean> => {
+export const getCookie = (key: string): TNullable<TUndefinable<string | number | boolean>> => {
   if (isCookieEnabled) {
     const match = document.cookie.match(`(^|;)\\s*${key}\\s*=\\s*([^;]+)`);
     const result = match ? match.pop() : '';
 
-    // TODO: convert string to built-in types for easier access (boolean / null / undefined / number)
+    // Convert number strings to numbers (integers, floats, hexadecimals)
+    if ((result && /^\d+\.\d+$/.test(result)) || (result && /0[xX0-9A-Fa-f]{6}/g.test(result))) {
+      return Number(result);
+    }
 
-    return result;
+    // Convert built-in types to their corresponding types
+    switch (result) {
+      case 'true':
+        return true;
+      case 'false':
+        return false;
+      case 'undefined':
+        return undefined;
+      case 'null':
+        return null;
+      default:
+        return result;
+    }
   }
 
   console.warn('Cookie -> Cookies are disabled, no cookie was retrieved');

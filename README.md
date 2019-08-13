@@ -8,7 +8,6 @@
 
 ## Roadmap
 
-- Adjust getCookie to return native type ('true' string becomes true (boolean), etc..)
 - Add support for microphone input to AudioManager
 - Add screen lock API polyfill (lock screen from orientation switches when in fullscreen mode)
 - Look if it is possible to use GPU compressed textures in 2D canvas contexts (likely it won't be)
