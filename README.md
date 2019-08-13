@@ -11,15 +11,9 @@
 - Add support for microphone input to AudioManager
 - Add screen lock API polyfill (lock screen from orientation switches when in fullscreen mode)
 - Look if it is possible to use GPU compressed textures in 2D canvas contexts (likely it won't be)
-- Add support for spritesheets
-
+- Add primary support for efficient spritesheets reading / splitting (possibly in the asset loader)
 - Add support for KTX2 textures and Basis Universal textures (once a stabalized version has landed)
-- Add wrappers around various sensors available on smartphones (ambient light, geolocation, device motion, device orientation, battery)
 - Look into creating native bindings (doesn't make sense yet without native clients)
-- Look more into the latest Hydra experience release of Active Theory
-- Add GUI support
-- Add common data structures
-- Hot reloading shaders
 
 ## API
 

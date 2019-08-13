@@ -259,29 +259,29 @@ import * as Spar from '../dist/spar.umd';
 // Cookie
 // ------
 
-Spar.setCookie('key1', true);
-Spar.setCookie('key2', 0.14);
-Spar.setCookie('key3', null);
-Spar.setCookie('key4', undefined);
-Spar.setCookie('key5', 's');
-console.log(document.cookie);
+// Spar.setCookie('key1', true);
+// Spar.setCookie('key2', 0.14);
+// Spar.setCookie('key3', null);
+// Spar.setCookie('key4', undefined);
+// Spar.setCookie('key5', 's');
+// console.log(document.cookie);
 
-console.log(Spar.getCookie('key1'));
-console.log(Spar.getCookie('key2'));
-console.log(Spar.getCookie('key3'));
-console.log(Spar.getCookie('key4'));
-console.log(Spar.getCookie('key5'));
+// console.log(Spar.getCookie('key1'));
+// console.log(Spar.getCookie('key2'));
+// console.log(Spar.getCookie('key3'));
+// console.log(Spar.getCookie('key4'));
+// console.log(Spar.getCookie('key5'));
 
-Spar.deleteCookie('key1');
-console.log(document.cookie);
+// Spar.deleteCookie('key1');
+// console.log(document.cookie);
 
-Spar.deleteCookie('key2');
-console.log(document.cookie);
+// Spar.deleteCookie('key2');
+// console.log(document.cookie);
 
-Spar.deleteCookie('key3');
-Spar.deleteCookie('key4');
-Spar.deleteCookie('key5');
-console.log(document.cookie);
+// Spar.deleteCookie('key3');
+// Spar.deleteCookie('key4');
+// Spar.deleteCookie('key5');
+// console.log(document.cookie);
 
 // Events
 // ------
