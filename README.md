@@ -8,8 +8,6 @@
 
 ## Roadmap
 
-- Add support for KTX2 textures and Basis Universal textures (once a stabalized version has landed)
-
 ## API
 
 ### Analytics
