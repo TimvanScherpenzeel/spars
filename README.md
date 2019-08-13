@@ -9,7 +9,6 @@
 ## Roadmap
 
 - Add support for microphone input to AudioManager
-- Add screen lock API polyfill (lock screen from orientation switches when in fullscreen mode)
 - Add support for KTX2 textures and Basis Universal textures (once a stabalized version has landed)
 
 ## API
