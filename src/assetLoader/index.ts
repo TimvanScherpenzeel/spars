@@ -19,7 +19,7 @@ import isWebAssemblySupported from '../features/browserFeatures/isWebAssemblySup
 import { assert } from '../utilities';
 
 // Types
-import { TUndefinable, TVoidable } from '../types';
+import { TNullable, TUndefinable, TVoidable } from '../types';
 import {
   ELoaderKey,
   IByDeviceTypeOptions,
@@ -135,6 +135,9 @@ export class AssetLoader {
               break;
             case ELoaderKey.Audio:
               loadedItem = this.loadAudio(item);
+              break;
+            case ELoaderKey.Binpack:
+              loadedItem = this.loadBinpack(item);
               break;
             case ELoaderKey.Blob:
               loadedItem = this.loadBlob(item);
@@ -338,13 +341,12 @@ export class AssetLoader {
       if (data) {
         let content = null;
         let contentArray = null;
-        let binaryChunk: ArrayBuffer | null = null;
+        let binaryChunk: TNullable<ArrayBuffer> = null;
         let byteOffset = null;
         let chunkIndex = 0;
         let chunkLength = 0;
         let chunkType = null;
 
-        const headerView = new DataView(data, BINPACKER_HEADER_LENGTH);
         const headerMagic = new Uint8Array(data, 0, 4).reduce(
           (magic, char) => (magic += String.fromCharCode(char)),
           ''
@@ -383,15 +385,23 @@ export class AssetLoader {
           jsonChunk.map(
             (entry: { name: string; mimeType: string; bufferStart: number; bufferEnd: number }) => {
               const { name, mimeType } = entry;
-              const binary = binaryChunk.slice(entry.bufferStart, entry.bufferEnd);
-              const blob = new Blob([new Uint8Array(binary)], {
-                type: mimeType,
-              });
+              const binary = binaryChunk && binaryChunk.slice(entry.bufferStart, entry.bufferEnd);
+
+              assert(binary !== null, 'AssetLoader -> Binary content chunk not found');
+
+              const blob =
+                binary &&
+                new Blob([new Uint8Array(binary)], {
+                  type: mimeType,
+                });
+
+              const loaderType = this.getLoaderByFileExtension(name);
               const url = URL.createObjectURL(blob);
 
-              // this.loadImage()
+              console.log(loaderType, url);
 
-              // name, mimeType, url
+              // TODO: recursively call out other loader methods?
+              // TODO: ideally we would just inject the data into the already existing asset map
             }
           );
         }
