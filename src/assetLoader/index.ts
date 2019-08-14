@@ -382,7 +382,7 @@ export class AssetLoader {
         if (content && binaryChunk) {
           const jsonChunk = JSON.parse(content);
 
-          jsonChunk.map(
+          const result = jsonChunk.map(
             (entry: { name: string; mimeType: string; bufferStart: number; bufferEnd: number }) => {
               const { name, mimeType } = entry;
               const binary = binaryChunk && binaryChunk.slice(entry.bufferStart, entry.bufferEnd);
@@ -398,12 +398,23 @@ export class AssetLoader {
               const loaderType = this.getLoaderByFileExtension(name);
               const url = URL.createObjectURL(blob);
 
-              console.log(loaderType, url);
+              console.log(typeof loaderType);
+
+              assert(
+                loaderType === 'Image',
+                'AssetLoader -> Binpack currently only supports images'
+              );
+
+              return this.loadImage({ src: url, id: name });
+
+              // URL.revokeObjectURL(url);
 
               // TODO: recursively call out other loader methods?
               // TODO: ideally we would just inject the data into the already existing asset map
             }
           );
+
+          console.log(result);
         }
       }
     });
