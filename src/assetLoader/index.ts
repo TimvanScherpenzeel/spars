@@ -332,7 +332,7 @@ export class AssetLoader {
       });
 
   private loadBinpack = (item: ILoadItem): Promise<any> =>
-    this.loadArrayBuffer(item).then(data => {
+    this.loadArrayBuffer(item).then((data: TVoidable<ArrayBuffer>): any => {
       const BINPACKER_HEADER_MAGIC = 'BINP';
       const BINPACKER_HEADER_LENGTH = 12;
       const BINPACKER_CHUNK_TYPE_JSON = 0x4e4f534a;
@@ -382,39 +382,41 @@ export class AssetLoader {
         if (content && binaryChunk) {
           const jsonChunk = JSON.parse(content);
 
-          const result = jsonChunk.map(
-            (entry: { name: string; mimeType: string; bufferStart: number; bufferEnd: number }) => {
-              const { name, mimeType } = entry;
-              const binary = binaryChunk && binaryChunk.slice(entry.bufferStart, entry.bufferEnd);
+          return Promise.all(
+            jsonChunk.map(
+              (entry: {
+                name: string;
+                mimeType: string;
+                bufferStart: number;
+                bufferEnd: number;
+              }) => {
+                const { name, mimeType } = entry;
+                const binary = binaryChunk && binaryChunk.slice(entry.bufferStart, entry.bufferEnd);
 
-              assert(binary !== null, 'AssetLoader -> Binary content chunk not found');
+                assert(binary !== null, 'AssetLoader -> Binary content chunk not found');
 
-              const blob =
-                binary &&
-                new Blob([new Uint8Array(binary)], {
-                  type: mimeType,
-                });
+                const blob =
+                  binary &&
+                  new Blob([new Uint8Array(binary)], {
+                    type: mimeType,
+                  });
 
-              const loaderType = this.getLoaderByFileExtension(name);
-              const url = URL.createObjectURL(blob);
+                const loaderType = this.getLoaderByFileExtension(name);
+                const url = URL.createObjectURL(blob);
 
-              console.log(typeof loaderType);
+                assert(
+                  loaderType === ELoaderKey.Image,
+                  'AssetLoader -> Binpack currently only supports images'
+                );
 
-              assert(
-                loaderType === 'Image',
-                'AssetLoader -> Binpack currently only supports images'
-              );
-
-              return this.loadImage({ src: url, id: name });
-
-              // URL.revokeObjectURL(url);
-
-              // TODO: recursively call out other loader methods?
-              // TODO: ideally we would just inject the data into the already existing asset map
-            }
+                switch (loaderType) {
+                  case ELoaderKey.Image:
+                  default:
+                    return this.loadImage({ src: url, id: name });
+                }
+              }
+            )
           );
-
-          console.log(result);
         }
       }
     });
