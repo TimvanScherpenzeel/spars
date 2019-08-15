@@ -404,6 +404,8 @@ export class AssetLoader {
                 const loaderType = this.getLoaderByFileExtension(name);
                 const url = URL.createObjectURL(blob);
 
+                // TODO: add support for various formats supported by Binpack (where it makes sense)
+
                 assert(
                   loaderType === ELoaderKey.Image,
                   'AssetLoader -> Binpack currently only supports images'
