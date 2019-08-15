@@ -421,7 +421,6 @@ export class AssetLoader {
               )
             ).then((assets: any) => 
               Object.assign({}, ...assets.map((asset: any) => {
-                console.log([asset.id], asset.src);
                 return { [asset.id]: asset.src };
               }))
             )
