@@ -117,6 +117,10 @@ Contains some commonly used utilities.
 
 `Spar` does not include any polyfills. It is recommended to use the [polyfill.io](https://polyfill.io/v3/) service in your application.
 
+## Resources
+
+- State management on the worker: https://github.com/developit/stockroom
+
 ## Development
 
 ```sh
