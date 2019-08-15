@@ -374,41 +374,56 @@ export class AssetLoader {
         if (content && binaryChunk) {
           const jsonChunk = JSON.parse(content);
 
-          return Promise.all(
-            jsonChunk.map(
-              (entry: {
-                name: string;
-                mimeType: string;
-                bufferStart: number;
-                bufferEnd: number;
-              }) => {
-                const { name, mimeType } = entry;
-                const binary = binaryChunk && binaryChunk.slice(entry.bufferStart, entry.bufferEnd);
+          return Promise.resolve(
+            Promise.all(
+              jsonChunk.map(
+                (entry: {
+                  name: string;
+                  mimeType: string;
+                  bufferStart: number;
+                  bufferEnd: number;
+                }) => {
+                  const { name, mimeType } = entry;
+                  const binary =
+                    binaryChunk && binaryChunk.slice(entry.bufferStart, entry.bufferEnd);
 
-                assert(binary !== null, 'AssetLoader -> Binary content chunk not found');
+                  assert(binary !== null, 'AssetLoader -> Binary content chunk not found');
 
-                const blob =
-                  binary &&
-                  new Blob([new Uint8Array(binary)], {
-                    type: mimeType,
-                  });
+                  const blob =
+                    binary &&
+                    new Blob([new Uint8Array(binary)], {
+                      type: mimeType,
+                    });
 
-                const loaderType = this.getLoaderByFileExtension(name);
-                const url = URL.createObjectURL(blob);
+                  const loaderType = this.getLoaderByFileExtension(name);
+                  const url = URL.createObjectURL(blob);
 
-                assert(
-                  loaderType === ELoaderKey.Image || loaderType === ELoaderKey.XML,
-                  'AssetLoader -> Binpack currently only supports images and XML (SVG)'
-                );
+                  assert(
+                    loaderType === ELoaderKey.JSON ||
+                      loaderType === ELoaderKey.Text ||
+                      loaderType === ELoaderKey.Image ||
+                      loaderType === ELoaderKey.XML,
+                    'AssetLoader -> Binpack currently only supports JSON, plain text, XML (SVG) and images'
+                  );
 
-                switch (loaderType) {
-                  case ELoaderKey.XML:
-                    return this.loadXML({ src: url, id: name });
-                  case ELoaderKey.Image:
-                  default:
-                    return this.loadImage({ src: url, id: name });
+                  switch (loaderType) {
+                    case ELoaderKey.JSON:
+                      return { id: name, src: this.loadJSON({ src: url, id: name }) };
+                    case ELoaderKey.Text:
+                      return { id: name, src: this.loadText({ src: url, id: name }) };
+                    case ELoaderKey.XML:
+                      return { id: name, src: this.loadXML({ src: url, id: name }) };
+                    case ELoaderKey.Image:
+                    default:
+                      return { id: name, src: this.loadImage({ src: url, id: name }) };
+                  }
                 }
-              }
+              )
+            ).then((assets: any) => 
+              Object.assign({}, ...assets.map((asset: any) => {
+                console.log([asset.id], asset.src);
+                return { [asset.id]: asset.src };
+              }))
             )
           );
         }
