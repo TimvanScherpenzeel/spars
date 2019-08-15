@@ -333,11 +333,6 @@ export class AssetLoader {
 
   private loadBinpack = (item: ILoadItem): Promise<any> =>
     this.loadArrayBuffer(item).then((data: TVoidable<ArrayBuffer>): any => {
-      const BINPACKER_HEADER_MAGIC = 'BINP';
-      const BINPACKER_HEADER_LENGTH = 12;
-      const BINPACKER_CHUNK_TYPE_JSON = 0x4e4f534a;
-      const BINPACKER_CHUNK_TYPE_BINARY = 0x004e4942;
-
       if (data) {
         let content = null;
         let contentArray = null;
@@ -352,12 +347,9 @@ export class AssetLoader {
           ''
         );
 
-        assert(
-          headerMagic === BINPACKER_HEADER_MAGIC,
-          'AssetLoader -> Unsupported Binpacker header'
-        );
+        assert(headerMagic === 'BINP', 'AssetLoader -> Unsupported Binpacker header');
 
-        const chunkView = new DataView(data, BINPACKER_HEADER_LENGTH);
+        const chunkView = new DataView(data, 12);
 
         while (chunkIndex < chunkView.byteLength) {
           chunkLength = chunkView.getUint32(chunkIndex, true);
@@ -366,11 +358,11 @@ export class AssetLoader {
           chunkType = chunkView.getUint32(chunkIndex, true);
           chunkIndex += 4;
 
-          if (chunkType === BINPACKER_CHUNK_TYPE_JSON) {
-            contentArray = new Uint8Array(data, BINPACKER_HEADER_LENGTH + chunkIndex, chunkLength);
+          if (chunkType === 0x4e4f534a) {
+            contentArray = new Uint8Array(data, 12 + chunkIndex, chunkLength);
             content = contentArray.reduce((str, char) => (str += String.fromCharCode(char)), '');
-          } else if (chunkType === BINPACKER_CHUNK_TYPE_BINARY) {
-            byteOffset = BINPACKER_HEADER_LENGTH + chunkIndex;
+          } else if (chunkType === 0x004e4942) {
+            byteOffset = 12 + chunkIndex;
             binaryChunk = data.slice(byteOffset, byteOffset + chunkLength);
           }
 
@@ -404,15 +396,14 @@ export class AssetLoader {
                 const loaderType = this.getLoaderByFileExtension(name);
                 const url = URL.createObjectURL(blob);
 
-                // TODO: add support for various formats supported by Binpack (where it makes sense)
-                // TODO: check if we can rework these loading tasks to run in web workers (using threadPool)
-
                 assert(
-                  loaderType === ELoaderKey.Image,
-                  'AssetLoader -> Binpack currently only supports images'
+                  loaderType === ELoaderKey.Image || loaderType === ELoaderKey.XML,
+                  'AssetLoader -> Binpack currently only supports images and XML (SVG)'
                 );
 
                 switch (loaderType) {
+                  case ELoaderKey.XML:
+                    return this.loadXML({ src: url, id: name });
                   case ELoaderKey.Image:
                   default:
                     return this.loadImage({ src: url, id: name });
