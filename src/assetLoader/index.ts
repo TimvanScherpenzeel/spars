@@ -405,6 +405,7 @@ export class AssetLoader {
                 const url = URL.createObjectURL(blob);
 
                 // TODO: add support for various formats supported by Binpack (where it makes sense)
+                // TODO: check if we can rework these loading tasks to run in web workers (using threadPool)
 
                 assert(
                   loaderType === ELoaderKey.Image,
