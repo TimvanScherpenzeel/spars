@@ -28,11 +28,15 @@ const preventInteraction = (event: Event): void => {
  * @param duration Time it should take to scroll to that position
  * @param stepSize Amount of steps it should take to scroll to that position
  */
-export const scrollTo = (
-  destinationY: number = 0,
-  duration: number = 750,
-  stepSize: number = 10
-): Promise<void> =>
+export const scrollTo = ({
+  destinationY = 0,
+  duration = 750,
+  stepSize = 10,
+}: {
+  destinationY: number;
+  duration: number;
+  stepSize: number;
+}): Promise<void> =>
   new Promise((resolve): void => {
     // TODO: move this outside of the function?
     const scrollElement =
