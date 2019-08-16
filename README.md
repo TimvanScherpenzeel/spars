@@ -8,6 +8,9 @@
 
 ## Roadmap
 
+- Add tests for scrolling modules
+- Extract easings from audioManager and scrollTo into easings
+
 ## API
 
 ### Analytics
