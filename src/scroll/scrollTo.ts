@@ -1,0 +1,77 @@
+// Features
+import getBrowserType from '../features/browserFeatures/getBrowserType';
+
+const easeInOutQuad = (
+  time: number,
+  beginValue: number,
+  changeInValue: number,
+  duration: number
+): number => {
+  // tslint:disable-next-line:no-conditional-assignment
+  if ((time /= duration / 2) < 1) {
+    return (changeInValue / 2) * time * time + beginValue;
+  }
+
+  return (-changeInValue / 2) * (--time * (time - 2) - 1) + beginValue;
+};
+
+const preventInteraction = (event: Event): void => {
+  if (event.cancelable) {
+    event.preventDefault();
+  }
+};
+
+/**
+ * Smooth scroll to a specific Y-position
+ *
+ * @param destinationY Target Y-position
+ * @param duration Time it should take to scroll to that position
+ * @param stepSize Amount of steps it should take to scroll to that position
+ */
+export const scrollTo = (
+  destinationY: number = 0,
+  duration: number = 750,
+  stepSize: number = 10
+): Promise<void> =>
+  new Promise((resolve): void => {
+    const scrollElement =
+      getBrowserType.isFirefox || getBrowserType.isInternetExplorer
+        ? window.document.documentElement
+        : window.document.scrollingElement
+        ? window.document.scrollingElement
+        : window.document.body;
+
+    const startY =
+      window.pageYOffset !== undefined
+        ? window.pageYOffset
+        : document.documentElement.clientHeight
+        ? document.documentElement.scrollTop
+        : document.body.scrollTop;
+
+    let frameID = 0;
+    let currentTime = 0;
+    const distance = destinationY - startY;
+
+    const scroll = (): void => {
+      currentTime += stepSize;
+      scrollElement.scrollTop = easeInOutQuad(currentTime, startY, distance, duration);
+
+      if (currentTime < duration) {
+        frameID = window.requestAnimationFrame(scroll);
+      } else {
+        window.cancelAnimationFrame(frameID);
+
+        window.removeEventListener('wheel', preventInteraction);
+        window.removeEventListener('touchmove', preventInteraction);
+        window.removeEventListener('keydown', preventInteraction);
+
+        resolve();
+      }
+    };
+
+    window.addEventListener('wheel', preventInteraction, false);
+    window.addEventListener('touchmove', preventInteraction, false);
+    window.addEventListener('keydown', preventInteraction, false);
+
+    scroll();
+  });
