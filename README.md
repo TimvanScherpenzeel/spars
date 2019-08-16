@@ -8,8 +8,6 @@
 
 ## Roadmap
 
-- Add support for `.binpack` files to asset loader (as alternative to spritesheets)
-
 ## API
 
 ### Analytics
