@@ -31,6 +31,9 @@ export { persistentCache } from './persistentCache';
 // Polyfills
 export { fullScreen, pointerLock } from './polyfills';
 
+// Scrolling
+export { scrollTo, scrollToTopOnReload } from './scrolling';
+
 // Settings
 export { settings } from './settings';
 
