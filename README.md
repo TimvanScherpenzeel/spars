@@ -16,7 +16,7 @@ Contains code to help you set up Google Analytics tracking and reporting of indi
 
 ### AssetLoader
 
-Contains code for an `AssetLoader` used for preloading commonly used assets like images, GPU compressed images, bitmaps, video, audio, fonts, WebAssembly, JSON, SVG, XML, HTML etc..).
+Contains code for an `AssetLoader` used for preloading commonly used assets like images, GPU compressed images, bitmaps, binpacks, video, audio, fonts, WebAssembly, JSON, SVG, XML, HTML etc..).
 
 ### Audio
 
