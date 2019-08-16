@@ -34,6 +34,7 @@ export const scrollTo = (
   stepSize: number = 10
 ): Promise<void> =>
   new Promise((resolve): void => {
+    // TODO: move this outside of the function?
     const scrollElement =
       getBrowserType.isFirefox || getBrowserType.isInternetExplorer
         ? window.document.documentElement
