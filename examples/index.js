@@ -8,7 +8,7 @@ scrollTopElement.addEventListener('click', () => {
     destinationY: 0,
     duration: 750,
     stepSize: 10,
-  }).then(console.log('done'));
+  }).then(() => console.log('done'));
 });
 
 // Analytics
