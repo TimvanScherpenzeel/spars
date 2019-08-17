@@ -36,12 +36,10 @@ const scrollElement = getBrowserType.isFirefox
  */
 export const scrollTo = ({
   destinationY = 0,
-  duration = 750,
-  stepSize = 10,
+  duration = 1250,
 }: {
   destinationY: number;
   duration: number;
-  stepSize: number;
 }): Promise<void> =>
   new Promise((resolve): void => {
     const startY =
@@ -53,6 +51,7 @@ export const scrollTo = ({
 
     let frameID = 0;
     let currentTime = 0;
+    const stepSize = 16.66667;
     const distance = destinationY - startY;
 
     const scroll = (): void => {

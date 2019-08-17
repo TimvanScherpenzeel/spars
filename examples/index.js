@@ -1,16 +1,6 @@
 // Vendor
 import * as Spar from '../dist/spar.umd';
 
-const scrollTopElement = document.getElementById('scroll-top');
-
-scrollTopElement.addEventListener('click', () => {
-  Spar.scrollTo({
-    destinationY: 0,
-    duration: 750,
-    stepSize: 10,
-  }).then(() => console.log('done'));
-});
-
 // Analytics
 // ---------
 
@@ -447,6 +437,20 @@ console.log(Spar.features);
 // };
 
 // console.log(Spar.pointerLock);
+
+// Scrolling
+// ---------
+
+// const scrollTopElement = document.getElementById('scroll-top');
+
+// scrollTopElement.addEventListener('click', () => {
+//   Spar.scrollTo({
+//     destinationY: 0,
+//     duration: 1250,
+//   }).then(() => console.log('done'));
+// });
+
+// Spar.scrollToTopOnReload();
 
 // ThreadPool
 // ----------

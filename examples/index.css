@@ -12,11 +12,12 @@ body {
 
 #root {
   width: 100%;
-  height: 500vh;
-  background: linear-gradient(white, red);
+  height: 100%;
+  /* height: 500vh; */
+  /* background: linear-gradient(white, red); */
 }
 
-#scroll-top {
+/* #scroll-top {
   position: fixed;
   bottom: 0px;
-}
+} */
