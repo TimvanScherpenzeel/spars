@@ -21,6 +21,12 @@ const preventInteraction = (event: Event): void => {
   }
 };
 
+const scrollElement = getBrowserType.isFirefox
+  ? window.document.documentElement
+  : window.document.scrollingElement
+  ? window.document.scrollingElement
+  : window.document.body;
+
 /**
  * Smooth scroll to a specific Y-position
  *
@@ -38,14 +44,6 @@ export const scrollTo = ({
   stepSize: number;
 }): Promise<void> =>
   new Promise((resolve): void => {
-    // TODO: move this outside of the function?
-    const scrollElement =
-      getBrowserType.isFirefox || getBrowserType.isInternetExplorer
-        ? window.document.documentElement
-        : window.document.scrollingElement
-        ? window.document.scrollingElement
-        : window.document.body;
-
     const startY =
       window.pageYOffset !== undefined
         ? window.pageYOffset
