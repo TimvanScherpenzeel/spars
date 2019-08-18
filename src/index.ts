@@ -20,7 +20,7 @@ export { EventEmitter, eventEmitter } from './events';
 export { features } from './features';
 
 // FrameScheduler
-export { priorities, scheduleFrame } from './frameScheduler';
+export { schedulePriorities, scheduleFrame } from './frameScheduler';
 
 // FrameTicker
 export { frameTicker } from './frameTicker';

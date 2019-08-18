@@ -52,7 +52,7 @@ export const scrollTo = ({
 
     let frameID = 0;
     let currentTime = 0;
-    const stepSize = 16.66667;
+    const stepSize = 16.6667;
     const distance = destinationY - startY;
 
     const scroll = (): void => {

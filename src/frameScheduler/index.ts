@@ -8,7 +8,7 @@ import { PriorityUniqueQueue } from './PriorityUniqueQueue';
 
 const TIME_LIFE_FRAME = 16.6667;
 
-export const priorities = {
+export const schedulePriorities = {
   LOWER: 1,
   // tslint:disable-next-line:object-literal-sort-keys
   LOW: 3,
@@ -90,7 +90,12 @@ export const createFrameScheduler = (): (() => void) => {
    */
   // TODO: fix definition
   // @ts-ignore
-  return function scheduling(callback: () => void, { priority = priorities.NORMAL } = {}): void {
+  return function scheduling(
+    callback: () => void,
+    // TODO: fix definition
+    // @ts-ignore
+    { priority = schedulePriorities.NORMAL } = {}
+  ): void {
     addTask(callback, priority);
 
     runDefer();

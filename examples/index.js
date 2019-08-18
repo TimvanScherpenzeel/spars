@@ -343,14 +343,14 @@ console.log(Spar.features);
 //   () => {
 //     result.push('A');
 //   },
-//   { priority: Spar.priorities.LOW }
+//   { priority: Spar.schedulePriorities.LOW }
 // );
 
 // Spar.scheduleFrame(
 //   () => {
 //     result.push('C');
 //   },
-//   { priority: Spar.priorities.IMPORTANT }
+//   { priority: Spar.schedulePriorities.IMPORTANT }
 // );
 
 // Spar.scheduleFrame(
