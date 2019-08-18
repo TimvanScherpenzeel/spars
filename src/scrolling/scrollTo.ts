@@ -7,8 +7,9 @@ const easeInOutQuad = (
   changeInValue: number,
   duration: number
 ): number => {
-  // tslint:disable-next-line:no-conditional-assignment
-  if ((time /= duration / 2) < 1) {
+  time /= duration / 2;
+
+  if (time < 1) {
     return (changeInValue / 2) * time * time + beginValue;
   }
 
@@ -45,7 +46,7 @@ export const scrollTo = ({
     const startY =
       window.pageYOffset !== undefined
         ? window.pageYOffset
-        : document.documentElement.clientHeight
+        : document.documentElement.clientHeight !== undefined
         ? document.documentElement.scrollTop
         : document.body.scrollTop;
 
