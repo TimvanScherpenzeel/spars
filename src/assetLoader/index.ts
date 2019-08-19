@@ -398,31 +398,29 @@ export class AssetLoader {
                   const loaderType = this.getLoaderByFileExtension(name);
                   const url = URL.createObjectURL(blob);
 
-                  assert(
-                    loaderType === ELoaderKey.JSON ||
-                      loaderType === ELoaderKey.Text ||
-                      loaderType === ELoaderKey.Image ||
-                      loaderType === ELoaderKey.XML,
-                    'AssetLoader -> Binpack currently only supports JSON, plain text, XML (SVG) and images'
-                  );
-
                   switch (loaderType) {
+                    case ELoaderKey.Image:
+                      return { id: name, src: this.loadImage({ src: url, id: name }) };
                     case ELoaderKey.JSON:
                       return { id: name, src: this.loadJSON({ src: url, id: name }) };
                     case ELoaderKey.Text:
                       return { id: name, src: this.loadText({ src: url, id: name }) };
                     case ELoaderKey.XML:
                       return { id: name, src: this.loadXML({ src: url, id: name }) };
-                    case ELoaderKey.Image:
                     default:
-                      return { id: name, src: this.loadImage({ src: url, id: name }) };
+                      throw new Error(
+                        'AssetLoader -> Binpack currently only supports JSON, plain text, XML (SVG) and images'
+                      );
                   }
                 }
               )
-            ).then((assets: any) => 
-              Object.assign({}, ...assets.map((asset: any) => {
-                return { [asset.id]: asset.src };
-              }))
+            ).then((assets: any[]) =>
+              Object.assign(
+                {},
+                ...assets.map((asset: any) => {
+                  return { [asset.id]: asset.src };
+                })
+              )
             )
           );
         }
