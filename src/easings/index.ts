@@ -1,3 +1,6 @@
+/**
+ * https://easings.net/en#easeInQuad
+ */
 export const easeInQuad = (
   time: number,
   beginValue: number,
@@ -7,6 +10,9 @@ export const easeInQuad = (
   return changeInValue * (time /= duration) * time + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeOutQuad
+ */
 export const easeOutQuad = (
   time: number,
   beginValue: number,
@@ -16,6 +22,9 @@ export const easeOutQuad = (
   return -changeInValue * (time /= duration) * (time - 2) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInOutQuad
+ */
 export const easeInOutQuad = (
   time: number,
   beginValue: number,
@@ -31,6 +40,9 @@ export const easeInOutQuad = (
   return (-changeInValue / 2) * (--time * (time - 2) - 1) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInCubic
+ */
 export const easeInCubic = (
   time: number,
   beginValue: number,
@@ -40,6 +52,9 @@ export const easeInCubic = (
   return changeInValue * (time /= duration) * time * time + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeOutCubic
+ */
 export const easeOutCubic = (
   time: number,
   beginValue: number,
@@ -49,6 +64,9 @@ export const easeOutCubic = (
   return changeInValue * ((time = time / duration - 1) * time * time + 1) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInOutCubic
+ */
 export const easeInOutCubic = (
   time: number,
   beginValue: number,
@@ -64,6 +82,9 @@ export const easeInOutCubic = (
   return (changeInValue / 2) * ((time -= 2) * time * time + 2) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInQuart
+ */
 export const easeInQuart = (
   time: number,
   beginValue: number,
@@ -73,6 +94,9 @@ export const easeInQuart = (
   return changeInValue * (time /= duration) * time * time * time + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeOutQuart
+ */
 export const easeOutQuart = (
   time: number,
   beginValue: number,
@@ -82,6 +106,9 @@ export const easeOutQuart = (
   return -changeInValue * ((time = time / duration - 1) * time * time * time - 1) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInOutQuart
+ */
 export const easeInOutQuart = (
   time: number,
   beginValue: number,
@@ -97,6 +124,9 @@ export const easeInOutQuart = (
   return (-changeInValue / 2) * ((time -= 2) * time * time * time - 2) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInQuint
+ */
 export const easeInQuint = (
   time: number,
   beginValue: number,
@@ -106,6 +136,9 @@ export const easeInQuint = (
   return changeInValue * (time /= duration) * time * time * time * time + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeOutQuint
+ */
 export const easeOutQuint = (
   time: number,
   beginValue: number,
@@ -117,6 +150,9 @@ export const easeOutQuint = (
   );
 };
 
+/**
+ * https://easings.net/en#easeInOutQuint
+ */
 export const easeInOutQuint = (
   time: number,
   beginValue: number,
@@ -132,6 +168,9 @@ export const easeInOutQuint = (
   return (changeInValue / 2) * ((time -= 2) * time * time * time * time + 2) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInSine
+ */
 export const easeInSine = (
   time: number,
   beginValue: number,
@@ -141,6 +180,9 @@ export const easeInSine = (
   return -changeInValue * Math.cos((time / duration) * (Math.PI / 2)) + changeInValue + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeOutSine
+ */
 export const easeOutSine = (
   time: number,
   beginValue: number,
@@ -150,6 +192,9 @@ export const easeOutSine = (
   return changeInValue * Math.sin((time / duration) * (Math.PI / 2)) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInOutSine
+ */
 export const easeInOutSine = (
   time: number,
   beginValue: number,
@@ -159,6 +204,9 @@ export const easeInOutSine = (
   return (-changeInValue / 2) * (Math.cos((Math.PI * time) / duration) - 1) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInExpo
+ */
 export const easeInExpo = (
   time: number,
   beginValue: number,
@@ -170,6 +218,9 @@ export const easeInExpo = (
     : changeInValue * Math.pow(2, 10 * (time / duration - 1)) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeOutExpo
+ */
 export const easeOutExpo = (
   time: number,
   beginValue: number,
@@ -181,6 +232,9 @@ export const easeOutExpo = (
     : changeInValue * (-Math.pow(2, (-10 * time) / duration) + 1) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInOutExpo
+ */
 export const easeInOutExpo = (
   time: number,
   beginValue: number,
@@ -204,6 +258,9 @@ export const easeInOutExpo = (
   return (changeInValue / 2) * (-Math.pow(2, -10 * --time) + 2) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInCirc
+ */
 export const easeInCirc = (
   time: number,
   beginValue: number,
@@ -213,6 +270,9 @@ export const easeInCirc = (
   return -changeInValue * (Math.sqrt(1 - (time /= duration) * time) - 1) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeOutCirc
+ */
 export const easeOutCirc = (
   time: number,
   beginValue: number,
@@ -222,6 +282,9 @@ export const easeOutCirc = (
   return changeInValue * Math.sqrt(1 - (time = time / duration - 1) * time) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInOutCirc
+ */
 export const easeInOutCirc = (
   time: number,
   beginValue: number,
@@ -237,6 +300,9 @@ export const easeInOutCirc = (
   return (changeInValue / 2) * (Math.sqrt(1 - (time -= 2) * time) + 1) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeInElastic
+ */
 export const easeInElastic = (
   time: number,
   beginValue: number,
@@ -274,6 +340,9 @@ export const easeInElastic = (
   );
 };
 
+/**
+ * https://easings.net/en#easeOutElastic
+ */
 export const easeOutElastic = (
   time: number,
   beginValue: number,
@@ -312,6 +381,9 @@ export const easeOutElastic = (
   );
 };
 
+/**
+ * https://easings.net/en#easeInOutElastic
+ */
 export const easeInOutElastic = (
   time: number,
   beginValue: number,
@@ -363,6 +435,9 @@ export const easeInOutElastic = (
   );
 };
 
+/**
+ * https://easings.net/en#easeInBack
+ */
 export const easeInBack = (
   time: number,
   beginValue: number,
@@ -373,6 +448,9 @@ export const easeInBack = (
   return changeInValue * (time /= duration) * time * ((s + 1) * time - s) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeOutBack
+ */
 export const easeOutBack = (
   time: number,
   beginValue: number,
@@ -385,6 +463,9 @@ export const easeOutBack = (
   );
 };
 
+/**
+ * https://easings.net/en#easeInOutBack
+ */
 export const easeInOutBack = (
   time: number,
   beginValue: number,
@@ -403,6 +484,9 @@ export const easeInOutBack = (
   );
 };
 
+/**
+ * https://easings.net/en#easeInBounce
+ */
 export const easeInBounce = (
   time: number,
   beginValue: number,
@@ -412,6 +496,9 @@ export const easeInBounce = (
   return changeInValue - easeOutBounce(duration - time, 0, changeInValue, duration) + beginValue;
 };
 
+/**
+ * https://easings.net/en#easeOutBounce
+ */
 export const easeOutBounce = (
   time: number,
   beginValue: number,
@@ -431,6 +518,9 @@ export const easeOutBounce = (
   }
 };
 
+/**
+ * https://easings.net/en#easeInOutBounce
+ */
 export const easeInOutBounce = (
   time: number,
   beginValue: number,
