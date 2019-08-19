@@ -1,5 +1,5 @@
 // Easings
-import { easeInOutQuad } from '../easings';
+import { easeInOutCubic } from '../easings';
 
 // Features
 import getBrowserType from '../features/browserFeatures/getBrowserType';
@@ -45,7 +45,7 @@ export const scrollTo = ({
 
     const scroll = (): void => {
       currentTime += stepSize;
-      scrollElement.scrollTop = easeInOutQuad(currentTime, startY, distance, duration);
+      scrollElement.scrollTop = easeInOutCubic(currentTime, startY, distance, duration);
 
       if (currentTime < duration) {
         frameID = window.requestAnimationFrame(scroll);
