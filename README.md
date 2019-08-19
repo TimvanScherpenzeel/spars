@@ -8,8 +8,9 @@
 
 ## Roadmap
 
-- Add tests for scrolling modules
 - Extract easings from audioManager and scrollTo into easings
+- Add support for compression / decompression modules
+- Add persistent option to assetLoader that automatically sets and gets from the persistentCache
 
 ## API
 
