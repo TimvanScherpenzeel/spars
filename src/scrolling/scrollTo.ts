@@ -1,20 +1,8 @@
+// Easings
+import { easeInOutQuad } from '../easings';
+
 // Features
 import getBrowserType from '../features/browserFeatures/getBrowserType';
-
-const easeInOutQuad = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
-  time /= duration / 2;
-
-  if (time < 1) {
-    return (changeInValue / 2) * time * time + beginValue;
-  }
-
-  return (-changeInValue / 2) * (--time * (time - 2) - 1) + beginValue;
-};
 
 const preventInteraction = (event: Event): void => {
   if (event.cancelable) {

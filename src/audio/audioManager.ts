@@ -8,28 +8,13 @@ import { COOKIES, EVENTS } from '../constants';
 // Cookies
 import { deleteCookie, getCookie, setCookie } from '../cookies';
 
+// Easings
+import { easeInCubic, easeOutCubic } from '../easings';
+
 // Events
 import { eventEmitter } from '../events';
 
 class AudioManager {
-  private static easeInCubic = (
-    time: number,
-    beginValue: number,
-    changeInValue: number,
-    duration: number
-  ): number => {
-    return changeInValue * (time /= duration) * time * time + beginValue;
-  };
-
-  private static easeOutCubic = (
-    time: number,
-    beginValue: number,
-    changeInValue: number,
-    duration: number
-  ): number => {
-    return changeInValue * ((time = time / duration - 1) * time * time + 1) + beginValue;
-  };
-
   private audioSources: any = {};
   private context: AudioContext = createAudioContext();
 
@@ -139,8 +124,8 @@ class AudioManager {
       const time = performance.now() - start;
       const volume =
         from > to
-          ? AudioManager.easeOutCubic(time, from, to - from, duration)
-          : AudioManager.easeInCubic(time, from, to - from, duration);
+          ? easeOutCubic(time, from, to - from, duration)
+          : easeInCubic(time, from, to - from, duration);
 
       this.audioSources[source].audio.gainNode.gain.value = volume;
 
