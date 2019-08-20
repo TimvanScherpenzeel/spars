@@ -1,7 +1,7 @@
 // Types
 import { TNullable } from '../../types';
 
-export interface IListNode {
+export interface ISinglyLinkedListNode {
   value: () => void;
-  next: TNullable<IListNode>;
+  next: TNullable<ISinglyLinkedListNode>;
 }

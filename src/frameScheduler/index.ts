@@ -3,7 +3,7 @@
  */
 
 // Data structures
-import { LinkedList } from '../dataStructures';
+import { SinglyLinkedList } from '../dataStructures';
 
 // FrameScheduler
 import { PriorityUniqueQueue } from './PriorityUniqueQueue';
@@ -27,7 +27,7 @@ export const schedulePriorities = {
  * it is transferred to the next frame.
  */
 export const createFrameScheduler = (): (() => void) => {
-  const heapTasks = new PriorityUniqueQueue<LinkedList>();
+  const heapTasks = new PriorityUniqueQueue<SinglyLinkedList>();
   let deferScheduled = false;
 
   const runDefer = (): void => {
@@ -47,7 +47,7 @@ export const createFrameScheduler = (): (() => void) => {
     let task = heapTasks.get(priority);
 
     if (!task) {
-      task = new LinkedList();
+      task = new SinglyLinkedList();
       heapTasks.add(priority, task);
     }
 
