@@ -2,7 +2,7 @@
 import { TNullable } from '../types';
 import { IListNode } from './types';
 
-// TODO: add a complete LinkedList implementation (append, prepend, shift, pop, forEach, isEmpty)
+// TODO: add a complete LinkedList implementation (append, prepend, shift, pop, forEach, isEmpty which requires a previous, next and current)
 // https://github.com/trekhleb/javascript-algorithms/blob/master/src/data-structures/linked-list/LinkedList.js
 
 /**
