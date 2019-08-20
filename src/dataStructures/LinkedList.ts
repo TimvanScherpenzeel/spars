@@ -8,7 +8,7 @@ import { IListNode } from './types';
 export class LinkedList {
   private length: number = 0;
   private head: TNullable<IListNode> = null;
-  private last: TNullable<IListNode> = null;
+  private tail: TNullable<IListNode> = null;
 
   /**
    * Push a list node at the tail of the linked list
@@ -23,10 +23,10 @@ export class LinkedList {
 
     if (this.length === 0) {
       this.head = node;
-      this.last = node;
+      this.tail = node;
     } else {
-      (this.last as IListNode).next = node;
-      this.last = node;
+      (this.tail as IListNode).next = node;
+      this.tail = node;
     }
 
     this.length++;
