@@ -8,9 +8,30 @@ import { ISinglyLinkedListNode } from './types';
  * [A-HEAD] <- [B] <- [C] <- [D] <- [E-TAIL] where push appends to [E-TAIL] and shift removes the head node [A-HEAD]
  */
 export class SinglyLinkedList {
-  private length: number = 0;
   private head: TNullable<ISinglyLinkedListNode> = null;
   private tail: TNullable<ISinglyLinkedListNode> = null;
+  private length: number = 0;
+
+  /**
+   * Get the head of the list
+   */
+  get getHead(): TNullable<ISinglyLinkedListNode> {
+    return this.head;
+  }
+
+  /**
+   * Get the tail of the list
+   */
+  get getTail(): TNullable<ISinglyLinkedListNode> {
+    return this.tail;
+  }
+
+  /**
+   * Get length of the list
+   */
+  get getLength(): number {
+    return this.length;
+  }
 
   /**
    * Push a list node at the tail of the linked list
