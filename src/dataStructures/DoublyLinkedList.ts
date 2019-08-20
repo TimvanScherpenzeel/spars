@@ -4,6 +4,7 @@ import { IDoublyLinkedListNode } from './types';
 
 // TODO: implement methods (shift, pop, simplified forEach or other way of iterating over all nodes)
 // TODO: rename push method to append / prepend
+// https://github.com/trekhleb/javascript-algorithms/blob/master/src/data-structures/doubly-linked-list/DoublyLinkedList.js
 
 /**
  * A simple and efficient circular doubly linked list implementation (FIFO | LIFO)
