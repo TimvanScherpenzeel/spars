@@ -2,6 +2,8 @@
 import { TNullable } from '../types';
 import { IDoublyLinkedListNode } from './types';
 
+// TODO: implement methods (shift, pop, simplified forEach or other way of iterating over all nodes)
+
 /**
  * A simple and efficient circular doubly linked list implementation (FIFO | LIFO)
  *
