@@ -457,7 +457,7 @@ export class AssetLoader {
       const image = new Image();
 
       // Check if we can decode non-blocking by loading the image asynchronously using image.decode().then(() => ...)
-      // https://www.chromestatus.com/feature/5637156160667648 (Chrome / Safari / Safari iOS)
+      // https://www.chromestatus.com/feature/5637156160667648 (Chrome | Safari | Safari iOS)
       if (isImageDecodeSupported) {
         image.src = item.src;
         image

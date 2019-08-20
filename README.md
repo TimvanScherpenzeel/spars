@@ -9,7 +9,7 @@
 ## Roadmap
 
 - Add DoublyLinkedList and ObjectPool
-- Add support for compression / decompression modules
+- Add support for compression & decompression modules
 - Add persistent option to assetLoader that automatically sets and gets from the persistentCache
 
 ## API

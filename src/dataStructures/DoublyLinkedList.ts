@@ -3,7 +3,7 @@ import { TNullable } from '../types';
 import { IDoublyLinkedListNode } from './types';
 
 /**
- * A simple and efficient circular doubly linked list implementation (FIFO / LIFO)
+ * A simple and efficient circular doubly linked list implementation (FIFO | LIFO)
  *
  * [A-HEAD] <- [B] <- [C] <- [D] <- [E-TAIL] <- [A-HEAD]
  * [A-HEAD] -> [B] -> [C] -> [D] -> [E-TAIL] -> [A-HEAD]

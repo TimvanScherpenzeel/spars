@@ -256,7 +256,7 @@ export const worklet = URL.createObjectURL(
             statuses = returnStatuses;
           }
 
-          // Low-priority / normal return clears the entire queue
+          // Low-priority & normal return clears the entire queue
           if (resultCount === 0 || statuses.length === resultCount) {
             gotResults.length = 0;
           } else {
