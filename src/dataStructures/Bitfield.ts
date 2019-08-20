@@ -14,7 +14,7 @@ export class Bitfield {
    *
    * @param size Size of the bitfield
    */
-  constructor(size: number) {
+  constructor(size: number) /* -> O(1) */ {
     this.size = (size + 31) & ~31;
     this.data = new Uint32Array(this.size >>> 5);
   }
@@ -24,7 +24,7 @@ export class Bitfield {
    *
    * @param index Index of bit
    */
-  public get(index: number): boolean {
+  public get(index: number): boolean /* -> O(1) */ {
     return (this.data[index >>> 5] & (0x80000000 >>> (index & 31))) !== 0;
   }
 
@@ -42,7 +42,7 @@ export class Bitfield {
    * @param index Index of bit
    * @param value Value of bit
    */
-  public set(index: number, value: boolean = true): boolean {
+  public set(index: number, value: boolean = true): boolean /* -> O(1) */ {
     const id = index >>> 5;
     const mask = 0x80000000 >>> (index & 31);
     const bit = this.data[id] & mask;
@@ -61,7 +61,7 @@ export class Bitfield {
    *
    * @param size New size of the bitfield
    */
-  public resize(size: number): void {
+  public resize(size: number): void /* -> O(1) */ {
     size = (size + 31) & ~31;
 
     const tmp = new Uint32Array(size >>> 5);
@@ -74,7 +74,7 @@ export class Bitfield {
   /**
    * Stringify the bitfield
    */
-  public toString(): string {
+  public toString(): string /* -> O(n) */ {
     return `0b${[...Array.from(this.data)]
       .map(bit => (bit >>> 0).toString(2).padStart(32, '0'))
       .join('')}`;

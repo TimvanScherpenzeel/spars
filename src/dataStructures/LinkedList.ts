@@ -18,7 +18,7 @@ export class LinkedList {
    *
    * @param value Value to add to the list node
    */
-  public push(value: () => void): void {
+  public push(value: () => void): void /* -> O(1) */ {
     const node: IListNode = {
       next: null,
       value,
@@ -38,7 +38,7 @@ export class LinkedList {
   /**
    * Shift a list node off of the head of the linked list
    */
-  public shift(): any {
+  public shift(): any /* -> O(1) */ {
     const currentHead = this.head as IListNode;
     const value = currentHead.value;
 
@@ -51,7 +51,7 @@ export class LinkedList {
   /**
    * Check if the linked list has no link nodes
    */
-  public isEmpty(): boolean {
+  public isEmpty(): boolean /* -> O(1) */ {
     return this.length === 0;
   }
 }
