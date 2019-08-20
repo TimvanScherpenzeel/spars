@@ -33,4 +33,34 @@ export class DoublyLinkedList {
   get getLength(): number {
     return this.length;
   }
+
+  /**
+   * Push a list node at the tail of the linked list
+   *
+   * @param value Value to add to the list node
+   */
+  public push(value: () => void): void /* -> O(1) */ {
+    const node: IDoublyLinkedListNode = {
+      next: null,
+      previous: null,
+      value,
+    };
+  }
+
+  /**
+   * Shift a list node off of the head of the linked list
+   */
+  public shift(): any /* -> O(1) */ {}
+
+  /**
+   * Pop a list node off of the tail of the linked list
+   */
+  public pop(): any /* -> O(1) */ {}
+
+  /**
+   * Check if the linked list has no link nodes
+   */
+  public isEmpty(): boolean /* -> O(1) */ {
+    return this.length === 0;
+  }
 }
