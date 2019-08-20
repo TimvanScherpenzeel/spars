@@ -51,8 +51,10 @@ export class Bitfield {
    */
   public resize(size: number): void {
     size = (size + 31) & ~31;
+
     const tmp = new Uint32Array(size >>> 5);
     tmp.set(this.data.slice(0, tmp.length));
+
     this.data = tmp;
     this.size = size;
   }
