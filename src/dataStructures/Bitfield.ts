@@ -33,7 +33,7 @@ export class Bitfield {
   public set(index: number, value: boolean = true): boolean {
     const id = index >>> 5;
     const mask = 0x80000000 >>> (index & 31);
-    const isBitSet = this.data[id] & mask;
+    const bit = this.data[id] & mask;
 
     if (value) {
       this.data[id] |= mask;
@@ -41,7 +41,7 @@ export class Bitfield {
       this.data[id] &= ~mask;
     }
 
-    return isBitSet !== 0;
+    return bit !== 0;
   }
 
   /**
