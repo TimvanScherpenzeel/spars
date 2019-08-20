@@ -62,7 +62,7 @@ export class Bitfield {
    */
   public toString(): string {
     return `0b${[...Array.from(this.data)]
-      .map(x => (x >>> 0).toString(2).padStart(32, '0'))
+      .map(bit => (bit >>> 0).toString(2).padStart(32, '0'))
       .join('')}`;
   }
 }
