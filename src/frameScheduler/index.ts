@@ -2,8 +2,10 @@
  * Inspired by https://github.com/Tom910/frame-scheduling
  */
 
+// Data structures
+import { LinkedList } from '../dataStructures';
+
 // FrameScheduler
-import { LinkedList } from './LinkedList';
 import { PriorityUniqueQueue } from './PriorityUniqueQueue';
 
 const TIME_LIFE_FRAME = 16.6667;
