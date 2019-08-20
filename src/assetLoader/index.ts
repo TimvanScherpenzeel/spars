@@ -334,13 +334,13 @@ export class AssetLoader {
   private loadBinpack = (item: ILoadItem): Promise<any> =>
     this.loadArrayBuffer(item).then((data: TVoidable<ArrayBuffer>): any => {
       if (data) {
-        let content = null;
-        let contentArray = null;
+        let content: TNullable<string> = null;
+        let contentArray: TNullable<Uint8Array> = null;
         let binaryChunk: TNullable<ArrayBuffer> = null;
-        let byteOffset = null;
-        let chunkIndex = 0;
-        let chunkLength = 0;
-        let chunkType = null;
+        let byteOffset: number = 0;
+        let chunkIndex: number = 0;
+        let chunkLength: number = 0;
+        let chunkType: TNullable<number> = null;
 
         const headerMagic = new Uint8Array(data, 0, 4).reduce(
           (magic, char) => (magic += String.fromCharCode(char)),
