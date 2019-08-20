@@ -1,4 +1,8 @@
 /**
+ * Inspired by https://github.com/thi-ng/umbrella/blob/master/packages/bitfield/src/bitfield.ts
+ */
+
+/**
  * Bitfield is a simple resizable bitfield data structure. It is an efficient way of storing many boolean values.
  */
 export class Bitfield {
