@@ -2,6 +2,8 @@
 import { TNullable } from '../types';
 import { IListNode } from './types';
 
+// TODO: add a complete LinkedList implementation (append, prepend, shift, pop, forEach, isEmpty)
+
 /**
  * A simple and efficient linked list implementation
  */
@@ -33,7 +35,7 @@ export class LinkedList {
   }
 
   /**
-   * Shift a list node off of the start of the linked list
+   * Shift a list node off of the head of the linked list
    */
   public shift(): any {
     const currentHead = this.head as IListNode;
