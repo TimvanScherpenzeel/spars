@@ -3,9 +3,11 @@ import { config } from './config';
 import { Task } from './Task';
 import { worklet } from './worklet';
 
+// Utilities
+import { assert } from '../utilities';
+
 // Types
 import { TVoidable } from '../types';
-import { assert } from '../utilities';
 import { IThread } from './types';
 
 /**

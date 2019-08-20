@@ -1,9 +1,6 @@
 // Features
 import isCookieEnabled from '../features/browserSettings/isCookieEnabled';
 
-// Types
-import { TNullable, TUndefinable } from '../types';
-
 // NOTE: When blocking cookies Firefox throws a security error for localStorage and indexedDB blocking further execution.
 /**
  * Set a cookie
