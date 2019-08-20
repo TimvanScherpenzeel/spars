@@ -3,6 +3,7 @@ import { TNullable } from '../types';
 import { IListNode } from './types';
 
 // TODO: add a complete LinkedList implementation (append, prepend, shift, pop, forEach, isEmpty)
+// https://github.com/trekhleb/javascript-algorithms/blob/master/src/data-structures/linked-list/LinkedList.js
 
 /**
  * A simple and efficient linked list implementation
