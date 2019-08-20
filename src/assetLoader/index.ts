@@ -409,7 +409,7 @@ export class AssetLoader {
                       return { id: name, src: this.loadXML({ src: url, id: name }) };
                     default:
                       throw new Error(
-                        'AssetLoader -> Binpack currently only supports JSON, plain text, XML (SVG) and images'
+                        'AssetLoader -> Binpack currently only supports images, JSON, plain text and XML (SVG)'
                       );
                   }
                 }
