@@ -5,8 +5,10 @@ import { IDoublyLinkedListNode } from './types';
 /**
  * A simple and efficient circular doubly linked list implementation (FIFO / LIFO)
  *
- * [A-HEAD] <- [B] <- [C] <- [D] <- [E-TAIL] where push appends to [E-TAIL] and shift removes the head node [A-HEAD]
- *          ->     ->     ->     ->
+ * [A-HEAD] <- [B] <- [C] <- [D] <- [E-TAIL] <- [A-HEAD]
+ * [A-HEAD] -> [B] -> [C] -> [D] -> [E-TAIL] -> [A-HEAD]
+ *
+ * Where push appends to [E-TAIL] and shift removes the head node [A-HEAD]
  */
 export class DoublyLinkedList {
   private head: TNullable<IDoublyLinkedListNode> = null;
@@ -16,21 +18,21 @@ export class DoublyLinkedList {
   /**
    * Get the head of the list
    */
-  get getHead(): TNullable<IDoublyLinkedListNode> {
+  get getHead(): TNullable<IDoublyLinkedListNode> /* -> O(1) */ {
     return this.head;
   }
 
   /**
    * Get the tail of the list
    */
-  get getTail(): TNullable<IDoublyLinkedListNode> {
+  get getTail(): TNullable<IDoublyLinkedListNode> /* -> O(1) */ {
     return this.tail;
   }
 
   /**
    * Get length of the list
    */
-  get getLength(): number {
+  get getLength(): number /* -> O(1) */ {
     return this.length;
   }
 

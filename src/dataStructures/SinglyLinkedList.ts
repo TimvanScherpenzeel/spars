@@ -5,7 +5,9 @@ import { ISinglyLinkedListNode } from './types';
 /**
  * A simple and efficient circular singly linked list implementation (FIFO)
  *
- * [A-HEAD] <- [B] <- [C] <- [D] <- [E-TAIL] where push appends to [E-TAIL] and shift removes the head node [A-HEAD]
+ * [A-HEAD] <- [B] <- [C] <- [D] <- [E-TAIL] <- [A-HEAD]
+ *
+ * Where push appends to [E-TAIL] and shift removes the head node [A-HEAD]
  */
 export class SinglyLinkedList {
   private head: TNullable<ISinglyLinkedListNode> = null;
@@ -15,21 +17,21 @@ export class SinglyLinkedList {
   /**
    * Get the head of the list
    */
-  get getHead(): TNullable<ISinglyLinkedListNode> {
+  get getHead(): TNullable<ISinglyLinkedListNode> /* -> O(1) */ {
     return this.head;
   }
 
   /**
    * Get the tail of the list
    */
-  get getTail(): TNullable<ISinglyLinkedListNode> {
+  get getTail(): TNullable<ISinglyLinkedListNode> /* -> O(1) */ {
     return this.tail;
   }
 
   /**
    * Get length of the list
    */
-  get getLength(): number {
+  get getLength(): number /* -> O(1) */ {
     return this.length;
   }
 
