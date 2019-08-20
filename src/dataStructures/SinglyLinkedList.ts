@@ -3,7 +3,9 @@ import { TNullable } from '../types';
 import { ISinglyLinkedListNode } from './types';
 
 /**
- * A simple and efficient linked list implementation
+ * A simple and efficient circular singly linked list implementation (FIFO)
+ *
+ * [A-HEAD] <- [B] <- [C] <- [D] <- [E-TAIL] where push appends to [E-TAIL] and shift removes the head node [A-HEAD]
  */
 export class SinglyLinkedList {
   private length: number = 0;
