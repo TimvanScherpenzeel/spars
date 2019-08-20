@@ -2,6 +2,12 @@
 import { TNullable } from '../types';
 import { IDoublyLinkedListNode } from './types';
 
+/**
+ * A simple and efficient circular doubly linked list implementation (FIFO / LIFO)
+ *
+ * [A-HEAD] <- [B] <- [C] <- [D] <- [E-TAIL] where push appends to [E-TAIL] and shift removes the head node [A-HEAD]
+ *          ->     ->     ->     ->
+ */
 export class DoublyLinkedList {
   private head: TNullable<IDoublyLinkedListNode> = null;
   private tail: TNullable<IDoublyLinkedListNode> = null;
