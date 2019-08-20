@@ -36,7 +36,6 @@ const isAllowedAsKey = (key: any): boolean => {
  *
  * IndexedDB is promisified by `idb-keyval`, a small abstraction around the IndexedDB API.
  */
-
 export class PersistentCache {
   // Back persistent cache with in-memory cache in order to maintain functionality
   // in case IndexedDB is not available (private browsing mode)

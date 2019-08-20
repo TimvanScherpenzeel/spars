@@ -13,6 +13,9 @@ export { COOKIES, EVENTS } from './constants';
 // Cookies
 export { deleteCookie, getCookie, setCookie } from './cookies';
 
+// Data structures
+export { Bitfield } from './dataStructures';
+
 // Easings
 export {
   easeInCirc,
