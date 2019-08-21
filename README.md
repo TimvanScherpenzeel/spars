@@ -8,7 +8,8 @@
 
 ## Roadmap
 
-- Add DoublyLinkedList and ObjectPool
+- Add SinglyLinkedList, DoublyLinkedList, ObjectPool, Stack, Queue, Tree, Graph
+- Add binary search tree
 - Add support for compression & decompression modules
 - Add persistent option to assetLoader that automatically sets and gets from the persistentCache
 
