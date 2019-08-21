@@ -43,64 +43,25 @@ export class DoublyLinkedList {
   /**
    * Push a list node at the tail of the linked list
    *
-   * @param value Value to add to the list node
+   * @param data Data to add to the list node
    */
-  public push(value: () => void): void /* -> O(1) */ {
+  public push(data: () => void): void /* -> O(1) */ {
     const node: IDoublyLinkedListNode = {
+      data,
       next: null,
       previous: null,
-      value,
     };
   }
 
   /**
    * Shift a list node off of the head of the linked list
    */
-  public shift(): any /* -> O(1) */ {
-    if (!this.head) {
-      return null;
-    }
-
-    const currentHead = this.head;
-
-    if (this.head.next) {
-      this.head = this.head.next;
-      this.head.previous = null;
-    } else {
-      this.head = null;
-      this.tail = null;
-    }
-
-    return currentHead;
-  }
+  public shift(): any /* -> O(1) */ {}
 
   /**
    * Pop a list node off of the tail of the linked list
    */
-  public pop(): any /* -> O(1) */ {
-    if (!this.tail) {
-      return null;
-    }
-
-    // TODO: is this simple check sufficient? Shouldn't we check it by an id instead of comparing an object
-    if (this.head === this.tail) {
-      const currentTail = this.tail;
-      this.head = null;
-      this.tail = null;
-
-      return currentTail;
-    } else {
-      const currentTail = this.tail;
-
-      this.tail = this.tail.previous;
-
-      if (this.tail) {
-        this.tail.next = null;
-      }
-
-      return currentTail;
-    }
-  }
+  public pop(): any /* -> O(1) */ {}
 
   /**
    * Check if the linked list has no link nodes

@@ -2,12 +2,12 @@
 import { TNullable } from '../../types';
 
 export interface ISinglyLinkedListNode {
+  data: () => void;
   next: TNullable<ISinglyLinkedListNode>;
-  value: () => void;
 }
 
 export interface IDoublyLinkedListNode {
+  data: () => void;
   next: TNullable<IDoublyLinkedListNode>;
   previous: TNullable<IDoublyLinkedListNode>;
-  value: () => void;
 }

@@ -3,7 +3,7 @@ import { TNullable } from '../types';
 import { ISinglyLinkedListNode } from './types';
 
 /**
- * A simple and efficient circular singly linked list implementation (FIFO)
+ * A simple and efficient singly linked list implementation (FIFO)
  *
  * [A-HEAD] <- [B] <- [C] <- [D] <- [E-TAIL] <- [A-HEAD]
  *
@@ -38,12 +38,12 @@ export class SinglyLinkedList {
   /**
    * Push a list node at the tail of the linked list
    *
-   * @param value Value to add to the list node
+   * @param data Data to add to the list node
    */
-  public push(value: () => void): void /* -> O(1) */ {
+  public push(data: () => void): void /* -> O(1) */ {
     const node: ISinglyLinkedListNode = {
+      data,
       next: null,
-      value,
     };
 
     if (this.length === 0) {
@@ -62,12 +62,12 @@ export class SinglyLinkedList {
    */
   public shift(): any /* -> O(1) */ {
     const currentHead = this.head as ISinglyLinkedListNode;
-    const value = currentHead.value;
+    const data = currentHead.data;
 
     this.head = currentHead.next;
     this.length--;
 
-    return value;
+    return data;
   }
 
   /**
