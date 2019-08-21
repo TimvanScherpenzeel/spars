@@ -15,27 +15,6 @@ export class SinglyLinkedList {
   private length: number = 0;
 
   /**
-   * Get the head of the list
-   */
-  get getHead(): TNullable<ISinglyLinkedListNode> /* -> O(1) */ {
-    return this.head;
-  }
-
-  /**
-   * Get the tail of the list
-   */
-  get getTail(): TNullable<ISinglyLinkedListNode> /* -> O(1) */ {
-    return this.tail;
-  }
-
-  /**
-   * Get length of the list
-   */
-  get getLength(): number /* -> O(1) */ {
-    return this.length;
-  }
-
-  /**
    * Push a list node at the tail of the linked list
    *
    * @param data Data to add to the list node
