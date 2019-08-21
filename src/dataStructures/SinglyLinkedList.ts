@@ -5,7 +5,7 @@ import { ISinglyLinkedListNode } from './types';
 /**
  * A simple and efficient singly linked list implementation (FIFO)
  *
- * [A-HEAD] <- [B] <- [C] <- [D] <- [E-TAIL] <- [A-HEAD]
+ * [A-HEAD] <- [B] <- [C] <- [D] <- [E-TAIL]
  *
  * Where push appends to [E-TAIL] and shift removes the head node [A-HEAD]
  */
