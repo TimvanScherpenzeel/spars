@@ -337,36 +337,36 @@ console.log(Spar.features);
 // FrameScheduler
 // --------------
 
-const result = [];
+// const result = [];
 
-Spar.scheduleFrame(
-  () => {
-    result.push('A');
-  },
-  { priority: Spar.schedulePriorities.LOW }
-);
+// Spar.scheduleFrame(
+//   () => {
+//     result.push('A');
+//   },
+//   { priority: Spar.schedulePriorities.LOW }
+// );
 
-Spar.scheduleFrame(
-  () => {
-    result.push('C');
-  },
-  { priority: Spar.schedulePriorities.IMPORTANT }
-);
+// Spar.scheduleFrame(
+//   () => {
+//     result.push('C');
+//   },
+//   { priority: Spar.schedulePriorities.IMPORTANT }
+// );
 
-Spar.scheduleFrame(
-  () => {
-    result.push('D');
-  },
-  { priority: 1000 }
-);
+// Spar.scheduleFrame(
+//   () => {
+//     result.push('D');
+//   },
+//   { priority: 1000 }
+// );
 
-Spar.scheduleFrame(() => {
-  result.push('B');
-});
+// Spar.scheduleFrame(() => {
+//   result.push('B');
+// });
 
-setTimeout(() => {
-  console.log(result); // -> ["D", "C", "B", "A"]
-}, 1000);
+// setTimeout(() => {
+//   console.log(result); // -> ["D", "C", "B", "A"]
+// }, 1000);
 
 // FrameTicker
 // ---------
