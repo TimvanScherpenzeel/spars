@@ -41,6 +41,10 @@ export class DoubleEndedQueue {
    * @param index Index of the item to peek at
    */
   public peekAtIndex(index: number): TUndefinable<any> /* O(1) */ {
+    if (index !== (index | 0)) {
+      return undefined;
+    }
+
     const length = this.getSize();
 
     if (index >= length || index < -length) {
@@ -79,7 +83,7 @@ export class DoubleEndedQueue {
    *
    * @param item Item to insert
    */
-  public insert(item: any): TUndefinable<any> /* O(1) */ {
+  public unshift(item: any): TUndefinable<any> /* O(1) */ {
     const length = this.internalList.length;
 
     this.headIndex = (this.headIndex - 1 + length) & this.capacityMask;
