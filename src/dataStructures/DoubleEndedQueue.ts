@@ -24,7 +24,7 @@ export class DoubleEndedQueue {
    *
    * @param index Index of the item to peek at
    */
-  public peekAt(index: number): TUndefinable<any> {
+  public peekAtIndex(index: number): TUndefinable<any> {
     const length = this.size();
 
     if (index >= length || index < -length) {
@@ -43,7 +43,7 @@ export class DoubleEndedQueue {
   /**
    * Returns the head item of the internal list without removing it
    */
-  public peekHead(): TUndefinable<any> {
+  public peekAtHead(): TUndefinable<any> {
     if (this.headIndex === this.tailIndex) {
       return undefined;
     }
@@ -54,8 +54,8 @@ export class DoubleEndedQueue {
   /**
    * Returns the tail item of the internal list without removing it
    */
-  public peekTail(): TUndefinable<any> {
-    return this.peekAt(-1);
+  public peekAtTail(): TUndefinable<any> {
+    return this.peekAtIndex(-1);
   }
 
   /**
@@ -248,16 +248,16 @@ export class DoubleEndedQueue {
   /**
    * Copy the internal list to a new list
    *
-   * @param fullCopy Should it do a full copy
+   * @param shouldDoFullCopy Should it do a full copy
    */
-  private copyList(fullCopy: boolean): any[] {
+  private copyList(shouldDoFullCopy: boolean): any[] {
     const tmp = [];
     const tmpList = this.internalList;
     const length = tmpList.length;
 
     let i;
 
-    if (fullCopy || this.headIndex > this.tailIndex) {
+    if (shouldDoFullCopy || this.headIndex > this.tailIndex) {
       for (i = this.headIndex; i < length; i++) {
         tmp.push(tmpList[i]);
       }
