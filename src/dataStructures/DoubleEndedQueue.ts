@@ -245,7 +245,6 @@ export class DoubleEndedQueue {
     this.capacityMask = (this.capacityMask << 1) | 1;
   }
 
-  // TODO: see if we can inline this
   /**
    * Copy the internal list to a new list
    *
