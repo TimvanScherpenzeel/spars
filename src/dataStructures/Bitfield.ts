@@ -3,7 +3,8 @@
  */
 
 /**
- * Bitfield is a simple resizable bitfield data structure. It is an efficient way of storing many boolean values.
+ * Bitfield is a simple resizable bitfield data structure
+ * It is an efficient way of storing many boolean values
  */
 export class Bitfield {
   private data: Uint32Array;

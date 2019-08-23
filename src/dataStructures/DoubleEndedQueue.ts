@@ -1,6 +1,13 @@
+/**
+ * Inspired by https://github.com/invertase/denque/blob/master/index.js
+ */
+
 // Types
 import { TUndefinable } from '../types';
 
+/**
+ * DoubleEndedQueue is a simple resizable double ended queue
+ */
 export class DoubleEndedQueue {
   private headIndex: number = 0;
   private tailIndex: number = 0;
