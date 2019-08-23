@@ -1,15 +1,15 @@
 // Source
-import { Bitfield } from '../../src/dataStructures/Bitfield';
+import { BitField } from '../../src/dataStructures/BitField';
 
-describe('Bitfield', () => {
+describe('BitField', () => {
   it('should take a size as argument and fit automatically to 32-bit chunks', () => {
     expect.assertions(2);
 
-    const bitfieldA = new Bitfield(31);
+    const bitfieldA = new BitField(31);
 
     expect(bitfieldA.length).toEqual(32);
 
-    const bitfieldB = new Bitfield(33);
+    const bitfieldB = new BitField(33);
 
     expect(bitfieldB.length).toEqual(64);
   });
@@ -17,7 +17,7 @@ describe('Bitfield', () => {
   it('should allow to set / get a bit', () => {
     expect.assertions(11);
 
-    const bitfield = new Bitfield(5);
+    const bitfield = new BitField(5);
 
     expect(bitfield.length).toEqual(32);
 

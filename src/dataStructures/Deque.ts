@@ -235,13 +235,6 @@ export class Deque {
   }
 
   /**
-   * Get the internal list as string representation
-   */
-  public toString(): string /* O(n) */ {
-    return JSON.stringify(this.copyList(false));
-  }
-
-  /**
    * Get the number of items in the internal list
    */
   private getSize(): number /* O(1) */ {

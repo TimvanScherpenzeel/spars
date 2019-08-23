@@ -50,7 +50,7 @@ describe('Deque', () => {
   });
 
   it('should add a single item with plenty of capacity left', () => {
-    expect.assertions(6);
+    expect.assertions(5);
 
     const deque = new Deque([1, 2, 3, 4, 5]);
 
@@ -63,11 +63,10 @@ describe('Deque', () => {
     expect(deque.length).toStrictEqual(itemIndex);
     expect(itemIndex).toStrictEqual(6);
     expect(deque.toArray()).toEqual(['A', 1, 2, 3, 4, 5]);
-    expect(deque.toString()).toEqual('["A",1,2,3,4,5]');
   });
 
   it('should add a single item with over capacity', () => {
-    expect.assertions(6);
+    expect.assertions(5);
 
     // prettier-ignore
     const deque = new Deque([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
@@ -82,7 +81,6 @@ describe('Deque', () => {
     expect(itemIndex).toStrictEqual(17);
     // prettier-ignore
     expect(deque.toArray()).toEqual(['A', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
-    expect(deque.toString()).toEqual('["A",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]');
   });
 
   it('should return the item at the back of the queue', () => {
