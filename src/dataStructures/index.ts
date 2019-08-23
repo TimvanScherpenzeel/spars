@@ -1,3 +1,3 @@
 // Data structures
-export { Bitfield } from './Bitfield';
+export { BitField } from './BitField';
 export { Deque } from './Deque';

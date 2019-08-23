@@ -14,7 +14,7 @@ export { COOKIES, EVENTS } from './constants';
 export { deleteCookie, getCookie, setCookie } from './cookies';
 
 // Data structures
-export { Bitfield, Deque } from './dataStructures';
+export { BitField, Deque } from './dataStructures';
 
 // Easings
 export {
