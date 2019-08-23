@@ -32,7 +32,7 @@ export class DoubleEndedQueue {
    * @param index Index of the item to peek at
    */
   public peekAtIndex(index: number): TUndefinable<any> /* O(1) */ {
-    const length = this.size();
+    const length = this.getSize();
 
     if (index >= length || index < -length) {
       return undefined;
@@ -68,7 +68,7 @@ export class DoubleEndedQueue {
   /**
    * Get the number of items in the internal list
    */
-  public size(): number /* O(1) */ {
+  public getSize(): number /* O(1) */ {
     if (this.headIndex === this.tailIndex) {
       return 0;
     }
@@ -85,7 +85,7 @@ export class DoubleEndedQueue {
    *
    * @param item Item to insert
    */
-  public insertHead(item: any): TUndefinable<any> /* O(1) */ {
+  public insert(item: any): TUndefinable<any> /* O(1) */ {
     const length = this.internalList.length;
 
     this.headIndex = (this.headIndex - 1 + length) & this.capacityMask;
@@ -181,7 +181,7 @@ export class DoubleEndedQueue {
       return undefined;
     }
 
-    const size = this.size();
+    const size = this.getSize();
     const length = this.internalList.length;
 
     if (index >= size || index < -size) {

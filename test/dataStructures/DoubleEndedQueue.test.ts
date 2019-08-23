@@ -7,7 +7,7 @@ describe('DoubleEndedQueue', () => {
 
     const doubleEndedQueue = new DoubleEndedQueue();
 
-    expect(doubleEndedQueue.size()).toStrictEqual(0);
+    expect(doubleEndedQueue.getSize()).toStrictEqual(0);
   });
 
   it('should take an array argument using fromArray', () => {
@@ -18,7 +18,7 @@ describe('DoubleEndedQueue', () => {
 
     doubleEndedQueueA.fromArray(A);
 
-    expect(doubleEndedQueueA.size()).toBeGreaterThanOrEqual(A.length);
+    expect(doubleEndedQueueA.getSize()).toBeGreaterThanOrEqual(A.length);
     expect(doubleEndedQueueA.toArray()).toEqual(A);
 
     const B: any[] = [];
@@ -26,7 +26,28 @@ describe('DoubleEndedQueue', () => {
 
     doubleEndedQueueB.fromArray(B);
 
-    expect(doubleEndedQueueA.size()).toBeGreaterThanOrEqual(A.length);
+    expect(doubleEndedQueueA.getSize()).toBeGreaterThanOrEqual(A.length);
     expect(doubleEndedQueueA.toArray()).toEqual(A);
+  });
+
+  it('should handle high volume traffic', () => {
+    const doubleEndedQueue = new DoubleEndedQueue();
+    let A = 2500000;
+
+    while (--A) {
+      doubleEndedQueue.push(A);
+      doubleEndedQueue.insert(A);
+    }
+
+    let B = 2500000;
+
+    while (--B) {
+      const itemB = doubleEndedQueue.shift();
+      doubleEndedQueue.pop();
+      doubleEndedQueue.shift();
+      doubleEndedQueue.push(itemB);
+      doubleEndedQueue.shift();
+      doubleEndedQueue.shift();
+    }
   });
 });
