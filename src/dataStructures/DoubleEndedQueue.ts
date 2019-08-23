@@ -1,3 +1,4 @@
+// Types
 import { TUndefinable } from '../types';
 
 export class DoubleEndedQueue {
@@ -5,12 +6,6 @@ export class DoubleEndedQueue {
   private tailIndex: number = 0;
   private capacityMask: number = 0x3;
   private internalList: any[] = new Array(4);
-
-  constructor(array?: any[]) {
-    if (Array.isArray(array)) {
-      this.fromArray(array);
-    }
-  }
 
   /**
    * Fills the queue with items from an array
@@ -114,11 +109,7 @@ export class DoubleEndedQueue {
     this.internalList[headIndex] = undefined;
     this.headIndex = (headIndex + 1) & this.capacityMask;
 
-    if (
-      headIndex < 2 &&
-      this.tailIndex > 10000 &&
-      this.tailIndex <= this.internalList.length >>> 2
-    ) {
+    if (headIndex < 2 && this.tailIndex > 1e4 && this.tailIndex <= this.internalList.length >>> 2) {
       this.shrinkList();
     }
 
@@ -166,7 +157,7 @@ export class DoubleEndedQueue {
 
     this.internalList[this.tailIndex] = undefined;
 
-    if (this.headIndex < 2 && tailIndex > 10000 && tailIndex <= length >>> 2) {
+    if (this.headIndex < 2 && tailIndex > 1e4 && tailIndex <= length >>> 2) {
       this.shrinkList();
     }
 
