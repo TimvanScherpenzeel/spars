@@ -17,7 +17,7 @@ export class DoubleEndedQueue {
   /**
    * Get the current length of the queue
    */
-  get length(): number {
+  get length(): number /* O(1) */ {
     return this.getSize();
   }
 
@@ -26,7 +26,7 @@ export class DoubleEndedQueue {
    *
    * @param array Array with items to initialise the internal list with
    */
-  constructor(array?: any[]) {
+  constructor(array?: any[]) /* O(n) */ {
     if (Array.isArray(array)) {
       this.fromArray(array);
     }
@@ -237,6 +237,13 @@ export class DoubleEndedQueue {
    */
   public toArray(): any[] /* O(n) */ {
     return this.copyList(false);
+  }
+
+  /**
+   * Get the internal list as string representation
+   */
+  public toString(): string /* O(n) */ {
+    return JSON.stringify(this.copyList(false));
   }
 
   /**

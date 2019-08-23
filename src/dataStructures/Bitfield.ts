@@ -13,7 +13,7 @@ export class Bitfield {
   /**
    * Get the current size of the bitfield
    */
-  get length(): number {
+  get length(): number /* O(1) */ {
     return this.size;
   }
 
@@ -80,7 +80,7 @@ export class Bitfield {
   }
 
   /**
-   * Stringify the bitfield
+   * Get the bitfield as a string representation
    */
   public toString(): string /* O(n) */ {
     return `0b${[...Array.from(this.data)]

@@ -52,7 +52,7 @@ describe('DoubleEndedQueue', () => {
   });
 
   it('should add a single item with plenty of capacity', () => {
-    expect.assertions(5);
+    expect.assertions(6);
 
     const doubleEndedQueue = new DoubleEndedQueue();
     doubleEndedQueue.fromArray([1, 2, 3, 4, 5]);
@@ -66,5 +66,6 @@ describe('DoubleEndedQueue', () => {
     expect(doubleEndedQueue.length).toStrictEqual(itemIndex);
     expect(itemIndex).toStrictEqual(6);
     expect(doubleEndedQueue.toArray()).toEqual([1, 2, 3, 4, 5, 1]);
+    expect(doubleEndedQueue.toString()).toEqual('[1,2,3,4,5,1]');
   });
 });
