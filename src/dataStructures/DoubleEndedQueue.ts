@@ -14,6 +14,12 @@ export class DoubleEndedQueue {
   private capacityMask: number = 0x3;
   private internalList: any[] = new Array(4);
 
+  constructor(array?: any[]) {
+    if (Array.isArray(array)) {
+      this.fromArray(array);
+    }
+  }
+
   /**
    * Fills the queue with items from an array
    *

@@ -14,9 +14,7 @@ describe('DoubleEndedQueue', () => {
     expect.assertions(4);
 
     const A = [1, 2, 3, 4];
-    const doubleEndedQueueA = new DoubleEndedQueue();
-
-    doubleEndedQueueA.fromArray(A);
+    const doubleEndedQueueA = new DoubleEndedQueue(A);
 
     expect(doubleEndedQueueA.getSize()).toBeGreaterThanOrEqual(A.length);
     expect(doubleEndedQueueA.toArray()).toEqual(A);
@@ -49,5 +47,12 @@ describe('DoubleEndedQueue', () => {
       doubleEndedQueue.shift();
       doubleEndedQueue.shift();
     }
+  });
+
+  it('should add a single item with plenty of capacity', () => {
+    const doubleEndedQueue = new DoubleEndedQueue();
+    doubleEndedQueue.fromArray([1, 2, 3, 4, 5]);
+
+    // TODO: https://github.com/invertase/denque/blob/master/test/denque.js
   });
 });
