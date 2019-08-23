@@ -40,7 +40,7 @@ export class DoubleEndedQueue {
    *
    * @param index Index of the item to peek at
    */
-  public peekAtIndex(index: number): TUndefinable<any> /* O(1) */ {
+  public peekIndex(index: number): TUndefinable<any> /* O(1) */ {
     if (index !== (index | 0)) {
       return undefined;
     }
@@ -63,7 +63,7 @@ export class DoubleEndedQueue {
   /**
    * Returns the head item of the internal list without removing it
    */
-  public peekAtHead(): TUndefinable<any> /* O(1) */ {
+  public peekHead(): TUndefinable<any> /* O(1) */ {
     if (this.headIndex === this.tailIndex) {
       return undefined;
     }
@@ -74,8 +74,8 @@ export class DoubleEndedQueue {
   /**
    * Returns the tail item of the internal list without removing it
    */
-  public peekAtTail(): TUndefinable<any> /* O(1) */ {
-    return this.peekAtIndex(-1);
+  public peekTail(): TUndefinable<any> /* O(1) */ {
+    return this.peekIndex(-1);
   }
 
   /**
