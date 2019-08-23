@@ -43,14 +43,14 @@ export class Bitfield {
    * @param value Value of bit
    */
   public set(index: number, value: boolean = true): boolean /* -> O(1) */ {
-    const id = index >>> 5;
+    const bitIndex = index >>> 5;
     const bitMask = 0x80000000 >>> (index & 31);
-    const bitValue = this.data[id] & bitMask;
+    const bitValue = this.data[bitIndex] & bitMask;
 
     if (value) {
-      this.data[id] |= bitMask;
+      this.data[bitIndex] |= bitMask;
     } else {
-      this.data[id] &= ~bitMask;
+      this.data[bitIndex] &= ~bitMask;
     }
 
     return bitValue !== 0;
