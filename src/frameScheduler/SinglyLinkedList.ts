@@ -19,7 +19,7 @@ export class SinglyLinkedList {
    *
    * @param data Data to add to the list node
    */
-  public push(data: () => void): void /* -> O(1) */ {
+  public push(data: () => void): void /* O(1) */ {
     const node: ISinglyLinkedListNode = {
       data,
       next: null,
@@ -39,7 +39,7 @@ export class SinglyLinkedList {
   /**
    * Shift a list node off of the head of the linked list
    */
-  public shift(): any /* -> O(1) */ {
+  public shift(): any /* O(1) */ {
     const currentHead = this.head as ISinglyLinkedListNode;
     const data = currentHead.data;
 
@@ -52,7 +52,7 @@ export class SinglyLinkedList {
   /**
    * Check if the linked list has no link nodes
    */
-  public isEmpty(): boolean /* -> O(1) */ {
+  public isEmpty(): boolean /* O(1) */ {
     return this.length === 0;
   }
 }
