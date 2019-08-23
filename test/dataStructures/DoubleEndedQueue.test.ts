@@ -29,6 +29,8 @@ describe('DoubleEndedQueue', () => {
   });
 
   it('should handle high volume traffic', () => {
+    expect.assertions(0);
+
     const doubleEndedQueue = new DoubleEndedQueue();
     let A = 2500000;
 
@@ -50,9 +52,19 @@ describe('DoubleEndedQueue', () => {
   });
 
   it('should add a single item with plenty of capacity', () => {
+    expect.assertions(5);
+
     const doubleEndedQueue = new DoubleEndedQueue();
     doubleEndedQueue.fromArray([1, 2, 3, 4, 5]);
 
-    // TODO: https://github.com/invertase/denque/blob/master/test/denque.js
+    // @ts-ignore internalList is a private variable
+    expect(doubleEndedQueue.internalList.length - doubleEndedQueue.length).toBeGreaterThan(1);
+    const beforeInsertion = doubleEndedQueue.length;
+    const itemIndex = doubleEndedQueue.push(1);
+
+    expect(itemIndex).toStrictEqual(beforeInsertion + 1);
+    expect(doubleEndedQueue.length).toStrictEqual(itemIndex);
+    expect(itemIndex).toStrictEqual(6);
+    expect(doubleEndedQueue.toArray()).toEqual([1, 2, 3, 4, 5, 1]);
   });
 });

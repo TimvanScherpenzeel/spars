@@ -14,6 +14,13 @@ export class DoubleEndedQueue {
   private capacityMask: number = 0x3;
   private internalList: any[] = new Array(4);
 
+  /**
+   * Get the current length of the queue
+   */
+  get length(): number {
+    return this.getSize();
+  }
+
   constructor(array?: any[]) {
     if (Array.isArray(array)) {
       this.fromArray(array);
