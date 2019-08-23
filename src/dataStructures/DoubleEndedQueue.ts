@@ -79,21 +79,6 @@ export class DoubleEndedQueue {
   }
 
   /**
-   * Get the number of items in the internal list
-   */
-  public getSize(): number /* O(1) */ {
-    if (this.headIndex === this.tailIndex) {
-      return 0;
-    }
-
-    if (this.headIndex < this.tailIndex) {
-      return this.tailIndex - this.headIndex;
-    } else {
-      return this.capacityMask + 1 - (this.headIndex - this.tailIndex);
-    }
-  }
-
-  /**
    * Add an item to the head of the internal list
    *
    * @param item Item to insert
@@ -247,6 +232,21 @@ export class DoubleEndedQueue {
    */
   public toArray(): any[] /* O(n) */ {
     return this.copyList(false);
+  }
+
+  /**
+   * Get the number of items in the internal list
+   */
+  private getSize(): number /* O(1) */ {
+    if (this.headIndex === this.tailIndex) {
+      return 0;
+    }
+
+    if (this.headIndex < this.tailIndex) {
+      return this.tailIndex - this.headIndex;
+    } else {
+      return this.capacityMask + 1 - (this.headIndex - this.tailIndex);
+    }
   }
 
   /**

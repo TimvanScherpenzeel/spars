@@ -7,7 +7,7 @@ describe('DoubleEndedQueue', () => {
 
     const doubleEndedQueue = new DoubleEndedQueue();
 
-    expect(doubleEndedQueue.getSize()).toStrictEqual(0);
+    expect(doubleEndedQueue.length).toStrictEqual(0);
   });
 
   it('should take an array argument using fromArray', () => {
@@ -16,7 +16,7 @@ describe('DoubleEndedQueue', () => {
     const A = [1, 2, 3, 4];
     const doubleEndedQueueA = new DoubleEndedQueue(A);
 
-    expect(doubleEndedQueueA.getSize()).toBeGreaterThanOrEqual(A.length);
+    expect(doubleEndedQueueA.length).toBeGreaterThanOrEqual(A.length);
     expect(doubleEndedQueueA.toArray()).toEqual(A);
 
     const B: any[] = [];
@@ -24,7 +24,7 @@ describe('DoubleEndedQueue', () => {
 
     doubleEndedQueueB.fromArray(B);
 
-    expect(doubleEndedQueueA.getSize()).toBeGreaterThanOrEqual(A.length);
+    expect(doubleEndedQueueA.length).toBeGreaterThanOrEqual(A.length);
     expect(doubleEndedQueueA.toArray()).toEqual(A);
   });
 
