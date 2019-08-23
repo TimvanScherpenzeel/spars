@@ -6,9 +6,9 @@
 import { TUndefinable } from '../types';
 
 /**
- * DoubleEndedQueue is a simple resizable double ended queue
+ * Deque is a simple resizable double ended queue
  */
-export class DoubleEndedQueue {
+export class Deque {
   private headIndex: number = 0;
   private tailIndex: number = 0;
   private capacityMask: number = 0x3;

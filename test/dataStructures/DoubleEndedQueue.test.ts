@@ -1,128 +1,128 @@
 // Source
-import { DoubleEndedQueue } from '../../src/dataStructures/DoubleEndedQueue';
+import { Deque } from '../../src/dataStructures/Deque';
 
-describe('DoubleEndedQueue', () => {
+describe('Deque', () => {
   it('should take no argument', () => {
     expect.assertions(1);
 
-    const doubleEndedQueue = new DoubleEndedQueue();
+    const deque = new Deque();
 
-    expect(doubleEndedQueue.length).toStrictEqual(0);
+    expect(deque.length).toStrictEqual(0);
   });
 
   it('should take an array argument', () => {
     expect.assertions(4);
 
     const A = [1, 2, 3, 4];
-    const doubleEndedQueueA = new DoubleEndedQueue(A);
+    const dequeA = new Deque(A);
 
-    expect(doubleEndedQueueA.length).toBeGreaterThanOrEqual(A.length);
-    expect(doubleEndedQueueA.toArray()).toEqual(A);
+    expect(dequeA.length).toBeGreaterThanOrEqual(A.length);
+    expect(dequeA.toArray()).toEqual(A);
 
     const B: any[] = [];
-    const doubleEndedQueueB = new DoubleEndedQueue([]);
+    const dequeB = new Deque([]);
 
-    expect(doubleEndedQueueB.length).toBeGreaterThanOrEqual(B.length);
-    expect(doubleEndedQueueB.toArray()).toEqual(B);
+    expect(dequeB.length).toBeGreaterThanOrEqual(B.length);
+    expect(dequeB.toArray()).toEqual(B);
   });
 
   it('should handle high volume traffic', () => {
     expect.assertions(0);
 
-    const doubleEndedQueue = new DoubleEndedQueue();
+    const deque = new Deque();
     let A = 2500000;
 
     while (--A) {
-      doubleEndedQueue.push(A);
-      doubleEndedQueue.unshift(A);
+      deque.push(A);
+      deque.unshift(A);
     }
 
     let B = 2500000;
 
     while (--B) {
-      const itemB = doubleEndedQueue.shift();
-      doubleEndedQueue.pop();
-      doubleEndedQueue.shift();
-      doubleEndedQueue.push(itemB);
-      doubleEndedQueue.shift();
-      doubleEndedQueue.shift();
+      const itemB = deque.shift();
+      deque.pop();
+      deque.shift();
+      deque.push(itemB);
+      deque.shift();
+      deque.shift();
     }
   });
 
   it('should add a single item with plenty of capacity left', () => {
     expect.assertions(6);
 
-    const doubleEndedQueue = new DoubleEndedQueue([1, 2, 3, 4, 5]);
+    const deque = new Deque([1, 2, 3, 4, 5]);
 
     // @ts-ignore internalList is a private variable
-    expect(doubleEndedQueue.internalList.length - doubleEndedQueue.length).toBeGreaterThan(1);
-    const beforeInsertion = doubleEndedQueue.length;
-    const itemIndex = doubleEndedQueue.unshift('A');
+    expect(deque.internalList.length - deque.length).toBeGreaterThan(1);
+    const beforeInsertion = deque.length;
+    const itemIndex = deque.unshift('A');
 
     expect(itemIndex).toStrictEqual(beforeInsertion + 1);
-    expect(doubleEndedQueue.length).toStrictEqual(itemIndex);
+    expect(deque.length).toStrictEqual(itemIndex);
     expect(itemIndex).toStrictEqual(6);
-    expect(doubleEndedQueue.toArray()).toEqual(['A', 1, 2, 3, 4, 5]);
-    expect(doubleEndedQueue.toString()).toEqual('["A",1,2,3,4,5]');
+    expect(deque.toArray()).toEqual(['A', 1, 2, 3, 4, 5]);
+    expect(deque.toString()).toEqual('["A",1,2,3,4,5]');
   });
 
   it('should add a single item with over capacity', () => {
     expect.assertions(6);
 
     // prettier-ignore
-    const doubleEndedQueue = new DoubleEndedQueue([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+    const deque = new Deque([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
 
     // @ts-ignore internalList is a private variable
-    expect(doubleEndedQueue.internalList.length / doubleEndedQueue.length).toEqual(2);
-    const beforeInsertion = doubleEndedQueue.length;
-    const itemIndex = doubleEndedQueue.unshift('A');
+    expect(deque.internalList.length / deque.length).toEqual(2);
+    const beforeInsertion = deque.length;
+    const itemIndex = deque.unshift('A');
 
     expect(itemIndex).toStrictEqual(beforeInsertion + 1);
-    expect(doubleEndedQueue.length).toStrictEqual(itemIndex);
+    expect(deque.length).toStrictEqual(itemIndex);
     expect(itemIndex).toStrictEqual(17);
     // prettier-ignore
-    expect(doubleEndedQueue.toArray()).toEqual(['A', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
-    expect(doubleEndedQueue.toString()).toEqual('["A",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]');
+    expect(deque.toArray()).toEqual(['A', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+    expect(deque.toString()).toEqual('["A",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]');
   });
 
   it('should return the item at the back of the queue', () => {
     expect.assertions(8);
 
     const A: any[] = [];
-    const doubleEndedQueueA = new DoubleEndedQueue(A);
+    const dequeA = new Deque(A);
 
-    expect(doubleEndedQueueA.length).toEqual(0);
-    expect(doubleEndedQueueA.pop()).toEqual(undefined);
-    expect(doubleEndedQueueA.pop()).toEqual(undefined);
-    expect(doubleEndedQueueA.length).toEqual(0);
+    expect(dequeA.length).toEqual(0);
+    expect(dequeA.pop()).toEqual(undefined);
+    expect(dequeA.pop()).toEqual(undefined);
+    expect(dequeA.length).toEqual(0);
 
     const B = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const doubleEndedQueueB = new DoubleEndedQueue(B);
+    const dequeB = new Deque(B);
 
-    expect(doubleEndedQueueB.pop()).toEqual(9);
-    expect(doubleEndedQueueB.pop()).toEqual(8);
+    expect(dequeB.pop()).toEqual(9);
+    expect(dequeB.pop()).toEqual(8);
     B.pop();
     B.pop();
 
-    expect(doubleEndedQueueB.toArray()).toEqual(B);
+    expect(dequeB.toArray()).toEqual(B);
 
-    doubleEndedQueueB.unshift(5);
-    doubleEndedQueueB.unshift(4);
-    doubleEndedQueueB.unshift(3);
-    doubleEndedQueueB.unshift(2);
-    doubleEndedQueueB.unshift(1);
+    dequeB.unshift(5);
+    dequeB.unshift(4);
+    dequeB.unshift(3);
+    dequeB.unshift(2);
+    dequeB.unshift(1);
 
-    doubleEndedQueueB.push(1);
-    doubleEndedQueueB.push(2);
-    doubleEndedQueueB.push(3);
-    doubleEndedQueueB.push(4);
-    doubleEndedQueueB.push(5);
+    dequeB.push(1);
+    dequeB.push(2);
+    dequeB.push(3);
+    dequeB.push(4);
+    dequeB.push(5);
 
-    doubleEndedQueueB.unshift(3);
-    doubleEndedQueueB.unshift(2);
-    doubleEndedQueueB.unshift(1);
+    dequeB.unshift(3);
+    dequeB.unshift(2);
+    dequeB.unshift(1);
 
-    doubleEndedQueueB.pop();
+    dequeB.pop();
 
     B.unshift(1, 2, 3, 4, 5);
     B.push(1, 2, 3, 4, 5);
@@ -130,171 +130,171 @@ describe('DoubleEndedQueue', () => {
 
     B.pop();
 
-    expect(doubleEndedQueueB.toArray()).toEqual(B);
+    expect(dequeB.toArray()).toEqual(B);
   });
 
   it('should return the item at the front of the queue', () => {
     expect.assertions(11);
 
     const A = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    const doubleEndedQueueA = new DoubleEndedQueue(A);
+    const dequeA = new Deque(A);
 
-    expect(doubleEndedQueueA.shift()).toEqual(1);
-    expect(doubleEndedQueueA.shift()).toEqual(2);
+    expect(dequeA.shift()).toEqual(1);
+    expect(dequeA.shift()).toEqual(2);
 
     A.shift();
     A.shift();
 
-    expect(doubleEndedQueueA.toArray()).toEqual(A);
+    expect(dequeA.toArray()).toEqual(A);
 
-    doubleEndedQueueA.unshift(5);
-    doubleEndedQueueA.unshift(4);
-    doubleEndedQueueA.unshift(3);
-    doubleEndedQueueA.unshift(2);
-    doubleEndedQueueA.unshift(1);
+    dequeA.unshift(5);
+    dequeA.unshift(4);
+    dequeA.unshift(3);
+    dequeA.unshift(2);
+    dequeA.unshift(1);
 
-    doubleEndedQueueA.push(1);
-    doubleEndedQueueA.push(2);
-    doubleEndedQueueA.push(3);
-    doubleEndedQueueA.push(4);
-    doubleEndedQueueA.push(5);
+    dequeA.push(1);
+    dequeA.push(2);
+    dequeA.push(3);
+    dequeA.push(4);
+    dequeA.push(5);
 
-    doubleEndedQueueA.unshift(3);
-    doubleEndedQueueA.unshift(2);
-    doubleEndedQueueA.unshift(1);
+    dequeA.unshift(3);
+    dequeA.unshift(2);
+    dequeA.unshift(1);
 
-    doubleEndedQueueA.shift();
+    dequeA.shift();
 
     A.unshift(1, 2, 3, 4, 5);
     A.push(1, 2, 3, 4, 5);
     A.unshift(1, 2, 3);
     A.shift();
 
-    expect(doubleEndedQueueA.toArray()).toEqual(A);
+    expect(dequeA.toArray()).toEqual(A);
 
-    expect(doubleEndedQueueA.shift()).toEqual(A.shift());
+    expect(dequeA.shift()).toEqual(A.shift());
 
-    expect(doubleEndedQueueA.toArray()).toEqual(A);
+    expect(dequeA.toArray()).toEqual(A);
 
-    const doubleEndedQueueB = new DoubleEndedQueue([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-    expect(doubleEndedQueueB.peekHead()).toEqual(1);
-    expect(doubleEndedQueueB.peekTail()).toEqual(9);
+    const dequeB = new Deque([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    expect(dequeB.peekHead()).toEqual(1);
+    expect(dequeB.peekTail()).toEqual(9);
 
     let length = 5;
 
     while (length--) {
-      doubleEndedQueueB.pop();
+      dequeB.pop();
     }
 
-    expect(doubleEndedQueueB.toArray()).toEqual([1, 2, 3, 4]);
-    expect(doubleEndedQueueB.peekHead()).toEqual(1);
-    expect(doubleEndedQueueB.peekTail()).toEqual(4);
+    expect(dequeB.toArray()).toEqual([1, 2, 3, 4]);
+    expect(dequeB.peekHead()).toEqual(1);
+    expect(dequeB.peekTail()).toEqual(4);
   });
 
   it('should return undefined on nonsencial argument', () => {
     expect.assertions(14);
 
-    const doubleEndedQueueA = new DoubleEndedQueue([1, 2, 3, 4]);
+    const dequeA = new Deque([1, 2, 3, 4]);
 
-    expect(doubleEndedQueueA.peekIndex(-5)).toEqual(undefined);
-    expect(doubleEndedQueueA.peekIndex(-100)).toEqual(undefined);
+    expect(dequeA.peekIndex(-5)).toEqual(undefined);
+    expect(dequeA.peekIndex(-100)).toEqual(undefined);
     // @ts-ignore peekIndex expects numerical values
-    expect(doubleEndedQueueA.peekIndex(undefined)).toEqual(undefined);
+    expect(dequeA.peekIndex(undefined)).toEqual(undefined);
     // @ts-ignore peekIndex expects numerical values
-    expect(doubleEndedQueueA.peekIndex('1')).toEqual(undefined);
-    expect(doubleEndedQueueA.peekIndex(NaN)).toEqual(undefined);
-    expect(doubleEndedQueueA.peekIndex(Infinity)).toEqual(undefined);
-    expect(doubleEndedQueueA.peekIndex(-Infinity)).toEqual(undefined);
-    expect(doubleEndedQueueA.peekIndex(1.5)).toEqual(undefined);
-    expect(doubleEndedQueueA.peekIndex(4)).toEqual(undefined);
+    expect(dequeA.peekIndex('1')).toEqual(undefined);
+    expect(dequeA.peekIndex(NaN)).toEqual(undefined);
+    expect(dequeA.peekIndex(Infinity)).toEqual(undefined);
+    expect(dequeA.peekIndex(-Infinity)).toEqual(undefined);
+    expect(dequeA.peekIndex(1.5)).toEqual(undefined);
+    expect(dequeA.peekIndex(4)).toEqual(undefined);
 
-    const doubleEndedQueueB = new DoubleEndedQueue();
+    const dequeB = new Deque();
 
-    expect(doubleEndedQueueB.length).toEqual(0);
-    expect(doubleEndedQueueB.peekHead()).toEqual(undefined);
-    expect(doubleEndedQueueB.peekHead()).toEqual(undefined);
-    expect(doubleEndedQueueB.peekTail()).toEqual(undefined);
-    expect(doubleEndedQueueB.peekTail()).toEqual(undefined);
+    expect(dequeB.length).toEqual(0);
+    expect(dequeB.peekHead()).toEqual(undefined);
+    expect(dequeB.peekHead()).toEqual(undefined);
+    expect(dequeB.peekTail()).toEqual(undefined);
+    expect(dequeB.peekTail()).toEqual(undefined);
   });
 
   it('should support positive indexing', () => {
     expect.assertions(4);
 
-    const doubleEndedQueue = new DoubleEndedQueue([1, 2, 3, 4]);
+    const deque = new Deque([1, 2, 3, 4]);
 
-    expect(doubleEndedQueue.peekIndex(0)).toEqual(1);
-    expect(doubleEndedQueue.peekIndex(1)).toEqual(2);
-    expect(doubleEndedQueue.peekIndex(2)).toEqual(3);
-    expect(doubleEndedQueue.peekIndex(3)).toEqual(4);
+    expect(deque.peekIndex(0)).toEqual(1);
+    expect(deque.peekIndex(1)).toEqual(2);
+    expect(deque.peekIndex(2)).toEqual(3);
+    expect(deque.peekIndex(3)).toEqual(4);
   });
 
   it('should support negative indexing', () => {
     expect.assertions(4);
 
-    const doubleEndedQueue = new DoubleEndedQueue([1, 2, 3, 4]);
+    const deque = new Deque([1, 2, 3, 4]);
 
-    expect(doubleEndedQueue.peekIndex(-1)).toEqual(4);
-    expect(doubleEndedQueue.peekIndex(-2)).toEqual(3);
-    expect(doubleEndedQueue.peekIndex(-3)).toEqual(2);
-    expect(doubleEndedQueue.peekIndex(-4)).toEqual(1);
+    expect(deque.peekIndex(-1)).toEqual(4);
+    expect(deque.peekIndex(-2)).toEqual(3);
+    expect(deque.peekIndex(-3)).toEqual(2);
+    expect(deque.peekIndex(-4)).toEqual(1);
   });
 
   it('should return true on empty queue', () => {
     expect.assertions(2);
 
-    const doubleEndedQueueA = new DoubleEndedQueue();
-    expect(doubleEndedQueueA.isEmpty()).toEqual(true);
+    const dequeA = new Deque();
+    expect(dequeA.isEmpty()).toEqual(true);
 
-    const doubleEndedQueueB = new DoubleEndedQueue([1, 2, 3, 4]);
-    expect(doubleEndedQueueB.isEmpty()).toEqual(false);
+    const dequeB = new Deque([1, 2, 3, 4]);
+    expect(dequeB.isEmpty()).toEqual(false);
   });
 
   it('should support removing an item by index', () => {
     expect.assertions(11);
 
-    const doubleEndedQueueA = new DoubleEndedQueue();
-    const doubleEndedQueueB = new DoubleEndedQueue();
-    const doubleEndedQueueC = new DoubleEndedQueue();
+    const dequeA = new Deque();
+    const dequeB = new Deque();
+    const dequeC = new Deque();
 
-    doubleEndedQueueB.push('foobar');
-    doubleEndedQueueB.push('foobaz');
+    dequeB.push('foobar');
+    dequeB.push('foobaz');
 
-    expect(doubleEndedQueueA.length).toEqual(0);
+    expect(dequeA.length).toEqual(0);
     // @ts-ignore remove expects a numerical index
-    expect(doubleEndedQueueA.remove('foobar')).toEqual(undefined);
+    expect(dequeA.remove('foobar')).toEqual(undefined);
     // @ts-ignore remove expects a numerical index
-    expect(doubleEndedQueueB.remove(-1, 2)).toEqual('foobaz');
+    expect(dequeB.remove(-1, 2)).toEqual('foobaz');
     // @ts-ignore remove expects a numerical index
-    expect(doubleEndedQueueB.remove(-4, 0)).toEqual(undefined);
+    expect(dequeB.remove(-4, 0)).toEqual(undefined);
     // @ts-ignore remove expects a numerical index
-    expect(doubleEndedQueueB.remove(3, 2)).toEqual(undefined);
+    expect(dequeB.remove(3, 2)).toEqual(undefined);
     // @ts-ignore remove expects a numerical index
-    expect(doubleEndedQueueA.remove({})).toEqual(undefined);
-    expect(doubleEndedQueueA.length).toEqual(0);
+    expect(dequeA.remove({})).toEqual(undefined);
+    expect(dequeA.length).toEqual(0);
 
-    expect(doubleEndedQueueC.length).toEqual(0);
-    expect(doubleEndedQueueC.remove(1)).toEqual(undefined);
+    expect(dequeC.length).toEqual(0);
+    expect(dequeC.remove(1)).toEqual(undefined);
     // @ts-ignore remove expects a numerical index
-    expect(doubleEndedQueueC.remove(2, 3)).toEqual(undefined);
-    expect(doubleEndedQueueC.length).toEqual(0);
+    expect(dequeC.remove(2, 3)).toEqual(undefined);
+    expect(dequeC.length).toEqual(0);
   });
 
   it('pop should shrink array when mostly empty', () => {
-    const doubleEndedQueue = new DoubleEndedQueue();
+    const deque = new Deque();
 
     for (let i = 0; i < 50000; i++) {
-      doubleEndedQueue.push(i);
+      deque.push(i);
     }
 
     // @ts-ignore capacityMask is a private variable
-    const maskA = doubleEndedQueue.capacityMask;
+    const maskA = deque.capacityMask;
 
     for (let i = 0; i < 35000; i++) {
-      doubleEndedQueue.pop();
+      deque.pop();
     }
 
     // @ts-ignore capacityMask is a private variable
-    const maskB = doubleEndedQueue.capacityMask;
+    const maskB = deque.capacityMask;
 
     expect(maskA).toBeGreaterThan(maskB);
   });
