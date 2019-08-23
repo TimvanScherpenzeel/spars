@@ -28,7 +28,7 @@ export class Bitfield {
   }
 
   /**
-   * Get a bit value by index
+   * Get a bit value by index (positive number)
    *
    * @param index Index of bit
    */
@@ -37,7 +37,7 @@ export class Bitfield {
   }
 
   /**
-   * Set a bit index with value
+   * Set a bit index with value (positive number)
    *
    * 1 << 0   = 1            = 0b00000000000000000000000000000001
    * 1 << 1   = 2            = 0b00000000000000000000000000000010
