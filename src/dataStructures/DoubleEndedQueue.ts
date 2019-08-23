@@ -21,6 +21,11 @@ export class DoubleEndedQueue {
     return this.getSize();
   }
 
+  /**
+   * Optionally populate the internal list with an array
+   *
+   * @param array Array with items to initialise the internal list with
+   */
   constructor(array?: any[]) {
     if (Array.isArray(array)) {
       this.fromArray(array);
