@@ -5,7 +5,7 @@ import { isObject } from './isObject';
 import { TNullable } from '../types';
 
 /**
- * Find the difference between two objects
+ * Find all the elements that are different in objectB compared to objectA
  *
  * @param objectA First object
  * @param objectB Second object
