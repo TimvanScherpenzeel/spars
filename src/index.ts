@@ -69,4 +69,12 @@ export { settings } from './settings';
 export { threadPool } from './threadPool';
 
 // Utilities
-export { assert, debounce, getQueryParameters, getUUID, hashString } from './utilities';
+export {
+  assert,
+  diffObject,
+  debounce,
+  getQueryParameters,
+  getUUID,
+  hashString,
+  isObject,
+} from './utilities';
