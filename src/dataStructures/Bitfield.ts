@@ -11,6 +11,13 @@ export class Bitfield {
   private size: number;
 
   /**
+   * Get the current size of the bitfield
+   */
+  get length(): number {
+    return this.size;
+  }
+
+  /**
    * Set the size of the bitfield and initializes the internal data buffer
    *
    * @param size Size of the bitfield

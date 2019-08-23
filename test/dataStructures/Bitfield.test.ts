@@ -7,21 +7,19 @@ describe('Bitfield', () => {
 
     const bitfieldA = new Bitfield(31);
 
-    // @ts-ignore size is a private variable
-    expect(bitfieldA.size).toEqual(32);
+    expect(bitfieldA.length).toEqual(32);
 
     const bitfieldB = new Bitfield(33);
 
-    // @ts-ignore size is a private variable
-    expect(bitfieldB.size).toEqual(64);
+    expect(bitfieldB.length).toEqual(64);
   });
 
   it('should allow to set / get a bit', () => {
     expect.assertions(11);
 
     const bitfieldA = new Bitfield(5);
-    // @ts-ignore size is a private variable
-    expect(bitfieldA.size).toEqual(32);
+
+    expect(bitfieldA.length).toEqual(32);
 
     bitfieldA.set(2, true);
     expect(bitfieldA.get(2)).toEqual(true);
@@ -35,8 +33,7 @@ describe('Bitfield', () => {
 
     bitfieldA.resize(33);
 
-    // @ts-ignore size is a private variable
-    expect(bitfieldA.size).toEqual(64);
+    expect(bitfieldA.length).toEqual(64);
 
     expect(bitfieldA.toString()).toEqual(
       '0b0000000000000000000000000000000000000000000000000000000000000000'
