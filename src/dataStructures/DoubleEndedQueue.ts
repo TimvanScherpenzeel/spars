@@ -15,7 +15,7 @@ export class DoubleEndedQueue {
   /**
    * Fills the queue with items from an array
    *
-   * @param array Array with items to fill the list with
+   * @param array Array with items to fill the internal list with
    */
   public fromArray(array: any[]): void {
     for (const item of array) {
@@ -24,8 +24,8 @@ export class DoubleEndedQueue {
   }
 
   /**
-   * Returns the item at the specified index from the list
-   * You can specify a negative index to peek at values from the end of the list
+   * Returns the item at the specified index from the internal list
+   * You can specify a negative index to peek at values from the end of the internal list
    *
    * @param index Index of the item to peek at
    */
@@ -46,7 +46,7 @@ export class DoubleEndedQueue {
   }
 
   /**
-   * Returns the head item of the list without removing it
+   * Returns the head item of the internal list without removing it
    */
   public peekHead(): TUndefinable<any> {
     if (this.headIndex === this.tailIndex) {
@@ -57,14 +57,14 @@ export class DoubleEndedQueue {
   }
 
   /**
-   * Returns the tail item of the list without removing it
+   * Returns the tail item of the internal list without removing it
    */
   public peekTail(): TUndefinable<any> {
     return this.peekAt(-1);
   }
 
   /**
-   * Get the number of items in the list
+   * Get the number of items in the internal list
    */
   public size(): number {
     if (this.headIndex === this.tailIndex) {
@@ -79,7 +79,7 @@ export class DoubleEndedQueue {
   }
 
   /**
-   * Add an item to the head of the list
+   * Add an item to the head of the internal list
    *
    * @param item Item to insert
    */
@@ -101,7 +101,7 @@ export class DoubleEndedQueue {
   }
 
   /**
-   * Remove and return the first item on the list
+   * Remove and return the first item on the internal list
    */
   public shift(): TUndefinable<any> {
     const headIndex = this.headIndex;
@@ -126,7 +126,7 @@ export class DoubleEndedQueue {
   }
 
   /**
-   * Add an item to the tail of the list
+   * Add an item to the tail of the internal list
    *
    * @param item Item to insert
    */
@@ -149,7 +149,7 @@ export class DoubleEndedQueue {
   }
 
   /**
-   * Remove and return the last item on the list
+   * Remove and return the last item on the internal list
    */
   public pop(): any {
     const tailIndex = this.tailIndex;
@@ -174,6 +174,71 @@ export class DoubleEndedQueue {
   }
 
   /**
+   * Remove and return the item at the specified index from the internal list
+   *
+   * @param index
+   */
+  public remove(index: number): TUndefinable<any> {
+    if (this.isEmpty()) {
+      return undefined;
+    }
+
+    const size = this.size();
+    const length = this.internalList.length;
+
+    if (index >= size || index < -size) {
+      return undefined;
+    }
+
+    if (index < 0) {
+      index += size;
+    }
+
+    index = (this.headIndex + index) & this.capacityMask;
+
+    const item = this.internalList[index];
+
+    let i;
+
+    if (index < size / 2) {
+      for (i = index; i > 0; i--) {
+        this.internalList[index] = this.internalList[
+          (index = (index - 1 + length) & this.capacityMask)
+        ];
+      }
+
+      this.internalList[index] = undefined;
+
+      this.headIndex = (this.headIndex + 1 + length) & this.capacityMask;
+    } else {
+      for (i = size - 1 - index; i > 0; i--) {
+        this.internalList[index] = this.internalList[
+          (index = (index + 1 + length) & this.capacityMask)
+        ];
+      }
+
+      this.internalList[index] = undefined;
+      this.tailIndex = (this.tailIndex - 1 + length) & this.capacityMask;
+    }
+
+    return item;
+  }
+
+  /**
+   * Check if the internal list is empty
+   */
+  public isEmpty(): boolean {
+    return this.headIndex === this.tailIndex;
+  }
+
+  /**
+   * Get the internal list as array
+   */
+  public toArray(): any[] {
+    return this.copyList(false);
+  }
+
+  /**
    * Double the length of the internal list
    */
   private growList(): void {
@@ -189,6 +254,7 @@ export class DoubleEndedQueue {
     this.capacityMask = (this.capacityMask << 1) | 1;
   }
 
+  // TODO: see if we can inline this
   /**
    * Copy the internal list to a new list
    *
