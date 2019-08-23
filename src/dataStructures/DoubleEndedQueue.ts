@@ -28,18 +28,9 @@ export class DoubleEndedQueue {
    */
   constructor(array?: any[]) /* O(n) */ {
     if (Array.isArray(array)) {
-      this.fromArray(array);
-    }
-  }
-
-  /**
-   * Fills the queue with items from an array
-   *
-   * @param array Array with items to fill the internal list with
-   */
-  public fromArray(array: any[]): void /* O(n) */ {
-    for (const item of array) {
-      this.push(item);
+      for (const item of array) {
+        this.push(item);
+      }
     }
   }
 

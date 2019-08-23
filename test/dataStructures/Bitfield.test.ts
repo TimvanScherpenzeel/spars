@@ -17,39 +17,39 @@ describe('Bitfield', () => {
   it('should allow to set / get a bit', () => {
     expect.assertions(11);
 
-    const bitfieldA = new Bitfield(5);
+    const bitfield = new Bitfield(5);
 
-    expect(bitfieldA.length).toEqual(32);
+    expect(bitfield.length).toEqual(32);
 
-    bitfieldA.set(2, true);
-    expect(bitfieldA.get(2)).toEqual(true);
+    bitfield.set(2, true);
+    expect(bitfield.get(2)).toEqual(true);
 
-    expect(bitfieldA.toString()).toEqual('0b00100000000000000000000000000000');
+    expect(bitfield.toString()).toEqual('0b00100000000000000000000000000000');
 
-    bitfieldA.set(2, false);
-    expect(bitfieldA.get(2)).toEqual(false);
+    bitfield.set(2, false);
+    expect(bitfield.get(2)).toEqual(false);
 
-    expect(bitfieldA.toString()).toEqual('0b00000000000000000000000000000000');
+    expect(bitfield.toString()).toEqual('0b00000000000000000000000000000000');
 
-    bitfieldA.resize(33);
+    bitfield.resize(33);
 
-    expect(bitfieldA.length).toEqual(64);
+    expect(bitfield.length).toEqual(64);
 
-    expect(bitfieldA.toString()).toEqual(
+    expect(bitfield.toString()).toEqual(
       '0b0000000000000000000000000000000000000000000000000000000000000000'
     );
 
-    bitfieldA.set(36, true);
-    expect(bitfieldA.get(36)).toEqual(true);
+    bitfield.set(36, true);
+    expect(bitfield.get(36)).toEqual(true);
 
-    expect(bitfieldA.toString()).toEqual(
+    expect(bitfield.toString()).toEqual(
       '0b0000000000000000000000000000000000001000000000000000000000000000'
     );
 
-    bitfieldA.set(36, false);
-    expect(bitfieldA.get(36)).toEqual(false);
+    bitfield.set(36, false);
+    expect(bitfield.get(36)).toEqual(false);
 
-    expect(bitfieldA.toString()).toEqual(
+    expect(bitfield.toString()).toEqual(
       '0b0000000000000000000000000000000000000000000000000000000000000000'
     );
   });

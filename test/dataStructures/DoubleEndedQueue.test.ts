@@ -10,7 +10,7 @@ describe('DoubleEndedQueue', () => {
     expect(doubleEndedQueue.length).toStrictEqual(0);
   });
 
-  it('should take an array argument using fromArray', () => {
+  it('should take an array argument', () => {
     expect.assertions(4);
 
     const A = [1, 2, 3, 4];
@@ -20,12 +20,10 @@ describe('DoubleEndedQueue', () => {
     expect(doubleEndedQueueA.toArray()).toEqual(A);
 
     const B: any[] = [];
-    const doubleEndedQueueB = new DoubleEndedQueue();
+    const doubleEndedQueueB = new DoubleEndedQueue([]);
 
-    doubleEndedQueueB.fromArray(B);
-
-    expect(doubleEndedQueueA.length).toBeGreaterThanOrEqual(A.length);
-    expect(doubleEndedQueueA.toArray()).toEqual(A);
+    expect(doubleEndedQueueB.length).toBeGreaterThanOrEqual(B.length);
+    expect(doubleEndedQueueB.toArray()).toEqual(B);
   });
 
   it('should handle high volume traffic', () => {
@@ -51,21 +49,30 @@ describe('DoubleEndedQueue', () => {
     }
   });
 
-  it('should add a single item with plenty of capacity', () => {
+  it('should add a single item with plenty of capacity left', () => {
     expect.assertions(6);
 
-    const doubleEndedQueue = new DoubleEndedQueue();
-    doubleEndedQueue.fromArray([1, 2, 3, 4, 5]);
+    const doubleEndedQueue = new DoubleEndedQueue([1, 2, 3, 4, 5]);
 
     // @ts-ignore internalList is a private variable
     expect(doubleEndedQueue.internalList.length - doubleEndedQueue.length).toBeGreaterThan(1);
     const beforeInsertion = doubleEndedQueue.length;
-    const itemIndex = doubleEndedQueue.push(1);
+    const itemIndex = doubleEndedQueue.insert('A');
 
     expect(itemIndex).toStrictEqual(beforeInsertion + 1);
     expect(doubleEndedQueue.length).toStrictEqual(itemIndex);
     expect(itemIndex).toStrictEqual(6);
-    expect(doubleEndedQueue.toArray()).toEqual([1, 2, 3, 4, 5, 1]);
-    expect(doubleEndedQueue.toString()).toEqual('[1,2,3,4,5,1]');
+    expect(doubleEndedQueue.toArray()).toEqual(['A', 1, 2, 3, 4, 5]);
+    expect(doubleEndedQueue.toString()).toEqual('["A",1,2,3,4,5]');
+  });
+
+  it('should add a single item with over capacity', () => {
+    // prettier-ignore
+    const doubleEndedQueue = new DoubleEndedQueue([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+
+    // @ts-ignore internalList is a private variable
+    expect(doubleEndedQueue.internalList.length / doubleEndedQueue.length).toEqual(2);
+
+    // const beforeInsertion = doubleEndedQueue.length;
   });
 });
