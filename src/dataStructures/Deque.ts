@@ -6,7 +6,7 @@
 import { TUndefinable } from '../types';
 
 /**
- * Deque is a simple resizable double ended queue
+ * Deque is a simple automatically resizable double ended queue implementation (abbreviated to deque).
  */
 export class Deque {
   private headIndex: number = 0;
