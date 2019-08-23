@@ -71,6 +71,7 @@ export { threadPool } from './threadPool';
 // Utilities
 export {
   assert,
+  diffArray,
   diffObject,
   debounce,
   getQueryParameters,
