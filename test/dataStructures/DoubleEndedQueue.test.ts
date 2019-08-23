@@ -67,12 +67,21 @@ describe('DoubleEndedQueue', () => {
   });
 
   it('should add a single item with over capacity', () => {
+    expect.assertions(6);
+
     // prettier-ignore
     const doubleEndedQueue = new DoubleEndedQueue([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
 
     // @ts-ignore internalList is a private variable
     expect(doubleEndedQueue.internalList.length / doubleEndedQueue.length).toEqual(2);
+    const beforeInsertion = doubleEndedQueue.length;
+    const itemIndex = doubleEndedQueue.insert('A');
 
-    // const beforeInsertion = doubleEndedQueue.length;
+    expect(itemIndex).toStrictEqual(beforeInsertion + 1);
+    expect(doubleEndedQueue.length).toStrictEqual(itemIndex);
+    expect(itemIndex).toStrictEqual(17);
+    // prettier-ignore
+    expect(doubleEndedQueue.toArray()).toEqual(['A', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+    expect(doubleEndedQueue.toString()).toEqual('["A",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]');
   });
 });
