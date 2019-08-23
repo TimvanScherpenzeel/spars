@@ -134,7 +134,7 @@ describe('DoubleEndedQueue', () => {
   });
 
   it('should return the item at the front of the queue', () => {
-    expect.assertions(6);
+    expect.assertions(11);
 
     const A = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const doubleEndedQueueA = new DoubleEndedQueue(A);
@@ -175,24 +175,46 @@ describe('DoubleEndedQueue', () => {
     expect(doubleEndedQueueA.shift()).toEqual(A.shift());
 
     expect(doubleEndedQueueA.toArray()).toEqual(A);
+
+    const doubleEndedQueueB = new DoubleEndedQueue([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    expect(doubleEndedQueueB.peekHead()).toEqual(1);
+    expect(doubleEndedQueueB.peekTail()).toEqual(9);
+
+    let length = 5;
+
+    while (length--) {
+      doubleEndedQueueB.pop();
+    }
+
+    expect(doubleEndedQueueB.toArray()).toEqual([1, 2, 3, 4]);
+    expect(doubleEndedQueueB.peekHead()).toEqual(1);
+    expect(doubleEndedQueueB.peekTail()).toEqual(4);
   });
 
   it('should return undefined on nonsencial argument', () => {
-    expect.assertions(9);
+    expect.assertions(14);
 
-    const doubleEndedQueue = new DoubleEndedQueue([1, 2, 3, 4]);
+    const doubleEndedQueueA = new DoubleEndedQueue([1, 2, 3, 4]);
 
-    expect(doubleEndedQueue.peekIndex(-5)).toEqual(undefined);
-    expect(doubleEndedQueue.peekIndex(-100)).toEqual(undefined);
+    expect(doubleEndedQueueA.peekIndex(-5)).toEqual(undefined);
+    expect(doubleEndedQueueA.peekIndex(-100)).toEqual(undefined);
     // @ts-ignore peekIndex expects numerical values
-    expect(doubleEndedQueue.peekIndex(undefined)).toEqual(undefined);
+    expect(doubleEndedQueueA.peekIndex(undefined)).toEqual(undefined);
     // @ts-ignore peekIndex expects numerical values
-    expect(doubleEndedQueue.peekIndex('1')).toEqual(undefined);
-    expect(doubleEndedQueue.peekIndex(NaN)).toEqual(undefined);
-    expect(doubleEndedQueue.peekIndex(Infinity)).toEqual(undefined);
-    expect(doubleEndedQueue.peekIndex(-Infinity)).toEqual(undefined);
-    expect(doubleEndedQueue.peekIndex(1.5)).toEqual(undefined);
-    expect(doubleEndedQueue.peekIndex(4)).toEqual(undefined);
+    expect(doubleEndedQueueA.peekIndex('1')).toEqual(undefined);
+    expect(doubleEndedQueueA.peekIndex(NaN)).toEqual(undefined);
+    expect(doubleEndedQueueA.peekIndex(Infinity)).toEqual(undefined);
+    expect(doubleEndedQueueA.peekIndex(-Infinity)).toEqual(undefined);
+    expect(doubleEndedQueueA.peekIndex(1.5)).toEqual(undefined);
+    expect(doubleEndedQueueA.peekIndex(4)).toEqual(undefined);
+
+    const doubleEndedQueueB = new DoubleEndedQueue();
+
+    expect(doubleEndedQueueB.length).toEqual(0);
+    expect(doubleEndedQueueB.peekHead()).toEqual(undefined);
+    expect(doubleEndedQueueB.peekHead()).toEqual(undefined);
+    expect(doubleEndedQueueB.peekTail()).toEqual(undefined);
+    expect(doubleEndedQueueB.peekTail()).toEqual(undefined);
   });
 
   it('should support positive indexing', () => {
