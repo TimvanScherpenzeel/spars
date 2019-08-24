@@ -8,9 +8,7 @@
 
 ## Roadmap
 
-- Add SinglyLinkedList, DoublyLinkedList, ObjectPool, Stack, Queue, Tree, Graph
-- Add binary search tree
-- Add support for compression & decompression modules
+- Add binary sound / sprite loader (either a single file with multiple sprites or a binary buffer)
 - Add persistent option to assetLoader that automatically sets and gets from the persistentCache
 
 ## API
