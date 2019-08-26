@@ -15,7 +15,7 @@ describe('BitField', () => {
     expect(bitfieldB.length).toEqual(64);
   });
 
-  it('should allow to set / get a bit', () => {
+  it('should allow to set & get a bit', () => {
     expect.assertions(11);
 
     const bitfield = new BitField(5);

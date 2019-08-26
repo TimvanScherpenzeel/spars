@@ -768,7 +768,7 @@ export class AssetLoader {
               width,
             });
 
-            // Add size of the image for the next face / mipmap
+            // Add size of the image for the next face & mipmap
             dataOffset += imageSize;
 
             // Add padding for odd sized image
