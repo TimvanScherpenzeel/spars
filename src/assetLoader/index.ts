@@ -207,6 +207,8 @@ export class AssetLoader {
               persistentCache.set(asset.id, asset.item);
               break;
             case ELoaderKey.Blob:
+              // Safari iOS does not permit storing file blobs and must be converted to ArrayBuffers
+              // SEE: https://developers.google.com/web/fundamentals/instant-and-offline/web-storage/indexeddb-best-practices
               convertBlobToArrayBuffer(asset.item).then(buffer => {
                 persistentCache.set(asset.id, buffer);
               });
