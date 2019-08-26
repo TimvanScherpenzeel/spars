@@ -8,8 +8,6 @@
 
 ## Roadmap
 
-- Add binary sound / sprite loader (either a single file with multiple sprites or a binary buffer), possibly a modified version of Binpack to support audio files and merge all audio files into a single buffer that can be indexed. This has the advantage of faster loading times and less audio sprites to handle. The downside is that no two sprites can be played at the same time.
-
 ## API
 
 ### Analytics

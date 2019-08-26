@@ -230,10 +230,10 @@ export class TaskManager {
       resultController.isCompleted = true;
 
       // [id,status,data] denotes a task with an eager return value
-      // (forced/numbers/booleans):
+      // (forced | numbers | booleans):
       if (status.length === 3 && status[2]) {
         task.state = 'fulfilled';
-        // resolve/reject the status
+        // resolve | reject the status
         resultController.isFulfilled = true;
         resultController[status[1]](status[2]);
       }
