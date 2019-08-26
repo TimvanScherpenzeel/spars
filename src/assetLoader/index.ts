@@ -362,8 +362,6 @@ export class AssetLoader {
   private loadAudiopack = (item: ILoadItem): Promise<unknown> =>
     this.loadArrayBuffer(item).then((data: TVoidable<ArrayBuffer>): any => {
       if (data) {
-        console.log(data);
-
         let content: TNullable<string> = null;
         let contentArray: TNullable<Uint8Array> = null;
         let binaryChunk: TNullable<ArrayBuffer> = null;
@@ -402,7 +400,30 @@ export class AssetLoader {
         assert(content !== null, 'AssetLoader -> JSON content chunk not found');
 
         if (content) {
-          console.log(JSON.parse(content));
+          const jsonChunk = JSON.parse(content);
+
+          const binary =
+            binaryChunk && binaryChunk.slice(jsonChunk.bufferStart, jsonChunk.bufferEnd);
+
+          assert(binary !== null, 'AssetLoader -> Binary content chunk not found');
+
+          const blob =
+            binary &&
+            new Blob([new Uint8Array(binary)], {
+              type: jsonChunk.mimeType,
+            });
+
+          if (blob) {
+            return Promise.resolve(
+              this.loadAudio({ src: URL.createObjectURL(blob), id: item.src })
+            ).then(audio => {
+              return {
+                audio,
+                data: jsonChunk.data,
+                mimeType: jsonChunk.mimeType,
+              };
+            });
+          }
         }
       }
     });
