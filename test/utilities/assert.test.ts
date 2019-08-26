@@ -6,6 +6,7 @@ const assertionErrorMessage = 'foo must be true';
 
 const foo = true;
 
+// Suite
 describe('assert', () => {
   it('should not throw any Error if the assertion passes', () => {
     expect.assertions(1);

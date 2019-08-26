@@ -17,6 +17,7 @@ const SAMPLE_STRING = /* glsl */ `
   }
 `;
 
+// Suite
 describe('hashString', () => {
   it('hashes a string', () => {
     expect.assertions(13);

@@ -1,6 +1,7 @@
 // Source
 import { Deque } from '../../src/dataStructures/Deque';
 
+// Suite
 describe('Deque', () => {
   it('should take no argument', () => {
     expect.assertions(1);

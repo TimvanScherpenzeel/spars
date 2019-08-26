@@ -15,6 +15,9 @@ import isImageBitmapSupported from '../features/browserFeatures/isImageBitmapSup
 import isImageDecodeSupported from '../features/browserFeatures/isImageDecodeSupported';
 import isWebAssemblySupported from '../features/browserFeatures/isWebAssemblySupported';
 
+// PersistentCache
+import { persistentCache } from '../persistentCache';
+
 // Utilities
 import { assert } from '../utilities';
 

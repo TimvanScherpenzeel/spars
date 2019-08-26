@@ -4,9 +4,6 @@ import { clear, del, get, keys, set, Store } from 'idb-keyval';
 // Utilities
 import { assert } from '../utilities/assert';
 
-// Types
-import { TNullable } from '../types';
-
 /**
  * Check if key is allowed to be stored in IndexedDB
  *
@@ -52,33 +49,6 @@ export class PersistentCache {
   constructor(databaseName: string = 'spar-cache-db', storeName: string = 'spar-cache-store') {
     this.store = new Store(databaseName, storeName);
   }
-
-  /**
-   * Convert ArrayBuffer to Blob
-   *
-   * @param buffer Buffer to convert
-   * @param type MIME type of ArrayBuffer to store
-   */
-  public convertArrayBufferToBlob = (buffer: ArrayBuffer, type: string): Blob =>
-    new Blob([buffer], { type });
-
-  /**
-   * Convert Blob to ArrayBuffer
-   *
-   * @param blob Blob to convert
-   */
-  public convertBlobToArrayBuffer = (blob: Blob): Promise<TNullable<string | ArrayBuffer>> => {
-    return new Promise((resolve, reject): void => {
-      const reader = new FileReader();
-
-      reader.addEventListener('loadend', (event: Event) => {
-        resolve(reader.result);
-      });
-
-      reader.addEventListener('error', reject);
-      reader.readAsArrayBuffer(blob);
-    });
-  };
 
   /**
    * Sets a { key: value } pair in the persistent cache

@@ -1,6 +1,7 @@
 // Source
 import { getQueryParameters } from '../../src/utilities/getQueryParameters';
 
+// Suite
 describe('getQueryParameters', () => {
   it('can create a valid { key: value } pair', () => {
     expect.assertions(1);

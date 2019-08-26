@@ -1,6 +1,7 @@
 // Source
 import { BitField } from '../../src/dataStructures/BitField';
 
+// Suite
 describe('BitField', () => {
   it('should take a size as argument and fit automatically to 32-bit chunks', () => {
     expect.assertions(2);
