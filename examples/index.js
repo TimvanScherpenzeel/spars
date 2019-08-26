@@ -39,8 +39,8 @@ Spar.assetLoader
     // },
     // isTablet && { src: './assets/2.png' },
     // isMobile && { src: './assets/3.png' },
-    // { src: './assets/example.binpack' },
-    { src: './assets/example.audiopack' },
+    { src: './assets/example.binpack' },
+    // { src: './assets/example.audiopack' },
     // { src: './assets/audio.mp3', loader: 'ArrayBuffer', persistent: true },
     // { src: './assets/audio.mp3', loader: 'Blob', persistent: true },
     // { src: './assets/video.mp4' },
@@ -119,6 +119,12 @@ Spar.assetLoader
 
 class App {
   constructor(assets) {
+    // assets.get('./assets/example.binpack').then(bin => {
+    //   console.log(bin);
+    // });
+    // assets.get('./assets/example.binpack')['buttontray.png'].then(asset => console.log(asset));
+    // const list = assets.get('./assets/example.binpack');
+    // console.log(list['buttontray.png']);
     // const { audio, data } = assets.get('./assets/example.audiopack');
     // console.log(audio, data);
     // document.body.appendChild(audio);
