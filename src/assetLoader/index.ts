@@ -565,7 +565,7 @@ export class AssetLoader {
       } else {
         // Fallback solution
         // Decode as synchronous blocking on the main thread
-        // This is the least favorable method and should preferably only be used in old browsers (Edge, Firefox)
+        // This is the least favorable method and should preferably only be used in old browsers (Edge | Firefox)
         image.onload = (): void => {
           resolve(image);
         };
