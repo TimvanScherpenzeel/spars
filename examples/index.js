@@ -39,22 +39,19 @@ Spar.assetLoader
     // },
     // isTablet && { src: './assets/2.png' },
     // isMobile && { src: './assets/3.png' },
-
-    { src: './assets/images.binpack', persistent: true },
-    // { src: './assets/audio.mp3' },
+    // { src: './assets/images.binpack' },
+    // { src: './assets/audio.mp3', loader: 'ArrayBuffer', persistent: true },
+    // { src: './assets/audio.mp3', loader: 'Blob', persistent: true },
     // { src: './assets/video.mp4' },
     // { src: './assets/text.txt' },
     // { src: './assets/MJeans1TEX_Lores.dds' },
     // { src: './assets/audio.ogg' },
-
     // { src: './assets/icon-twitter.svg' },
     // { src: './assets/xml.html' },
     // { src: './assets/xml.xml' },
-
     // // Does not require a src but can use it for automatic loader detection
     // // { id: 'Antonio', loader: 'Font' },
     // { id: 'Antonio', src: './assets/antonio-bold-webfont.woff2' },
-
     // {
     //   src: './assets/simple.wasm',
     //   loaderOptions: {
@@ -65,7 +62,6 @@ Spar.assetLoader
     //     },
     //   },
     // },
-
     // {
     //   id: './assets/1-device.png',
     //   src: Spar.assetLoader.byDeviceType({
@@ -74,7 +70,6 @@ Spar.assetLoader
     //     MOBILE: './assets/1-mobile.png',
     //   }),
     // },
-
     // {
     //   id: './assets/example.ktx',
     //   src: Spar.assetLoader.bySupportedCompressedTexture({
@@ -85,7 +80,6 @@ Spar.assetLoader
     //     FALLBACK: './assets/example.png',
     //   }),
     // },
-
     // {
     //   id: './assets/example-mipmaps.ktx',
     //   src: Spar.assetLoader.bySupportedCompressedTexture({
@@ -96,11 +90,9 @@ Spar.assetLoader
     //     FALLBACK: './assets/example.png',
     //   }),
     // },
-
     // (isMobile || isTablet) && {
     //   src: './assets/green_point_park_4k_sh.bin',
     // },
-
     // isDesktop && {
     //   id: './assets/green_point_park_4k_ibl.ktx',
     //   src: Spar.assetLoader.bySupportedCompressedTexture({
@@ -110,7 +102,6 @@ Spar.assetLoader
     //     FALLBACK: './assets/green_point_park_4k_ibl_none.ktx',
     //   }),
     // },
-
     // isDesktop && {
     //   id: './assets/green_point_park_4k_skybox.ktx',
     //   src: Spar.assetLoader.bySupportedCompressedTexture({

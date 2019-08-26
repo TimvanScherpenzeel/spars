@@ -19,7 +19,7 @@ import isWebAssemblySupported from '../features/browserFeatures/isWebAssemblySup
 import { persistentCache } from '../persistentCache';
 
 // Utilities
-import { assert } from '../utilities';
+import { assert, convertBlobToArrayBuffer } from '../utilities';
 
 // Types
 import { TNullable, TUndefinable, TVoidable } from '../types';
@@ -185,6 +185,8 @@ export class AssetLoader {
               fromCache: false,
               id: item.id || item.src,
               item: asset,
+              loaderType,
+              persistent: item.persistent,
               timeToLoad: window.performance.now() - startTime,
             });
           });
@@ -198,6 +200,23 @@ export class AssetLoader {
     loadingAssets.forEach((promise: Promise<any>) =>
       promise.then(asset => {
         progress++;
+
+        if (asset.persistent) {
+          switch (asset.loaderType) {
+            case ELoaderKey.ArrayBuffer:
+              persistentCache.set(asset.id, asset.item);
+              break;
+            case ELoaderKey.Blob:
+              convertBlobToArrayBuffer(asset.item).then(buffer => {
+                persistentCache.set(asset.id, buffer);
+              });
+              break;
+            default:
+              console.warn(
+                'AssetLoader -> Persistent caching is currently only possible with ArrayBuffer and Blob loaders'
+              );
+          }
+        }
 
         eventEmitter.emit(EVENTS.ASSET_LOADED, {
           id: asset.id,
