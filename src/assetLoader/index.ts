@@ -37,6 +37,7 @@ import {
 const LOADER_EXTENSIONS_MAP = new Map([
   [ELoaderKey.ArrayBuffer, { extensions: ['bin'] }],
   [ELoaderKey.Audio, { extensions: ['mp3', 'ogg', 'wav', 'flac'] }],
+  [ELoaderKey.Audiopack, { extensions: ['audiopack'] }],
   [ELoaderKey.Binpack, { extensions: ['binpack'] }],
   [ELoaderKey.Font, { extensions: ['woff2', 'woff', 'ttf', 'otf', 'eot'] }],
   [ELoaderKey.Image, { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
@@ -138,6 +139,9 @@ export class AssetLoader {
               break;
             case ELoaderKey.Audio:
               loadedItem = this.loadAudio(item);
+              break;
+            case ELoaderKey.Audiopack:
+              loadedItem = this.loadAudiopack(item);
               break;
             case ELoaderKey.Binpack:
               loadedItem = this.loadBinpack(item);
@@ -354,6 +358,54 @@ export class AssetLoader {
       .catch(err => {
         console.error(err);
       });
+
+  private loadAudiopack = (item: ILoadItem): Promise<unknown> =>
+    this.loadArrayBuffer(item).then((data: TVoidable<ArrayBuffer>): any => {
+      if (data) {
+        console.log(data);
+
+        let content: TNullable<string> = null;
+        let contentArray: TNullable<Uint8Array> = null;
+        let binaryChunk: TNullable<ArrayBuffer> = null;
+        let byteOffset: number = 0;
+        let chunkIndex: number = 0;
+        let chunkLength: number = 0;
+        let chunkType: TNullable<number> = null;
+
+        const headerMagic = new Uint8Array(data, 0, 4).reduce(
+          (magic, char) => (magic += String.fromCharCode(char)),
+          ''
+        );
+
+        assert(headerMagic === 'AUDP', 'AssetLoader -> Unsupported Audiopacker header');
+
+        const chunkView = new DataView(data, 12);
+
+        while (chunkIndex < chunkView.byteLength) {
+          chunkLength = chunkView.getUint32(chunkIndex, true);
+          chunkIndex += 4;
+
+          chunkType = chunkView.getUint32(chunkIndex, true);
+          chunkIndex += 4;
+
+          if (chunkType === 0x4e4f534a) {
+            contentArray = new Uint8Array(data, 12 + chunkIndex, chunkLength);
+            content = contentArray.reduce((str, char) => (str += String.fromCharCode(char)), '');
+          } else if (chunkType === 0x004e4942) {
+            byteOffset = 12 + chunkIndex;
+            binaryChunk = data.slice(byteOffset, byteOffset + chunkLength);
+          }
+
+          chunkIndex += chunkLength;
+        }
+
+        assert(content !== null, 'AssetLoader -> JSON content chunk not found');
+
+        if (content) {
+          console.log(JSON.parse(content));
+        }
+      }
+    });
 
   private loadBinpack = (item: ILoadItem): Promise<any> =>
     this.loadArrayBuffer(item).then((data: TVoidable<ArrayBuffer>): any => {

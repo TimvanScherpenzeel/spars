@@ -40,6 +40,7 @@ Spar.assetLoader
     // isTablet && { src: './assets/2.png' },
     // isMobile && { src: './assets/3.png' },
     // { src: './assets/images.binpack' },
+    { src: './assets/example.audiopack' },
     // { src: './assets/audio.mp3', loader: 'ArrayBuffer', persistent: true },
     // { src: './assets/audio.mp3', loader: 'Blob', persistent: true },
     // { src: './assets/video.mp4' },
@@ -119,7 +120,7 @@ Spar.assetLoader
 class App {
   constructor(assets) {
     // console.log(assets.get('./assets/images.binpack'));
-    // console.log(assets);
+    console.log(assets);
     // console.log(assets.get('./assets/green_point_park_4k_skybox.ktx'));
     // assets.get('./assets/simple.wasm').instance.exports.exported_func();
   }
