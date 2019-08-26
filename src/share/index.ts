@@ -1,3 +1,12 @@
+/**
+ * Create a share embed link
+ *
+ * @param type Share platform
+ * @param shareURL URL to share
+ * @param shareDescription Description of URL to share
+ * @param width Width of the share embed
+ * @param height Height of the share embed
+ */
 export const share = (
   type: string,
   shareURL: string,
