@@ -450,9 +450,12 @@ console.log(Spar.features);
 
 // Spar.scrollToTopOnReload();
 
-// Share
+// Social
 // -----
-// Spar.share('twitter', 'https://www.random.studio', 'a studio');
+
+// Spar.shareFacebook('https://www.random.studio', 'a design studio', 300, 400);
+// Spar.shareLinkedIn('https://www.random.studio', 'a design studio', 500, 1000)
+// Spar.shareTwitter('https://www.random.studio', 'a design studio')
 
 // ThreadPool
 // ----------
