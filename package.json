@@ -14,7 +14,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts"
+    "build": "jest --verbose=false && tsc --module commonjs && rollup -c rollup.config.ts"
   },
   "author": "Tim van Scherpenzeel",
   "license": "MIT",
