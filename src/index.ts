@@ -2,7 +2,7 @@
 export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 
 // AssetLoader
-export { AssetLoader } from './assetLoader';
+export { AssetLoader } from './AssetLoader';
 
 // Audio
 export { audioManager, createAudioContext, checkAutoplay } from './audio';
@@ -51,10 +51,10 @@ export { features } from './features';
 export { schedulePriorities, scheduleFrame } from './frameScheduler';
 
 // FrameTicker
-export { frameTicker } from './frameTicker';
+export { frameTicker } from './FrameTicker';
 
-// Caching
-export { PersistentCache } from './caching';
+// PersistentCache
+export { PersistentCache } from './PersistentCache';
 
 // Polyfills
 export { fullScreen, pointerLock } from './polyfills';
