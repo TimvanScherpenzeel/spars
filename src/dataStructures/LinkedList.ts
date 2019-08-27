@@ -47,28 +47,19 @@ export class LinkedList {
   }
 
   /**
-   * Create a new unlisted node
-   *
-   * @param value Value to store in node
-   */
-  public createEntry(value: any): LinkedListNode {
-    return new LinkedListNode(value);
-  }
-
-  /**
    * Insert a new value at the tail
    *
    * @param value Value to insert at tail
    */
   public insertValue(value: any): LinkedListNode {
-    const node = this.createEntry(value);
+    const node = new LinkedListNode(value);
     this.insertEntry(node);
 
     return node;
   }
 
   /**
-   * Insert an node at the tail
+   * Insert a node at the tail
    *
    * @param node Entry to insert at tail
    */
@@ -88,7 +79,7 @@ export class LinkedList {
   }
 
   /**
-   * Dispose an node
+   * Dispose a node
    *
    * @param node Entry to dispose
    */

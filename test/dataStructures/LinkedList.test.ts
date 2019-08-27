@@ -42,18 +42,6 @@ describe('LinkedList', () => {
 
     linkedList.clear();
   });
-
-  it('should create a new insertable unlisted node', () => {
-    expect.assertions(1);
-
-    const node = linkedList.createEntry(Ax);
-
-    linkedList.insertEntry(node);
-
-    expect(linkedList.getLength).toEqual(1);
-
-    linkedList.clear();
-  });
 });
 
 let linkedListNode = new LinkedListNode(Ax);
