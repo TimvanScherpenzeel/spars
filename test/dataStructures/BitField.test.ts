@@ -8,11 +8,11 @@ describe('BitField', () => {
 
     const bitfieldA = new BitField(31);
 
-    expect(bitfieldA.length).toEqual(32);
+    expect(bitfieldA.getLength).toEqual(32);
 
     const bitfieldB = new BitField(33);
 
-    expect(bitfieldB.length).toEqual(64);
+    expect(bitfieldB.getLength).toEqual(64);
   });
 
   it('should allow to set & get a bit', () => {
@@ -20,7 +20,7 @@ describe('BitField', () => {
 
     const bitfield = new BitField(5);
 
-    expect(bitfield.length).toEqual(32);
+    expect(bitfield.getLength).toEqual(32);
 
     bitfield.set(2, true);
     expect(bitfield.get(2)).toEqual(true);
@@ -34,7 +34,7 @@ describe('BitField', () => {
 
     bitfield.resize(33);
 
-    expect(bitfield.length).toEqual(64);
+    expect(bitfield.getLength).toEqual(64);
 
     expect(bitfield.toString()).toEqual(
       '0b0000000000000000000000000000000000000000000000000000000000000000'

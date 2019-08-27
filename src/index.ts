@@ -5,7 +5,7 @@ export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 export { audioManager, createAudioContext, checkAutoplay } from './audio';
 
 // Caching
-export { PersistentCache } from './caching';
+export { LRUCache, PersistentCache } from './caching';
 
 // Constants
 export { COOKIES, EVENTS } from './constants';
@@ -14,7 +14,7 @@ export { COOKIES, EVENTS } from './constants';
 export { deleteCookie, getCookie, setCookie } from './cookies';
 
 // Data structures
-export { BitField, Deque } from './dataStructures';
+export { BitField, Deque, LinkedList } from './dataStructures';
 
 // Easings
 export {
