@@ -551,7 +551,7 @@ export class AssetLoader {
       const image = new Image();
 
       // Check if we can decode non-blocking by loading the image asynchronously using image.decode().then(() => ...)
-      // https://www.chromestatus.com/feature/5637156160667648 (Chrome | Safari | Safari iOS)
+      // SEE: https://www.chromestatus.com/feature/5637156160667648 (Chrome | Safari | Safari iOS)
       if (isImageDecodeSupported) {
         image.src = item.src;
         image
@@ -601,8 +601,8 @@ export class AssetLoader {
             if (sx !== undefined && sy !== undefined && sw !== undefined && sh !== undefined) {
               if (options !== undefined) {
                 // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
-                // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
-                // https://www.khronos.org/registry/webgl/specs/latest/1.0/#PIXEL_STORAGE_PARAMETERS
+                // SEE: https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+                // SEE: https://www.khronos.org/registry/webgl/specs/latest/1.0/#PIXEL_STORAGE_PARAMETERS
                 // @ts-ignore createImageBitmap expects 1 or 5 parameters but now optionally supports 6
                 return createImageBitmap(data, sx, sy, sw, sh, options);
               } else {
@@ -610,8 +610,8 @@ export class AssetLoader {
               }
             } else if (options !== undefined) {
               // NOTE: Firefox does not yet support passing options (at least as second parameter) to createImageBitmap and throws
-              // https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
-              // https://www.khronos.org/registry/webgl/specs/latest/1.0/#PIXEL_STORAGE_PARAMETERS
+              // SEE: https://bugzilla.mozilla.org/show_bug.cgi?id=1335594
+              // SEE: https://www.khronos.org/registry/webgl/specs/latest/1.0/#PIXEL_STORAGE_PARAMETERS
               // @ts-ignore createImageBitmap expects 1 or 5 parameters but now optionally supports 2
               return createImageBitmap(data, options);
             } else {

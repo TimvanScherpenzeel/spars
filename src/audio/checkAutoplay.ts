@@ -10,7 +10,7 @@ import { eventEmitter } from '../events/EventEmitter';
 // Features
 import isUserActivationSupported from '../features/browserFeatures/isUserActivationSupported';
 
-// https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
+// SEE: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
 
 // Muted autoplay is always allowed.
 
@@ -28,7 +28,7 @@ let autoplayAllowed = false;
  */
 export const checkAutoplay = (element?: HTMLElement): Promise<boolean> =>
   new Promise((resolve, reject): void => {
-    // https://developers.google.com/web/updates/2019/01/nic72#user-activation
+    // SEE: https://developers.google.com/web/updates/2019/01/nic72#user-activation
     if (
       autoplayAllowed === true ||
       (isUserActivationSupported && (navigator as any).userActivation.hasBeenActive === true)

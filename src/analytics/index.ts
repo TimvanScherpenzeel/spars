@@ -12,7 +12,7 @@ export const registerAnalytics = (trackingIdentifier: string): void => {
     trackingIdentifier === undefined ||
     !/^ua-\d{4,9}-\d{1,4}$/i.test(trackingIdentifier.toString())
   ) {
-    // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#trackingId
+    // SEE: https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#trackingId
     console.warn('Analytics -> TrackingIdentifier expected to be of format "UA-XXXX-YY"');
   }
 

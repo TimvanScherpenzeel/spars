@@ -50,7 +50,7 @@ function onConnectionChangeHandler(): void {
  * Start listening to connection change events
  */
 export default ((): void => {
-  // https://caniuse.com/#feat=netinfo (Chrome only for now)
+  // SEE: https://caniuse.com/#feat=netinfo (Chrome only for now)
   if ((navigator as any).connection) {
     (navigator as any).connection.addEventListener('change', onConnectionChangeHandler, false);
   }

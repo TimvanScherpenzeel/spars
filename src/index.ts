@@ -65,8 +65,8 @@ export { scrollTo, scrollToTopOnReload } from './scrolling';
 // Settings
 export { settings } from './settings';
 
-// Share
-export { share } from './share';
+// Social
+export { shareFacebook, shareLinkedIn, shareTwitter } from './social';
 
 // ThreadPool
 export { threadPool } from './threadPool';
