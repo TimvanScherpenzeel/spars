@@ -51,7 +51,7 @@ export { features } from './features';
 export { schedulePriorities, scheduleFrame } from './frameScheduler';
 
 // FrameTicker
-export { frameTicker } from './FrameTicker';
+export { frameTicker } from './frameTicker';
 
 // PersistentCache
 export { PersistentCache } from './PersistentCache';
