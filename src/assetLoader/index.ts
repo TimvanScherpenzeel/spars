@@ -331,7 +331,7 @@ export class AssetLoader {
    *
    * @param item Item to load
    */
-  private loadAudio = (item: ILoadItem): Promise<unknown> =>
+  private loadAudio = (item: ILoadItem): Promise<any> =>
     this.fetchItem(item)
       .then(response => response.blob())
       .then(
@@ -368,7 +368,12 @@ export class AssetLoader {
         console.error(err);
       });
 
-  private loadAudiopack = (item: ILoadItem): Promise<unknown> =>
+  /**
+   * Load an item and parse the Response as Audiopack
+   *
+   * @param item Item to load
+   */
+  private loadAudiopack = (item: ILoadItem): Promise<any> =>
     this.loadArrayBuffer(item).then((data: TVoidable<ArrayBuffer>): any => {
       if (data) {
         let content: TNullable<string> = null;
@@ -437,6 +442,11 @@ export class AssetLoader {
       }
     });
 
+  /**
+   * Load an item and parse the Response as Binpack
+   *
+   * @param item Item to load
+   */
   private loadBinpack = (item: ILoadItem): Promise<any> =>
     this.loadArrayBuffer(item).then((data: TVoidable<ArrayBuffer>): any => {
       if (data) {
@@ -830,7 +840,7 @@ export class AssetLoader {
    *
    * @param item Item to load
    */
-  private loadVideo = (item: ILoadItem): Promise<unknown> =>
+  private loadVideo = (item: ILoadItem): Promise<any> =>
     this.fetchItem(item)
       .then(response => response.blob())
       .then(
