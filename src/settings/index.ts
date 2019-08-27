@@ -5,7 +5,7 @@ import getGPUTier from '../features/hardwareFeatures/getGPUTier';
 import { getQueryParameters } from '../utilities/getQueryParameters';
 
 const defaultSettings = {
-  GPUTier: Number(getGPUTier.tier.split('TIER_')[1]),
+  GPUTier: getGPUTier.tier.split('TIER_')[1],
   debug: process.env.NODE_ENV === 'development',
   devicePixelRatio: window.devicePixelRatio,
 };
