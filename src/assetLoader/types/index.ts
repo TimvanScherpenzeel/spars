@@ -1,3 +1,6 @@
+// Caching
+import { PersistentCache } from '../../caching';
+
 /**
  * Keys used for the loaders
  */
@@ -16,6 +19,13 @@ export enum ELoaderKey {
   Video = 'Video',
   WebAssembly = 'WebAssembly',
   XML = 'XML',
+}
+
+/**
+ * Options to pass to the AssetLoader
+ */
+export interface IAssetLoaderOptions {
+  persistentCache?: PersistentCache;
 }
 
 /**

@@ -2,7 +2,7 @@
 export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 
 // AssetLoader
-export { assetLoader } from './assetLoader';
+export { AssetLoader } from './assetLoader';
 
 // Audio
 export { audioManager, createAudioContext, checkAutoplay } from './audio';
@@ -53,8 +53,8 @@ export { schedulePriorities, scheduleFrame } from './frameScheduler';
 // FrameTicker
 export { frameTicker } from './frameTicker';
 
-// PersistentCache
-export { persistentCache } from './persistentCache';
+// Caching
+export { PersistentCache } from './caching';
 
 // Polyfills
 export { fullScreen, pointerLock } from './polyfills';

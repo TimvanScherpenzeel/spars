@@ -4,6 +4,9 @@ import { clear, del, get, keys, set, Store } from 'idb-keyval';
 // Utilities
 import { assert } from '../utilities/assert';
 
+// Types
+import { IPersistentCacheOptions } from './types';
+
 /**
  * Check if key is allowed to be stored in IndexedDB
  *
@@ -38,16 +41,19 @@ export class PersistentCache {
   // in case IndexedDB is not available (private browsing mode)
   private memoryCache: Map<IDBValidKey, any> = new Map();
 
+  private options: IPersistentCacheOptions;
   private store: Store;
 
   /**
    * Sets various configuration options
-   *
-   * @param databaseName Name of the persistent cache database
-   * @param storeName Name of the persistent cache store
    */
-  constructor(databaseName: string = 'spar-cache-db', storeName: string = 'spar-cache-store') {
-    this.store = new Store(databaseName, storeName);
+  constructor(options: IPersistentCacheOptions) {
+    this.options = options;
+
+    this.store = new Store(
+      (this.options && this.options.databaseName) || 'spar-cache-db',
+      (this.options && this.options.storeName) || 'spar-cache-store'
+    );
   }
 
   /**
@@ -135,5 +141,3 @@ export class PersistentCache {
     });
   }
 }
-
-export const persistentCache = new PersistentCache();

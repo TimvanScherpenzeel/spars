@@ -15,9 +15,6 @@ import isImageBitmapSupported from '../features/browserFeatures/isImageBitmapSup
 import isImageDecodeSupported from '../features/browserFeatures/isImageDecodeSupported';
 import isWebAssemblySupported from '../features/browserFeatures/isWebAssemblySupported';
 
-// PersistentCache
-import { persistentCache } from '../persistentCache';
-
 // Utilities
 import { assert, convertBlobToArrayBuffer } from '../utilities';
 
@@ -25,6 +22,7 @@ import { assert, convertBlobToArrayBuffer } from '../utilities';
 import { TNullable, TUndefinable, TVoidable } from '../types';
 import {
   ELoaderKey,
+  IAssetLoaderOptions,
   IByDeviceTypeOptions,
   IBySupportedCompressedTextureOptions,
   ILoadItem,
@@ -71,10 +69,13 @@ const IS_MEDIA_PRELOAD_SUPPORTED = !getBrowserType.isSafari;
 export class AssetLoader {
   public assets: Map<string, Promise<Response>> = new Map();
 
-  /**
-   * DOMParser instance for the XML loader
-   */
+  private options: IAssetLoaderOptions;
   private domParser = new DOMParser();
+
+  constructor(options: IAssetLoaderOptions) {
+    this.options = options;
+  }
+
   /**
    * Load conditionally based on device type
    */
@@ -205,16 +206,24 @@ export class AssetLoader {
       promise.then(asset => {
         progress++;
 
-        if (asset.persistent) {
+        if (asset.persistent && (!this.options || !this.options.persistentCache)) {
+          console.warn(
+            'AssetLoader -> Persistent caching requires an instance of a PersistentCache to be passed to the AssetLoader constructor'
+          );
+        }
+
+        if (this.options && this.options.persistentCache && asset.persistent) {
           switch (asset.loaderType) {
             case ELoaderKey.ArrayBuffer:
-              persistentCache.set(asset.id, asset.item);
+              this.options.persistentCache.set(asset.id, asset.item);
               break;
             case ELoaderKey.Blob:
               // Safari iOS does not permit storing file blobs and must be converted to ArrayBuffers
               // SEE: https://developers.google.com/web/fundamentals/instant-and-offline/web-storage/indexeddb-best-practices
               convertBlobToArrayBuffer(asset.item).then(buffer => {
-                persistentCache.set(asset.id, buffer);
+                if (this.options && this.options.persistentCache) {
+                  this.options.persistentCache.set(asset.id, buffer);
+                }
               });
               break;
             default:
@@ -914,5 +923,3 @@ export class AssetLoader {
       });
   };
 }
-
-export const assetLoader = new AssetLoader();
