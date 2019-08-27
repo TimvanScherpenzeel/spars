@@ -21,34 +21,34 @@ describe('LinkedList', () => {
   it('should insert a new value at the tail', () => {
     expect.assertions(2);
 
-    const entry = linkedList.insertValue(Ax);
+    const node = linkedList.insertValue(Ax);
 
-    expect((linkedList.getTail as any).value).toEqual(entry.value);
+    expect((linkedList.getTail as any).value).toEqual(node.value);
     expect((linkedList.getTail as any).value).toEqual(Ax);
 
     linkedList.clear();
   });
 
-  it('should dispose an entry by entry', () => {
+  it('should dispose an node by node', () => {
     expect.assertions(2);
 
-    const entry = linkedList.insertValue(Ax);
+    const node = linkedList.insertValue(Ax);
 
     expect(linkedList.getLength).toEqual(1);
 
-    linkedList.disposeEntry(entry);
+    linkedList.disposeEntry(node);
 
     expect(linkedList.getLength).toEqual(0);
 
     linkedList.clear();
   });
 
-  it('should create a new insertable unlisted entry', () => {
+  it('should create a new insertable unlisted node', () => {
     expect.assertions(1);
 
-    const entry = linkedList.createEntry(Ax);
+    const node = linkedList.createEntry(Ax);
 
-    linkedList.insertEntry(entry);
+    linkedList.insertEntry(node);
 
     expect(linkedList.getLength).toEqual(1);
 
