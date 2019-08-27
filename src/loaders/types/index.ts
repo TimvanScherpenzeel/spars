@@ -1,5 +1,5 @@
-// PersistentCache
-import { PersistentCache } from '../../PersistentCache';
+// Caching
+import { PersistentCache } from '../../caching/PersistentCache';
 
 /**
  * Keys used for the loaders

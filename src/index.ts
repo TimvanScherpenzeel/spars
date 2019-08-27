@@ -1,11 +1,11 @@
 // Analytics
 export { registerAnalytics, recordAnalyticsEvent } from './analytics';
 
-// AssetLoader
-export { AssetLoader } from './AssetLoader';
-
 // Audio
 export { audioManager, createAudioContext, checkAutoplay } from './audio';
+
+// Caching
+export { PersistentCache } from './caching';
 
 // Constants
 export { COOKIES, EVENTS } from './constants';
@@ -53,8 +53,8 @@ export { schedulePriorities, scheduleFrame } from './frameScheduler';
 // FrameTicker
 export { frameTicker } from './frameTicker';
 
-// PersistentCache
-export { PersistentCache } from './PersistentCache';
+// Loaders
+export { AssetLoader } from './loaders';
 
 // Polyfills
 export { fullScreen, pointerLock } from './polyfills';

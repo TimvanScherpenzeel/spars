@@ -12,129 +12,6 @@ import * as Spar from '../dist/spar.umd';
 //   eventLabel: 'Fall Campaign',
 // });
 
-// AssetLoader
-// -----------
-
-// Spar.eventEmitter.on(Spar.EVENTS.ASSET_LOADED, event => {
-//   console.log(event);
-// });
-
-// Spar.eventEmitter.on(Spar.EVENTS.ASSETS_LOADED, event => {
-//   console.log(event);
-// });
-
-// const { isDesktop, isTablet, isMobile } = Spar.features.browserFeatures.browserType;
-
-// const persistentCache = new Spar.PersistentCache();
-// const assetLoader = new Spar.AssetLoader({ persistentCache });
-
-// assetLoader
-//   .loadAssets([
-//     // isDesktop && {
-//     //   loader: 'ImageBitmap',
-//     //   loaderOptions: {
-//     //     sx: 0,
-//     //     sy: 0,
-//     //     sw: 25,
-//     //     sh: 25,
-//     //   },
-//     //   src: './assets/1.png',
-//     // },
-//     // isTablet && { src: './assets/2.png' },
-//     // isMobile && { src: './assets/3.png' },
-//     // { src: './assets/example.binpack' },
-//     // { src: './assets/example.audiopack' },
-//     { src: './assets/audio.mp3', loader: 'ArrayBuffer', persistent: true },
-//     // { src: './assets/audio.mp3', loader: 'Blob', persistent: true },
-//     // { src: './assets/video.mp4' },
-//     // { src: './assets/text.txt' },
-//     // { src: './assets/MJeans1TEX_Lores.dds' },
-//     // { src: './assets/audio.ogg' },
-//     // { src: './assets/icon-twitter.svg' },
-//     // { src: './assets/xml.html' },
-//     // { src: './assets/xml.xml' },
-//     // // Does not require a src but can use it for automatic loader detection
-//     // // { id: 'Antonio', loader: 'Font' },
-//     // { id: 'Antonio', src: './assets/antonio-bold-webfont.woff2' },
-//     // {
-//     //   src: './assets/simple.wasm',
-//     //   loaderOptions: {
-//     //     importObject: {
-//     //       imports: {
-//     //         imported_func: arg => console.log(arg),
-//     //       },
-//     //     },
-//     //   },
-//     // },
-//     // {
-//     //   id: './assets/1-device.png',
-//     //   src: Spar.assetLoader.byDeviceType({
-//     //     DESKTOP: './assets/1-desktop.png',
-//     //     TABLET: './assets/1-tablet.png',
-//     //     MOBILE: './assets/1-mobile.png',
-//     //   }),
-//     // },
-//     // {
-//     //   id: './assets/example.ktx',
-//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
-//     //     ASTC: './assets/example-astc-4x4.ktx',
-//     //     ETC: './assets/example-etc2.ktx',
-//     //     PVRTC: './assets/example-pvrtc4BPP.ktx',
-//     //     S3TC: './assets/example-dxt5.ktx',
-//     //     FALLBACK: './assets/example.png',
-//     //   }),
-//     // },
-//     // {
-//     //   id: './assets/example-mipmaps.ktx',
-//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
-//     //     ASTC: './assets/example-astc-4x4-mipmaps.ktx',
-//     //     ETC: './assets/example-etc2-mipmaps.ktx',
-//     //     PVRTC: './assets/example-pvrtc4BPP-mipmaps.ktx',
-//     //     S3TC: './assets/example-dxt5-mipmaps.ktx',
-//     //     FALLBACK: './assets/example.png',
-//     //   }),
-//     // },
-//     // (isMobile || isTablet) && {
-//     //   src: './assets/green_point_park_4k_sh.bin',
-//     // },
-//     // isDesktop && {
-//     //   id: './assets/green_point_park_4k_ibl.ktx',
-//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
-//     //     ASTC: './assets/green_point_park_4k_ibl_astc.ktx',
-//     //     ETC: './assets/green_point_park_4k_ibl_etc.ktx',
-//     //     S3TC: './assets/green_point_park_4k_ibl_s3tc.ktx',
-//     //     FALLBACK: './assets/green_point_park_4k_ibl_none.ktx',
-//     //   }),
-//     // },
-//     // isDesktop && {
-//     //   id: './assets/green_point_park_4k_skybox.ktx',
-//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
-//     //     ASTC: './assets/green_point_park_4k_skybox_astc.ktx',
-//     //     ETC: './assets/green_point_park_4k_skybox_etc.ktx',
-//     //     S3TC: './assets/green_point_park_4k_skybox_s3tc.ktx',
-//     //     FALLBACK: './assets/green_point_park_4k_skybox_none.ktx',
-//     //   }),
-//     // },
-//   ])
-//   .then(assets => {
-//     new App(assets);
-//   });
-
-// class App {
-//   constructor(assets) {
-//     // const list = assets.get('./assets/example.binpack');
-//     // console.log(list['buttontray.png'], list);
-//     // const { audio, data } = assets.get('./assets/example.audiopack');
-//     // console.log(audio, data);
-//     // document.body.appendChild(audio);
-//     // audio.play();
-//     // console.log(assets.get('./assets/example.audiopack'));
-//     // console.log(assets);
-//     // console.log(assets.get('./assets/green_point_park_4k_skybox.ktx'));
-//     // assets.get('./assets/simple.wasm').instance.exports.exported_func();
-//   }
-// }
-
 // Audio
 // -----
 
@@ -255,6 +132,28 @@ import * as Spar from '../dist/spar.umd';
 //         console.log(err);
 //       });
 //   });
+
+// Caching
+// -------
+
+// const persistentCache = new Spar.PersistentCache();
+
+// persistentCache.set('key1', 'value1');
+// persistentCache.set('key2', 'value2');
+// persistentCache.get('key1').then(key => console.log(key));
+// persistentCache.getKeys().then(keys => {
+//   console.log(keys);
+//   persistentCache.delete('key1');
+
+//   persistentCache.getKeys().then(keys => {
+//     console.log(keys);
+//     persistentCache.clear();
+
+//     persistentCache.getKeys().then(keys => {
+//       console.log(keys);
+//     });
+//   });
+// });
 
 // Cookie
 // ------
@@ -382,27 +281,128 @@ console.log(Spar.features);
 
 // Spar.frameTicker.off();
 
-// PersistentCache
-// ---------------
+// AssetLoader
+// -----------
+
+// Spar.eventEmitter.on(Spar.EVENTS.ASSET_LOADED, event => {
+//   console.log(event);
+// });
+
+// Spar.eventEmitter.on(Spar.EVENTS.ASSETS_LOADED, event => {
+//   console.log(event);
+// });
+
+// const { isDesktop, isTablet, isMobile } = Spar.features.browserFeatures.browserType;
 
 // const persistentCache = new Spar.PersistentCache();
+// const assetLoader = new Spar.AssetLoader({ persistentCache });
 
-// persistentCache.set('key1', 'value1');
-// persistentCache.set('key2', 'value2');
-// persistentCache.get('key1').then(key => console.log(key));
-// persistentCache.getKeys().then(keys => {
-//   console.log(keys);
-//   persistentCache.delete('key1');
-
-//   persistentCache.getKeys().then(keys => {
-//     console.log(keys);
-//     persistentCache.clear();
-
-//     persistentCache.getKeys().then(keys => {
-//       console.log(keys);
-//     });
+// assetLoader
+//   .loadAssets([
+//     // isDesktop && {
+//     //   loader: 'ImageBitmap',
+//     //   loaderOptions: {
+//     //     sx: 0,
+//     //     sy: 0,
+//     //     sw: 25,
+//     //     sh: 25,
+//     //   },
+//     //   src: './assets/1.png',
+//     // },
+//     // isTablet && { src: './assets/2.png' },
+//     // isMobile && { src: './assets/3.png' },
+//     // { src: './assets/example.binpack' },
+//     // { src: './assets/example.audiopack' },
+//     { src: './assets/audio.mp3', loader: 'ArrayBuffer', persistent: true },
+//     // { src: './assets/audio.mp3', loader: 'Blob', persistent: true },
+//     // { src: './assets/video.mp4' },
+//     // { src: './assets/text.txt' },
+//     // { src: './assets/MJeans1TEX_Lores.dds' },
+//     // { src: './assets/audio.ogg' },
+//     // { src: './assets/icon-twitter.svg' },
+//     // { src: './assets/xml.html' },
+//     // { src: './assets/xml.xml' },
+//     // // Does not require a src but can use it for automatic loader detection
+//     // // { id: 'Antonio', loader: 'Font' },
+//     // { id: 'Antonio', src: './assets/antonio-bold-webfont.woff2' },
+//     // {
+//     //   src: './assets/simple.wasm',
+//     //   loaderOptions: {
+//     //     importObject: {
+//     //       imports: {
+//     //         imported_func: arg => console.log(arg),
+//     //       },
+//     //     },
+//     //   },
+//     // },
+//     // {
+//     //   id: './assets/1-device.png',
+//     //   src: Spar.assetLoader.byDeviceType({
+//     //     DESKTOP: './assets/1-desktop.png',
+//     //     TABLET: './assets/1-tablet.png',
+//     //     MOBILE: './assets/1-mobile.png',
+//     //   }),
+//     // },
+//     // {
+//     //   id: './assets/example.ktx',
+//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
+//     //     ASTC: './assets/example-astc-4x4.ktx',
+//     //     ETC: './assets/example-etc2.ktx',
+//     //     PVRTC: './assets/example-pvrtc4BPP.ktx',
+//     //     S3TC: './assets/example-dxt5.ktx',
+//     //     FALLBACK: './assets/example.png',
+//     //   }),
+//     // },
+//     // {
+//     //   id: './assets/example-mipmaps.ktx',
+//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
+//     //     ASTC: './assets/example-astc-4x4-mipmaps.ktx',
+//     //     ETC: './assets/example-etc2-mipmaps.ktx',
+//     //     PVRTC: './assets/example-pvrtc4BPP-mipmaps.ktx',
+//     //     S3TC: './assets/example-dxt5-mipmaps.ktx',
+//     //     FALLBACK: './assets/example.png',
+//     //   }),
+//     // },
+//     // (isMobile || isTablet) && {
+//     //   src: './assets/green_point_park_4k_sh.bin',
+//     // },
+//     // isDesktop && {
+//     //   id: './assets/green_point_park_4k_ibl.ktx',
+//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
+//     //     ASTC: './assets/green_point_park_4k_ibl_astc.ktx',
+//     //     ETC: './assets/green_point_park_4k_ibl_etc.ktx',
+//     //     S3TC: './assets/green_point_park_4k_ibl_s3tc.ktx',
+//     //     FALLBACK: './assets/green_point_park_4k_ibl_none.ktx',
+//     //   }),
+//     // },
+//     // isDesktop && {
+//     //   id: './assets/green_point_park_4k_skybox.ktx',
+//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
+//     //     ASTC: './assets/green_point_park_4k_skybox_astc.ktx',
+//     //     ETC: './assets/green_point_park_4k_skybox_etc.ktx',
+//     //     S3TC: './assets/green_point_park_4k_skybox_s3tc.ktx',
+//     //     FALLBACK: './assets/green_point_park_4k_skybox_none.ktx',
+//     //   }),
+//     // },
+//   ])
+//   .then(assets => {
+//     new App(assets);
 //   });
-// });
+
+// class App {
+//   constructor(assets) {
+//     // const list = assets.get('./assets/example.binpack');
+//     // console.log(list['buttontray.png'], list);
+//     // const { audio, data } = assets.get('./assets/example.audiopack');
+//     // console.log(audio, data);
+//     // document.body.appendChild(audio);
+//     // audio.play();
+//     // console.log(assets.get('./assets/example.audiopack'));
+//     // console.log(assets);
+//     // console.log(assets.get('./assets/green_point_park_4k_skybox.ktx'));
+//     // assets.get('./assets/simple.wasm').instance.exports.exported_func();
+//   }
+// }
 
 // Polyfills
 // ---------
