@@ -99,7 +99,7 @@ export class PriorityUniqueQueue<T> {
     }
 
     for (const heap of this.heapContainer) {
-      heap.priority += 1;
+      heap.priority++;
     }
   }
 

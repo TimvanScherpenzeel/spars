@@ -46,7 +46,7 @@ describe('memoize', () => {
     let numberOfCalls = 0;
 
     function addition(obj: any): number {
-      numberOfCalls += 1;
+      numberOfCalls++;
       return obj.number + 1;
     }
 
@@ -71,23 +71,6 @@ describe('memoize', () => {
     expect(memoizedNToThePower(2, 3)).toBe(8);
   });
 
-  it('memoize functions with spread arguments', () => {
-    expect.assertions(2);
-
-    function multiply(multiplier: number, ...theArgs: number[]): number[] {
-      return theArgs.map((element: number): number => {
-        return multiplier * element;
-      });
-    }
-
-    const memoizedMultiply = memoize(multiply, {
-      strategy: memoize.strategies.variadic,
-    });
-
-    expect(memoizedMultiply(2, 1, 2, 3)).toEqual([2, 4, 6]);
-    expect(memoizedMultiply(2, 4, 5, 6)).toEqual([8, 10, 12]);
-  });
-
   it('single argument primitive test', () => {
     expect.assertions(2);
 
@@ -99,128 +82,5 @@ describe('memoize', () => {
 
     expect(memoizedKindOf(2)).toEqual('number');
     expect(memoizedKindOf('2')).toEqual('string');
-  });
-
-  it('inject custom cache', () => {
-    expect.assertions(1);
-
-    let setMethodExecutionCount = 0;
-
-    // a custom cache instance must implement:
-    // - has
-    // - get
-    // - set
-    // - delete
-    const customCacheProto = {
-      has(key: any): boolean {
-        // @ts-ignore
-        return key in this.cache;
-      },
-
-      get(key: any): any {
-        // @ts-ignore
-        return this.cache[key];
-      },
-      set(key: any, value: any): void {
-        setMethodExecutionCount++;
-        // @ts-ignore
-        this.cache[key] = value;
-      },
-
-      delete(key: any): void {
-        // @ts-ignore
-        delete this.cache[key];
-      },
-    };
-
-    const customCache = {
-      create(): any {
-        const cache = Object.create(customCacheProto);
-        cache.cache = Object.create(null);
-
-        return cache;
-      },
-    };
-
-    function minus(a: number, b: number): number {
-      return a - b;
-    }
-
-    const memoizedMinus = (memoize as any)(minus, {
-      cache: customCache,
-    });
-
-    memoizedMinus(3, 1);
-    memoizedMinus(3, 1);
-
-    expect(setMethodExecutionCount).toBe(1);
-  });
-
-  it('inject custom serializer', () => {
-    expect.assertions(1);
-
-    let serializerMethodExecutionCount = 0;
-
-    function serializer(): string {
-      serializerMethodExecutionCount++;
-      return JSON.stringify(arguments);
-    }
-
-    function minus(a: number, b: number): number {
-      return a - b;
-    }
-
-    const memoizedMinus = memoize(minus, {
-      serializer,
-    });
-
-    memoizedMinus(3, 1);
-    memoizedMinus(3, 1);
-
-    expect(serializerMethodExecutionCount).toBe(2);
-  });
-
-  it('explicitly use exposed monadic strategy', () => {
-    let numberOfCalls = 0;
-
-    function addition(numb: number): number {
-      numberOfCalls += 1;
-      return numb + 1;
-    }
-
-    const spy = jest.spyOn(memoize.strategies, 'monadic');
-    const memoizedAddition = memoize(addition, { strategy: memoize.strategies.monadic });
-
-    expect(memoizedAddition(1)).toBe(2);
-    expect(numberOfCalls).toBe(1);
-    expect(memoizedAddition(1)).toBe(2);
-    expect(numberOfCalls).toBe(1);
-    expect(spy).toHaveBeenCalled();
-
-    // Teardown
-    spy.mockRestore();
-  });
-
-  it('explicitly use exposed variadic strategy', () => {
-    expect.assertions(5);
-
-    let numberOfCalls = 0;
-
-    function addition(numb: number): number {
-      numberOfCalls += 1;
-      return numb + 1;
-    }
-
-    const spy = jest.spyOn(memoize.strategies, 'variadic');
-    const memoizedAddition = memoize(addition, { strategy: memoize.strategies.variadic });
-
-    expect(memoizedAddition(1)).toBe(2);
-    expect(numberOfCalls).toBe(1);
-    expect(memoizedAddition(1)).toBe(2);
-    expect(numberOfCalls).toBe(1);
-    expect(spy).toHaveBeenCalled();
-
-    // Teardown
-    spy.mockRestore();
   });
 });
