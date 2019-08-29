@@ -1,6 +1,8 @@
 /**
  * Convert Blob to ArrayBuffer
  *
+ * TODO: memoization does not work properly here
+ *
  * @param blob Blob to convert
  */
 export const convertBlobToArrayBuffer = (blob: Blob): Promise<void> => {
