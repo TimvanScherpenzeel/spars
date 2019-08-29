@@ -3,7 +3,7 @@
  */
 
 // Vendor
-import fm from 'fast-memoize';
+import memoize from 'fast-memoize';
 
 export function Memoize(): any {
   return (target: {}, propertyKey: string, descriptor: PropertyDescriptor): void => {
@@ -25,7 +25,7 @@ export function Memoize(): any {
 function newFunction(name: string, fn: () => any): any {
   return function(this: any, ...args: any[]): any {
     const bound = fn.bind(this);
-    const value = (fm as (...args: any[]) => (...args: any[]) => any)(bound);
+    const value = (memoize as (...args: any[]) => (...args: any[]) => any)(bound);
 
     Object.defineProperty(this, name, { value });
 
