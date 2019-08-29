@@ -103,7 +103,7 @@ class AudioManager {
   private onVisibilityChangeHandler = (event: { isVisible: boolean }): void => {
     if (getCookie(COOKIES.AUDIO_MUTED)) {
       // Avoid fading back in if the user has purposely set the audio to be muted
-      return;
+      return undefined;
     }
 
     if (event.isVisible) {

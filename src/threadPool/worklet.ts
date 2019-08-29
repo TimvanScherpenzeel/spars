@@ -81,7 +81,7 @@ export const worklet = URL.createObjectURL(
 
         function countPendingTasks(task: Task, property: string, obj: any[]): void {
           if ('$$TASK_RESULT' in task) {
-            return;
+            return undefined;
           }
 
           const result = results[(task as any).id];
@@ -124,7 +124,7 @@ export const worklet = URL.createObjectURL(
 
           if (queue.length === 0) {
             flushTimer = setTimeout(flushResultStatuses, 50);
-            return;
+            return undefined;
           }
 
           let taskDescription;
@@ -150,7 +150,7 @@ export const worklet = URL.createObjectURL(
             // This is dead time, flush any pending results
             flushResultStatuses();
 
-            return;
+            return undefined;
           }
 
           const id = taskDescription[0];
@@ -200,7 +200,7 @@ export const worklet = URL.createObjectURL(
           clearTimeout(flushTimer);
 
           if (gotResults.length === 0) {
-            return;
+            return undefined;
           }
 
           const transferrables: any[] = [];
@@ -300,7 +300,7 @@ export const worklet = URL.createObjectURL(
 
             if (id in cancellations) {
               console.log(`Skipping cancelled task: ${id}`);
-              return;
+              return undefined;
             }
 
             if (queue.push(data) === 1) {
@@ -338,7 +338,7 @@ export const worklet = URL.createObjectURL(
           // tslint:disable-next-line:no-shadowed-variable
           function next(): void {
             if (++index === data.length) {
-              return;
+              return undefined;
             }
 
             const item: any[] = data[index];

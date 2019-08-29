@@ -108,7 +108,7 @@ export class TaskManager {
         resultController.isPending = false;
 
         if (resultController.isCancelled) {
-          return;
+          return undefined;
         }
 
         for (let i = tasks.length; i--; ) {

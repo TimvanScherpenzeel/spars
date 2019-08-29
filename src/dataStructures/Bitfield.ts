@@ -13,7 +13,7 @@ export class BitField {
   /**
    * Get the current length of the bitfield
    */
-  get getLength(): number /* O(1) */ {
+  get length(): number /* O(1) */ {
     return this.size;
   }
 

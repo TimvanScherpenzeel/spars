@@ -100,7 +100,7 @@ export const recordAnalyticsEvent = (record = {}): void => {
   if ((window as any).ga !== undefined && typeof (window as any).ga === 'function') {
     if (Object.keys(record).length <= 0) {
       console.warn('Analytics -> Record cannot be empty');
-      return;
+      return undefined;
     }
 
     const callback = (): void => {
