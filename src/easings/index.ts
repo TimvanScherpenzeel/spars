@@ -1,10 +1,7 @@
-// Utilities
-import { memoize } from '../utilities';
-
 /**
  * https://easings.net/en#easeInQuad
  */
-const mEaseInQuad = (
+export const easeInQuad = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -13,12 +10,10 @@ const mEaseInQuad = (
   return changeInValue * (time /= duration) * time + beginValue;
 };
 
-export const easeInQuad = memoize(mEaseInQuad);
-
 /**
  * https://easings.net/en#easeOutQuad
  */
-const mEaseOutQuad = (
+export const easeOutQuad = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -27,12 +22,10 @@ const mEaseOutQuad = (
   return -changeInValue * (time /= duration) * (time - 2) + beginValue;
 };
 
-export const easeOutQuad = memoize(mEaseOutQuad);
-
 /**
  * https://easings.net/en#easeInOutQuad
  */
-const mEaseInOutQuad = (
+export const easeInOutQuad = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -47,12 +40,10 @@ const mEaseInOutQuad = (
   return (-changeInValue / 2) * (--time * (time - 2) - 1) + beginValue;
 };
 
-export const easeInOutQuad = memoize(mEaseInOutQuad);
-
 /**
  * https://easings.net/en#easeInCubic
  */
-const mEaseInCubic = (
+export const easeInCubic = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -61,12 +52,10 @@ const mEaseInCubic = (
   return changeInValue * (time /= duration) * time * time + beginValue;
 };
 
-export const easeInCubic = memoize(mEaseInCubic);
-
 /**
  * https://easings.net/en#easeOutCubic
  */
-const mEaseOutCubic = (
+export const easeOutCubic = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -75,12 +64,10 @@ const mEaseOutCubic = (
   return changeInValue * ((time = time / duration - 1) * time * time + 1) + beginValue;
 };
 
-export const easeOutCubic = memoize(mEaseOutCubic);
-
 /**
  * https://easings.net/en#easeInOutCubic
  */
-const mEaseInOutCubic = (
+export const easeInOutCubic = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -95,12 +82,10 @@ const mEaseInOutCubic = (
   return (changeInValue / 2) * ((time -= 2) * time * time + 2) + beginValue;
 };
 
-export const easeInOutCubic = memoize(mEaseInOutCubic);
-
 /**
  * https://easings.net/en#easeInQuart
  */
-const mEaseInQuart = (
+export const easeInQuart = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -109,12 +94,10 @@ const mEaseInQuart = (
   return changeInValue * (time /= duration) * time * time * time + beginValue;
 };
 
-export const easeInQuart = memoize(mEaseInQuart);
-
 /**
  * https://easings.net/en#easeOutQuart
  */
-const mEaseOutQuart = (
+export const easeOutQuart = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -123,12 +106,10 @@ const mEaseOutQuart = (
   return -changeInValue * ((time = time / duration - 1) * time * time * time - 1) + beginValue;
 };
 
-export const easeOutQuart = memoize(mEaseOutQuart);
-
 /**
  * https://easings.net/en#easeInOutQuart
  */
-const mEaseInOutQuart = (
+export const easeInOutQuart = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -143,12 +124,10 @@ const mEaseInOutQuart = (
   return (-changeInValue / 2) * ((time -= 2) * time * time * time - 2) + beginValue;
 };
 
-export const easeInOutQuart = memoize(mEaseInOutQuart);
-
 /**
  * https://easings.net/en#easeInQuint
  */
-const mEaseInQuint = (
+export const easeInQuint = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -157,12 +136,10 @@ const mEaseInQuint = (
   return changeInValue * (time /= duration) * time * time * time * time + beginValue;
 };
 
-export const easeInQuint = memoize(mEaseInQuint);
-
 /**
  * https://easings.net/en#easeOutQuint
  */
-const mEaseOutQuint = (
+export const easeOutQuint = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -173,12 +150,10 @@ const mEaseOutQuint = (
   );
 };
 
-export const easeOutQuint = memoize(mEaseOutQuint);
-
 /**
  * https://easings.net/en#easeInOutQuint
  */
-const mEaseInOutQuint = (
+export const easeInOutQuint = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -193,12 +168,10 @@ const mEaseInOutQuint = (
   return (changeInValue / 2) * ((time -= 2) * time * time * time * time + 2) + beginValue;
 };
 
-export const easeInOutQuint = memoize(mEaseInOutQuint);
-
 /**
  * https://easings.net/en#easeInSine
  */
-const mEaseInSine = (
+export const easeInSine = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -207,12 +180,10 @@ const mEaseInSine = (
   return -changeInValue * Math.cos((time / duration) * (Math.PI / 2)) + changeInValue + beginValue;
 };
 
-export const easeInSine = memoize(mEaseInSine);
-
 /**
  * https://easings.net/en#easeOutSine
  */
-const mEaseOutSine = (
+export const easeOutSine = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -221,12 +192,10 @@ const mEaseOutSine = (
   return changeInValue * Math.sin((time / duration) * (Math.PI / 2)) + beginValue;
 };
 
-export const easeOutSine = memoize(mEaseOutSine);
-
 /**
  * https://easings.net/en#easeInOutSine
  */
-const mEaseInOutSine = (
+export const easeInOutSine = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -235,12 +204,10 @@ const mEaseInOutSine = (
   return (-changeInValue / 2) * (Math.cos((Math.PI * time) / duration) - 1) + beginValue;
 };
 
-export const easeInOutSine = memoize(mEaseInOutSine);
-
 /**
  * https://easings.net/en#easeInExpo
  */
-const mEaseInExpo = (
+export const easeInExpo = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -251,12 +218,10 @@ const mEaseInExpo = (
     : changeInValue * Math.pow(2, 10 * (time / duration - 1)) + beginValue;
 };
 
-export const easeInExpo = memoize(mEaseInExpo);
-
 /**
  * https://easings.net/en#easeOutExpo
  */
-const mEaseOutExpo = (
+export const easeOutExpo = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -267,12 +232,10 @@ const mEaseOutExpo = (
     : changeInValue * (-Math.pow(2, (-10 * time) / duration) + 1) + beginValue;
 };
 
-export const easeOutExpo = memoize(mEaseOutExpo);
-
 /**
  * https://easings.net/en#easeInOutExpo
  */
-const mEaseInOutExpo = (
+export const easeInOutExpo = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -295,12 +258,10 @@ const mEaseInOutExpo = (
   return (changeInValue / 2) * (-Math.pow(2, -10 * --time) + 2) + beginValue;
 };
 
-export const easeInOutExpo = memoize(mEaseInOutExpo);
-
 /**
  * https://easings.net/en#easeInCirc
  */
-const mEaseInCirc = (
+export const easeInCirc = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -309,12 +270,10 @@ const mEaseInCirc = (
   return -changeInValue * (Math.sqrt(1 - (time /= duration) * time) - 1) + beginValue;
 };
 
-export const easeInCirc = memoize(mEaseInCirc);
-
 /**
  * https://easings.net/en#easeOutCirc
  */
-const mEaseOutCirc = (
+export const easeOutCirc = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -323,12 +282,10 @@ const mEaseOutCirc = (
   return changeInValue * Math.sqrt(1 - (time = time / duration - 1) * time) + beginValue;
 };
 
-export const easeOutCirc = memoize(mEaseOutCirc);
-
 /**
  * https://easings.net/en#easeInOutCirc
  */
-const mEaseInOutCirc = (
+export const easeInOutCirc = (
   time: number,
   beginValue: number,
   changeInValue: number,
@@ -342,5 +299,3 @@ const mEaseInOutCirc = (
 
   return (changeInValue / 2) * (Math.sqrt(1 - (time -= 2) * time) + 1) + beginValue;
 };
-
-export const easeInOutCirc = memoize(mEaseInOutCirc);
