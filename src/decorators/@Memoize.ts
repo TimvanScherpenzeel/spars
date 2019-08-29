@@ -26,7 +26,9 @@ function newFunction(name: string, fn: () => any): any {
   return function(this: any, ...args: any[]): any {
     const bound = fn.bind(this);
     const value = (fm as (...args: any[]) => (...args: any[]) => any)(bound);
+
     Object.defineProperty(this, name, { value });
+
     return value(...args);
   };
 }
@@ -34,7 +36,9 @@ function newFunction(name: string, fn: () => any): any {
 function newGetter(name: string, fn: () => any): any {
   return function(this: any): any {
     const value = fn.apply(this);
+
     Object.defineProperty(this, name, { value });
+
     return value;
   };
 }
