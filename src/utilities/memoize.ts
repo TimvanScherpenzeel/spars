@@ -62,7 +62,7 @@ const serializerDefault = (...args: any): string => JSON.stringify(args);
 export const memoize = (
   fn: any,
   type: 'monadic' | 'variadic' = 'monadic',
-  cacheSize: number = 5
+  cacheSize: number = 3
 ): any => {
   return (type === 'monadic' && fn.length === 1 ? monadic : variadic).bind(
     // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation
