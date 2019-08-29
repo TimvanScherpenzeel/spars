@@ -1,2 +1,3 @@
 // Vendor
-export { memoize } from 'lodash.memoize';
+import memoize from 'fast-memoize';
+export { memoize };
