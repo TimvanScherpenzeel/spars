@@ -83,4 +83,38 @@ describe('memoize', () => {
     expect(memoizedKindOf(2)).toEqual('number');
     expect(memoizedKindOf('2')).toEqual('string');
   });
+
+  test('explicitly use exposed monadic strategy', () => {
+    let numberOfCalls = 0;
+
+    function addition(numb: number): number {
+      numberOfCalls += 1;
+      return numb + 1;
+    }
+
+    const memoizedAddition = memoize(addition, 'monadic');
+
+    // Assertions
+    expect(memoizedAddition(1)).toBe(2);
+    expect(numberOfCalls).toBe(1);
+    expect(memoizedAddition(1)).toBe(2);
+    expect(numberOfCalls).toBe(1);
+  });
+
+  test('explicitly use exposed variadic strategy', () => {
+    let numberOfCalls = 0;
+
+    function addition(numb: number): number {
+      numberOfCalls += 1;
+      return numb + 1;
+    }
+
+    const memoizedAddition = memoize(addition, 'variadic');
+
+    // Assertions
+    expect(memoizedAddition(1)).toBe(2);
+    expect(numberOfCalls).toBe(1);
+    expect(memoizedAddition(1)).toBe(2);
+    expect(numberOfCalls).toBe(1);
+  });
 });

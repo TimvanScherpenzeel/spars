@@ -63,8 +63,12 @@ function variadic(fn: any, cache: SizedCache, serializer: any): any {
 
 const serializerDefault = (...args: any): string => JSON.stringify(args);
 
-export const memoize = (fn: any, cacheSize: number = 5): any => {
-  return (fn.length === 1 ? monadic : variadic).bind(
+export const memoize = (
+  fn: any,
+  type: 'monadic' | 'variadic' = 'monadic',
+  cacheSize: number = 5
+): any => {
+  return (type === 'monadic' && fn.length === 1 ? monadic : variadic).bind(
     // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation
     this,
     fn,
