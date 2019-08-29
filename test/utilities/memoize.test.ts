@@ -136,6 +136,7 @@ describe('memoize', () => {
       create(): any {
         const cache = Object.create(customCacheProto);
         cache.cache = Object.create(null);
+
         return cache;
       },
     };
