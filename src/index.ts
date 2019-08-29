@@ -16,6 +16,9 @@ export { deleteCookie, getCookie, setCookie } from './cookies';
 // Data structures
 export { BitField, Deque } from './dataStructures';
 
+// Decorators
+export { Memoize } from './decorators';
+
 // Easings
 export {
   easeInCirc,
