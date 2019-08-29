@@ -1,9 +1,6 @@
 // Source
 import { getRandomValues, getUUID, hex } from '../../src/utilities/getUUID';
 
-// Regular expression used for basic parsing of the uuid.
-const UUIDRegexPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-
 /**
  * Extracts the version from the UUID, which is (by definition) the M in
  * xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx
@@ -43,7 +40,9 @@ describe('UUID', () => {
     for (let i = 0; i < 1000; i++) {
       const uuid = getUUID();
 
-      expect(UUIDRegexPattern.test(uuid)).toStrictEqual(true);
+      expect(
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(uuid)
+      ).toStrictEqual(true);
     }
   });
 

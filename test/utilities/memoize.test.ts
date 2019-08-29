@@ -1,3 +1,4 @@
+// Source
 import { memoize } from '../../src/utilities/memoize';
 
 // Suite
