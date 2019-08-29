@@ -80,4 +80,5 @@ export {
   getQueryParameters,
   getUUID,
   hashString,
+  memoize,
 } from './utilities';
