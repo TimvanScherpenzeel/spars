@@ -16,10 +16,9 @@ describe('memoize', () => {
 
     // Memoized
     let fibonacci = (n: number): number => (n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2));
-
     fibonacci = memoize(fibonacci);
-    const memoizedFibonacci = fibonacci;
 
+    const memoizedFibonacci = fibonacci;
     const memoizedExecTimeStart = Date.now();
     memoizedFibonacci(35);
     const memoizedExecTime = Date.now() - memoizedExecTimeStart;
@@ -30,14 +29,14 @@ describe('memoize', () => {
   it('memoize functions with single primitive argument', () => {
     expect.assertions(2);
 
-    function plusPlus(numb: number): number {
+    function addition(numb: number): number {
       return numb + 1;
     }
 
-    const memoizedPlusPlus = memoize(plusPlus);
+    const memoizedAddition = memoize(addition);
 
-    expect(memoizedPlusPlus(1)).toBe(2);
-    expect(memoizedPlusPlus(1)).toBe(2);
+    expect(memoizedAddition(1)).toBe(2);
+    expect(memoizedAddition(1)).toBe(2);
   });
 
   it('memoize functions with single non-primitive argument', () => {
@@ -45,16 +44,16 @@ describe('memoize', () => {
 
     let numberOfCalls = 0;
 
-    function plusPlus(obj: any): number {
+    function addition(obj: any): number {
       numberOfCalls += 1;
       return obj.number + 1;
     }
 
-    const memoizedPlusPlus = memoize(plusPlus);
+    const memoizedAddition = memoize(addition);
 
-    expect(memoizedPlusPlus({ number: 1 })).toBe(2);
+    expect(memoizedAddition({ number: 1 })).toBe(2);
     expect(numberOfCalls).toBe(1);
-    expect(memoizedPlusPlus({ number: 1 })).toBe(2);
+    expect(memoizedAddition({ number: 1 })).toBe(2);
     expect(numberOfCalls).toBe(1);
   });
 
@@ -182,17 +181,17 @@ describe('memoize', () => {
   it('explicitly use exposed monadic strategy', () => {
     let numberOfCalls = 0;
 
-    function plusPlus(numb: number): number {
+    function addition(numb: number): number {
       numberOfCalls += 1;
       return numb + 1;
     }
 
     const spy = jest.spyOn(memoize.strategies, 'monadic');
-    const memoizedPlusPlus = memoize(plusPlus, { strategy: memoize.strategies.monadic });
+    const memoizedAddition = memoize(addition, { strategy: memoize.strategies.monadic });
 
-    expect(memoizedPlusPlus(1)).toBe(2);
+    expect(memoizedAddition(1)).toBe(2);
     expect(numberOfCalls).toBe(1);
-    expect(memoizedPlusPlus(1)).toBe(2);
+    expect(memoizedAddition(1)).toBe(2);
     expect(numberOfCalls).toBe(1);
     expect(spy).toHaveBeenCalled();
 
@@ -205,17 +204,17 @@ describe('memoize', () => {
 
     let numberOfCalls = 0;
 
-    function plusPlus(numb: number): number {
+    function addition(numb: number): number {
       numberOfCalls += 1;
       return numb + 1;
     }
 
     const spy = jest.spyOn(memoize.strategies, 'variadic');
-    const memoizedPlusPlus = memoize(plusPlus, { strategy: memoize.strategies.variadic });
+    const memoizedAddition = memoize(addition, { strategy: memoize.strategies.variadic });
 
-    expect(memoizedPlusPlus(1)).toBe(2);
+    expect(memoizedAddition(1)).toBe(2);
     expect(numberOfCalls).toBe(1);
-    expect(memoizedPlusPlus(1)).toBe(2);
+    expect(memoizedAddition(1)).toBe(2);
     expect(numberOfCalls).toBe(1);
     expect(spy).toHaveBeenCalled();
 
