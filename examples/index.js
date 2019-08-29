@@ -159,17 +159,21 @@ import * as Spar from '../dist/spar.umd';
 // ------
 
 // Spar.setCookie('key1', true);
-// Spar.setCookie('key2', 0.14);
-// Spar.setCookie('key3', null);
-// Spar.setCookie('key4', undefined);
-// Spar.setCookie('key5', 's');
+// Spar.setCookie('key2', false);
+// Spar.setCookie('key3', 0.14);
+// Spar.setCookie('key4', null);
+// Spar.setCookie('key5', undefined);
+// Spar.setCookie('key6', 's');
+// Spar.setCookie('key7', 6);
 // console.log(document.cookie);
 
-// console.log(Spar.getCookie('key1'));
-// console.log(Spar.getCookie('key2'));
-// console.log(Spar.getCookie('key3'));
-// console.log(Spar.getCookie('key4'));
-// console.log(Spar.getCookie('key5'));
+// console.log(typeof Spar.getCookie('key1'), Spar.getCookie('key1'));
+// console.log(typeof Spar.getCookie('key2'), Spar.getCookie('key2'));
+// console.log(typeof Spar.getCookie('key3'), Spar.getCookie('key3'));
+// console.log(typeof Spar.getCookie('key4'), Spar.getCookie('key4'));
+// console.log(typeof Spar.getCookie('key5'), Spar.getCookie('key5'));
+// console.log(typeof Spar.getCookie('key6'), Spar.getCookie('key6'));
+// console.log(typeof Spar.getCookie('key7'), Spar.getCookie('key7'));
 
 // Spar.deleteCookie('key1');
 // console.log(document.cookie);

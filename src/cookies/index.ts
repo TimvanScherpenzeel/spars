@@ -32,31 +32,32 @@ export const setCookie = (key: string, value: string, expiryDays = 365): void =>
 export const getCookie = (key: string): boolean | undefined | null | number | string => {
   if (isCookieEnabled) {
     const match = document.cookie.match(`(^|;)\\s*${key}\\s*=\\s*([^;]+)`);
-    const result = match ? match.pop() : '';
+    const value = match ? match.pop() : '';
 
-    // Convert number strings to numbers (integers, floats, hexadecimals)
-    if ((result && /^\d+\.\d+$/.test(result)) || (result && /0[xX0-9A-Fa-f]{6}/g.test(result))) {
-      return Number(result);
-    }
+    const keywords = {
+      false: false,
+      null: null,
+      true: true,
+      undefined,
+    };
 
     // Convert built-in types to their corresponding types
-    switch (result) {
-      case 'true':
-        return true;
-      case 'false':
-        return false;
-      case 'undefined':
-        return undefined;
-      case 'null':
-        return null;
-      default:
-        return result;
+    if ((value as any) in keywords) {
+      return (keywords as any)[value as any];
     }
+
+    // Convert number strings to numbers (integers, floats, hexadecimals)
+    if (
+      value !== undefined &&
+      (/^\d+$/.test(value) || /^\d+\.\d+$/.test(value) || /0[xX0-9A-Fa-f]{6}/g.test(value))
+    ) {
+      return Number(value);
+    }
+  } else {
+    console.warn('Cookie -> Cookies are disabled, no cookie was retrieved');
+
+    return undefined;
   }
-
-  console.warn('Cookie -> Cookies are disabled, no cookie was retrieved');
-
-  return false;
 };
 
 /**
