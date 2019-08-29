@@ -15,6 +15,7 @@ export function Memoize(): any {
     }
 
     const get = descriptor.get;
+
     if (get != null) {
       descriptor.get = newGetter(propertyKey, get);
     }
