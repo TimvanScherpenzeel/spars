@@ -8,10 +8,6 @@ class SizedCache {
     this.size = size;
   }
 
-  public has(key: any): boolean {
-    return key in this.cache;
-  }
-
   public get(key: any): any {
     return this.cache[key];
   }
