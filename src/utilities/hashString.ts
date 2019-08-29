@@ -1,6 +1,5 @@
 // Utilities
 import { assert } from './assert';
-import { memoize } from './memoize';
 
 /**
  * Hash a string (memoized)
@@ -18,7 +17,7 @@ import { memoize } from './memoize';
  * SEE: https://jsperf.com/string-hash-speed
  * SEE: https://github.com/darkskyapp/string-hash/issues/10#issuecomment-422020290
  */
-export const mHashString = (str: string): number => {
+export const hashString = (str: string): number => {
   // Verify that the input string only has ASCII characters (negligible overhead)
   assert(/^[\x00-\x7F]*$/.test(str), 'HashString -> String contains non-ASCII characters');
 
@@ -31,8 +30,3 @@ export const mHashString = (str: string): number => {
 
   return hash >>> 0;
 };
-
-/**
- * Hash a string (memoized)
- */
-export const hashString = memoize(mHashString);

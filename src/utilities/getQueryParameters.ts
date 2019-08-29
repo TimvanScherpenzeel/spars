@@ -1,8 +1,5 @@
-// Utilities
-import { memoize } from './memoize';
-
 /**
- * Get search parameters from URL (memoized)
+ * Get search parameters from URL
  *
  * ?isDebug=false&isGUI=true&pi=3.141592653589793 would result in { isDebug: false, isGUI: true, pi: 3.141592653589793 }
  *
@@ -12,7 +9,7 @@ import { memoize } from './memoize';
  *
  * @param url query parameters
  */
-const mGetQueryParameters = (url = window.location.search): { [parameter: string]: string } =>
+export const getQueryParameters = (url = window.location.search): { [parameter: string]: string } =>
   url
     // Remove ?
     .slice(1)
@@ -35,8 +32,3 @@ const mGetQueryParameters = (url = window.location.search): { [parameter: string
 
       return values;
     }, {});
-
-/**
- * Get search parameters from URL (memoized)
- */
-export const getQueryParameters = memoize(mGetQueryParameters);

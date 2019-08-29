@@ -1,9 +1,6 @@
 // Source
 import { hashString } from '../../src/utilities/hashString';
 
-// Constants
-import { VERY_LARGE_STRING } from '../constants';
-
 const SAMPLE_STRING = /* glsl */ `
   precision lowp sampler3D;
 
@@ -66,22 +63,5 @@ describe('hashString', () => {
     expect.assertions(1);
 
     expect(hashString(SAMPLE_STRING + ' ')).toBe(1475696267);
-  });
-
-  it('uses memoization correctly', () => {
-    expect.assertions(2);
-
-    const execTimeStart = Date.now();
-    const stringHash1 = hashString(VERY_LARGE_STRING);
-    const execTime = Date.now() - execTimeStart;
-
-    const memoizedExecTimeStart = Date.now();
-    const stringHash2 = hashString(VERY_LARGE_STRING);
-    const memoizedExecTime = Date.now() - memoizedExecTimeStart;
-
-    console.log(memoizedExecTime, execTime);
-
-    expect(stringHash1).toBe(stringHash2);
-    expect(memoizedExecTime < execTime).toBe(true);
   });
 });
