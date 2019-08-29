@@ -1,8 +1,11 @@
 // Utilities
 import { assert } from './assert';
+import { memoize } from './memoize';
 
 /**
- * Hash a string (32-bit, DJB2)
+ * Hash a string (memoized)
+ *
+ * 32-bit, DJB2
  *
  * Node (v10.6.0) - 2834.177ms - Collisions: 0.000% (0/100000)
  * Chrome (74.0.3729.157, 64-bit) - 3099.947021484375ms - Collisions: 0.000% (0/100000)
@@ -15,7 +18,7 @@ import { assert } from './assert';
  * SEE: https://jsperf.com/string-hash-speed
  * SEE: https://github.com/darkskyapp/string-hash/issues/10#issuecomment-422020290
  */
-export const hashString = (str: string): number => {
+export const mHashString = (str: string): number => {
   // Verify that the input string only has ASCII characters (negligible overhead)
   assert(/^[\x00-\x7F]*$/.test(str), 'HashString -> String contains non-ASCII characters');
 
@@ -28,3 +31,8 @@ export const hashString = (str: string): number => {
 
   return hash >>> 0;
 };
+
+/**
+ * Hash a string (memoized)
+ */
+export const hashString = memoize(mHashString);
