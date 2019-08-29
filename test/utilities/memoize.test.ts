@@ -1,5 +1,5 @@
 // Source
-import { memoize } from '../../src/utilities/memoize';
+import { memoize, SizedCache } from '../../src/utilities/memoize';
 
 // Suite
 describe('memoize', () => {
@@ -84,7 +84,7 @@ describe('memoize', () => {
     expect(memoizedKindOf('2')).toEqual('string');
   });
 
-  test('explicitly use exposed monadic strategy', () => {
+  it('explicitly use exposed monadic strategy', () => {
     let numberOfCalls = 0;
 
     function addition(numb: number): number {
@@ -101,7 +101,7 @@ describe('memoize', () => {
     expect(numberOfCalls).toBe(1);
   });
 
-  test('explicitly use exposed variadic strategy', () => {
+  it('explicitly use exposed variadic strategy', () => {
     let numberOfCalls = 0;
 
     function addition(numb: number): number {
@@ -116,5 +116,40 @@ describe('memoize', () => {
     expect(numberOfCalls).toBe(1);
     expect(memoizedAddition(1)).toBe(2);
     expect(numberOfCalls).toBe(1);
+  });
+
+  it('SizedCache works with integers', () => {
+    const cache = new SizedCache(3);
+
+    cache.set(1, 'foo');
+
+    expect(cache.get(1)).toEqual('foo');
+
+    cache.set(2, 'bar');
+    cache.set(3, 'baz');
+    cache.set(4, 'baa');
+
+    expect(cache.get(1)).toEqual(undefined);
+    expect(cache.get(2)).toEqual('bar');
+    expect(cache.get(3)).toEqual('baz');
+    expect(cache.get(4)).toEqual('baa');
+  });
+
+  it('SizedCache works with strings', () => {
+    const cache = new SizedCache(3);
+
+    cache.set('a', 1);
+
+    expect(cache.get('a')).toEqual(1);
+
+    cache.set('b', 2);
+    cache.set('c', 3);
+    cache.set('d', 4);
+    cache.set('e', 5);
+
+    expect(cache.get('b')).toEqual(undefined);
+    expect(cache.get('c')).toEqual(3);
+    expect(cache.get('d')).toEqual(4);
+    expect(cache.get('e')).toEqual(5);
   });
 });

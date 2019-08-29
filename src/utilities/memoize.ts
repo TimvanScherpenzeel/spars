@@ -1,4 +1,4 @@
-class SizedCache {
+export class SizedCache {
   private size: number;
   private track: any[] = new Array(this.size);
   private cache: any = {};
