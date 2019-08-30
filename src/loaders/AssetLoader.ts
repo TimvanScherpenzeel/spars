@@ -338,6 +338,11 @@ export class AssetLoader {
         blob =>
           new Promise((resolve, reject): void => {
             const audio = document.createElement('audio');
+
+            if (item.loaderOptions && item.loaderOptions.crossOrigin) {
+              audio.crossOrigin = 'anonymous';
+            }
+
             audio.preload = 'auto';
             audio.autoplay = false;
 
@@ -568,6 +573,10 @@ export class AssetLoader {
   private loadImage = (item: ILoadItem): Promise<HTMLImageElement> =>
     new Promise((resolve, reject): void => {
       const image = new Image();
+
+      if (item.loaderOptions && item.loaderOptions.crossOrigin) {
+        image.crossOrigin = 'anonymous';
+      }
 
       // Check if we can decode non-blocking by loading the image asynchronously using image.decode().then(() => ...)
       // SEE: https://www.chromestatus.com/feature/5637156160667648 (Chrome | Safari | Safari iOS)
@@ -847,10 +856,15 @@ export class AssetLoader {
         blob =>
           new Promise((resolve, reject): void => {
             const video = document.createElement('video');
+
+            if (item.loaderOptions && item.loaderOptions.crossOrigin) {
+              video.crossOrigin = 'anonymous';
+            }
+
             video.preload = 'auto';
             video.autoplay = false;
-            // @ts-ignore playsinline is not recognized as a valid type but it is valid syntax
-            video.playsinline = true;
+            // @ts-ignore playsInline is not recognized as a valid type but it is valid syntax
+            video.playsInline = true;
 
             if (IS_MEDIA_PRELOAD_SUPPORTED) {
               video.addEventListener('canplaythrough', function handler(): void {
