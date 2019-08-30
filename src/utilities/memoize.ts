@@ -2,8 +2,6 @@
  * Inspired by https://github.com/caiogondim/fast-memoize.js
  */
 
-// TODO: look into creating a cheaper data structure than a class to express fixed size caching
-
 /**
  * Cache with a fixed boundary to prevent memory leaks
  */
@@ -77,7 +75,7 @@ function monadic(fn: any, cache: FixedSizeCache, serializer: any, arg: any): any
 }
 
 /**
- * A function which accepts a variable number of arguments.
+ * A function which accepts a variable number of arguments
  *
  * @param fn Function to memoize
  * @param cache Cache to use
@@ -100,7 +98,7 @@ function variadic(fn: any, cache: FixedSizeCache, serializer: any): any {
 /**
  * Serialize the arguments in order to be cached and compared correctly
  *
- * @param args Any arguments that have been passed along
+ * @param args Any arguments that have been passed along that need to be serialized
  */
 const serializerDefault = (...args: any): string => JSON.stringify(args);
 
