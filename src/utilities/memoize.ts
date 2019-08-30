@@ -1,7 +1,7 @@
 export class SizedCache {
   private size: number;
   private track: any[] = new Array(this.size);
-  private cache: any = {};
+  private cache: Map<any, any> = new Map();
   private index: number = 0;
 
   constructor(size: number) {
@@ -9,14 +9,14 @@ export class SizedCache {
   }
 
   public get(key: any): any {
-    return this.cache[key];
+    return this.cache.get(key);
   }
 
   public set(key: any, value: any): any {
-    this.cache[key] = value;
+    this.cache.set(key, value);
 
     if (this.track[this.index]) {
-      delete this.cache[this.track[this.index]];
+      this.cache.delete(this.track[this.index]);
     }
 
     this.track[this.index] = key;
@@ -61,14 +61,19 @@ const serializerDefault = (...args: any): string => JSON.stringify(args);
 
 export const memoize = (
   fn: any,
-  type: 'monadic' | 'variadic' = 'monadic',
-  cacheSize: number = 3
+  {
+    size = 3,
+    type = 'monadic',
+  }: {
+    size?: number;
+    type?: 'monadic' | 'variadic';
+  } = {}
 ): any => {
   return (type === 'monadic' && fn.length === 1 ? monadic : variadic).bind(
     // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation
     this,
     fn,
-    new SizedCache(cacheSize),
+    new SizedCache(size),
     serializerDefault
   );
 };

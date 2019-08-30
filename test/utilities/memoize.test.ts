@@ -85,6 +85,8 @@ describe('memoize', () => {
   });
 
   it('explicitly use exposed monadic strategy', () => {
+    expect.assertions(4);
+
     let numberOfCalls = 0;
 
     function addition(numb: number): number {
@@ -92,9 +94,8 @@ describe('memoize', () => {
       return numb + 1;
     }
 
-    const memoizedAddition = memoize(addition, 'monadic');
+    const memoizedAddition = memoize(addition, { type: 'monadic' });
 
-    // Assertions
     expect(memoizedAddition(1)).toBe(2);
     expect(numberOfCalls).toBe(1);
     expect(memoizedAddition(1)).toBe(2);
@@ -102,6 +103,8 @@ describe('memoize', () => {
   });
 
   it('explicitly use exposed variadic strategy', () => {
+    expect.assertions(4);
+
     let numberOfCalls = 0;
 
     function addition(numb: number): number {
@@ -109,9 +112,8 @@ describe('memoize', () => {
       return numb + 1;
     }
 
-    const memoizedAddition = memoize(addition, 'variadic');
+    const memoizedAddition = memoize(addition, { type: 'variadic' });
 
-    // Assertions
     expect(memoizedAddition(1)).toBe(2);
     expect(numberOfCalls).toBe(1);
     expect(memoizedAddition(1)).toBe(2);
@@ -119,6 +121,8 @@ describe('memoize', () => {
   });
 
   it('SizedCache works with integers', () => {
+    expect.assertions(5);
+
     const cache = new SizedCache(3);
 
     cache.set(1, 'foo');
@@ -136,6 +140,8 @@ describe('memoize', () => {
   });
 
   it('SizedCache works with strings', () => {
+    expect.assertions(5);
+
     const cache = new SizedCache(3);
 
     cache.set('a', 1);
