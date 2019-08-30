@@ -1,5 +1,5 @@
 // Source
-import { memoize, SizedCache } from '../../src/utilities/memoize';
+import { FixedSizeCache, memoize } from '../../src/utilities/memoize';
 
 // Suite
 describe('memoize', () => {
@@ -120,10 +120,10 @@ describe('memoize', () => {
     expect(numberOfCalls).toBe(1);
   });
 
-  it('SizedCache works with integers', () => {
+  it('FixedSizeCache works with integers', () => {
     expect.assertions(5);
 
-    const cache = new SizedCache(3);
+    const cache = new FixedSizeCache(3);
 
     cache.set(1, 'foo');
 
@@ -139,10 +139,10 @@ describe('memoize', () => {
     expect(cache.get(4)).toEqual('baa');
   });
 
-  it('SizedCache works with strings', () => {
+  it('FixedSizeCache works with strings', () => {
     expect.assertions(5);
 
-    const cache = new SizedCache(3);
+    const cache = new FixedSizeCache(3);
 
     cache.set('a', 1);
 

@@ -18,6 +18,9 @@ class AudioManager {
   private audioSources: any = {};
   private context: AudioContext = createAudioContext();
 
+  /**
+   * Upon initial load check the cookies for the audio manager configuration
+   */
   constructor() {
     eventEmitter.on(EVENTS.VISIBILITY_CHANGE, this.onVisibilityChangeHandler);
 
@@ -28,6 +31,13 @@ class AudioManager {
     }
   }
 
+  /**
+   * Create a new audio object
+   *
+   * @param source Audio object source
+   * @param arrayBuffer Audio object buffer
+   * @param options Options
+   */
   public load = (
     source: string,
     arrayBuffer: ArrayBuffer,
@@ -84,6 +94,11 @@ class AudioManager {
     });
   };
 
+  /**
+   * Mute all audio objects
+   *
+   * @param fadeDuration Time to fade when muting
+   */
   public muteAll = (fadeDuration = 750): void => {
     setCookie(COOKIES.AUDIO_MUTED, 'true');
 
@@ -92,6 +107,11 @@ class AudioManager {
     });
   };
 
+  /**
+   * Unmute all audio objects
+   *
+   * @param fadeDuration Time to fade when unmuting
+   */
   public unmuteAll = (fadeDuration = 750): void => {
     deleteCookie(COOKIES.AUDIO_MUTED);
 
@@ -100,6 +120,11 @@ class AudioManager {
     });
   };
 
+  /**
+   * Keep track of the document visibility, mute if hidden
+   *
+   * @param event Visibility change event
+   */
   private onVisibilityChangeHandler = (event: { isVisible: boolean }): void => {
     if (getCookie(COOKIES.AUDIO_MUTED)) {
       // Avoid fading back in if the user has purposely set the audio to be muted
@@ -117,6 +142,14 @@ class AudioManager {
     }
   };
 
+  /**
+   * Fade this audio object volume in or out
+   *
+   * @param from Starting volume
+   * @param to Ending volume
+   * @param duration Time it should take to fade
+   * @param source Source of the audio object to fade
+   */
   private fadeVolume = (from: number, to: number, duration: number, source: string): void => {
     const start = performance.now();
 
@@ -135,6 +168,11 @@ class AudioManager {
     }, 1000 / 60);
   };
 
+  /**
+   * Play this audio object
+   *
+   * @param source Audio object source
+   */
   private play = (source: string): void => {
     checkAutoplay().then(() => {
       if (this.audioSources[source].isPlaying === false) {
@@ -161,6 +199,11 @@ class AudioManager {
     });
   };
 
+  /**
+   * Pause this audio object
+   *
+   * @param source Audio object source
+   */
   private pause = (source: string): void => {
     const elapsed = this.context.currentTime - this.audioSources[source].startedAt;
 
@@ -169,6 +212,11 @@ class AudioManager {
     this.audioSources[source].pausedAt = elapsed;
   };
 
+  /**
+   * Stop this audio object
+   *
+   * @param source Audio object source
+   */
   private stop = (source: string): void => {
     this.audioSources[source].audio.disconnect();
     this.audioSources[source].audio.stop();
@@ -177,6 +225,11 @@ class AudioManager {
     this.audioSources[source].isPlaying = false;
   };
 
+  /**
+   * Dispose this audio object
+   *
+   * @param source Audio object source
+   */
   private dispose = (source: string): void => {
     if (this.audioSources[source].isPlaying) {
       this.stop(source);
@@ -189,23 +242,51 @@ class AudioManager {
     delete this.audioSources[source];
   };
 
+  /**
+   * Mute this audio object
+   *
+   * @param source Audio object source
+   * @param fadeDuration Time to fade when muting
+   */
   private mute = (source: string, fadeDuration = 750): void => {
     this.fadeVolume(this.audioSources[source].volume, 0, fadeDuration, source);
   };
 
+  /**
+   * Unmute this audio object
+   *
+   * @param source Audio object source
+   * @param fadeDuration Time to fade when unmuting
+   */
   private unmute = (source: string, fadeDuration = 750): void => {
     this.fadeVolume(0, this.audioSources[source].volume, fadeDuration, source);
   };
 
+  /**
+   * Set the volume of this audio object
+   *
+   * @param source Audio object source
+   * @param volume Volume of the audio object to be
+   */
   private setVolume = (source: string, volume: number): void => {
     this.audioSources[source].volume = volume;
     this.audioSources[source].audio.gainNode.gain.value = volume;
   };
 
+  /**
+   * Check if this audio object is playing
+   *
+   * @param source Audio object source
+   */
   private isPlaying = (source: string): boolean => {
     return this.audioSources[source].isPlaying;
   };
 
+  /**
+   * Get the current playtime of this audio object
+   *
+   * @param source Audio object source
+   */
   private getCurrentTime = (source: string): number => {
     if (this.audioSources[source].pausedAt) {
       return this.audioSources[source].pausedAt;
@@ -218,6 +299,11 @@ class AudioManager {
     return 0;
   };
 
+  /**
+   * Get the duration of this audio object
+   *
+   * @param source Audio object source
+   */
   private getDuration = (source: string): number => {
     return this.audioSources[source].buffer.duration;
   };

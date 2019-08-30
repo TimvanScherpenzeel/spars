@@ -1,4 +1,8 @@
 /**
+ * Inspired by https://github.com/typescript-plus/fast-memoize-decorator
+ */
+
+/**
  * Cache with a fixed boundary to prevent memory leaks
  */
 export class FixedSizeCache {
@@ -7,6 +11,11 @@ export class FixedSizeCache {
   private cache: Map<any, any> = new Map();
   private index: number = 0;
 
+  /**
+   * Configure the fixed cache size
+   *
+   * @param size Size of the cache
+   */
   constructor(size: number) {
     this.size = size;
   }
@@ -94,7 +103,7 @@ const serializerDefault = (...args: any): string => JSON.stringify(args);
  * @param fn Function to memoize
  * @param object { size: number, type: 'monadic' | 'variadic' } Memoization configuration
  */
-export const memoize = (
+export function memoize(
   fn: any,
   {
     size = 3,
@@ -103,7 +112,7 @@ export const memoize = (
     size?: number;
     type?: 'monadic' | 'variadic';
   } = {}
-): any => {
+): any {
   return (type === 'monadic' && fn.length === 1 ? monadic : variadic).bind(
     // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation
     this,
@@ -111,4 +120,4 @@ export const memoize = (
     new FixedSizeCache(size),
     serializerDefault
   );
-};
+}
