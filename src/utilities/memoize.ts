@@ -1,4 +1,7 @@
-export class SizedCache {
+/**
+ * Cache with a fixed boundary to prevent memory leaks
+ */
+export class FixedSizeCache {
   private size: number;
   private track: any[] = new Array(this.size);
   private cache: Map<any, any> = new Map();
@@ -8,10 +11,21 @@ export class SizedCache {
     this.size = size;
   }
 
+  /**
+   * Get a cache entry from the cache by key
+   *
+   * @param key Key to get cache entry by
+   */
   public get(key: any): any {
     return this.cache.get(key);
   }
 
+  /**
+   * Set a cache entry by key
+   *
+   * @param key Key to set cache entry by
+   * @param value Value to set cache entry to
+   */
   public set(key: any, value: any): any {
     this.cache.set(key, value);
 
@@ -29,7 +43,15 @@ export class SizedCache {
   }
 }
 
-function monadic(fn: any, cache: SizedCache, serializer: any, arg: any): any {
+/**
+ * A function which accepts a single argument
+ *
+ * @param fn Function to memoize
+ * @param cache Cache to use
+ * @param serializer Serializer to use
+ * @param arg Argument
+ */
+function monadic(fn: any, cache: FixedSizeCache, serializer: any, arg: any): any {
   const cacheKey =
     arg === null || typeof arg === 'number' || typeof arg === 'boolean' ? arg : serializer(arg);
   let computedValue = cache.get(cacheKey);
@@ -43,7 +65,14 @@ function monadic(fn: any, cache: SizedCache, serializer: any, arg: any): any {
   return computedValue;
 }
 
-function variadic(fn: any, cache: SizedCache, serializer: any): any {
+/**
+ * A function which accepts a variable number of arguments.
+ *
+ * @param fn Function to memoize
+ * @param cache Cache to use
+ * @param serializer Serializer to use
+ */
+function variadic(fn: any, cache: FixedSizeCache, serializer: any): any {
   const args = Array.prototype.slice.call(arguments, 3);
   const cacheKey = serializer(args);
   let computedValue = cache.get(cacheKey);
@@ -59,6 +88,12 @@ function variadic(fn: any, cache: SizedCache, serializer: any): any {
 
 const serializerDefault = (...args: any): string => JSON.stringify(args);
 
+/**
+ * Memoization is used to cache pure function results in order to speed up recurrent computation
+ *
+ * @param fn Function to memoize
+ * @param object { size: number, type: 'monadic' | 'variadic' } Memoization configuration
+ */
 export const memoize = (
   fn: any,
   {
@@ -73,7 +108,7 @@ export const memoize = (
     // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation
     this,
     fn,
-    new SizedCache(size),
+    new FixedSizeCache(size),
     serializerDefault
   );
 };

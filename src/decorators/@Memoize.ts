@@ -2,8 +2,8 @@
  * Inspired by https://github.com/typescript-plus/fast-memoize-decorator
  */
 
-// Vendor
-import memoize from 'fast-memoize';
+// Utilities
+import { memoize } from '../utilities';
 
 export function Memoize(): any {
   return (target: {}, propertyKey: string, descriptor: PropertyDescriptor): void => {

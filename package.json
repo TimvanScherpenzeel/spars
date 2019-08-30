@@ -21,7 +21,6 @@
   "dependencies": {
     "detect-gpu": "^1.1.0",
     "detect-ua": "^0.0.11",
-    "fast-memoize": "^2.5.1",
     "fontfaceobserver-es": "^3.3.1",
     "idb-keyval": "^3.2.0",
     "mitt": "^1.1.3",
