@@ -9,7 +9,7 @@ const LOG_LEVELS = {
 };
 
 // Pipe the console methods of this window so important logs are sent to the server
-export const pipeConsoleToSocket = (
+export const installRemoteErrorHandler = (
   windowRef: Window,
   socket: any,
   ignorePrefixes: string[]
