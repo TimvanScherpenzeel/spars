@@ -3,7 +3,7 @@ import { checkAutoplay } from './checkAutoplay';
 import { createAudioContext } from './createAudioContext';
 
 // Constants
-import { COOKIES, EVENTS } from '../constants';
+import { AUDIO_MUTED, VISIBILITY_CHANGE } from '../constants';
 
 // Cookies
 import { deleteCookie, getCookie, setCookie } from '../cookies';
@@ -22,9 +22,9 @@ class AudioManager {
    * Upon initial load check the cookies for the audio manager configuration
    */
   constructor() {
-    eventEmitter.on(EVENTS.VISIBILITY_CHANGE, this.onVisibilityChangeHandler);
+    eventEmitter.on(VISIBILITY_CHANGE, this.onVisibilityChangeHandler);
 
-    if (getCookie(COOKIES.AUDIO_MUTED)) {
+    if (getCookie(AUDIO_MUTED)) {
       Object.keys(this.audioSources).forEach((audioSource: string) => {
         this.setVolume(audioSource, 0);
       });
@@ -100,7 +100,7 @@ class AudioManager {
    * @param fadeDuration Time to fade when muting
    */
   public muteAll = (fadeDuration = 750): void => {
-    setCookie(COOKIES.AUDIO_MUTED, 'true');
+    setCookie(AUDIO_MUTED, 'true');
 
     Object.keys(this.audioSources).forEach((audioSource: string) => {
       this.fadeVolume(this.audioSources[audioSource].volume, 0, fadeDuration, audioSource);
@@ -113,7 +113,7 @@ class AudioManager {
    * @param fadeDuration Time to fade when unmuting
    */
   public unmuteAll = (fadeDuration = 750): void => {
-    deleteCookie(COOKIES.AUDIO_MUTED);
+    deleteCookie(AUDIO_MUTED);
 
     Object.keys(this.audioSources).forEach((audioSource: string) => {
       this.fadeVolume(0, this.audioSources[audioSource].volume, fadeDuration, audioSource);
@@ -126,7 +126,7 @@ class AudioManager {
    * @param event Visibility change event
    */
   private onVisibilityChangeHandler = (event: { isVisible: boolean }): void => {
-    if (getCookie(COOKIES.AUDIO_MUTED)) {
+    if (getCookie(AUDIO_MUTED)) {
       // Avoid fading back in if the user has purposely set the audio to be muted
       return undefined;
     }

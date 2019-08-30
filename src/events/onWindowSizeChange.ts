@@ -1,5 +1,5 @@
 // Constants
-import { EVENTS } from '../constants';
+import { WINDOW_SIZE_CHANGE } from '../constants';
 
 // Events
 import { eventEmitter } from './EventEmitter';
@@ -16,7 +16,7 @@ const debouncedOnWindowSizeChange = debounce(onWindowSizeChangeHandler, 100);
  * Monitor window size changes
  */
 function onWindowSizeChangeHandler(): void {
-  eventEmitter.emit(EVENTS.WINDOW_SIZE_CHANGE, {
+  eventEmitter.emit(WINDOW_SIZE_CHANGE, {
     windowHeight: window.innerHeight,
     windowWidth: window.innerWidth,
   });

@@ -8,7 +8,19 @@ export { audioManager, createAudioContext, checkAutoplay } from './audio';
 export { PersistentCache } from './caching';
 
 // Constants
-export { COOKIES, EVENTS } from './constants';
+export {
+  AUDIO_MUTED,
+  AUTOPLAY_UNLOCKED,
+  CONNECTION_CHANGE,
+  KEY_DOWN_CHANGE,
+  KEY_UP_CHANGE,
+  ORIENTATION_CHANGE,
+  VISIBILITY_CHANGE,
+  WINDOW_SIZE_CHANGE,
+  FRAME_TICK,
+  ASSETS_LOADED,
+  ASSET_LOADED,
+} from './constants';
 
 // Cookies
 export { deleteCookie, getCookie, setCookie } from './cookies';

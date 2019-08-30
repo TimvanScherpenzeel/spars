@@ -1,5 +1,5 @@
 // Constants
-import { EVENTS } from '../constants';
+import { CONNECTION_CHANGE } from '../constants';
 
 // Events
 import { eventEmitter } from './EventEmitter';
@@ -39,7 +39,7 @@ function onConnectionChangeHandler(): void {
     }
   }
 
-  eventEmitter.emit(EVENTS.CONNECTION_CHANGE, {
+  eventEmitter.emit(CONNECTION_CHANGE, {
     connectionIsOnline,
     connectionSaveData,
     connectionSpeed,

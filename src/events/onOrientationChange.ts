@@ -1,5 +1,5 @@
 // Constants
-import { EVENTS } from '../constants';
+import { ORIENTATION_CHANGE } from '../constants';
 
 // Events
 import { eventEmitter } from './EventEmitter';
@@ -39,7 +39,7 @@ function onOrientationChangeHandler(): void {
 
   const isPortrait = !isLandscape;
 
-  eventEmitter.emit(EVENTS.ORIENTATION_CHANGE, {
+  eventEmitter.emit(ORIENTATION_CHANGE, {
     angle,
     isLandscape,
     isPortrait,

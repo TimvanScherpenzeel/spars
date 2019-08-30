@@ -1,5 +1,5 @@
 // Constants
-import { EVENTS } from '../constants';
+import { KEY_DOWN_CHANGE, KEY_UP_CHANGE } from '../constants';
 
 // Events
 import { eventEmitter } from './EventEmitter';
@@ -12,7 +12,7 @@ import { eventEmitter } from './EventEmitter';
  * Monitor keydown changes
  */
 function onKeyDownChangeHandler(event: KeyboardEvent): void {
-  eventEmitter.emit(EVENTS.KEY_DOWN_CHANGE, {
+  eventEmitter.emit(KEY_DOWN_CHANGE, {
     key: event.key,
   });
 }
@@ -21,7 +21,7 @@ function onKeyDownChangeHandler(event: KeyboardEvent): void {
  * Monitor keyup changes
  */
 function onKeyUpChangeHandler(event: KeyboardEvent): void {
-  eventEmitter.emit(EVENTS.KEY_UP_CHANGE, {
+  eventEmitter.emit(KEY_UP_CHANGE, {
     key: event.key,
   });
 }

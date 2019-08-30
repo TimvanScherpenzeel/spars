@@ -1,5 +1,5 @@
 // Constants
-import { EVENTS } from '../constants';
+import { VISIBILITY_CHANGE } from '../constants';
 
 // Events
 import { eventEmitter } from './EventEmitter';
@@ -50,7 +50,7 @@ const visibility = {
  * Monitor visibility changes
  */
 function onVisibilityChangeHandler(): void {
-  eventEmitter.emit(EVENTS.VISIBILITY_CHANGE, {
+  eventEmitter.emit(VISIBILITY_CHANGE, {
     isVisible: !visibility.hidden,
   });
 }

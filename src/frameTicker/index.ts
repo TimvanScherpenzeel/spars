@@ -1,5 +1,5 @@
 // Constants
-import { EVENTS } from '../constants';
+import { FRAME_TICK } from '../constants';
 
 // Events
 import { eventEmitter } from '../events/EventEmitter';
@@ -24,7 +24,7 @@ class FrameTicker {
 
       this.tickId = window.requestAnimationFrame(this.tick);
 
-      eventEmitter.emit(EVENTS.FRAME_TICK, {
+      eventEmitter.emit(FRAME_TICK, {
         delta: this.tickId - this.previousTickId,
         time,
       });

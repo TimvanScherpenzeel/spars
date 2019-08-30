@@ -2,7 +2,7 @@
 import { createAudioContext } from './createAudioContext';
 
 // Constants
-import { EVENTS } from '../constants';
+import { AUTOPLAY_UNLOCKED } from '../constants';
 
 // Events
 import { eventEmitter } from '../events/EventEmitter';
@@ -43,7 +43,7 @@ export const checkAutoplay = (element?: HTMLElement): Promise<boolean> =>
     if (context.state === 'suspended') {
       autoplayAllowed = false;
 
-      eventEmitter.emit(EVENTS.AUTOPLAY_UNLOCKED, {
+      eventEmitter.emit(AUTOPLAY_UNLOCKED, {
         autoplayAllowed,
       });
 
@@ -85,7 +85,7 @@ export const checkAutoplay = (element?: HTMLElement): Promise<boolean> =>
 
             autoplayAllowed = true;
 
-            eventEmitter.emit(EVENTS.AUTOPLAY_UNLOCKED, {
+            eventEmitter.emit(AUTOPLAY_UNLOCKED, {
               autoplayAllowed,
             });
 

@@ -3,7 +3,7 @@
 import FontFaceObserver from 'fontfaceobserver-es';
 
 // Constants
-import { EVENTS } from '../constants';
+import { ASSET_LOADED, ASSETS_LOADED } from '../constants';
 
 // Events
 import { eventEmitter } from '../events/EventEmitter';
@@ -233,7 +233,7 @@ export class AssetLoader {
           }
         }
 
-        eventEmitter.emit(EVENTS.ASSET_LOADED, {
+        eventEmitter.emit(ASSET_LOADED, {
           id: asset.id,
           progress: `${(progress / loadingAssets.length).toFixed(2)}`,
           timeToLoad: `${asset.timeToLoad.toFixed(2)}ms`,
@@ -252,7 +252,7 @@ export class AssetLoader {
         assetMap.set(asset.id, asset.item);
       });
 
-      eventEmitter.emit(EVENTS.ASSETS_LOADED, {
+      eventEmitter.emit(ASSETS_LOADED, {
         assetMap,
       });
 
