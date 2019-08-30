@@ -1,5 +1,13 @@
+// Cookies
+// -------
+
 // Audio
 export const AUDIO_MUTED = 'SPAR::COOKIE_AUDIO_MUTED';
+
+// Events
+// ------
+
+// Audio
 export const AUTOPLAY_UNLOCKED = 'SPAR::EVENT_AUTOPLAY_UNLOCKED';
 
 // Events
