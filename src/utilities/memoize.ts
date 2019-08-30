@@ -95,6 +95,11 @@ function variadic(fn: any, cache: FixedSizeCache, serializer: any): any {
   return computedValue;
 }
 
+/**
+ * Serialize the arguments in order to be cached and compared correctly
+ *
+ * @param args Any arguments that have been passed along
+ */
 const serializerDefault = (...args: any): string => JSON.stringify(args);
 
 /**
