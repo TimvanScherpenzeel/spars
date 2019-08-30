@@ -34,7 +34,7 @@ import {
  */
 const LOADER_EXTENSIONS_MAP = new Map([
   [ELoaderKey.ArrayBuffer, { extensions: ['bin'] }],
-  [ELoaderKey.Audio, { extensions: ['mp3', 'ogg', 'wav', 'flac'] }],
+  [ELoaderKey.Audio, { extensions: ['mp3', 'm4a', 'ogg', 'wav', 'flac'] }],
   [ELoaderKey.Audiopack, { extensions: ['audiopack'] }],
   [ELoaderKey.Binpack, { extensions: ['binpack'] }],
   [ELoaderKey.Font, { extensions: ['woff2', 'woff', 'ttf', 'otf', 'eot'] }],
