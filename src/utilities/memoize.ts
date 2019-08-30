@@ -106,7 +106,7 @@ const serializerDefault = (...args: any): string => JSON.stringify(args);
  * Memoization is used to cache pure function results in order to speed up recurrent computation
  *
  * @param fn Function to memoize
- * @param object { size: number, type: 'monadic' | 'variadic' } Memoization configuration
+ * @param options { size: number, type: 'monadic' | 'variadic' } Memoization configuration
  */
 export function memoize(
   fn: any,
