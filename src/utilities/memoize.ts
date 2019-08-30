@@ -1,5 +1,5 @@
 /**
- * Inspired by https://github.com/typescript-plus/fast-memoize-decorator
+ * Inspired by https://github.com/caiogondim/fast-memoize.js
  */
 
 // TODO: look into creating a cheaper data structure than a class to express fixed size caching
