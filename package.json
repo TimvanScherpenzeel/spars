@@ -19,7 +19,7 @@
   "author": "Tim van Scherpenzeel",
   "license": "MIT",
   "dependencies": {
-    "detect-gpu": "^1.1.0",
+    "detect-gpu": "^1.1.2",
     "detect-ua": "^0.0.11",
     "fontfaceobserver-es": "^3.3.1",
     "idb-keyval": "^3.2.0",
@@ -36,16 +36,16 @@
     "parcel": "^1.12.3",
     "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
-    "rollup": "^1.20.2",
+    "rollup": "^1.20.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-filesize": "^6.2.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.1",
-    "rollup-plugin-typescript2": "^0.23.0",
+    "rollup-plugin-typescript2": "^0.24.0",
     "ts-jest": "^24.0.2",
     "tslint": "^5.19.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.6.2"
   },
   "prettier": {
     "semi": true,
