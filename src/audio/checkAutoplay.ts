@@ -10,14 +10,17 @@ import { eventEmitter } from '../events/EventEmitter';
 // Features
 import isUserActivationSupported from '../features/browserFeatures/isUserActivationSupported';
 
-// SEE: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
-
-// Muted autoplay is always allowed.
-
-// Autoplay with sound is allowed if:
-// - User has interacted with the domain (click, tap, etc.).
-// - On desktop, the user's Media Engagement Index threshold has been crossed, meaning the user has previously play video with sound.
-// - On mobile, the user has [added the site to their home screen].
+/**
+ * SEE: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
+ *
+ * Muted autoplay is always allowed
+ *
+ * Autoplay with sound is allowed if:
+ *
+ * - User has interacted with the domain (click, tap, etc.)
+ * - On desktop, the user's Media Engagement Index threshold has been crossed, meaning the user has previously play video with sound
+ * - On mobile, the user has [added the site to their home screen]
+ */
 
 let autoplayAllowed = false;
 
