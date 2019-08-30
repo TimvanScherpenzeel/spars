@@ -42,7 +42,7 @@ const LOADER_EXTENSIONS_MAP = new Map([
   [ELoaderKey.ImageBitmap, { extensions: ['jpeg', 'jpg', 'gif', 'png', 'webp'] }],
   [ELoaderKey.ImageCompressed, { extensions: ['ktx'] }],
   [ELoaderKey.JSON, { extensions: ['json'] }],
-  [ELoaderKey.Text, { extensions: ['txt'] }],
+  [ELoaderKey.Text, { extensions: ['txt', 'm3u8'] }],
   [ELoaderKey.Video, { extensions: ['webm', 'ogg', 'mp4'] }],
   [ELoaderKey.WebAssembly, { extensions: ['wasm', 'wat'] }],
   [
