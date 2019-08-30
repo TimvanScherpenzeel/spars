@@ -2,6 +2,8 @@
  * Inspired by https://github.com/typescript-plus/fast-memoize-decorator
  */
 
+// TODO: look into creating a cheap data structure than a class to express fixed size caching
+
 /**
  * Cache with a fixed boundary to prevent memory leaks
  */
