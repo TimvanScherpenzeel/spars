@@ -47,6 +47,7 @@ describe('memoize', () => {
 
     function addition(obj: any): number {
       numberOfCalls++;
+
       return obj.number + 1;
     }
 
@@ -90,7 +91,8 @@ describe('memoize', () => {
     let numberOfCalls = 0;
 
     function addition(numb: number): number {
-      numberOfCalls += 1;
+      numberOfCalls++;
+
       return numb + 1;
     }
 
@@ -108,7 +110,8 @@ describe('memoize', () => {
     let numberOfCalls = 0;
 
     function addition(numb: number): number {
-      numberOfCalls += 1;
+      numberOfCalls++;
+
       return numb + 1;
     }
 
