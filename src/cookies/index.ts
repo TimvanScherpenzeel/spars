@@ -1,9 +1,10 @@
 // Features
 import isCookieEnabled from '../features/browserSettings/isCookieEnabled';
 
-// NOTE: When blocking cookies Firefox throws a security error for localStorage and indexedDB blocking further execution
 /**
  * Set a cookie
+ *
+ * NOTE: When blocking cookies Firefox throws a security error for localStorage and indexedDB blocking further execution
  *
  * @param key Key of cookie
  * @param value Value of cookie
