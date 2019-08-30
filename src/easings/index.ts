@@ -1,5 +1,10 @@
 /**
  * https://easings.net/en#easeInQuad
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInQuad = (
   time: number,
@@ -12,6 +17,11 @@ export const easeInQuad = (
 
 /**
  * https://easings.net/en#easeOutQuad
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeOutQuad = (
   time: number,
@@ -24,6 +34,11 @@ export const easeOutQuad = (
 
 /**
  * https://easings.net/en#easeInOutQuad
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInOutQuad = (
   time: number,
@@ -42,6 +57,11 @@ export const easeInOutQuad = (
 
 /**
  * https://easings.net/en#easeInCubic
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInCubic = (
   time: number,
@@ -54,6 +74,11 @@ export const easeInCubic = (
 
 /**
  * https://easings.net/en#easeOutCubic
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeOutCubic = (
   time: number,
@@ -66,6 +91,11 @@ export const easeOutCubic = (
 
 /**
  * https://easings.net/en#easeInOutCubic
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInOutCubic = (
   time: number,
@@ -84,6 +114,11 @@ export const easeInOutCubic = (
 
 /**
  * https://easings.net/en#easeInQuart
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInQuart = (
   time: number,
@@ -96,6 +131,11 @@ export const easeInQuart = (
 
 /**
  * https://easings.net/en#easeOutQuart
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeOutQuart = (
   time: number,
@@ -108,6 +148,11 @@ export const easeOutQuart = (
 
 /**
  * https://easings.net/en#easeInOutQuart
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInOutQuart = (
   time: number,
@@ -126,6 +171,11 @@ export const easeInOutQuart = (
 
 /**
  * https://easings.net/en#easeInQuint
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInQuint = (
   time: number,
@@ -138,6 +188,11 @@ export const easeInQuint = (
 
 /**
  * https://easings.net/en#easeOutQuint
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeOutQuint = (
   time: number,
@@ -152,6 +207,11 @@ export const easeOutQuint = (
 
 /**
  * https://easings.net/en#easeInOutQuint
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInOutQuint = (
   time: number,
@@ -170,6 +230,11 @@ export const easeInOutQuint = (
 
 /**
  * https://easings.net/en#easeInSine
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInSine = (
   time: number,
@@ -182,6 +247,11 @@ export const easeInSine = (
 
 /**
  * https://easings.net/en#easeOutSine
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeOutSine = (
   time: number,
@@ -194,6 +264,11 @@ export const easeOutSine = (
 
 /**
  * https://easings.net/en#easeInOutSine
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInOutSine = (
   time: number,
@@ -206,6 +281,11 @@ export const easeInOutSine = (
 
 /**
  * https://easings.net/en#easeInExpo
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInExpo = (
   time: number,
@@ -220,6 +300,11 @@ export const easeInExpo = (
 
 /**
  * https://easings.net/en#easeOutExpo
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeOutExpo = (
   time: number,
@@ -234,6 +319,11 @@ export const easeOutExpo = (
 
 /**
  * https://easings.net/en#easeInOutExpo
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInOutExpo = (
   time: number,
@@ -260,6 +350,11 @@ export const easeInOutExpo = (
 
 /**
  * https://easings.net/en#easeInCirc
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInCirc = (
   time: number,
@@ -272,6 +367,11 @@ export const easeInCirc = (
 
 /**
  * https://easings.net/en#easeOutCirc
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeOutCirc = (
   time: number,
@@ -284,6 +384,11 @@ export const easeOutCirc = (
 
 /**
  * https://easings.net/en#easeInOutCirc
+ *
+ * @param time Current time
+ * @param beginValue Begin value
+ * @param changeInValue Change of value over time
+ * @param duration Duration of the ease
  */
 export const easeInOutCirc = (
   time: number,
