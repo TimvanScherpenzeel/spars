@@ -45,11 +45,7 @@ for (let i = 0; i < 256; i++) {
 export const getUUID = (): string => {
   const r = getRandomValues();
 
-  /**
-   * Convert array of 16 byte values to UUID string format of the form:
-   * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-   */
-
+  // Convert array of 16 byte values to UUID string format of the form: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
   // Per V4.4, set bits for version and `clock_seq_hi_and_reserved`
   r[6] = (r[6] & 0x0f) | 0x40;
   r[8] = (r[8] & 0x3f) | 0x80;

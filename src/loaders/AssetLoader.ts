@@ -59,7 +59,7 @@ const LOADER_EXTENSIONS_MAP = new Map([
   ],
 ]);
 
-// Safari does not fire `canplaythrough` preventing it from resolving naturally.
+// Safari does not fire `canplaythrough` preventing it from resolving naturally
 // A workaround is to not wait for the `canplaythrough` event but rather resolve early and hope for the best
 const IS_MEDIA_PRELOAD_SUPPORTED = !getBrowserType.isSafari;
 

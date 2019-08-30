@@ -20,9 +20,8 @@ export const schedulePriorities = {
 /**
  * Create a new frame scheduler
  *
- * A frame scheduler schedules a limited amount of tasks each frame in order to keep
- * a consistent 60 frames per second. If a task is expected to not fit in a single frame
- * it is transferred to the next frame.
+ * A frame scheduler schedules a limited amount of tasks each frame in order to keep a consistent 60 frames per second
+ * If a task is expected to not fit in a single frame it is transferred to the next frame
  */
 export const createFrameScheduler = (): (() => void) => {
   const heapTasks = new PriorityUniqueQueue<SinglyLinkedList>();

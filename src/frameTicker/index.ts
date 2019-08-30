@@ -7,8 +7,7 @@ import { eventEmitter } from '../events/EventEmitter';
 /**
  * Create a new global requestAnimationFrame ticker
  *
- * It is more efficient to have a single requestAnimationFrame than
- * to have multiple independent ones.
+ * It is more efficient to have a single requestAnimationFrame than to have multiple independent ones
  */
 class FrameTicker {
   private isPlaying: boolean = false;

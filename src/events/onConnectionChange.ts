@@ -9,10 +9,10 @@ import { eventEmitter } from './EventEmitter';
  */
 function onConnectionChangeHandler(): void {
   // ECT          RTT         Kbps    Explanation
-  // slow-2g      2000	      50	    The network is suited for small transfers only such as text-only pages.
-  // 2g	          1400	      70	    The network is suited for transfers of small images.
-  // 3g	          270	        700	    The network is suited for transfers of large assets such as high resolution images, audio, and SD video.
-  // 4g	          0	          ∞	      The network is suited for HD video, real-time video, etc.
+  // slow-2g      2000	      50	    The network is suited for small transfers only such as text-only pages
+  // 2g	          1400	      70	    The network is suited for transfers of small images
+  // 3g	          270	        700	    The network is suited for transfers of large assets such as high resolution images, audio, and SD video
+  // 4g	          0	          ∞	      The network is suited for HD video, real-time video, etc
 
   const connectionIsOnline = navigator.onLine || false;
   const connectionEffectiveType =
