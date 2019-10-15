@@ -12,7 +12,7 @@ import typescriptPlugin from 'rollup-plugin-typescript2';
 import pkg from './package.json';
 
 const input = './src/index.ts';
-const name = 'Spar';
+const name = 'Spars';
 
 // tslint:disable-next-line:typedef
 const plugins = ({ isUMD = false, isCJS = false, isES = false }) => [

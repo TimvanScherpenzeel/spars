@@ -1,11 +1,11 @@
 // Vendor
-import * as Spar from '../dist/spar.umd';
+import * as Spars from '../dist/spars.umd';
 
 // Analytics
 // ---------
 
-// Spar.registerAnalytics('UA-71404844-4');
-// Spar.recordAnalyticsEvent({
+// Spars.registerAnalytics('UA-71404844-4');
+// Spars.recordAnalyticsEvent({
 //   hitType: 'event',
 //   eventCategory: 'string',
 //   eventAction: 'play',
@@ -15,10 +15,10 @@ import * as Spar from '../dist/spar.umd';
 // Audio
 // -----
 
-// Spar.assetLoader.loadAssets([{ src: './assets/audio.mp3', loader: 'ArrayBuffer' }]).then(assets => {
+// Spars.assetLoader.loadAssets([{ src: './assets/audio.mp3', loader: 'ArrayBuffer' }]).then(assets => {
 //   console.log(assets);
 
-//   Spar.audioManager.load('./assets/audio.mp3', assets.get('./assets/audio.mp3')).then(sound => {
+//   Spars.audioManager.load('./assets/audio.mp3', assets.get('./assets/audio.mp3')).then(sound => {
 //     console.log(sound);
 
 //     sound.start();
@@ -53,12 +53,12 @@ import * as Spar from '../dist/spar.umd';
 //   button.innerHTML = 'unlock audio';
 //   document.getElementById('root').appendChild(button);
 
-//   if (Spar.isAutoplayAllowed()) {
+//   if (Spars.isAutoplayAllowed()) {
 //     console.log('allowed!');
 //   } else {
 //     console.log('not allowed, waiting for user interaction');
 
-//     Spar.checkAutoplay(button)
+//     Spars.checkAutoplay(button)
 //       .then(unlocked => {
 //         console.log('allowed!');
 //       })
@@ -68,7 +68,7 @@ import * as Spar from '../dist/spar.umd';
 //   }
 // }
 
-// Spar.assetLoader
+// Spars.assetLoader
 //   .loadAssets([
 //     {
 //       src: './assets/audio.mp3',
@@ -78,9 +78,9 @@ import * as Spar from '../dist/spar.umd';
 //   .then(assets => {
 //     console.log(assets);
 
-//     Spar.checkAutoplay()
+//     Spars.checkAutoplay()
 //       .then(() => {
-//         Spar.audioManager
+//         Spars.audioManager
 //           .load('./assets/audio.mp3', assets.get('./assets/audio.mp3'), {
 //             loop: true,
 //           })
@@ -88,10 +88,10 @@ import * as Spar from '../dist/spar.umd';
 //             source.play();
 //             // source.setVolume(0.1);
 
-//             // Spar.audioManager.muteAll();
+//             // Spars.audioManager.muteAll();
 
 //             // setTimeout(() => {
-//             //   Spar.audioManager.unmuteAll();
+//             //   Spars.audioManager.unmuteAll();
 //             //   //   source.stop();
 
 //             //   //   setTimeout(() => {
@@ -109,10 +109,10 @@ import * as Spar from '../dist/spar.umd';
 
 //             // source.play();
 
-//             // Spar.audioManager.muteAll(1000);
+//             // Spars.audioManager.muteAll(1000);
 
 //             // setTimeout(() => {
-//             //   Spar.audioManager.unmuteAll(1000);
+//             //   Spars.audioManager.unmuteAll(1000);
 //             // }, 5000);
 
 //             // setTimeout(() => {
@@ -136,7 +136,7 @@ import * as Spar from '../dist/spar.umd';
 // Caching
 // -------
 
-// const persistentCache = new Spar.PersistentCache();
+// const persistentCache = new Spars.PersistentCache();
 
 // persistentCache.set('key1', 'value1');
 // persistentCache.set('key2', 'value2');
@@ -158,38 +158,38 @@ import * as Spar from '../dist/spar.umd';
 // Cookie
 // ------
 
-// Spar.setCookie('key1', true);
-// Spar.setCookie('key2', false);
-// Spar.setCookie('key3', 0.14);
-// Spar.setCookie('key4', null);
-// Spar.setCookie('key5', undefined);
-// Spar.setCookie('key6', 's');
-// Spar.setCookie('key7', 6);
+// Spars.setCookie('key1', true);
+// Spars.setCookie('key2', false);
+// Spars.setCookie('key3', 0.14);
+// Spars.setCookie('key4', null);
+// Spars.setCookie('key5', undefined);
+// Spars.setCookie('key6', 's');
+// Spars.setCookie('key7', 6);
 // console.log(document.cookie);
 
-// console.log(typeof Spar.getCookie('key1'), Spar.getCookie('key1'));
-// console.log(typeof Spar.getCookie('key2'), Spar.getCookie('key2'));
-// console.log(typeof Spar.getCookie('key3'), Spar.getCookie('key3'));
-// console.log(typeof Spar.getCookie('key4'), Spar.getCookie('key4'));
-// console.log(typeof Spar.getCookie('key5'), Spar.getCookie('key5'));
-// console.log(typeof Spar.getCookie('key6'), Spar.getCookie('key6'));
-// console.log(typeof Spar.getCookie('key7'), Spar.getCookie('key7'));
+// console.log(typeof Spars.getCookie('key1'), Spars.getCookie('key1'));
+// console.log(typeof Spars.getCookie('key2'), Spars.getCookie('key2'));
+// console.log(typeof Spars.getCookie('key3'), Spars.getCookie('key3'));
+// console.log(typeof Spars.getCookie('key4'), Spars.getCookie('key4'));
+// console.log(typeof Spars.getCookie('key5'), Spars.getCookie('key5'));
+// console.log(typeof Spars.getCookie('key6'), Spars.getCookie('key6'));
+// console.log(typeof Spars.getCookie('key7'), Spars.getCookie('key7'));
 
-// Spar.deleteCookie('key1');
+// Spars.deleteCookie('key1');
 // console.log(document.cookie);
 
-// Spar.deleteCookie('key2');
+// Spars.deleteCookie('key2');
 // console.log(document.cookie);
 
-// Spar.deleteCookie('key3');
-// Spar.deleteCookie('key4');
-// Spar.deleteCookie('key5');
+// Spars.deleteCookie('key3');
+// Spars.deleteCookie('key4');
+// Spars.deleteCookie('key5');
 // console.log(document.cookie);
 
 // Events
 // ------
 
-// class Test extends Spar.EventEmitter {
+// class Test extends Spars.EventEmitter {
 //   constructor() {
 //     super();
 
@@ -202,69 +202,69 @@ import * as Spar from '../dist/spar.umd';
 // const connectionChangeHandler = event => {
 //   console.log(event);
 
-//   Spar.eventEmitter.off(Spar.EVENTS.CONNECTION_CHANGE, connectionChangeHandler);
+//   Spars.eventEmitter.off(Spars.EVENTS.CONNECTION_CHANGE, connectionChangeHandler);
 // };
 
-// Spar.eventEmitter.on(Spar.EVENTS.CONNECTION_CHANGE, connectionChangeHandler);
+// Spars.eventEmitter.on(Spars.EVENTS.CONNECTION_CHANGE, connectionChangeHandler);
 
 // const orientationChangeHandler = event => {
 //   console.log(event);
 
-//   Spar.eventEmitter.off(Spar.EVENTS.ORIENTATION_CHANGE);
+//   Spars.eventEmitter.off(Spars.EVENTS.ORIENTATION_CHANGE);
 
 //   document.getElementById('root').appendChild(document.createTextNode(event.angle));
 // };
 
-// Spar.eventEmitter.on(Spar.EVENTS.ORIENTATION_CHANGE, orientationChangeHandler);
+// Spars.eventEmitter.on(Spars.EVENTS.ORIENTATION_CHANGE, orientationChangeHandler);
 
 // const visibilityChangeHandler = event => {
 //   console.log(event);
 
-//   Spar.eventEmitter.off(Spar.EVENTS.VISIBILITY_CHANGE);
+//   Spars.eventEmitter.off(Spars.EVENTS.VISIBILITY_CHANGE);
 // };
 
-// Spar.eventEmitter.on(Spar.EVENTS.VISIBILITY_CHANGE, visibilityChangeHandler);
+// Spars.eventEmitter.on(Spars.EVENTS.VISIBILITY_CHANGE, visibilityChangeHandler);
 
 // const windowSizeChangeHandler = event => {
 //   console.log(event);
 
-//   Spar.eventEmitter.off(Spar.EVENTS.WINDOW_SIZE_CHANGE);
+//   Spars.eventEmitter.off(Spars.EVENTS.WINDOW_SIZE_CHANGE);
 // };
 
-// Spar.eventEmitter.on(Spar.EVENTS.WINDOW_SIZE_CHANGE, windowSizeChangeHandler);
+// Spars.eventEmitter.on(Spars.EVENTS.WINDOW_SIZE_CHANGE, windowSizeChangeHandler);
 
 // Features
 // --------
 
-console.log(Spar.features);
+console.log(Spars.features);
 
 // FrameScheduler
 // --------------
 
 // const result = [];
 
-// Spar.scheduleFrame(
+// Spars.scheduleFrame(
 //   () => {
 //     result.push('A');
 //   },
-//   { priority: Spar.schedulePriorities.LOW }
+//   { priority: Spars.schedulePriorities.LOW }
 // );
 
-// Spar.scheduleFrame(
+// Spars.scheduleFrame(
 //   () => {
 //     result.push('C');
 //   },
-//   { priority: Spar.schedulePriorities.IMPORTANT }
+//   { priority: Spars.schedulePriorities.IMPORTANT }
 // );
 
-// Spar.scheduleFrame(
+// Spars.scheduleFrame(
 //   () => {
 //     result.push('D');
 //   },
 //   { priority: 1000 }
 // );
 
-// Spar.scheduleFrame(() => {
+// Spars.scheduleFrame(() => {
 //   result.push('B');
 // });
 
@@ -275,31 +275,31 @@ console.log(Spar.features);
 // FrameTicker
 // ---------
 
-// Spar.frameTicker.on();
+// Spars.frameTicker.on();
 
 // const tickHandler = event => {
 //   console.log(event);
 // };
 
-// Spar.eventEmitter.on(Spar.EVENTS.FRAME_TICK, tickHandler);
+// Spars.eventEmitter.on(Spars.EVENTS.FRAME_TICK, tickHandler);
 
-// Spar.frameTicker.off();
+// Spars.frameTicker.off();
 
 // AssetLoader
 // -----------
 
-// Spar.eventEmitter.on(Spar.EVENTS.ASSET_LOADED, event => {
+// Spars.eventEmitter.on(Spars.EVENTS.ASSET_LOADED, event => {
 //   console.log(event);
 // });
 
-// Spar.eventEmitter.on(Spar.EVENTS.ASSETS_LOADED, event => {
+// Spars.eventEmitter.on(Spars.EVENTS.ASSETS_LOADED, event => {
 //   console.log(event);
 // });
 
-// const { isDesktop, isTablet, isMobile } = Spar.features.browserFeatures.browserType;
+// const { isDesktop, isTablet, isMobile } = Spars.features.browserFeatures.browserType;
 
-// const persistentCache = new Spar.PersistentCache();
-// const assetLoader = new Spar.AssetLoader({ persistentCache });
+// const persistentCache = new Spars.PersistentCache();
+// const assetLoader = new Spars.AssetLoader({ persistentCache });
 
 // assetLoader
 //   .loadAssets([
@@ -341,7 +341,7 @@ console.log(Spar.features);
 //     // },
 //     // {
 //     //   id: './assets/1-device.png',
-//     //   src: Spar.assetLoader.byDeviceType({
+//     //   src: Spars.assetLoader.byDeviceType({
 //     //     DESKTOP: './assets/1-desktop.png',
 //     //     TABLET: './assets/1-tablet.png',
 //     //     MOBILE: './assets/1-mobile.png',
@@ -349,7 +349,7 @@ console.log(Spar.features);
 //     // },
 //     // {
 //     //   id: './assets/example.ktx',
-//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
+//     //   src: Spars.assetLoader.bySupportedCompressedTexture({
 //     //     ASTC: './assets/example-astc-4x4.ktx',
 //     //     ETC: './assets/example-etc2.ktx',
 //     //     PVRTC: './assets/example-pvrtc4BPP.ktx',
@@ -359,7 +359,7 @@ console.log(Spar.features);
 //     // },
 //     // {
 //     //   id: './assets/example-mipmaps.ktx',
-//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
+//     //   src: Spars.assetLoader.bySupportedCompressedTexture({
 //     //     ASTC: './assets/example-astc-4x4-mipmaps.ktx',
 //     //     ETC: './assets/example-etc2-mipmaps.ktx',
 //     //     PVRTC: './assets/example-pvrtc4BPP-mipmaps.ktx',
@@ -372,7 +372,7 @@ console.log(Spar.features);
 //     // },
 //     // isDesktop && {
 //     //   id: './assets/green_point_park_4k_ibl.ktx',
-//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
+//     //   src: Spars.assetLoader.bySupportedCompressedTexture({
 //     //     ASTC: './assets/green_point_park_4k_ibl_astc.ktx',
 //     //     ETC: './assets/green_point_park_4k_ibl_etc.ktx',
 //     //     S3TC: './assets/green_point_park_4k_ibl_s3tc.ktx',
@@ -381,7 +381,7 @@ console.log(Spar.features);
 //     // },
 //     // isDesktop && {
 //     //   id: './assets/green_point_park_4k_skybox.ktx',
-//     //   src: Spar.assetLoader.bySupportedCompressedTexture({
+//     //   src: Spars.assetLoader.bySupportedCompressedTexture({
 //     //     ASTC: './assets/green_point_park_4k_skybox_astc.ktx',
 //     //     ETC: './assets/green_point_park_4k_skybox_etc.ktx',
 //     //     S3TC: './assets/green_point_park_4k_skybox_s3tc.ktx',
@@ -416,16 +416,16 @@ console.log(Spar.features);
 // const element = document.getElementById('root');
 
 // element.onclick = () => {
-//   if (Spar.fullScreen.fullscreenSupported) {
-//     if (Spar.fullScreen.fullscreenElement) {
-//       Spar.fullScreen.exitFullscreen();
+//   if (Spars.fullScreen.fullscreenSupported) {
+//     if (Spars.fullScreen.fullscreenElement) {
+//       Spars.fullScreen.exitFullscreen();
 //     } else {
-//       Spar.fullScreen.requestFullscreen(element);
+//       Spars.fullScreen.requestFullscreen(element);
 //     }
 //   }
 // };
 
-// console.log(Spar.fullScreen);
+// console.log(Spars.fullScreen);
 
 // Pointer lock
 
@@ -436,14 +436,14 @@ console.log(Spar.features);
 // element.onclick = () => {
 //   if (pointerLockEnabled) {
 //     pointerLockEnabled = false;
-//     Spar.pointerLock.exitPointerLock();
+//     Spars.pointerLock.exitPointerLock();
 //   } else {
 //     pointerLockEnabled = true;
-//     Spar.pointerLock.requestPointerLock(element);
+//     Spars.pointerLock.requestPointerLock(element);
 //   }
 // };
 
-// console.log(Spar.pointerLock);
+// console.log(Spars.pointerLock);
 
 // Scrolling
 // ---------
@@ -451,26 +451,26 @@ console.log(Spar.features);
 // const scrollTopElement = document.getElementById('scroll-top');
 
 // scrollTopElement.addEventListener('click', () => {
-//   Spar.scrollTo({
+//   Spars.scrollTo({
 //     destinationY: 0,
 //     duration: 1250,
 //   }).then(() => console.log('done'));
 // });
 
-// Spar.scrollToTopOnReload();
+// Spars.scrollToTopOnReload();
 
 // Social
 // -----
 
-// Spar.shareFacebook('https://www.random.studio', 'a design studio', 300, 400);
-// Spar.shareLinkedIn('https://www.random.studio', 'a design studio', 500, 1000)
-// Spar.shareTwitter('https://www.random.studio', 'a design studio')
+// Spars.shareFacebook('https://www.random.studio', 'a design studio', 300, 400);
+// Spars.shareLinkedIn('https://www.random.studio', 'a design studio', 500, 1000)
+// Spars.shareTwitter('https://www.random.studio', 'a design studio')
 
 // ThreadPool
 // ----------
 
 // (async () => {
-//   const pool = Spar.threadPool;
+//   const pool = Spars.threadPool;
 
 //   console.time('synchronous');
 //   await pool.add(
@@ -573,4 +573,4 @@ console.log(Spar.features);
 // })();
 
 // Utilities
-// console.log(Spar.getUUID());
+// console.log(Spars.getUUID());

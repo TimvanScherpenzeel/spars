@@ -51,8 +51,8 @@ export class PersistentCache {
     this.options = options;
 
     this.store = new Store(
-      (this.options && this.options.databaseName) || 'spar-cache-db',
-      (this.options && this.options.storeName) || 'spar-cache-store'
+      (this.options && this.options.databaseName) || 'spars-cache-db',
+      (this.options && this.options.storeName) || 'spars-cache-store'
     );
   }
 
