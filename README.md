@@ -1,6 +1,16 @@
 # Spars
 
+[![npm version](https://badge.fury.io/js/spars.svg)](https://badge.fury.io/js/spars)
+
 🌲 A general toolkit for creating interactive web experiences.
+
+## Installation
+
+Make sure you have [Node.js](http://nodejs.org/) installed.
+
+```sh
+ $ npm install spars
+```
 
 ## Statement
 
