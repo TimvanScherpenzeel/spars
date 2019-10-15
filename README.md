@@ -35,4 +35,4 @@ $ yarn build
 
 ## Licence
 
-My work is released under the [MIT license](https://raw.githubusercontent.com/TimvanScherpenzeel/alpine-toolkit/master/LICENSE).
+My work is released under the [MIT license](https://raw.githubusercontent.com/TimvanScherpenzeel/spar/master/LICENSE).
