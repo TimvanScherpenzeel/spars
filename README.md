@@ -44,7 +44,7 @@ Contains implementations of `Bitfield` and `Deque` data structures.
 
 ### Decorators
 
-Contains the `memoize` decorator method.
+Contains some commonly used decorators.
 
 ### Easings
 
@@ -64,7 +64,7 @@ Contains a scheduler to schedule tasks over multiple frames to avoid dropping be
 
 ### Frame ticker
 
-Contains code to set up a global `requestAnimationFrame` ticker, fires `SPARS::FRAME_TICK` event.
+Contains code to set up a global `requestAnimationFrame` ticker which fires the `SPARS::FRAME_TICK` event that one can listen to.
 
 ### Loaders
 
