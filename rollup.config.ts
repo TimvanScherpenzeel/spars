@@ -42,32 +42,32 @@ export default [
       include: 'src/**',
     },
   },
-  // {
-  //   input,
-  //   output: [
-  //     {
-  //       exports: 'named',
-  //       file: pkg.main,
-  //       format: 'cjs',
-  //     },
-  //   ],
-  //   plugins: plugins({ isCJS: true }),
-  //   watch: {
-  //     include: 'src/**',
-  //   },
-  // },
-  // {
-  //   input,
-  //   output: [
-  //     {
-  //       file: pkg.module,
-  //       format: 'es',
-  //       name,
-  //     },
-  //   ],
-  //   plugins: plugins({ isES: true }),
-  //   watch: {
-  //     include: 'src/**',
-  //   },
-  // },
+  {
+    input,
+    output: [
+      {
+        exports: 'named',
+        file: pkg.main,
+        format: 'cjs',
+      },
+    ],
+    plugins: plugins({ isCJS: true }),
+    watch: {
+      include: 'src/**',
+    },
+  },
+  {
+    input,
+    output: [
+      {
+        file: pkg.module,
+        format: 'es',
+        name,
+      },
+    ],
+    plugins: plugins({ isES: true }),
+    watch: {
+      include: 'src/**',
+    },
+  },
 ];
