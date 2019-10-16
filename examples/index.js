@@ -459,13 +459,6 @@ console.log(Spars.features);
 
 // Spars.scrollToTopOnReload();
 
-// Social
-// -----
-
-// Spars.shareFacebook('https://www.random.studio', 'a design studio', 300, 400);
-// Spars.shareLinkedIn('https://www.random.studio', 'a design studio', 500, 1000)
-// Spars.shareTwitter('https://www.random.studio', 'a design studio')
-
 // ThreadPool
 // ----------
 
