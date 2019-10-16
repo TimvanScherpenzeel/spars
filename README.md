@@ -80,7 +80,7 @@ Contains utility functions for smooth scrolling to certain positions on the page
 
 ### Settings
 
-Contains code to parse ?key1=value&key2=value search queries in the URL to override application wide settings. Useful for toggling settings on any device without requiring special builds.
+Contains code to parse `?key1=value&key2=value` search queries in the URL to override application wide settings. Useful for toggling settings on any device without requiring special builds.
 
 ### Thread pool
 
