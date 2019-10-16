@@ -1,5 +1,5 @@
 // Source
-import { BitField } from '../../src/dataStructures/BitField';
+import { BitField } from '../../src/dataStructures/Bitfield';
 
 // Suite
 describe('BitField', () => {
