@@ -76,6 +76,8 @@ Contains a fullscreen and pointerlock polyfill that can be used without having t
 
 ### Scrolling
 
+Contains utility functions for smooth scrolling to certain positions on the page and scrolling to top on page unload.
+
 ### Settings
 
 Contains code to parse ?key1=value&key2=value search queries in the URL to override application wide settings. Useful for toggling settings on any device without requiring special builds.
