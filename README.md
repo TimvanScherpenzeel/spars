@@ -70,7 +70,7 @@ Contains code to set up a global `requestAnimationFrame` ticker which fires the 
 
 ### Loaders
 
-Contains code for an `AssetLoader` used for preloading commonly used assets like images, GPU compressed images, bitmaps, audiopacks, binpacks, video, audio, fonts, WebAssembly, JSON, SVG, XML, HTML etc..).
+Contains code for an `AssetLoader` used for preloading commonly used assets like images, GPU compressed images, bitmaps, [audiopacks](https://github.com/timvanscherpenzeel/audiopacker), [binpacks](https://github.com/timvanscherpenzeel/binpacker), video, audio, fonts, WebAssembly, JSON, SVG, XML, HTML etc..).
 
 ### Polyfills
 
