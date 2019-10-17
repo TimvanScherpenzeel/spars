@@ -26,7 +26,7 @@ Contains a code snippet to help you set up Google Analytics tracking and reporti
 
 ### Audio
 
-Contains an audio manager to help you manage multiple audio sources (play, pause, mute, unmute, fade-in, fade-out, etc..). It also has utility functions to check if the audio context has been unlocked through user interaction and otherwise a transparent interaction layer is put on top of the page to unlock it.
+Contains an audio manager to help you manage multiple audio sources (`play`, `pause`, `mute`, `unmute`, `fade-in`, `fade-out`, etc..) on each source individually or as a whole (`muteAll`, `unmuteAll`). It also has utility functions to check if the audio context has been unlocked through user interaction and otherwise a transparent interaction layer is put on top of the page to unlock it.
 
 ### Caching
 
@@ -58,7 +58,7 @@ Contains code to handle network connection changes, key presses, device orientat
 
 ### Features
 
-Contains code to check the support of various browser features (what extensions are available for WebGL2?), test for browser settings (are cookies enabled?) and check for certain hardware features (what pixel density is the screen?).
+Contains code to check the support of various browser features (`What extensions are available for WebGL on this device?`, `is requestIdleCallback available in this browser?`), test for browser settings (`Are cookies enabled in this browser?`, `has the user enabled the 'do not track' setting? If so, avoid any tracking analytics.`) and check for certain hardware features (`What pixel density is the screen?`, `How well does the GPU perform on this device? If it is lower quality mobile device I need to make sure to run a reduced quality version of the experience so it still has a good framerate.`).
 
 ### Frame scheduler
 
@@ -74,11 +74,11 @@ Contains code for an [AssetLoader](src/loaders/AssetLoader.ts) used for preloadi
 
 ### Polyfills
 
-Contains a fullscreen and pointerlock polyfill that can be used without having to worry about vendor prefixes.
+Contains a `fullscreen` and `pointerlock` polyfill that can be used without having to worry about vendor prefixes.
 
 ### Scrolling
 
-Contains utility functions for smooth scrolling to certain positions on the page and scrolling to top on page unload.
+Contains some utility functions for smooth scrolling to certain positions on the page and scrolling to top on page unload.
 
 ### Settings
 
@@ -86,7 +86,7 @@ Contains code to parse `?key1=value&key2=value` search queries in the URL to ove
 
 ### Thread pool
 
-A small module to run arbitrary tasks efficiently off of the main thread. The module is heavily based on the [Task Worklet polyfill](https://github.com/developit/task-worklet/) by [Jason Miller](https://github.com/developit).
+Contains code to run arbitrary tasks efficiently off of the main thread largely based on the [Task Worklet polyfill](https://github.com/developit/task-worklet/) by [Jason Miller](https://github.com/developit).
 
 `Sticky threads` allow you to use re-usable generic `worklets` (modularized web workers) retrieved from a centralized `sticky thread pool`. In order to maximize concurrency and minimize transfer overhead the library distributes work across multiple threads through an implicit data flow graph that is formed based on how the different tasks are linked.
 
@@ -94,7 +94,7 @@ Results from one task can be directly passed into another task but instead of pu
 
 ### Utilities
 
-Contains some commonly used utilities.
+Contains some commonly used utilities (debounce, memoization, hashing strings, creating UUID's, etc..).
 
 ## Browser support
 
