@@ -34,7 +34,7 @@ Contains code to set up persistent caching using `IndexedDB` and with an in-memo
 
 ### Constants
 
-Contains constant values used inside of the library and offers a forward compatible way of handling changes of these constants (such as event names or cookie names).
+Contains constant values (names of exposed events and cookies) used inside of `Spars`.
 
 ### Cookies
 
@@ -42,23 +42,23 @@ Contains code to help you with getting and setting cookies.
 
 ### Data structures
 
-Contains implementations of `Bitfield` and `Deque` data structures.
+Contains implementations of [Bitfield](src/dataStructures/Bitfield.ts) and [Deque](src/dataStructures/Deque.ts) data structures.
 
 ### Decorators
 
-Contains some commonly used decorators.
+Contains an implementation of [@Memoize](src/decorators/@Memoize.ts) decorator
 
 ### Easings
 
-Contains code to handle all commonly used easings.
+Contains code to handle all commonly used easings (`easeInQuad`, `easeOutCubic`, etc..).
 
 ### Events
 
-Contains code to handle network connection changes, device orietation changes, document visibility changes and window size changes. It also exposes an `EventEmitter` wrapper around [mitt](https://github.com/developit/mitt).
+Contains code to handle network connection changes, key presses, device orientation changes, document visibility changes and window size changes. It exposes an `EventEmitter` wrapper around [mitt](https://github.com/developit/mitt).
 
 ### Features
 
-Contains code to check the support of various browser features, test for browser settings and check for certain hardware features.
+Contains code to check the support of various browser features (what extensions are available for WebGL2?), test for browser settings (are cookies enabled?) and check for certain hardware features (what pixel density is the screen?).
 
 ### Frame scheduler
 
@@ -70,7 +70,7 @@ Contains code to set up a global `requestAnimationFrame` ticker which fires the 
 
 ### Loaders
 
-Contains code for an `AssetLoader` used for preloading commonly used assets like images, GPU compressed images, bitmaps, [audiopacks](https://github.com/timvanscherpenzeel/audiopacker), [binpacks](https://github.com/timvanscherpenzeel/binpacker), video, audio, fonts, WebAssembly, JSON, SVG, XML, HTML etc..).
+Contains code for an [AssetLoader](src/loaders/AssetLoader.ts) used for preloading commonly used assets like binary encoded buffers, images, GPU compressed images, bitmaps, [audiopacks](https://github.com/timvanscherpenzeel/audiopacker), [binpacks](https://github.com/timvanscherpenzeel/binpacker), video, audio, fonts, WebAssembly, JSON, SVG, XML, HTML).
 
 ### Polyfills
 
