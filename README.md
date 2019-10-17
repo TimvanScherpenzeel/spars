@@ -18,6 +18,8 @@ Make sure you have [Node.js](http://nodejs.org/) installed.
 
 ## API
 
+I'm well aware that the library is currently lacking a lot of documentation you would need to get started. I'm planning to improve the quality of the documentation over time but for now I would like to point you to the [examples](/examples/index.html) and the [index](/src/index.ts).
+
 ### Analytics
 
 Contains a code snippet to help you set up Google Analytics tracking and reporting of individual events. The reporting of events are optionally throttled using requestIdleCallback which guarantees no interference with higher priority code.
