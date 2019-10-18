@@ -10,16 +10,19 @@ import isCookieEnabled from '../features/browserSettings/isCookieEnabled';
  * @param value Value of cookie
  * @param expiryDays After how many days the cookie expires
  */
-export const setCookie = (key: string, value: string, expiryDays = 365): void => {
+export const setCookie = (
+  key: string,
+  value: string,
+  expiryDays: number = 365,
+  path: string = '/',
+  domain: string = window.location.hostname.replace('www.', '')
+): void => {
   if (isCookieEnabled) {
     const date = new Date();
     date.setTime(date.getTime() + expiryDays * 86400000); // 24 * 60 * 60 * 1000 = 1 day
     const expires = `expires=${date.toUTCString()}`;
 
-    document.cookie = `${key}=${value}; ${expires}; path=/; domain=${window.location.hostname.replace(
-      'www.',
-      ''
-    )};`;
+    document.cookie = `${key}=${value}; ${expires}; path=${path}; domain=${domain};`;
   } else {
     console.warn('Cookie -> Cookies are disabled, no cookie was set');
   }
@@ -66,12 +69,13 @@ export const getCookie = (key: string): boolean | undefined | null | number | st
  *
  * @param key Key of cookie to delete
  */
-export const deleteCookie = (key: string): void => {
+export const deleteCookie = (
+  key: string,
+  path: string = '/',
+  domain: string = window.location.hostname.replace('www.', '')
+): void => {
   if (isCookieEnabled) {
-    document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=${window.location.hostname.replace(
-      'www.',
-      ''
-    )}`;
+    document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=${path}; domain=${domain}`;
   } else {
     console.warn('Cookie -> Cookies are disabled, no cookie was deleted');
   }
