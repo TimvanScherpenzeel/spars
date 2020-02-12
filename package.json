@@ -1,6 +1,6 @@
 {
   "name": "spars",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A general toolkit for creating interactive web experiences.",
   "main": "dist/spars.cjs.js",
   "browser": "dist/spars.umd.js",
