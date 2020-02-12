@@ -202,36 +202,36 @@ import * as Spars from '../dist/spars.umd';
 // const connectionChangeHandler = event => {
 //   console.log(event);
 
-//   Spars.eventEmitter.off(Spars.EVENTS.CONNECTION_CHANGE, connectionChangeHandler);
+//   Spars.eventEmitter.off(Spars.CONNECTION_CHANGE, connectionChangeHandler);
 // };
 
-// Spars.eventEmitter.on(Spars.EVENTS.CONNECTION_CHANGE, connectionChangeHandler);
+// Spars.eventEmitter.on(Spars.CONNECTION_CHANGE, connectionChangeHandler);
 
 // const orientationChangeHandler = event => {
 //   console.log(event);
 
-//   Spars.eventEmitter.off(Spars.EVENTS.ORIENTATION_CHANGE);
+//   Spars.eventEmitter.off(Spars.ORIENTATION_CHANGE);
 
 //   document.getElementById('root').appendChild(document.createTextNode(event.angle));
 // };
 
-// Spars.eventEmitter.on(Spars.EVENTS.ORIENTATION_CHANGE, orientationChangeHandler);
+// Spars.eventEmitter.on(Spars.ORIENTATION_CHANGE, orientationChangeHandler);
 
 // const visibilityChangeHandler = event => {
 //   console.log(event);
 
-//   Spars.eventEmitter.off(Spars.EVENTS.VISIBILITY_CHANGE);
+//   Spars.eventEmitter.off(Spars.VISIBILITY_CHANGE);
 // };
 
-// Spars.eventEmitter.on(Spars.EVENTS.VISIBILITY_CHANGE, visibilityChangeHandler);
+// Spars.eventEmitter.on(Spars.VISIBILITY_CHANGE, visibilityChangeHandler);
 
 // const windowSizeChangeHandler = event => {
 //   console.log(event);
 
-//   Spars.eventEmitter.off(Spars.EVENTS.WINDOW_SIZE_CHANGE);
+//   Spars.eventEmitter.off(Spars.WINDOW_SIZE_CHANGE);
 // };
 
-// Spars.eventEmitter.on(Spars.EVENTS.WINDOW_SIZE_CHANGE, windowSizeChangeHandler);
+// Spars.eventEmitter.on(Spars.WINDOW_SIZE_CHANGE, windowSizeChangeHandler);
 
 // Features
 // --------
@@ -281,18 +281,18 @@ console.log(Spars.features);
 //   console.log(event);
 // };
 
-// Spars.eventEmitter.on(Spars.EVENTS.FRAME_TICK, tickHandler);
+// Spars.eventEmitter.on(Spars.FRAME_TICK, tickHandler);
 
 // Spars.frameTicker.off();
 
 // AssetLoader
 // -----------
 
-// Spars.eventEmitter.on(Spars.EVENTS.ASSET_LOADED, event => {
+// Spars.eventEmitter.on(Spars.ASSET_LOADED, event => {
 //   console.log(event);
 // });
 
-// Spars.eventEmitter.on(Spars.EVENTS.ASSETS_LOADED, event => {
+// Spars.eventEmitter.on(Spars.ASSETS_LOADED, event => {
 //   console.log(event);
 // });
 

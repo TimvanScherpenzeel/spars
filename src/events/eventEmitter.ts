@@ -1,6 +1,6 @@
 // Vendor
-import Mitt from 'mitt';
+import mitt from 'mitt';
 
-const eventEmitter = new Mitt();
+const eventEmitter = mitt();
 
-export { eventEmitter, Mitt as EventEmitter };
+export { eventEmitter, mitt as EventEmitter };
