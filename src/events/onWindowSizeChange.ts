@@ -8,11 +8,6 @@ import { eventEmitter } from './EventEmitter';
 import { debounce } from '../utilities/debounce';
 
 /**
- * Store reference allowing debounced function to be removed again
- */
-const debouncedOnWindowSizeChange = debounce(onWindowSizeChangeHandler, 100);
-
-/**
  * Monitor window size changes
  */
 function onWindowSizeChangeHandler(): void {
@@ -21,6 +16,11 @@ function onWindowSizeChangeHandler(): void {
     windowWidth: window.innerWidth,
   });
 }
+
+/**
+ * Store reference allowing debounced function to be removed again
+ */
+const debouncedOnWindowSizeChange = debounce(onWindowSizeChangeHandler, 100);
 
 /**
  * Start listening to window size change events

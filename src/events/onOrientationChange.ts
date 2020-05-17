@@ -20,11 +20,6 @@ const getOrientation = (): any => {
 };
 
 /**
- * Store reference allowing debounced function to be removed again
- */
-const debouncedOnOrientationChange = debounce(onOrientationChangeHandler, 100);
-
-/**
  * Monitor orientation changes
  */
 function onOrientationChangeHandler(): void {
@@ -45,6 +40,11 @@ function onOrientationChangeHandler(): void {
     isPortrait,
   });
 }
+
+/**
+ * Store reference allowing debounced function to be removed again
+ */
+const debouncedOnOrientationChange = debounce(onOrientationChangeHandler, 100);
 
 /**
  * Start listening to orientation change events
