@@ -6,12 +6,7 @@
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInQuad = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInQuad = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return changeInValue * (time /= duration) * time + beginValue;
 };
 
@@ -23,12 +18,7 @@ export const easeInQuad = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeOutQuad = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeOutQuad = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return -changeInValue * (time /= duration) * (time - 2) + beginValue;
 };
 
@@ -40,12 +30,7 @@ export const easeOutQuad = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInOutQuad = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInOutQuad = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   time /= duration / 2;
 
   if (time < 1) {
@@ -63,12 +48,7 @@ export const easeInOutQuad = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInCubic = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInCubic = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return changeInValue * (time /= duration) * time * time + beginValue;
 };
 
@@ -80,12 +60,7 @@ export const easeInCubic = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeOutCubic = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeOutCubic = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return changeInValue * ((time = time / duration - 1) * time * time + 1) + beginValue;
 };
 
@@ -97,12 +72,7 @@ export const easeOutCubic = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInOutCubic = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInOutCubic = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   time /= duration / 2;
 
   if (time < 1) {
@@ -120,12 +90,7 @@ export const easeInOutCubic = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInQuart = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInQuart = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return changeInValue * (time /= duration) * time * time * time + beginValue;
 };
 
@@ -137,12 +102,7 @@ export const easeInQuart = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeOutQuart = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeOutQuart = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return -changeInValue * ((time = time / duration - 1) * time * time * time - 1) + beginValue;
 };
 
@@ -154,12 +114,7 @@ export const easeOutQuart = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInOutQuart = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInOutQuart = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   time /= duration / 2;
 
   if (time < 1) {
@@ -177,12 +132,7 @@ export const easeInOutQuart = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInQuint = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInQuint = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return changeInValue * (time /= duration) * time * time * time * time + beginValue;
 };
 
@@ -194,15 +144,8 @@ export const easeInQuint = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeOutQuint = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
-  return (
-    changeInValue * ((time = time / duration - 1) * time * time * time * time + 1) + beginValue
-  );
+export const easeOutQuint = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
+  return changeInValue * ((time = time / duration - 1) * time * time * time * time + 1) + beginValue;
 };
 
 /**
@@ -213,12 +156,7 @@ export const easeOutQuint = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInOutQuint = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInOutQuint = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   time /= duration / 2;
 
   if (time < 1) {
@@ -236,12 +174,7 @@ export const easeInOutQuint = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInSine = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInSine = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return -changeInValue * Math.cos((time / duration) * (Math.PI / 2)) + changeInValue + beginValue;
 };
 
@@ -253,12 +186,7 @@ export const easeInSine = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeOutSine = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeOutSine = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return changeInValue * Math.sin((time / duration) * (Math.PI / 2)) + beginValue;
 };
 
@@ -270,12 +198,7 @@ export const easeOutSine = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInOutSine = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInOutSine = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return (-changeInValue / 2) * (Math.cos((Math.PI * time) / duration) - 1) + beginValue;
 };
 
@@ -287,15 +210,8 @@ export const easeInOutSine = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInExpo = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
-  return time === 0
-    ? beginValue
-    : changeInValue * Math.pow(2, 10 * (time / duration - 1)) + beginValue;
+export const easeInExpo = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
+  return time === 0 ? beginValue : changeInValue * Math.pow(2, 10 * (time / duration - 1)) + beginValue;
 };
 
 /**
@@ -306,12 +222,7 @@ export const easeInExpo = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeOutExpo = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeOutExpo = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return time === duration
     ? beginValue + changeInValue
     : changeInValue * (-Math.pow(2, (-10 * time) / duration) + 1) + beginValue;
@@ -325,12 +236,7 @@ export const easeOutExpo = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInOutExpo = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInOutExpo = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   if (time === 0) {
     return beginValue;
   }
@@ -356,12 +262,7 @@ export const easeInOutExpo = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInCirc = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInCirc = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return -changeInValue * (Math.sqrt(1 - (time /= duration) * time) - 1) + beginValue;
 };
 
@@ -373,12 +274,7 @@ export const easeInCirc = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeOutCirc = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeOutCirc = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   return changeInValue * Math.sqrt(1 - (time = time / duration - 1) * time) + beginValue;
 };
 
@@ -390,12 +286,7 @@ export const easeOutCirc = (
  * @param changeInValue Change of value over time
  * @param duration Duration of the ease
  */
-export const easeInOutCirc = (
-  time: number,
-  beginValue: number,
-  changeInValue: number,
-  duration: number
-): number => {
+export const easeInOutCirc = (time: number, beginValue: number, changeInValue: number, duration: number): number => {
   time /= duration / 2;
 
   if (time < 1) {

@@ -6,7 +6,7 @@
  * @param wait Amount of milliseconds to wait
  * @param immediate Trigger function on the leader edge instead of the trailing
  */
-export const debounce = (func: any, wait: number, immediate: boolean = false): (() => void) => {
+export const debounce = (func: any, wait: number, immediate = false): (() => void) => {
   let timeout: any;
 
   return function executedFunction(): void {

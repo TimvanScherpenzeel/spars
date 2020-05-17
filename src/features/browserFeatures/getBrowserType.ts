@@ -9,11 +9,9 @@ export const isChrome = typeof browser === 'object' && browser.name === 'Chrome'
 export const isFirefox = typeof browser === 'object' && browser.name === 'Firefox';
 export const isSafari = typeof browser === 'object' && browser.name === 'Safari';
 export const isEdge = typeof browser === 'object' && browser.name === 'Microsoft Edge';
-export const isInternetExplorer =
-  typeof browser === 'object' && browser.name === 'Internet Explorer';
+export const isInternetExplorer = typeof browser === 'object' && browser.name === 'Internet Explorer';
 export const isOpera = typeof browser === 'object' && browser.name === 'Opera';
-export const isSamsungBrowser =
-  typeof browser === 'object' && browser.name === 'Samsung Internet for Android';
+export const isSamsungBrowser = typeof browser === 'object' && browser.name === 'Samsung Internet for Android';
 export const isYandexBrowser = typeof browser === 'object' && browser.name === 'Yandex Browser';
 export const isUCBrowser = typeof browser === 'object' && browser.name === 'UC Browser';
 export const isChromium = typeof browser === 'object' && browser.name === 'Chromium';

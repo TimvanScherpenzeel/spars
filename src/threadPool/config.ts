@@ -6,9 +6,7 @@ export const config = {
   ID_COUNT: 0,
 
   // Used to verify that a task was serialized by the task pool
-  UNIQUE_ID: `${Math.random()
-    .toString(36)
-    .substr(2, 8)}`,
+  UNIQUE_ID: `${Math.random().toString(36).substr(2, 8)}`,
 
   // Default thread pool size based on reported available CPU cores minus the main thread
   THREAD_POOL_SIZE: Math.min(6, Math.max(2, getAvailableCPUCoreCount - 1)),

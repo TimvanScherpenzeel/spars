@@ -50,7 +50,7 @@ export class BitField {
    * @param index Index of bit
    * @param value Value of bit
    */
-  public set(index: number, value: boolean = true): boolean /* O(1) */ {
+  public set(index: number, value = true): boolean /* O(1) */ {
     const bitIndex = index >>> 5;
     const bitMask = 0x80000000 >>> (index & 31);
     const bitValue = this.data[bitIndex] & bitMask;
@@ -83,8 +83,6 @@ export class BitField {
    * Get the bitfield as a string representation
    */
   public toString(): string /* O(n) */ {
-    return `0b${[...Array.from(this.data)]
-      .map(bit => (bit >>> 0).toString(2).padStart(32, '0'))
-      .join('')}`;
+    return `0b${[...Array.from(this.data)].map((bit) => (bit >>> 0).toString(2).padStart(32, '0')).join('')}`;
   }
 }

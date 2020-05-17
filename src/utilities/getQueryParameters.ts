@@ -21,13 +21,13 @@ const mGetQueryParameters = (url = window.location.search): { [parameter: string
     .split('&')
 
     // Find parameters
-    .map(param => param.split('='))
+    .map((param) => param.split('='))
 
     // Remove any empty string entries
-    .filter(param => param[0] !== '')
+    .filter((param) => param[0] !== '')
 
     // If any keys didn't have a value, automatically use Boolean true for value
-    .map(param => (param.length === 1 ? [param.toString(), 'true'] : param))
+    .map((param) => (param.length === 1 ? [param.toString(), 'true'] : param))
 
     // Construct { key: value } pairs
     .reduce((values, [key, value]) => {

@@ -23,8 +23,7 @@ export class PriorityUniqueQueue<T> {
   /**
    * Check if the child has a parent
    */
-  private static hasParent = (childIndex: number): boolean =>
-    PriorityUniqueQueue.getParentIndex(childIndex) >= 0;
+  private static hasParent = (childIndex: number): boolean => PriorityUniqueQueue.getParentIndex(childIndex) >= 0;
 
   private heapContainer: Array<IQueueItem<T>> = [];
   private hashPriority: Record<string, T> = {};
@@ -141,9 +140,7 @@ export class PriorityUniqueQueue<T> {
         nextIndex = PriorityUniqueQueue.getLeftChildIndex(currentIndex);
       }
 
-      if (
-        this.pairIsInCorrectOrder(this.heapContainer[currentIndex], this.heapContainer[nextIndex])
-      ) {
+      if (this.pairIsInCorrectOrder(this.heapContainer[currentIndex], this.heapContainer[nextIndex])) {
         break;
       }
 

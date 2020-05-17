@@ -22,7 +22,7 @@ export const settings = ((): {
     undefined,
   };
 
-  Object.keys(queryParameters).map(key => {
+  Object.keys(queryParameters).map((key) => {
     let value = queryParameters[key];
 
     // Convert number strings to numbers (integers, floats, hexadecimals)

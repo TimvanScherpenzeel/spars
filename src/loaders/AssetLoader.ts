@@ -89,9 +89,7 @@ export class AssetLoader {
   /**
    * Load conditionally based on supported compressed texture
    */
-  public bySupportedCompressedTexture = (
-    data: IBySupportedCompressedTextureOptions
-  ): TUndefinable<string> => {
+  public bySupportedCompressedTexture = (data: IBySupportedCompressedTextureOptions): TUndefinable<string> => {
     if (getWebGLFeatures) {
       return data.ASTC && getWebGLFeatures.extensions.compressedTextureASTCExtension
         ? data.ASTC
@@ -114,8 +112,8 @@ export class AssetLoader {
    */
   public loadAssets = (items: ILoadItem[]): Promise<any> => {
     const loadingAssets = items
-      .filter(item => item)
-      .map(item => {
+      .filter((item) => item)
+      .map((item) => {
         const startTime = window.performance.now();
 
         return new Promise((resolve): void => {
@@ -203,7 +201,7 @@ export class AssetLoader {
     let progress = 0;
 
     loadingAssets.forEach((promise: Promise<any>) =>
-      promise.then(asset => {
+      promise.then((asset) => {
         progress++;
 
         if (asset.persistent && (!this.options || !this.options.persistentCache)) {
@@ -220,7 +218,7 @@ export class AssetLoader {
             case ELoaderKey.Blob:
               // Safari iOS does not permit storing file blobs and must be converted to ArrayBuffers
               // SEE: https://developers.google.com/web/fundamentals/instant-and-offline/web-storage/indexeddb-best-practices
-              convertBlobToArrayBuffer(asset.item).then(buffer => {
+              convertBlobToArrayBuffer(asset.item).then((buffer) => {
                 if (this.options && this.options.persistentCache) {
                   this.options.persistentCache.set(asset.id, buffer);
                 }
@@ -241,7 +239,7 @@ export class AssetLoader {
       })
     );
 
-    return loadedAssets.then(assets => {
+    return loadedAssets.then((assets) => {
       const assetMap = new Map();
 
       assets.forEach((asset: any) => {
@@ -300,9 +298,7 @@ export class AssetLoader {
    */
   private getLoaderByFileExtension = (path: string): string => {
     const fileExtension = this.getFileExtension(path);
-    const loader = Array.from(LOADER_EXTENSIONS_MAP).find(type =>
-      type[1].extensions.includes(fileExtension)
-    );
+    const loader = Array.from(LOADER_EXTENSIONS_MAP).find((type) => type[1].extensions.includes(fileExtension));
 
     return loader ? loader[0] : ELoaderKey.ArrayBuffer;
   };
@@ -321,8 +317,8 @@ export class AssetLoader {
    */
   private loadArrayBuffer = (item: ILoadItem): Promise<ArrayBuffer | void> =>
     this.fetchItem(item)
-      .then(response => response.arrayBuffer())
-      .catch(err => {
+      .then((response) => response.arrayBuffer())
+      .catch((err) => {
         console.warn(err.message);
       });
 
@@ -333,9 +329,9 @@ export class AssetLoader {
    */
   private loadAudio = (item: ILoadItem): Promise<any> =>
     this.fetchItem(item)
-      .then(response => response.blob())
+      .then((response) => response.blob())
       .then(
-        blob =>
+        (blob) =>
           new Promise((resolve, reject): void => {
             const audio = document.createElement('audio');
 
@@ -369,7 +365,7 @@ export class AssetLoader {
             }
           })
       )
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
 
@@ -384,9 +380,9 @@ export class AssetLoader {
         let content: TNullable<string> = null;
         let contentArray: TNullable<Uint8Array> = null;
         let binaryChunk: TNullable<ArrayBuffer> = null;
-        let byteOffset: number = 0;
-        let chunkIndex: number = 0;
-        let chunkLength: number = 0;
+        let byteOffset = 0;
+        let chunkIndex = 0;
+        let chunkLength = 0;
         let chunkType: TNullable<number> = null;
 
         const headerMagic = new Uint8Array(data, 0, 4).reduce(
@@ -421,8 +417,7 @@ export class AssetLoader {
         if (content) {
           const jsonChunk = JSON.parse(content);
 
-          const binary =
-            binaryChunk && binaryChunk.slice(jsonChunk.bufferStart, jsonChunk.bufferEnd);
+          const binary = binaryChunk && binaryChunk.slice(jsonChunk.bufferStart, jsonChunk.bufferEnd);
 
           assert(binary !== null, 'AssetLoader -> Binary content chunk not found');
 
@@ -433,9 +428,7 @@ export class AssetLoader {
             });
 
           if (blob) {
-            return Promise.resolve(
-              this.loadAudio({ src: URL.createObjectURL(blob), id: item.src })
-            ).then(audio => {
+            return Promise.resolve(this.loadAudio({ src: URL.createObjectURL(blob), id: item.src })).then((audio) => {
               return {
                 audio,
                 data: jsonChunk.data,
@@ -458,9 +451,9 @@ export class AssetLoader {
         let content: TNullable<string> = null;
         let contentArray: TNullable<Uint8Array> = null;
         let binaryChunk: TNullable<ArrayBuffer> = null;
-        let byteOffset: number = 0;
-        let chunkIndex: number = 0;
-        let chunkLength: number = 0;
+        let byteOffset = 0;
+        let chunkIndex = 0;
+        let chunkLength = 0;
         let chunkType: TNullable<number> = null;
 
         const headerMagic = new Uint8Array(data, 0, 4).reduce(
@@ -496,43 +489,36 @@ export class AssetLoader {
           const jsonChunk = JSON.parse(content);
 
           return Promise.all(
-            jsonChunk.map(
-              (entry: {
-                name: string;
-                mimeType: string;
-                bufferStart: number;
-                bufferEnd: number;
-              }) => {
-                const { name, mimeType } = entry;
-                const binary = binaryChunk && binaryChunk.slice(entry.bufferStart, entry.bufferEnd);
+            jsonChunk.map((entry: { name: string; mimeType: string; bufferStart: number; bufferEnd: number }) => {
+              const { name, mimeType } = entry;
+              const binary = binaryChunk && binaryChunk.slice(entry.bufferStart, entry.bufferEnd);
 
-                assert(binary !== null, 'AssetLoader -> Binary content chunk not found');
+              assert(binary !== null, 'AssetLoader -> Binary content chunk not found');
 
-                const blob =
-                  binary &&
-                  new Blob([new Uint8Array(binary)], {
-                    type: mimeType,
-                  });
+              const blob =
+                binary &&
+                new Blob([new Uint8Array(binary)], {
+                  type: mimeType,
+                });
 
-                const loaderType = this.getLoaderByFileExtension(name);
-                const url = URL.createObjectURL(blob);
+              const loaderType = this.getLoaderByFileExtension(name);
+              const url = URL.createObjectURL(blob);
 
-                switch (loaderType) {
-                  case ELoaderKey.Image:
-                    return this.loadImage({ src: url, id: name });
-                  case ELoaderKey.JSON:
-                    return this.loadJSON({ src: url, id: name });
-                  case ELoaderKey.Text:
-                    return this.loadText({ src: url, id: name });
-                  case ELoaderKey.XML:
-                    return this.loadXML({ src: url, id: name });
-                  default:
-                    throw new Error(
-                      'AssetLoader -> Binpack currently only supports images, JSON, plain text and XML (SVG)'
-                    );
-                }
+              switch (loaderType) {
+                case ELoaderKey.Image:
+                  return this.loadImage({ src: url, id: name });
+                case ELoaderKey.JSON:
+                  return this.loadJSON({ src: url, id: name });
+                case ELoaderKey.Text:
+                  return this.loadText({ src: url, id: name });
+                case ELoaderKey.XML:
+                  return this.loadXML({ src: url, id: name });
+                default:
+                  throw new Error(
+                    'AssetLoader -> Binpack currently only supports images, JSON, plain text and XML (SVG)'
+                  );
               }
-            )
+            })
           ).then((assets: any[]) => {
             return Object.assign(
               {},
@@ -552,8 +538,8 @@ export class AssetLoader {
    */
   private loadBlob = (item: ILoadItem): Promise<Blob | void> =>
     this.fetchItem(item)
-      .then(response => response.blob())
-      .catch(err => {
+      .then((response) => response.blob())
+      .catch((err) => {
         console.error(err);
       });
 
@@ -562,8 +548,7 @@ export class AssetLoader {
    *
    * @param item Item to load
    */
-  private loadFont = (item: ILoadItem): Promise<any> =>
-    new FontFaceObserver(item.id, item.options || {}).load();
+  private loadFont = (item: ILoadItem): Promise<any> => new FontFaceObserver(item.id, item.options || {}).load();
 
   /**
    * Load an item and parse the Response as <image> element
@@ -587,7 +572,7 @@ export class AssetLoader {
           .then(() => {
             resolve(image);
           })
-          .catch(err => {
+          .catch((err) => {
             reject(err);
           });
       } else {
@@ -621,7 +606,7 @@ export class AssetLoader {
    */
   private loadImageBitmap = (item: ILoadItem): Promise<ImageBitmap | HTMLImageElement> => {
     if (isImageBitmapSupported) {
-      return this.loadBlob(item).then(data => {
+      return this.loadBlob(item).then((data) => {
         if (data) {
           if (item.loaderOptions) {
             const { sx, sy, sw, sh, options } = item.loaderOptions;
@@ -651,9 +636,7 @@ export class AssetLoader {
         } else {
           // In case something went wrong with loading the blob or corrupted data
           // Fallback to default image loader
-          console.warn(
-            'AssetLoader -> Received no or corrupt data, falling back to default image loader'
-          );
+          console.warn('AssetLoader -> Received no or corrupt data, falling back to default image loader');
           return this.loadImage(item);
         }
       });
@@ -682,14 +665,11 @@ export class AssetLoader {
       width: number;
     }>
   > =>
-    this.loadArrayBuffer(item).then(data => {
+    this.loadArrayBuffer(item).then((data) => {
       if (data) {
         // Switch endianness of value
         const switchEndianness = (value: number): number =>
-          ((value & 0xff) << 24) |
-          ((value & 0xff00) << 8) |
-          ((value >> 8) & 0xff00) |
-          ((value >> 24) & 0xff);
+          ((value & 0xff) << 24) | ((value & 0xff00) << 8) | ((value >> 8) & 0xff00) | ((value >> 24) & 0xff);
 
         // Test that it is a ktx formatted file, based on the first 12 bytes:
         // '´', 'K', 'T', 'X', ' ', '1', '1', 'ª', '\r', '\n', '\x1A', '\n'
@@ -760,16 +740,10 @@ export class AssetLoader {
         numberOfMipmapLevels = Math.max(1, numberOfMipmapLevels);
 
         // Check for 2D texture
-        assert(
-          pixelHeight !== 0 && pixelDepth === 0,
-          'AssetLoader -> Only 2D textures currently supported'
-        );
+        assert(pixelHeight !== 0 && pixelDepth === 0, 'AssetLoader -> Only 2D textures currently supported');
 
         // Check for texture arrays, currently not supported
-        assert(
-          numberOfArrayElements === 0,
-          'AssetLoader -> Texture arrays not currently supported'
-        );
+        assert(numberOfArrayElements === 0, 'AssetLoader -> Texture arrays not currently supported');
 
         const mipmaps = [];
 
@@ -827,8 +801,8 @@ export class AssetLoader {
    */
   private loadJSON = (item: ILoadItem): Promise<JSON> =>
     this.fetchItem(item)
-      .then(response => response.json())
-      .catch(err => {
+      .then((response) => response.json())
+      .catch((err) => {
         console.error(err);
       });
 
@@ -839,8 +813,8 @@ export class AssetLoader {
    */
   private loadText = (item: ILoadItem): Promise<string | void> =>
     this.fetchItem(item)
-      .then(response => response.text())
-      .catch(err => {
+      .then((response) => response.text())
+      .catch((err) => {
         console.error(err);
       });
 
@@ -851,9 +825,9 @@ export class AssetLoader {
    */
   private loadVideo = (item: ILoadItem): Promise<any> =>
     this.fetchItem(item)
-      .then(response => response.blob())
+      .then((response) => response.blob())
       .then(
-        blob =>
+        (blob) =>
           new Promise((resolve, reject): void => {
             const video = document.createElement('video');
 
@@ -889,7 +863,7 @@ export class AssetLoader {
             }
           })
       )
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
 
@@ -901,17 +875,12 @@ export class AssetLoader {
   private loadWebAssembly = (item: ILoadItem): Promise<TVoidable<WebAssembly.Instance>> => {
     if (isWebAssemblySupported) {
       if ((window as any).WebAssembly.instantiateStreaming) {
-        return (window as any).WebAssembly.instantiateStreaming(
-          this.fetchItem(item),
-          item.loaderOptions.importObject
-        );
+        return (window as any).WebAssembly.instantiateStreaming(this.fetchItem(item), item.loaderOptions.importObject);
       } else {
         return this.fetchItem(item)
-          .then(response => response.arrayBuffer())
-          .then(data =>
-            (window as any).WebAssembly.instantiate(data, item.loaderOptions.importObject)
-          )
-          .catch(err => {
+          .then((response) => response.arrayBuffer())
+          .then((data) => (window as any).WebAssembly.instantiate(data, item.loaderOptions.importObject))
+          .catch((err) => {
             console.error(err);
           });
       }
@@ -936,13 +905,13 @@ export class AssetLoader {
     }
 
     return this.fetchItem(item)
-      .then(response => response.text())
-      .then(data => {
+      .then((response) => response.text())
+      .then((data) => {
         if (item.mimeType) {
           return this.domParser.parseFromString(data, item.mimeType);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   };

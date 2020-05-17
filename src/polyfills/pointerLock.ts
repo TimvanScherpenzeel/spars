@@ -40,8 +40,7 @@ const prefix =
   [];
 
 export const pointerLock = {
-  requestPointerLock: (element: HTMLElement): void =>
-    (element as any)[prefix[key.requestPointerLock]](),
+  requestPointerLock: (element: HTMLElement): void => (element as any)[prefix[key.requestPointerLock]](),
 
   get exitPointerLock(): void {
     return (document as any)[prefix[key.exitPointerLock]].bind(document);
@@ -55,10 +54,7 @@ export const pointerLock = {
 
   get pointerlockEnabled(): boolean {
     return Boolean(
-      'pointerLockElement' in document ||
-        webkit[0] in document ||
-        moz[0] in document ||
-        ms[0] in document
+      'pointerLockElement' in document || webkit[0] in document || moz[0] in document || ms[0] in document
     );
   },
 

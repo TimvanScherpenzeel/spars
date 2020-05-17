@@ -43,8 +43,7 @@ const prefix =
   [];
 
 export const fullScreen = {
-  requestFullscreen: (element: HTMLElement): void =>
-    (element as any)[prefix[key.requestFullscreen]](),
+  requestFullscreen: (element: HTMLElement): void => (element as any)[prefix[key.requestFullscreen]](),
 
   get exitFullscreen(): void {
     return (document as any)[prefix[key.exitFullscreen]].bind(document);

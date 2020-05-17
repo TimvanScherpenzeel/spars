@@ -9,9 +9,9 @@ import { TUndefinable } from '../types';
  * Deque is a simple automatically resizable double ended queue implementation (abbreviated to deque).
  */
 export class Deque {
-  private headIndex: number = 0;
-  private tailIndex: number = 0;
-  private capacityMask: number = 0x3;
+  private headIndex = 0;
+  private tailIndex = 0;
+  private capacityMask = 0x3;
   private internalList: any[] = new Array(4);
 
   /**
@@ -198,9 +198,7 @@ export class Deque {
 
     if (index < size / 2) {
       for (i = index; i > 0; i--) {
-        this.internalList[index] = this.internalList[
-          (index = (index - 1 + length) & this.capacityMask)
-        ];
+        this.internalList[index] = this.internalList[(index = (index - 1 + length) & this.capacityMask)];
       }
 
       this.internalList[index] = undefined;
@@ -208,9 +206,7 @@ export class Deque {
       this.headIndex = (this.headIndex + 1 + length) & this.capacityMask;
     } else {
       for (i = size - 1 - index; i > 0; i--) {
-        this.internalList[index] = this.internalList[
-          (index = (index + 1 + length) & this.capacityMask)
-        ];
+        this.internalList[index] = this.internalList[(index = (index + 1 + length) & this.capacityMask)];
       }
 
       this.internalList[index] = undefined;

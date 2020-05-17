@@ -38,10 +38,8 @@ import {
  * @param gl WebGL rendering context
  * @param parameter Context parameter
  */
-export const getParameter = (
-  gl: WebGLRenderingContext | WebGL2RenderingContext,
-  parameter: GLenum
-): any => gl.getParameter(parameter);
+export const getParameter = (gl: WebGLRenderingContext | WebGL2RenderingContext, parameter: GLenum): any =>
+  gl.getParameter(parameter);
 
 /**
  * Wrapper function for better minification (saves ~ 1kB)
@@ -62,10 +60,8 @@ export const getShaderPrecisionFormat = (
  * @param gl WebGL rendering context
  * @param extension WebGL extension
  */
-export const getExtension = (
-  gl: WebGLRenderingContext | WebGL2RenderingContext,
-  extension: string
-): any => gl.getExtension(extension);
+export const getExtension = (gl: WebGLRenderingContext | WebGL2RenderingContext, extension: string): any =>
+  gl.getExtension(extension);
 
 /**
  * Collect and structure all major device and browser specific WebGL features
@@ -77,8 +73,7 @@ export default ((): any => {
   };
 
   const canvas = document.createElement('canvas');
-  const gl =
-    canvas.getContext('webgl', attributes) || canvas.getContext('experimental-webgl', attributes);
+  const gl = canvas.getContext('webgl', attributes) || canvas.getContext('experimental-webgl', attributes);
 
   if (!gl || !(gl instanceof WebGLRenderingContext)) {
     return false;
@@ -101,13 +96,11 @@ export default ((): any => {
     base: {
       renderer: getParameter(gl, GL_RENDERER),
       rendererUnmasked:
-        glExtensionDebugRendererInfo &&
-        getParameter(gl, glExtensionDebugRendererInfo.UNMASKED_RENDERER_WEBGL),
+        glExtensionDebugRendererInfo && getParameter(gl, glExtensionDebugRendererInfo.UNMASKED_RENDERER_WEBGL),
       shaderVersion: getParameter(gl, GL_SHADING_LANGUAGE_VERSION),
       vendor: getParameter(gl, GL_VENDOR),
       vendorUnmasked:
-        glExtensionDebugRendererInfo &&
-        getParameter(gl, glExtensionDebugRendererInfo.UNMASKED_VENDOR_WEBGL),
+        glExtensionDebugRendererInfo && getParameter(gl, glExtensionDebugRendererInfo.UNMASKED_VENDOR_WEBGL),
       version: getParameter(gl, GL_VERSION),
     },
 
@@ -197,9 +190,7 @@ export default ((): any => {
       maxAnisotropy: glAnisotropicExtension
         ? getParameter(gl, glAnisotropicExtension.MAX_TEXTURE_MAX_ANISOTROPY_EXT)
         : 0,
-      maxDrawBuffers: glDrawBufferExtension
-        ? getParameter(gl, glDrawBufferExtension.MAX_DRAW_BUFFERS_WEBGL)
-        : 0,
+      maxDrawBuffers: glDrawBufferExtension ? getParameter(gl, glDrawBufferExtension.MAX_DRAW_BUFFERS_WEBGL) : 0,
       supportedExtensions: gl.getSupportedExtensions(),
 
       // Compressed texture extensions
@@ -212,8 +203,7 @@ export default ((): any => {
         getExtension(gl, 'WEBKIT_WEBGL_compressed_texture_pvrtc') ||
         null,
       compressedTextureS3TCExtension: getExtension(gl, 'WEBGL_compressed_texture_s3tc') || null,
-      compressedTextureS3TCSRGBExtension:
-        getExtension(gl, 'WEBGL_compressed_texture_s3tc_srgb') || null,
+      compressedTextureS3TCSRGBExtension: getExtension(gl, 'WEBGL_compressed_texture_s3tc_srgb') || null,
     },
   };
 

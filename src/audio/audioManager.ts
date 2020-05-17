@@ -48,7 +48,7 @@ class AudioManager {
     }
   ): Promise<any> => {
     return new Promise((resolve): any => {
-      this.context.decodeAudioData(arrayBuffer, buffer => {
+      this.context.decodeAudioData(arrayBuffer, (buffer) => {
         const audioObject: any = {};
 
         audioObject.startedAt = 0;
@@ -156,9 +156,7 @@ class AudioManager {
     const timer = setInterval(() => {
       const time = performance.now() - start;
       const volume =
-        from > to
-          ? easeOutCubic(time, from, to - from, duration)
-          : easeInCubic(time, from, to - from, duration);
+        from > to ? easeOutCubic(time, from, to - from, duration) : easeInCubic(time, from, to - from, duration);
 
       this.audioSources[source].audio.gainNode.gain.value = volume;
 

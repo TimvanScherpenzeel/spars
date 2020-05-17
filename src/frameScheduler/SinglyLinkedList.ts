@@ -12,7 +12,7 @@ import { ISinglyLinkedListNode } from './types';
 export class SinglyLinkedList {
   private head: TNullable<ISinglyLinkedListNode> = null;
   private tail: TNullable<ISinglyLinkedListNode> = null;
-  private length: number = 0;
+  private length = 0;
 
   /**
    * Push a list node at the tail of the linked list

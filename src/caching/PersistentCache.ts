@@ -68,10 +68,8 @@ export class PersistentCache {
   public set(key: IDBValidKey, value: any): void {
     assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
 
-    set(key, value, this.store).catch(err => {
-      console.warn(
-        `PersistentCache -> Set: { key: ${key}, value: ${value} } has failed with error: ${err}`
-      );
+    set(key, value, this.store).catch((err) => {
+      console.warn(`PersistentCache -> Set: { key: ${key}, value: ${value} } has failed with error: ${err}`);
 
       this.memoryCache.set(key, value);
     });
@@ -87,10 +85,10 @@ export class PersistentCache {
 
     return new Promise((resolve): void => {
       get(key, this.store)
-        .then(value => {
+        .then((value) => {
           resolve(value);
         })
-        .catch(err => {
+        .catch((err) => {
           console.warn(`PersistentCache -> Get: { key: ${key} } has failed with error: ${err}`);
 
           this.memoryCache.get(key);
@@ -104,10 +102,10 @@ export class PersistentCache {
   public getKeys(): Promise<any[]> {
     return new Promise((resolve): void => {
       keys(this.store)
-        .then(storeKeys => {
+        .then((storeKeys) => {
           resolve(storeKeys);
         })
-        .catch(err => {
+        .catch((err) => {
           console.warn(`PersistentCache -> Keys: { key: ${keys} } has failed with error: ${err}`);
 
           this.memoryCache.keys();
@@ -123,7 +121,7 @@ export class PersistentCache {
   public delete(key: IDBValidKey): void {
     assert(isAllowedAsKey(key), 'PersistentCache -> The given type of key is not allowed');
 
-    del(key, this.store).catch(err => {
+    del(key, this.store).catch((err) => {
       console.warn(`PersistentCache -> Delete: { key: ${key} } has failed with error: ${err}`);
 
       this.memoryCache.delete(key);
@@ -134,7 +132,7 @@ export class PersistentCache {
    * Clear the entire persistent cache from { key: value } pairs
    */
   public clear(): void {
-    clear(this.store).catch(err => {
+    clear(this.store).catch((err) => {
       console.warn(`PersistentCache -> Clear: Store clearing has failed with error: ${err}`);
 
       this.memoryCache.clear();

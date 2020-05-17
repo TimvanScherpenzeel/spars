@@ -13,8 +13,8 @@ import isCookieEnabled from '../features/browserSettings/isCookieEnabled';
 export const setCookie = (
   key: string,
   value: string,
-  expiryDays: number = 365,
-  path: string = '/',
+  expiryDays = 365,
+  path = '/',
   domain: string = window.location.hostname.replace('www.', '')
 ): void => {
   if (isCookieEnabled) {
@@ -51,10 +51,7 @@ export const getCookie = (key: string): boolean | undefined | null | number | st
     }
 
     // Convert number strings to numbers (integers, floats, hexadecimals)
-    if (
-      value !== undefined &&
-      (/^\d+$/.test(value) || /^\d+\.\d+$/.test(value) || /0[xX0-9A-Fa-f]{6}/g.test(value))
-    ) {
+    if (value !== undefined && (/^\d+$/.test(value) || /^\d+\.\d+$/.test(value) || /0[xX0-9A-Fa-f]{6}/g.test(value))) {
       return Number(value);
     }
   } else {
@@ -71,7 +68,7 @@ export const getCookie = (key: string): boolean | undefined | null | number | st
  */
 export const deleteCookie = (
   key: string,
-  path: string = '/',
+  path = '/',
   domain: string = window.location.hostname.replace('www.', '')
 ): void => {
   if (isCookieEnabled) {

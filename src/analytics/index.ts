@@ -8,10 +8,7 @@ import isDoNotTrackEnabled from '../features/browserSettings/isDoNotTrackEnabled
  * @param trackingIdentifier Tracking identifier in format: UA-XXXX-YY
  */
 export const registerAnalytics = (trackingIdentifier: string): void => {
-  if (
-    trackingIdentifier === undefined ||
-    !/^ua-\d{4,9}-\d{1,4}$/i.test(trackingIdentifier.toString())
-  ) {
+  if (trackingIdentifier === undefined || !/^ua-\d{4,9}-\d{1,4}$/i.test(trackingIdentifier.toString())) {
     // SEE: https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#trackingId
     console.warn('Analytics -> TrackingIdentifier expected to be of format "UA-XXXX-YY"');
   }
@@ -19,7 +16,7 @@ export const registerAnalytics = (trackingIdentifier: string): void => {
   if (!isDoNotTrackEnabled) {
     // Default async GA snippet as provided by Google
     // tslint:disable-next-line:only-arrow-functions
-    (function(i, s, o, g, r, a, m): void {
+    (function (i, s, o, g, r, a, m): void {
       // @ts-ignore Google Analytics snippet
       i.GoogleAnalyticsObject = r;
       // @ts-ignore Google Analytics snippet
@@ -27,7 +24,7 @@ export const registerAnalytics = (trackingIdentifier: string): void => {
         // @ts-ignore Google Analytics snippet
         i[r] ||
         // tslint:disable-next-line:only-arrow-functions
-        function(): void {
+        function (): void {
           // @ts-ignore Google Analytics snippet
           (i[r].q = i[r].q || []).push(arguments);
         }),
@@ -48,9 +45,7 @@ export const registerAnalytics = (trackingIdentifier: string): void => {
     // @ts-ignore Google Analytics snippet
     ga('send', 'pageview');
   } else {
-    console.warn(
-      'Analytics -> "DoNotTrack" setting is enabled, avoided installing the analytics snippet'
-    );
+    console.warn('Analytics -> "DoNotTrack" setting is enabled, avoided installing the analytics snippet');
   }
 };
 

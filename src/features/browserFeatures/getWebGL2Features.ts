@@ -96,13 +96,11 @@ export default ((): any => {
     base: {
       renderer: getParameter(gl, GL_RENDERER),
       rendererUnmasked:
-        glExtensionDebugRendererInfo &&
-        getParameter(gl, glExtensionDebugRendererInfo.UNMASKED_RENDERER_WEBGL),
+        glExtensionDebugRendererInfo && getParameter(gl, glExtensionDebugRendererInfo.UNMASKED_RENDERER_WEBGL),
       shaderVersion: getParameter(gl, GL_SHADING_LANGUAGE_VERSION),
       vendor: getParameter(gl, GL_VENDOR),
       vendorUnmasked:
-        glExtensionDebugRendererInfo &&
-        getParameter(gl, glExtensionDebugRendererInfo.UNMASKED_VENDOR_WEBGL),
+        glExtensionDebugRendererInfo && getParameter(gl, glExtensionDebugRendererInfo.UNMASKED_VENDOR_WEBGL),
       version: getParameter(gl, GL_VERSION),
     },
 
@@ -206,8 +204,7 @@ export default ((): any => {
         getExtension(gl, 'WEBKIT_WEBGL_compressed_texture_pvrtc') ||
         null,
       compressedTextureS3TCExtension: getExtension(gl, 'WEBGL_compressed_texture_s3tc') || null,
-      compressedTextureS3TCSRGBExtension:
-        getExtension(gl, 'WEBGL_compressed_texture_s3tc_srgb') || null,
+      compressedTextureS3TCSRGBExtension: getExtension(gl, 'WEBGL_compressed_texture_s3tc_srgb') || null,
     },
 
     // WebGL2 specific
@@ -216,15 +213,9 @@ export default ((): any => {
       maxArrayTextureLayers: getParameter(gl, GL_MAX_ARRAY_TEXTURE_LAYERS),
       maxClientWaitTimeout: getParameter(gl, GL_MAX_CLIENT_WAIT_TIMEOUT_WEBGL),
       maxColorAttachments: getParameter(gl, GL_MAX_COLOR_ATTACHMENTS),
-      maxCombinedFragmentUniformComponents: getParameter(
-        gl,
-        GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS
-      ),
+      maxCombinedFragmentUniformComponents: getParameter(gl, GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS),
       maxCombinedUniformBlocks: getParameter(gl, GL_MAX_COMBINED_UNIFORM_BLOCKS),
-      maxCombinedVertexUniformComponents: getParameter(
-        gl,
-        GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS
-      ),
+      maxCombinedVertexUniformComponents: getParameter(gl, GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS),
       maxDrawBuffers: getParameter(gl, GL_MAX_DRAW_BUFFERS),
       maxElementIndex: getParameter(gl, GL_MAX_ELEMENT_INDEX),
       maxElementsIndices: getParameter(gl, GL_MAX_ELEMENTS_INDICES),
@@ -236,18 +227,9 @@ export default ((): any => {
       maxSamples: getParameter(gl, GL_MAX_SAMPLES),
       maxServerWaitTimeout: getParameter(gl, GL_MAX_SERVER_WAIT_TIMEOUT),
       maxTextureLODBias: getParameter(gl, GL_MAX_TEXTURE_LOD_BIAS),
-      maxTransformFeedbackInterleavedComponents: getParameter(
-        gl,
-        GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS
-      ),
-      maxTransformFeedbackSeparateAttribs: getParameter(
-        gl,
-        GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS
-      ),
-      maxTransformFeedbackSeparateComponents: getParameter(
-        gl,
-        GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS
-      ),
+      maxTransformFeedbackInterleavedComponents: getParameter(gl, GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS),
+      maxTransformFeedbackSeparateAttribs: getParameter(gl, GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS),
+      maxTransformFeedbackSeparateComponents: getParameter(gl, GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS),
       maxUniformBlockSize: getParameter(gl, GL_MAX_UNIFORM_BLOCK_SIZE),
       maxUniformBufferBindings: getParameter(gl, GL_MAX_UNIFORM_BUFFER_BINDINGS),
       maxVaryingComponents: getParameter(gl, GL_MAX_VARYING_COMPONENTS),

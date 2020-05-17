@@ -9,7 +9,7 @@ export class FixedSizeCache {
   private size: number;
   private track: any[] = new Array(this.size);
   private cache: Map<any, any> = new Map();
-  private index: number = 0;
+  private index = 0;
 
   /**
    * Configure the fixed cache size
@@ -61,8 +61,7 @@ export class FixedSizeCache {
  * @param arg Argument
  */
 function monadic(fn: any, cache: FixedSizeCache, serializer: any, arg: any): any {
-  const cacheKey =
-    arg === null || typeof arg === 'number' || typeof arg === 'boolean' ? arg : serializer(arg);
+  const cacheKey = arg === null || typeof arg === 'number' || typeof arg === 'boolean' ? arg : serializer(arg);
   let computedValue = cache.get(cacheKey);
 
   if (typeof computedValue === 'undefined') {

@@ -15,9 +15,10 @@ export const worklet = URL.createObjectURL(
         scope.self = scope;
         const keys = Object.keys(scope);
 
-        return (self as any)
-          .eval(`(function(${keys},scope,code,keys,realm){\n${code}\n})`)
-          .apply(scope, keys.map(k => scope[k]));
+        return (self as any).eval(`(function(${keys},scope,code,keys,realm){\n${code}\n})`).apply(
+          scope,
+          keys.map((k) => scope[k])
+        );
       }
 
       ((): void => {
@@ -30,13 +31,7 @@ export const worklet = URL.createObjectURL(
         const cancellations: any = {};
         const gotResults: any[] = [];
 
-        function walkReduce(
-          obj: any,
-          reducer: any,
-          accumulator?: any,
-          index?: any,
-          parent?: any
-        ): any {
+        function walkReduce(obj: any, reducer: any, accumulator?: any, index?: any, parent?: any): any {
           const f = reducer(accumulator, obj, index, parent);
 
           if (f !== undefined) {
@@ -143,9 +138,7 @@ export const worklet = URL.createObjectURL(
 
           // Queue has tasks, but all are pending
           if (taskDescription == null) {
-            console.error(
-              `ThreadPool -> Queue deadlocked: all ${queue.length} tasks have unresolved dependencies.`
-            );
+            console.error(`ThreadPool -> Queue deadlocked: all ${queue.length} tasks have unresolved dependencies.`);
 
             // This is dead time, flush any pending results
             flushResultStatuses();
@@ -175,7 +168,7 @@ export const worklet = URL.createObjectURL(
               return instance.process(...args);
             })
             .then(
-              value => {
+              (value) => {
                 result.state = RESOLVE;
                 result.isFulfilled = true;
                 result.value = value;
@@ -184,7 +177,7 @@ export const worklet = URL.createObjectURL(
 
                 next();
               },
-              err => {
+              (err) => {
                 result.state = REJECT;
                 result.isFulfilled = true;
                 result.error = err;
@@ -206,8 +199,8 @@ export const worklet = URL.createObjectURL(
           const transferrables: any[] = [];
           let statuses: any[] = [];
           const returnStatuses: any[] = [];
-          let priorityResultCount: number = 0;
-          let resultCount: number = 0;
+          let priorityResultCount = 0;
+          let resultCount = 0;
 
           for (let i = 0; i < gotResults.length; i++) {
             if (gotResults[i] == null) {
@@ -346,7 +339,7 @@ export const worklet = URL.createObjectURL(
             resolved
               .then(() => (API as any)[item[0]].apply(null, item.slice(2)))
               .then(
-                result => {
+                (result) => {
                   if (result !== undefined) {
                     // @ts-ignore postMessage expects 2-3 arguments but got 1 (correct)
                     postMessage([0, item[1], result]);
@@ -354,7 +347,7 @@ export const worklet = URL.createObjectURL(
 
                   next();
                 },
-                err => {
+                (err) => {
                   // @ts-ignore postMessage expects 2-3 arguments but got 1 (correct)
                   postMessage([1, item[1], `${err}`]);
                 }

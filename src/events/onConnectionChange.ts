@@ -17,8 +17,7 @@ function onConnectionChangeHandler(): void {
   const connectionIsOnline = navigator.onLine || false;
   const connectionEffectiveType =
     ((navigator as any).connection && (navigator as any).connection.effectiveType) || '4g';
-  const connectionSaveData =
-    ((navigator as any).connection && (navigator as any).connection.saveData) || false;
+  const connectionSaveData = ((navigator as any).connection && (navigator as any).connection.saveData) || false;
 
   let connectionSpeed;
 

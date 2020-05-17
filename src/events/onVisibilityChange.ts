@@ -15,10 +15,7 @@ const webkit = ['webkitHidden', 'webkitvisibilitychange'];
 const ms = ['msHidden', 'msvisibilitychange'];
 
 const prefix =
-  ('hidden' in document && Object.keys(key)) ||
-  (webkit[0] in document && webkit) ||
-  (ms[0] in document && ms) ||
-  [];
+  ('hidden' in document && Object.keys(key)) || (webkit[0] in document && webkit) || (ms[0] in document && ms) || [];
 
 /**
  * Re-exposes the document visibility API without the need for vendor-specific prefixes

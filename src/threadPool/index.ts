@@ -50,9 +50,7 @@ export class TaskQueue {
    * @param moduleClass Compute module to make available to task
    */
   public add(moduleName: string, moduleClass: string): Promise<Task[]> {
-    return Promise.resolve(
-      this.$$TASK_MANAGER.addWorklet(`registerTask('${moduleName}', class { ${moduleClass} })`)
-    );
+    return Promise.resolve(this.$$TASK_MANAGER.addWorklet(`registerTask('${moduleName}', class { ${moduleClass} })`));
   }
 
   /**

@@ -18,8 +18,7 @@ export default ((): any => {
       WAV: canPlay(audio, 'audio/wav'),
     },
     video: {
-      HLS:
-        canPlay(video, 'application/vnd.apple.mpegURL') || canPlay(video, 'application/x-mpegurl'),
+      HLS: canPlay(video, 'application/vnd.apple.mpegURL') || canPlay(video, 'application/x-mpegurl'),
       MP4: canPlay(video, 'video/mp4'),
       Ogg: canPlay(video, 'video/ogg'),
       WebM: canPlay(video, 'video/webm'),

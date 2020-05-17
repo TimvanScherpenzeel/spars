@@ -14,10 +14,7 @@ import { IThread } from './types';
  * Manage the task queue and interact with the RPC's
  */
 export class TaskManager {
-  private static walkTaskArgs = (
-    obj: any[],
-    walker: (value: Task, i: string, obj: any[]) => void
-  ): void => {
+  private static walkTaskArgs = (obj: any[], walker: (value: Task, i: string, obj: any[]) => void): void => {
     // tslint:disable-next-line:forin
     for (const i in obj) {
       const value = obj[i];
@@ -104,7 +101,7 @@ export class TaskManager {
     tasksToResolve.push(worker.ready);
 
     Promise.all(tasksToResolve)
-      .then(taskValues => {
+      .then((taskValues) => {
         resultController.isPending = false;
 
         if (resultController.isCancelled) {
@@ -147,7 +144,7 @@ export class TaskManager {
   public addWorklet(code: string): Promise<Task[]> {
     this.worklets.push(code);
 
-    return Promise.all(this.workers.map(worker => worker.call('$$eval', [code])));
+    return Promise.all(this.workers.map((worker) => worker.call('$$eval', [code])));
   }
 
   /**
@@ -300,7 +297,7 @@ export class TaskManager {
 
     worker.call = (method: string, params: any[]): Promise<void> =>
       // tslint:disable-next-line:only-arrow-functions
-      new Promise(function(): void {
+      new Promise(function (): void {
         const id = config.ID_COUNT++;
         callbacks[id] = arguments;
 
